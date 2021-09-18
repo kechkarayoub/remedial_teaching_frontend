@@ -1,4 +1,7 @@
 ### Installation artifacts
+/node_modules
+/.pnp
+.pnp.js
 node_modules
 .idea/
 .env
@@ -9,7 +12,25 @@ log/
 /yarn.lock
 /yarn-error.log
 /package-lock.json
+/healthkools/yarn.lock
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 ### build fodler
 build/
 /.env
+
+# testing
+/coverage
+
+# production
+/build
