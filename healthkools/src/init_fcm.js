@@ -1,9 +1,6 @@
 import * as firebase from "firebase/app";
 import "firebase/messaging";
 
-// const initializedFirebaseApp = firebase.initializeApp({
-//     messagingSenderId: "196176104641"
-// });
 var messaging = null;
 try{
   // Your web app's Firebase configuration
@@ -25,7 +22,8 @@ try{
   messaging.usePublicVapidKey(
     "BAzPEXXila-EE69SVPSYfCXnKnlGsOMQ5vi63Sl62oZNggLuf0gZ8c_BosRU6eBdWbHrfhNPwpYA2nze6V-wz5g"
   );
-}catch(err){
+}
+catch(err){
 }
 
 

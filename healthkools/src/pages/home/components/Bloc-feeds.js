@@ -21,18 +21,18 @@ import axios from "axios";
   }
 
   componentDidMount() {
-    var root_url = "https://www.parents.fr/feeds/rss/";
-    switch(this.props.pages){
-      case "parent":
-        root_url+= "enfant";break;
-      default:
-      root_url+= "enfant";break;
-    }
+    var root_url = "http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC";
+    var root_url = "https://blog.myfitnesspal.com/feed/";
+    var root_url = "https://www.mobihealthnews.com/feed";
+    var root_url = "https://feeds.npr.org/103537970/rss.xml";
+    var root_url = "https://blogs.cisco.com/healthcare/feed";
+    var root_url = "https://www.healthstatus.com/feed/";
     axios
     .get('https://api.rss2json.com/v1/api.json?rss_url=' + root_url)
     .then(res => {
+      debugger
       this.setState({
-        data: res.data.items
+        data: res.data.items.filter(i => i.thumbnail || i.enclosure.link)
       });
     })
 
@@ -54,7 +54,7 @@ import axios from "axios";
       return (
         <div className="bloc-feed" key={idx}>
           <div className="feed-img">
-            <img src={rss.enclosure.link} className="img-fluid" />
+            <img src={rss.thumbnail || rss.enclosure.link} className="img-fluid" />
           </div>
           <p>{rss.title}</p>
           <p className="link link-planete">

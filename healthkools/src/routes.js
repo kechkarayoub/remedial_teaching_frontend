@@ -1,8 +1,7 @@
 import React from "react";
-import { Route, withRouter, Redirect } from "react-router-dom";
-import { clear, set, get, remove } from "./services/storage";
+import { Route, withRouter } from "react-router-dom";
+import {  get } from "./services/storage";
 
-import { useHistory } from "react-router-dom";
 
 const AppHomeRoute = ({
   Component,

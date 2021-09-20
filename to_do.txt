@@ -1,0 +1,3 @@
+Change favicon.ico in healthkools/public.
+In src/components/ErrorComponent:
+    The user have to return to the previous page when clicking on "Try again" button.

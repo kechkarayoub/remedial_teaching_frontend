@@ -9,6 +9,7 @@ import i18next from 'i18next';
 import translations_fr from "./translations/fr/translations.json";
 import translations_ar from "./translations/ar/translations.json";
 import translations_en from "./translations/en/translations.json";
+import { get } from "./services/storage";
 
 set_vh_vw_properties();
 // window.addEventListener("orientationchange", function() {
@@ -24,10 +25,10 @@ set_vh_vw_properties();
 // });
 i18next.init({
   interpolation: { escapeValue: false },  // React already does escaping
-  lng: "en",//get("current_language"),                              // language to use
+  lng: get("current_language") || "ar",   // language to use
   resources: {
       en: {
-          translations: translations_en               // 'common' is our custom namespace
+          translations: translations_en 
       },
       fr: {
           translations: translations_fr

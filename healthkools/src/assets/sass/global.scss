@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Arvo:400,700");
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css");
+@import "./variables.scss";
+@import "../css/animate.css";
+
+
+.btn{
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    height: 30px;
+    margin: auto;
+    min-width: 100px;
+    padding: 0 10px;
+    width: max-content;
+    &:focus{
+        outline: none;
+    }
+}
+
+.btn-rounded{
+    border-radius: 20px;
+}
+.default-bg-color{
+    background-color: $default_color;
+}
+.default-color{
+    color: $default_color;
+}
+

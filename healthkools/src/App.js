@@ -2,6 +2,8 @@ import React, { Component, Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
+import './assets/sass/global.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 import store from "./services/index";
 import { messaging } from "./init_fcm";
 

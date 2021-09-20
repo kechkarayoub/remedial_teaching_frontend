@@ -1,7 +1,6 @@
 import * as storage from "../storage";
 import { LOGIN, LOGOUT_SUCCESS } from "../actions";
 
-import { set, get } from "../storage";
 const initialState = {
   user: storage.get("session_user"),
   authenticated: false

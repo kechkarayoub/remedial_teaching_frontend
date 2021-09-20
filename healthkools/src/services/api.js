@@ -5,13 +5,6 @@ import { set, get, clear } from "./storage";
 
 const instance = axios.create({ baseURL: process.env.REACT_APP_URL_WS });
 
-const mapRegisterError = message => {
-  if (message.error) {
-    return "Identifiant déjà utilisé";
-  }
-  return "Erreur d'authentification";
-};
-
 const mapAuthError = message => {
   if (message.error === "not_activated") {
     return `Ton compte n'a pas encore été activé - Le message d'activation a été envoyé à l'adresse ${message.parent_email}`;

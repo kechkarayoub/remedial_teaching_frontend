@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import MediaQuery from "react-responsive";
-import { withTranslation, Trans } from 'react-i18next';
 import LdsEllipses from './LdsEllipses';
+import React, { Component } from "react";
 import logo from "../assets/img/logo_temp.jpg";
+import styled from "styled-components";
 import {colors} from "../assets/variables/colors";
+import { withTranslation, Trans } from 'react-i18next';
 
 class LoadingAssets extends Component {
     constructor(props) {
@@ -12,7 +11,7 @@ class LoadingAssets extends Component {
     }
     render(){
         return(
-            <LoadingAssetsStyle className="container-loading">    
+            <LoadingAssetsStyle className="container-loading-assets">    
                 <img src={logo} alt="Logo"/>
                 <strong>{this.props.t("Loading")}</strong>
                 <LdsEllipses/>
