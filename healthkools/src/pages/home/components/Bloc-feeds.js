@@ -5,8 +5,11 @@ import Feed from "rss-to-json";
 import { withTranslation, Trans } from 'react-i18next';
 import styled from "styled-components";
 import { images } from "../_resources";
+import {feeds_api_get} from "../../../services/api";
 import { colors } from "../../../assets/variables/colors";
 import axios from "axios";
+import { get } from "../../../services/storage";
+import {get_feeds_url} from "../../../utils/feeds";
 
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -16,25 +19,18 @@ import axios from "axios";
     super(props);
     this.state = {
       activeItemIndex: 0,
-      data: []
+      data: [],
     };
   }
 
   componentDidMount() {
-    var root_url = "http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC";
-    var root_url = "https://blog.myfitnesspal.com/feed/";
-    var root_url = "https://www.mobihealthnews.com/feed";
-    var root_url = "https://feeds.npr.org/103537970/rss.xml";
-    var root_url = "https://blogs.cisco.com/healthcare/feed";
-    var root_url = "https://www.healthstatus.com/feed/";
-    axios
-    .get('https://api.rss2json.com/v1/api.json?rss_url=' + root_url)
-    .then(res => {
-      debugger
+    const api_key = process.env.REACT_APP_RSS2JSON_API_KEY;
+    var feeds_url = get_feeds_url(get("current_language") || "en");
+    feeds_api_get(api_key, feeds_url).then(res => {
       this.setState({
-        data: res.data.items.filter(i => i.thumbnail || i.enclosure.link)
+        data: res.items,
       });
-    })
+    });
 
   }
 
@@ -128,7 +124,7 @@ const BlocFeedsStyle = styled.div`
           }
       }
    }
-   
+
    @media screen and (max-width: 1199px){
         h3{
           color: #46bfb6;

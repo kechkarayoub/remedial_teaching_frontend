@@ -27,6 +27,17 @@ const mapAuthError = message => {
 };
 
 
+export const feeds_api_get = (api_key, url) => {
+  return axios.get('https://api.rss2json.com/v1/api.json?api_key='+api_key+'&rss_url=' + url)
+  .then(res => {
+    return res.data;
+  })
+  .catch(err => {
+    throw err;
+  });
+};
+
+
 export const login = data => {
   return instance
     .post("/api/login_with_token/", data)
