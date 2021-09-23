@@ -43,10 +43,8 @@ export const login = data => {
     .post("/api/login_with_token/", data)
     .then(response => {
       
-      var lev = get("level_groups");
       var current_language = get("current_language");
       clear();
-      set("level_groups", lev);
       set("current_language", current_language);
       return response.data;
     })

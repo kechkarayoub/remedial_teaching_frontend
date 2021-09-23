@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import $ from "jquery";
 import styled from "styled-components";
-import BlocFeeds from "./components/Bloc-feeds";
+import BlocFeeds from "./components/BlocFeeds";
 import Footer from "../../components/Footer";
 
 window.jQuery = $;
