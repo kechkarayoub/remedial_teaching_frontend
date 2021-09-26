@@ -17,9 +17,9 @@ import defaultRssImg from "../../../assets/img/default_rss_img.png";
     return (
       <FeedItemStyle className="bloc-feed">
         <div className="feed-img">
-            <img src={feed.thumbnail || feed.enclosure.link || defaultRssImg} className="img-fluid" />
+          <img src={feed.thumbnail || feed.enclosure.link || defaultRssImg} className="img-fluid" />
         </div>
-        <p>{feed.title}</p>
+        <p role="p-title">{feed.title}</p>
         <p className="link link-planete">
           <a target="_blank" href={feed.link}>
             { this.props.t("Read more...") }

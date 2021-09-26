@@ -5,11 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {set_vh_vw_properties} from './utils';
 import {I18nextProvider} from 'react-i18next';
-import i18next from 'i18next';
-import translations_fr from "./translations/fr/translations.json";
-import translations_ar from "./translations/ar/translations.json";
-import translations_en from "./translations/en/translations.json";
-import { get } from "./services/storage";
+import i18next from './i18n_init';
 
 set_vh_vw_properties();
 // window.addEventListener("orientationchange", function() {
@@ -23,21 +19,6 @@ set_vh_vw_properties();
 //     set_vh_vw_properties();
 //   }, 500);
 // });
-i18next.init({
-  interpolation: { escapeValue: false },  // React already does escaping
-  lng: get("current_language") || "ar",   // language to use
-  resources: {
-      en: {
-          translations: translations_en 
-      },
-      fr: {
-          translations: translations_fr
-      },
-      ar: {
-          translations: translations_ar
-      },
-  },
-});
 // activate .env file
 require('dotenv').config();
 
