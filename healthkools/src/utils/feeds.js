@@ -1,4 +1,4 @@
-const feeds_urls = {
+export const feeds_urls = {
     ar: [
         "https://aawsat.com/feed/health",
         "https://news.un.org/feed/subscribe/ar/news/topic/health/feed/rss.xml",
@@ -26,12 +26,14 @@ const feeds_urls = {
 };
 
 export const get_feeds_url = language => {
+    /*
+        get_feeds_url get one of the rss urls in feeds_urls for the requested language.
+        if the language not exists, the returned url is one of exists urls
+    */
     var feeds_urls_ = feeds_urls[language];
-    var checked_languages = [],
-        languages_keys = Object.keys(feeds_urls);
-    while((!feeds_urls_ || feeds_urls.length === 0) && checked_languages.length !== languages_keys.length){
-        checked_languages.push(language);
-        feeds_urls_ = feeds_urls[languages_keys.filter(lk => checked_languages.indexOf(lk) === -1)[0]];
+    var languages_keys = Object.keys(feeds_urls);
+    if(!feeds_urls_ && languages_keys[0]){
+        feeds_urls_ = feeds_urls[languages_keys[0]];
     }
-    return feeds_urls_[Math.floor(Math.random() * feeds_urls_.length)];
+    return (feeds_urls_ || [])[Math.floor(Math.random() * feeds_urls_.length)];
 }
