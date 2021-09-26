@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import styles from "styled-components";
-
-import { withTranslation, Trans } from 'react-i18next';
+import LogoImage from "./LogoImage";
+import { withTranslation } from 'react-i18next';
 import { images } from "./_resources";
 import { colors } from "../assets/variables/colors";
-import { Link } from "react-router-dom";
+import moment from "moment"
+// import { Link } from "react-router-dom";
 class Footer extends Component {
   constructor(props){
     super(props);
@@ -14,10 +15,18 @@ class Footer extends Component {
       <>
         <FooterStyle>
           <div className="footer-logo">
-            <a href="/child/dashboard">
-              {" "}
-              <img src={images.logoFooter} />
-            </a>
+            <LogoImage style={{
+                cursor: "pointer",
+                marginBottom: "20px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                maxWidth: "250px",
+                minWidth: "200px",
+              }}
+              on_click={() => {
+                this.props.history.push(`/`);
+              }} 
+            />
           </div>
           <div className="container">
             <div className="bloc-footer new">
@@ -27,7 +36,7 @@ class Footer extends Component {
           </div>
         </FooterStyle>
         <Copyright className="copyright">
-          <p>{ this.props.t("2019 healthkools. Carefully crafted by 3 Minds Digital") }</p>
+          <p>{moment().format("YYYY") + " © Healthkools. "}{ this.props.t("Carefully crafted by 3 Minds Digital") }</p>
         </Copyright>
       </>
     );

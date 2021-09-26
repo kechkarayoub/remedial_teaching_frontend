@@ -1,7 +1,7 @@
 import LdsEllipses from './LdsEllipses';
 import React, { Component } from "react";
-import logo from "../assets/img/logo_temp.jpg";
 import styled from "styled-components";
+import LogoImage from "./LogoImage";
 import {colors} from "../assets/variables/colors";
 import { withTranslation, Trans } from 'react-i18next';
 
@@ -12,7 +12,14 @@ class LoadingAssets extends Component {
     render(){
         return(
             <LoadingAssetsStyle className="container-loading-assets">    
-                <img src={logo} alt="Logo"/>
+                <LogoImage style={{
+                    marginBottom: "20px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    maxWidth: "250px",
+                    minWidth: "200px",
+                    }} 
+                />
                 <strong>{this.props.t("Loading")}</strong>
                 <LdsEllipses/>
             </LoadingAssetsStyle>

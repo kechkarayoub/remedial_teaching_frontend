@@ -6,4 +6,4 @@ describe('BlocFeeds component', () => {
     test('Should render without crash', async () => {
         render(<BlocFeeds i18n={i18next}/>)
     });
-})
+});

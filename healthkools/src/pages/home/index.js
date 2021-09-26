@@ -42,7 +42,7 @@ class Home extends Component {
             </div>
           </div>
         </section>
-        <Footer />
+        <Footer {...this.props}/>
       </HomeStyle>
     );
   }
