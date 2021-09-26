@@ -7,9 +7,9 @@ import { colors } from "../assets/variables/colors";
 import moment from "moment"
 // import { Link } from "react-router-dom";
 class Footer extends Component {
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
   render(){
     return (
       <>

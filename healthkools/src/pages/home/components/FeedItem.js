@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withTranslation, Trans } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
 import { colors } from "../../../assets/variables/colors";
 import defaultRssImg from "../../../assets/img/default_rss_img.png";
@@ -17,11 +17,11 @@ import defaultRssImg from "../../../assets/img/default_rss_img.png";
     return (
       <FeedItemStyle className="bloc-feed">
         <div className="feed-img">
-          <img src={feed.thumbnail || feed.enclosure.link || defaultRssImg} className="img-fluid" />
+          <img src={feed.thumbnail || feed.enclosure.link || defaultRssImg} className="img-fluid" alt="Rss image" />
         </div>
         <p role="p-title">{feed.title}</p>
-        <p className="link link-planete">
-          <a target="_blank" href={feed.link}>
+        <p className="link">
+          <a target="_blank" href={feed.link} rel="noreferrer">
             { this.props.t("Read more...") }
           </a>
         </p>

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import MediaQuery from "react-responsive";
 import Slider from "react-slick";
-import Feed from "rss-to-json";
-import { withTranslation, Trans } from 'react-i18next';
+// import Feed from "rss-to-json";
+import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import { images } from "../_resources";
 import {feeds_api_get} from "../../../services/api";
 import { colors } from "../../../assets/variables/colors";
 import FeedItem from "./FeedItem";

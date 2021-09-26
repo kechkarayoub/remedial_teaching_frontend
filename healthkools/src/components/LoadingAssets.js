@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import LogoImage from "./LogoImage";
 import {colors} from "../assets/variables/colors";
-import { withTranslation, Trans } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 class LoadingAssets extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     render(){
         return(
             <LoadingAssetsStyle className="container-loading-assets">    
