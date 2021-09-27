@@ -4,12 +4,14 @@ import LogoImage from "./LogoImage";
 import { withTranslation } from 'react-i18next';
 import { images } from "./_resources";
 import { colors } from "../assets/variables/colors";
+import { get } from "../services/storage";
 import moment from "moment"
 // import { Link } from "react-router-dom";
 class Footer extends Component {
-  // constructor(props){
-  //   super(props);
-  // }
+  constructor(props){
+    super(props);
+    this.current_language = get("current_language") || "en";
+  }
   render(){
     return (
       <>
@@ -30,13 +32,12 @@ class Footer extends Component {
           </div>
           <div className="container">
             <div className="bloc-footer new">
-              <h3>{ this.props.t("Contact") }{": "}<a href="mailto:hello@healthkools.com">hello@healthkools.com</a></h3>
+              <h3 className={this.current_language == "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href="mailto:hello@healthkools.com">hello@healthkools.com</a></h3>
             </div>
-            
           </div>
         </FooterStyle>
         <Copyright className="copyright">
-          <p>{moment().format("YYYY") + " © Healthkools. "}{ this.props.t("Carefully crafted by 3 Minds Digital") }</p>
+          <p>{moment().format("YYYY") + " © Healthkools"}</p>
         </Copyright>
       </>
     );
