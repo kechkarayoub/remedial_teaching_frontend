@@ -3,16 +3,16 @@ import styled from "styled-components";
 import {colors} from "../assets/variables/colors";
 
 export default ({type, msg}) => {
-    return(
-        <SpinnerStyle className='loading-spinner'>
-            <div className="lds-ellipsis">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </SpinnerStyle>
-    )
+  return(
+    <SpinnerStyle className='loading-spinner'>
+      <div className="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </SpinnerStyle>
+  )
 }
 
 const SpinnerStyle = styled.div`
@@ -71,5 +71,4 @@ const SpinnerStyle = styled.div`
       transform: translate(19px, 0);
     }
   }
-  
 `
