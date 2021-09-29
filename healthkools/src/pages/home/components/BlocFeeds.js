@@ -16,17 +16,40 @@ import {get_feeds_url} from "../../../utils/feeds";
     this.state = {
       activeItemIndex: 0,
       data: [],
+      current_language: get("current_language") || "en",
     };
+    this.feeds_api_done = true;
   }
 
   componentDidMount() {
-    const api_key = process.env.REACT_APP_RSS2JSON_API_KEY;
-    var feeds_url = get_feeds_url(get("current_language") || "en");
-    feeds_api_get(api_key, feeds_url).then(res => {
-      this.setState({
-        data: res.items,
+    this.getFeeds();
+  }
+
+  getFeeds = (current_language) => {
+    if(this.feeds_api_done){
+      this.feeds_api_done = false;
+      const api_key = process.env.REACT_APP_RSS2JSON_API_KEY;
+      var feeds_url = get_feeds_url(current_language || this.state.current_language);
+      feeds_api_get(api_key, feeds_url).then(res => {
+        this.feeds_api_done = true;
+        this.setState({
+          data: res.items,
+        });
       });
-    });
+    }
+  }
+  static getDerivedStateFromProps(props, state) {
+    var current_language = get("current_language") || "en";
+    if(current_language != state.current_language){
+      var new_state = {current_language: current_language};
+      return new_state;
+    }
+    return null;
+  }
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.current_language != this.state.current_language){
+      this.getFeeds();
+    }
   }
 
   render() {

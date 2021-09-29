@@ -1,9 +1,18 @@
 {
+  "Ar": "Ar",
+  "Arabic": "Arabe",
   "Contact us": "Contactez-nous",
+  "En": "An",
+  "English": "Anglais",
+  "Fr": "Fr",
+  "France flag": "Drapeau de la France",
+  "French": "Français",
   "Health news": "Infos santé",
   "Home": "Accueil",
   "Loading": "En cours de chargement",
   "Logo image": "Image logo",
+  "Morocco flag": "Drapeau du Maroc",
   "Read more...": "Lire la suite...",
-  "Try again": "Réessayer"
+  "Try again": "Réessayer",
+  "United States flag": "Drapeau des États-Unis"
 }

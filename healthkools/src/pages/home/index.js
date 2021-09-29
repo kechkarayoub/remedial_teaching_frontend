@@ -5,6 +5,7 @@ import $ from "jquery";
 import styled from "styled-components";
 import BlocFeeds from "./components/BlocFeeds";
 import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 window.jQuery = $;
 
@@ -25,6 +26,7 @@ class Home extends Component {
   render() {
     return (
       <HomeStyle className="home-container">
+        <Header {...this.props}/>
         <section className="one">
           <div className="container">
             <div className="row">

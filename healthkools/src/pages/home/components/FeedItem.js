@@ -12,6 +12,14 @@ import defaultRssImg from "../../../assets/img/default_rss_img.png";
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if(props.feed.title != state.feed.title){
+      var new_state = {feed: props.feed};
+      return new_state;
+    }
+    return null;
+}
+
   render() {
     const {feed} = this.state;
     return (

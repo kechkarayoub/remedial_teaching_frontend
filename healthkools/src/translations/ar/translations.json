@@ -1,9 +1,18 @@
 {
+  "Ar": "عر",
+  "Arabic": "العربية",
   "Contact us": "اتصل بنا",
+  "En": "انج",
+  "English": "الانجليزية",
+  "Fr": "فر",
+  "France flag": "علم فرنسا",
+  "French": "الفرنسية",
   "Health news": "أخبار الصحة",
   "Home": "الصفحة الرئيسية",
   "Loading": "تحميل",
   "Logo image": "صورة الشعار",
+  "Morocco flag": "علم المغرب",
   "Read more...": "اقرأ أكثر...",
-  "Try again": "حاول مجددا"
+  "Try again": "حاول مجددا",
+  "United States flag": "علم الولايات المتحدة"
 }

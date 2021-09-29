@@ -2,32 +2,21 @@ import React, {Component} from "react";
 import styles from "styled-components";
 import LogoImage from "./LogoImage";
 import { withTranslation } from 'react-i18next';
-import { images } from "./_resources";
+import LanguageSelect from "./LanguageSelect/index";
 import { colors } from "../assets/variables/colors";
 import { get } from "../services/storage";
 import moment from "moment"
 // import { Link } from "react-router-dom";
-class Footer extends Component {
+class Header extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      current_language: get("current_language") || "en",
-    }
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if(props.i18n && props.i18n.language != state.current_language){
-      var new_state = {current_language: get("current_language") || "en"};
-      return new_state;
-    }
-    return null;
+    this.current_language = get("current_language") || "en";
   }
   render(){
-    const {current_language} = this.state;
     return (
       <>
-        <FooterStyle>
-          <div className="footer-logo">
+        <HeaderStyle>
+          <div className="header-logo">
             <LogoImage style={{
                 cursor: "pointer",
                 marginBottom: "20px",
@@ -42,45 +31,21 @@ class Footer extends Component {
             />
           </div>
           <div className="container">
-            <div className="contact_mail">
-              <h3 className={current_language == "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href="mailto:hello@healthkools.com">hello@healthkools.com</a></h3>
-            </div>
+            <LanguageSelect />
           </div>
-        </FooterStyle>
-        <Copyright className="copyright">
-          <p>{moment().format("YYYY") + " © Healthkools"}</p>
-        </Copyright>
+        </HeaderStyle>
       </>
     );
   }
 };
-const Copyright = styles.div`
-  background: ${colors.default_color};
-  float: left;
-  padding: 10px;
-  text-align: center;
-  width:100%;
-  p{
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10.5px;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: bold;
-    letter-spacing: normal;
-    line-height: 2;
-    margin: 0;
-    text-align: center;
-  }
-`;
-const FooterStyle = styles.footer`
+const HeaderStyle = styles.header`
   background: #f7f7f7;
   border-top: 10px solid ${colors.white};
   box-shadow: 0 -2px 10px 0 rgba(0,0,0,0.15);
   float: left;
   padding-bottom: 30px;
   width: 100%;
-  .footer-logo{
+  .header-logo{
     margin-bottom: 30px;
     text-align: center;
   }
@@ -111,4 +76,4 @@ const FooterStyle = styles.footer`
   }
 `;
 
-export default withTranslation('translations')(Footer);
+export default withTranslation('translations')(Header);
