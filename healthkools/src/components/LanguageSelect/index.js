@@ -35,6 +35,7 @@ class LanguageSelect extends Component {
                 className={`${this.props.added_class || ""} ${selected_language === "ar" ? "rtl" : "ltr"}`} 
                 style={this.props.style || {}} role="languages_select"
                 onClick={() => this.setState({open: !open})}
+                onMouseLeave={() => this.setState({open: false})}
             >
                 <img src={language_.flag} alt={this.props.t(language_.alt)} />{this.props.t(language_.short_name)}<i className="fa fa-caret-down"></i>
                 {open &&
@@ -52,10 +53,10 @@ class LanguageSelect extends Component {
     }
 }
 const LanguageSelectStyle = styled.div`
-    color: ${colors.default_color};
+    color: white;
     cursor: pointer;
     font-weight: bold;
-    line-height: 24px;
+    line-height: 30px;
     min-width: 71px;
     position: relative;
     width: max-content;
@@ -82,6 +83,7 @@ const LanguageSelectStyle = styled.div`
             color: black;
             cursor: pointer;
             display: flex;
+            line-height: 24px;
             margin-bottom: 5px;
             &:hover{
                 color: ${colors.default_color};

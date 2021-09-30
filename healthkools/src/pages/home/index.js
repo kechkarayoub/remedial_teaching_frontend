@@ -5,7 +5,8 @@ import $ from "jquery";
 import styled from "styled-components";
 import BlocFeeds from "./components/BlocFeeds";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import HomeHeader from "./components/HomeHeader";
+import { get } from "../../services/storage";
 
 window.jQuery = $;
 
@@ -13,23 +14,32 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      current_language: get("current_language") || "en",
     };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
+  static getDerivedStateFromProps(props, state) {
+    var current_language = get("current_language") || "en";
+    if(current_language != state.current_language){
+      var new_state = {current_language: current_language};
+      return new_state;
+    }
+    return null;
+  }
   componentWillUnmount() {
   }
 
   render() {
+    const {current_language} = this.state;
     return (
       <HomeStyle className="home-container">
-        <Header {...this.props}/>
+        <HomeHeader {...this.props}/>
         <section className="one">
           <div className="container">
-            <div className="row">
+            <div className={`row ${current_language == "ar" ? "rtl" : ""}`}>
               <div className="col-xl-8 col-lg-12 ">
                 {/* <Carousel
                   handleOpenModalConnexion={() =>
