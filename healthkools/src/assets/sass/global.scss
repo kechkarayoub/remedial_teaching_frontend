@@ -20,9 +20,29 @@
         outline: none;
     }
 }
-
+.btn-close{
+    
+}
 .btn-rounded{
     border-radius: 20px;
+}
+.custom_modal{
+    &.sign_in_up_modal{
+        .modal-dialog{
+            height: 100%;
+            margin-bottom: 0;
+            margin-right: 0;
+            margin-top: 0;
+            max-width: unset;
+            min-width: 500px;
+            width: 35%;
+            .modal-content{
+                border: 0;
+                border-radius: 0;
+                height: 100%;
+            }
+        }
+    }
 }
 .default-bg-color{
     background-color: $default_color;
@@ -30,7 +50,9 @@
 .default-color{
     color: $default_color;
 }
-
+.modal-backdrop.show {
+    opacity: 0.8 !important;
+}
 .rtl{
     direction: rtl;
 }

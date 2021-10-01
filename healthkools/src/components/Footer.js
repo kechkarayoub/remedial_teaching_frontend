@@ -12,18 +12,39 @@ class Footer extends Component {
     super(props);
     this.state = {
       current_language: get("current_language") || "en",
+      general_information: get("general_information"),
     }
+    this._isMounted = false;
   }
 
   static getDerivedStateFromProps(props, state) {
     if(props.i18n && props.i18n.language != state.current_language){
-      var new_state = {current_language: get("current_language") || "en"};
+      var new_state = {
+        current_language: get("current_language") || "en",
+      };
       return new_state;
     }
     return null;
   }
+  componentDidMount() {
+    this._isMounted = true;
+    window.addEventListener('general_information_stored',(e) => {
+      var general_information = get("general_information") || {};
+      if(this._isMounted){
+        this.setState({
+          general_information: general_information,
+        });
+      }
+    }, false);
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
+    window.removeEventListener('general_information_stored', () => {}, false);
+  }
   render(){
-    const {current_language} = this.state;
+    var {current_language, general_information} = this.state;
+    general_information = general_information || {};
     return (
       <>
         <FooterStyle>
@@ -43,12 +64,12 @@ class Footer extends Component {
           </div>
           <div className="container">
             <div className="contact_mail">
-              <h3 className={current_language == "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href="mailto:hello@healthkools.com">hello@healthkools.com</a></h3>
+              <h3 className={current_language == "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href={`mailto:${general_information.contact_email}`}>{general_information.contact_email}</a></h3>
             </div>
           </div>
         </FooterStyle>
         <Copyright className="copyright">
-          <p>{moment().format("YYYY") + " © Healthkools"}</p>
+          <p>{moment().format("YYYY") + " © " + (general_information.site_name || "Healthkools")}</p>
         </Copyright>
       </>
     );

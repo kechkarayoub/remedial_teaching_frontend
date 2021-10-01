@@ -37,7 +37,7 @@ class LanguageSelect extends Component {
                 onClick={() => this.setState({open: !open})}
                 onMouseLeave={() => this.setState({open: false})}
             >
-                <img src={language_.flag} alt={this.props.t(language_.alt)} />{this.props.t(language_.short_name)}<i className="fa fa-caret-down"></i>
+                <img className="selacted_language_flag" src={language_.flag} alt={this.props.t(language_.alt)} />{this.props.t(language_.short_name)}<i className="fa fa-caret-down"></i>
                 {open &&
                     <ul onClick={(evt) => evt.stopPropagation()}>
                         {languages.map((language) => {

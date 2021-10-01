@@ -12,7 +12,7 @@ describe('HKButtonIcon component', () => {
     test('Should render without crash', async () => {
         render(<HKButtonIcon />);
     });
-    test('Should contains text props', async () => {
+    test('Should contains image props', async () => {
         render(<HKButtonIcon image={sign_in} alt="Sign in icon"/>);
         const image = screen.getByAltText('Sign in icon');
         expect(image.src).toContain(sign_in);

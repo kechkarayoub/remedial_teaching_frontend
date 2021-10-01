@@ -6,6 +6,8 @@ import './assets/sass/global.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import "react-datepicker/dist/react-datepicker.css";
 import store from "./services/index";
 import { messaging } from "./init_fcm";
 

@@ -7,19 +7,22 @@ import BlocFeeds from "./components/BlocFeeds";
 import Footer from "../../components/Footer";
 import HomeHeader from "./components/HomeHeader";
 import { get } from "../../services/storage";
+import { general_information_api_get } from "../../services/api";
 
 window.jQuery = $;
 
-class Home extends Component {
+export class Home extends Component {
   constructor(props) {
     super(props);
+    general_information_api_get();
     this.state = {
       current_language: get("current_language") || "en",
     };
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
+    // if(window.scrollTo)
+    //   window.scrollTo(0, 0);
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language") || "en";

@@ -37,6 +37,25 @@ export const feeds_api_get = (api_key, url) => {
   });
 };
 
+var general_information_api_sent = false;
+export const general_information_api_get = () => {
+  if(!general_information_api_sent){
+    general_information_api_sent = true;
+    return instance.get('/general_information_api')
+    .then(res => {
+      general_information_api_sent = false;
+      set("general_information", res.data.general_information || {});
+      var event = document.createEvent('Event');
+      event.initEvent('general_information_stored', true, true);
+      window.dispatchEvent(event);
+    })
+    .catch(err => {
+      general_information_api_sent = false;
+      throw err;
+    });
+  }
+};
+
 
 export const login = data => {
   return instance
