@@ -81,8 +81,9 @@ class SignInUpModal extends Component {
       >
       <SignInUpModalModal>
           <Modal.Header>
+            <span className="visibility_hidden"></span>
             { this.props.t(default_view == "sign_in" ? 'Sign in' : 'Sign up') }
-            <Button variant="circle" className="btn-close-modal" onClick={() => this.props.onHide()}>
+            <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>
@@ -101,5 +102,28 @@ class SignInUpModal extends Component {
 const SignInUpModalModal = styled.div`
   height: 100%;
   padding: 10px 25px;
+  .modal-header{
+    color: #1fa1cf;
+    font-weight: bold;
+    padding: 5px 0;
+    .close-modal{
+      background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
+      border-radius: 50%;
+      box-shadow: 0 10px 20px 0 #1fa1cf5c;
+      color: #fff;
+      font-size: 40px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+      text-align: center;
+      width: 30px;
+      .close_ico{
+        display: block;
+        height: 100%;
+        line-height: 24px;
+        padding-bottom: 6px;
+      }
+    }
+  }
 `;
 export default withTranslation('translations')(SignInUpModal);
