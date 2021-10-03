@@ -15,7 +15,7 @@ class LanguageSelect extends Component {
         super(props);
         this.state = {
             open: props.open || false,
-            selected_language: get("current_language") || "en",
+            selected_language: get("current_language") || "fr",
         };
     }
     handleSelectLanguage = (evt, language) => {

@@ -16,7 +16,7 @@ export class Home extends Component {
     super(props);
     general_information_api_get();
     this.state = {
-      current_language: get("current_language") || "en",
+      current_language: get("current_language") || "fr",
     };
   }
 
@@ -25,7 +25,7 @@ export class Home extends Component {
     //   window.scrollTo(0, 0);
   }
   static getDerivedStateFromProps(props, state) {
-    var current_language = get("current_language") || "en";
+    var current_language = get("current_language") || "fr";
     if(current_language != state.current_language){
       var new_state = {current_language: current_language};
       return new_state;

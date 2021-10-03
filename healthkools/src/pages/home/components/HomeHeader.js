@@ -14,14 +14,14 @@ class HomeHeader extends Component {
   constructor(props){
     super(props);
     this.state = {
-      current_language: get("current_language") || "en",
+      current_language: get("current_language") || "fr",
       open_sign_in_up: false,
       default_sign_in_up_view: "sign_in",
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    var current_language = get("current_language") || "en";
+    var current_language = get("current_language") || "fr";
     if(current_language != state.current_language){
       var new_state = {current_language: current_language};
       return new_state;

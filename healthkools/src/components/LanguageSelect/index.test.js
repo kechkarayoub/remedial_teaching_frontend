@@ -14,12 +14,12 @@ describe('LanguagesSelect component', () => {
     test('Should contains sected language image url', async () => {
         render(<LanguagesSelect />);
         const image = screen.getByRole('img');
-        expect(image.src).toContain(languages[1].flag);
+        expect(image.src).toContain(languages[2].flag);
     });
     test('Should contains languages images url', async () => {
         render(<LanguagesSelect open={true} />);
         const images = screen.getAllByRole('img');
-        expect(images[0].src).toContain(languages[1].flag);
+        expect(images[0].src).toContain(languages[2].flag);
         expect(images[1].src).toContain(languages[0].flag);
         expect(images[2].src).toContain(languages[1].flag);
         expect(images[3].src).toContain(languages[2].flag);
@@ -27,6 +27,6 @@ describe('LanguagesSelect component', () => {
     test('Name rendred', async () => {
         render(<LanguagesSelect />);
         const div_language = screen.getByRole('languages_select');
-        expect(div_language.textContent).toBe(languages[1].short_name);
+        expect(div_language.textContent).toBe(languages[2].short_name);
     });
 });

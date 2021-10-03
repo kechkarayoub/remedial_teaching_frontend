@@ -56,6 +56,22 @@ export const general_information_api_get = () => {
   }
 };
 
+var feeds_languages_api_sent = false;
+export const feeds_languages_api_get = () => {
+  if(!feeds_languages_api_sent){
+    feeds_languages_api_sent = true;
+    return instance.get('/feeds_languages_api')
+    .then(res => {
+      feeds_languages_api_sent = false;
+      return res.data;
+    })
+    .catch(err => {
+      feeds_languages_api_sent = false;
+      throw err;
+    });
+  }
+};
+
 
 export const login = data => {
   return instance

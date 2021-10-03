@@ -25,7 +25,7 @@ describe('HomeHeader component', () => {
         expect(image_logo.src).toContain(logo);
         expect(sign_in_image.src).toContain(sign_in);
         expect(sign_up_image.src).toContain(sign_up);
-        expect(image_language.src).toContain(languages[1].flag);
-        expect(language_select.textContent).toBe(languages[1].short_name);
+        expect(image_language.src).toContain(languages[2].flag);
+        expect(language_select.textContent).toBe(languages[2].short_name);
     });
 });

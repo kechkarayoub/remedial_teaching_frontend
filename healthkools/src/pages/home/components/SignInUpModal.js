@@ -12,7 +12,7 @@ class SignInUpModal extends Component {
   constructor(props) {
     super(props);
     this.state= {
-      current_language: get("current_language") || "en",
+      current_language: get("current_language") || "fr",
       default_view: props.default_sign_in_up_view,
       isSubmitting: false,
     }
