@@ -11,7 +11,7 @@ class Footer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      current_language: get("current_language") || "fr",
+      current_language: get("current_language"),
       general_information: get("general_information"),
     }
     this._isMounted = false;
@@ -20,7 +20,7 @@ class Footer extends Component {
   static getDerivedStateFromProps(props, state) {
     if(props.i18n && props.i18n.language !== state.current_language){
       var new_state = {
-        current_language: get("current_language") || "fr",
+        current_language: get("current_language"),
       };
       return new_state;
     }

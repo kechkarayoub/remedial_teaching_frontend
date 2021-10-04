@@ -1,19 +1,23 @@
 import store from 'store';
 
 export const set = (key, value) => {
-  store.set(key, value)
+  store.set(key, value);
 }
 
 export const get = (key) => {
-  return store.get(key)
+  var res = store.get(key);
+  if(key == "current_language"){
+    return res || "fr";
+  }
+  return res;
 }
 
 export const remove = (key) => {
-  store.remove(key)
+  store.remove(key);
 }
 
 export const clear = () => {
-  store.clearAll()
+  store.clearAll();
 }
 
 export const logout = () => {

@@ -17,7 +17,7 @@ import {shuffle} from "../../../utils/index";
     this.state = {
       feeds_languages: {},
       data: [],
-      current_language: get("current_language") || "fr",
+      current_language: get("current_language"),
     };
     this.feeds_api_done = true;
     this.saved_feeds_api_done = true;
@@ -63,7 +63,7 @@ import {shuffle} from "../../../utils/index";
     }
   }
   static getDerivedStateFromProps(props, state) {
-    var current_language = get("current_language") || "fr";
+    var current_language = get("current_language");
     if(current_language !== state.current_language){
       var new_state = {current_language: current_language};
       return new_state;
