@@ -22,7 +22,7 @@ class HomeHeader extends Component {
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language") || "fr";
-    if(current_language != state.current_language){
+    if(current_language !== state.current_language){
       var new_state = {current_language: current_language};
       return new_state;
     }
@@ -34,10 +34,10 @@ class HomeHeader extends Component {
     return (
       <>
         <HomeHeaderStyle>
-          <div className={`header-top ${current_language == "ar" ? "rtl" : ""}`}>
+          <div className={`header-top ${current_language === "ar" ? "rtl" : ""}`}>
             <div className={`left`}>
             </div>
-            <div className={`right ${current_language == "ar" ? "rtl" : ""}`}>
+            <div className={`right ${current_language === "ar" ? "rtl" : ""}`}>
               <LanguageSelect />
               <HKButtonIcon image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
                 this.setState({
@@ -53,7 +53,7 @@ class HomeHeader extends Component {
               }} />
             </div>
           </div>
-          <div className={`header-bottom ${current_language == "ar" ? "rtl" : ""}`}>
+          <div className={`header-bottom ${current_language === "ar" ? "rtl" : ""}`}>
             <div className={`left `}>
               <LogoImage style={{
                   cursor: "pointer",

@@ -49,7 +49,7 @@ import {shuffle} from "../../../utils/index";
       feeds_languages_api_get().then(res => {
         this.saved_feeds_api_done = true;
         var new_state = {};
-        if(!res.feeds_languages[current_language || this.state.current_language] || res.feeds_languages[current_language || this.state.current_language].length == 0){
+        if(!res || !res.feeds_languages[current_language || this.state.current_language] || res.feeds_languages[current_language || this.state.current_language].length === 0){
           this.getFeeds(current_language);
         }
         else{
@@ -57,22 +57,24 @@ import {shuffle} from "../../../utils/index";
         }
         new_state.feeds_languages = res.feeds_languages;
         this.setState(new_state);
+      })
+      .catch(err => {
       });
     }
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language") || "fr";
-    if(current_language != state.current_language){
+    if(current_language !== state.current_language){
       var new_state = {current_language: current_language};
       return new_state;
     }
     return null;
   }
   componentDidUpdate(prevProps, prevState){
-    if(prevState.current_language != this.state.current_language){
+    if(prevState.current_language !== this.state.current_language){
       const {feeds_languages} = this.state;
       var new_state = {};
-      if(!feeds_languages[this.state.current_language] || feeds_languages[this.state.current_language].length == 0){
+      if(!feeds_languages[this.state.current_language] || feeds_languages[this.state.current_language].length === 0){
         // new_state.loading_feeds = true;
         // this.setState(new_state);
         this.getFeeds();

@@ -29,7 +29,7 @@ class LanguageSelect extends Component {
     }
     render(){
         const {open, selected_language} = this.state;
-        var language_ = languages.filter(l => l.value == selected_language)[0];
+        var language_ = languages.filter(l => l.value === selected_language)[0];
         return(
             <LanguageSelectStyle 
                 className={`${this.props.added_class || ""} ${selected_language === "ar" ? "rtl" : "ltr"}`} 

@@ -33,7 +33,7 @@ export const feeds_api_get = (api_key, url) => {
     return res.data;
   })
   .catch(err => {
-    throw err;
+    console.log(err);
   });
 };
 
@@ -51,7 +51,7 @@ export const general_information_api_get = () => {
     })
     .catch(err => {
       general_information_api_sent = false;
-      throw err;
+      console.log(err);
     });
   }
 };
@@ -67,7 +67,7 @@ export const feeds_languages_api_get = () => {
     })
     .catch(err => {
       feeds_languages_api_sent = false;
-      throw err;
+      console.log(err);
     });
   }
 };
@@ -87,6 +87,6 @@ export const login = data => {
       if (err.response) {
         throw new Error(mapAuthError(err.response.data));
       }
-      throw err;
+      console.log(err);
     });
 };

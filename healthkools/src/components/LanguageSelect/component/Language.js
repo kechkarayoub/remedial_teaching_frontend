@@ -11,7 +11,7 @@ class Language extends Component {
         };
     }
     static getDerivedStateFromProps(props, state) {
-        if(props.selected_language != state.selected_language){
+        if(props.selected_language !== state.selected_language){
           var new_state = {selected_language: props.selected_language};
           return new_state;
         }

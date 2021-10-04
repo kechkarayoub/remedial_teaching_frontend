@@ -18,7 +18,7 @@ class Footer extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if(props.i18n && props.i18n.language != state.current_language){
+    if(props.i18n && props.i18n.language !== state.current_language){
       var new_state = {
         current_language: get("current_language") || "fr",
       };
@@ -64,7 +64,7 @@ class Footer extends Component {
           </div>
           <div className="container">
             <div className="contact_mail">
-              <h3 className={current_language == "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href={`mailto:${general_information.contact_email}`}>{general_information.contact_email}</a></h3>
+              <h3 className={current_language === "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href={`mailto:${general_information.contact_email}`}>{general_information.contact_email}</a></h3>
             </div>
           </div>
         </FooterStyle>

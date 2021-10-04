@@ -26,7 +26,7 @@ export class Home extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language") || "fr";
-    if(current_language != state.current_language){
+    if(current_language !== state.current_language){
       var new_state = {current_language: current_language};
       return new_state;
     }
@@ -42,7 +42,7 @@ export class Home extends Component {
         <HomeHeader {...this.props}/>
         <section className="one">
           <div className="container">
-            <div className={`row ${current_language == "ar" ? "rtl" : ""}`}>
+            <div className={`row ${current_language === "ar" ? "rtl" : ""}`}>
               <div className="col-xl-8 col-lg-12 ">
                 {/* <Carousel
                   handleOpenModalConnexion={() =>
