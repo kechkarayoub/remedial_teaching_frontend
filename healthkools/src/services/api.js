@@ -37,6 +37,17 @@ export const feeds_api_get = (api_key, url) => {
   });
 };
 
+
+export const get_geo_info = (api_key) => {
+  return axios.get('https://geolocation-db.com/json/'+api_key)
+  .then(res => {
+    return res.data;
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
+
 var general_information_api_sent = false;
 export const general_information_api_get = () => {
   if(!general_information_api_sent){

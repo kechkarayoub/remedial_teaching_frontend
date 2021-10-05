@@ -40,6 +40,9 @@ import {shuffle} from "../../../utils/index";
           feeds: res.items,
           feeds_languages: feeds_languages,
         });
+      })
+      .catch(err => {
+        this.feeds_api_done = true;
       });
     }
   }
