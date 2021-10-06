@@ -5,16 +5,69 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import $ from 'jquery';
 import { withTranslation, Trans } from 'react-i18next';
+import { get_geo_info } from '../../../services/api';
+import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
 import { get } from "../../../services/storage";
+import InputText from "../../../components/forms_fields/InputText";
+import InputSelect from "../../../components/forms_fields/InputSelect";
 
 class SignInUpModal extends Component {
   constructor(props) {
     super(props);
     this.state= {
-      current_language: get("current_language") || "fr",
+      address: "",
+      birthday: moment().add(-30, "years").toDate(),
+      country_code: "",
+      current_language: get("current_language"),
       default_view: props.default_sign_in_up_view,
-      isSubmitting: false,
+      email: "",
+      first_name: "",
+      gender: "",
+      is_submitting: false,
+      last_name: "",
+      phone_number: "",
+      username: "",
+    };
+    this.geo_info_api_done = true;
+    this.countries_options = get_contries_select_options(get("current_language"), this.props.t);
+  }
+
+  componentDidMount(){
+    this.getGeoInfo();
+  }
+  static getDerivedStateFromProps(props, state) {
+    var current_language = get("current_language");
+    if(current_language !== state.current_language){
+      var new_state = {current_language: current_language};
+      return new_state;
+    }
+    return null;
+  }
+  componentDidUpdate(prevProps, prevState){
+    var new_state = {};
+    if(prevState.current_language !== this.state.current_language){
+      this.countries_options = get_contries_select_options(this.state.current_language, this.props.t);
+      new_state.random = parseInt(Math.random() * 100000);
+    }
+    if(Object.keys(new_state).length !== 0){
+      this.setState(new_state);
+    }
+  }
+
+  getGeoInfo = () => {
+    if(this.geo_info_api_done){
+      this.geo_info_api_done = false;
+      const api_key = process.env.REACT_APP_GEOLOCATION_DB_API_KEY;
+      get_geo_info(api_key).then(res => {
+        this.geo_info_api_done = true;
+        this.setState({
+          country_code: res.country_code,
+        });
+      })
+      .catch(err => {
+        this.geo_info_api_done = true;
+      });
     }
   }
 
@@ -70,7 +123,7 @@ class SignInUpModal extends Component {
 
   render() {
     var pat = /^http?:\/\//i;
-    const {current_language, default_view} = this.state;
+    const {current_language, default_view, country_code} = this.state;
     return (
       <>
       <Modal
@@ -79,23 +132,25 @@ class SignInUpModal extends Component {
         className={`custom_modal sign_in_up_modal ${current_language == "ar" ? "rtl" : ""}`}
         animation={false}
       >
-      <SignInUpModalModal>
+        <SignInUpModalModal>
           <Modal.Header>
             <span className="visibility_hidden"></span>
-            { this.props.t(default_view == "sign_in" ? 'Sign in' : 'Sign up') }
+            { this.props.t(default_view === "sign_in" ? 'Sign in' : 'Sign up') }
             <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>
           <Modal.Body>
-            
+            <InputText label="ffff" value={country_code} invalid_message={"error_message"} valid_message={"valid_message"} />
+            <InputSelect label="country" value={country_code} countries_options={this.countries_options}
+            invalid_message={"error_message"} valid_message={"valid_message"} />
           </Modal.Body>
           <Modal.Footer>
             
           </Modal.Footer>
         </SignInUpModalModal>
-    </Modal>
-    </>
+      </Modal>
+      </>
     );
   }
 }
