@@ -6,7 +6,7 @@ export const set = (key, value) => {
 
 export const get = (key) => {
   var res = store.get(key);
-  if(key == "current_language"){
+  if(key === "current_language"){
     return res || "fr";
   }
   return res;
