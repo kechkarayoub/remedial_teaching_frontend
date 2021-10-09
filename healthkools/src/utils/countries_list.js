@@ -1712,9 +1712,9 @@ export const get_contries_select_options = (current_language , t) => {
     var countries_ = countries.sort((a, b) => {
         return a.translations[current_language] < b.translations[current_language] ? -1 : 1;
     });
-    var countries_options = [{name: t("Choose a country"), value: ""}];
+    var countries_options = [];
     countries_.map(country => {
-        countries_options.push({name: country.translations[current_language], value: country.country_code,});
+        countries_options.push({label: country.translations[current_language], value: country.country_code,});
     });
     return countries_options;
 };

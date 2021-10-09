@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
 import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
-import SelectSearch from "react-select-search";
+import Select from 'react-select';
 
  class InputSelect extends Component {
   constructor(props) {
@@ -11,11 +11,13 @@ import SelectSearch from "react-select-search";
     this.state = {
       added_class: props.added_class,
       countries_options: props.countries_options,
+      current_language: props.current_language,
       disabled: props.disabled,
       error_message: props.error,
       invalid_message: props.invalid_message,
       label: props.label,
       random: props.random,
+      placeholder: props.placeholder,
       valid_message: props.valid_message,
       value: props.value,
     };
@@ -26,10 +28,12 @@ import SelectSearch from "react-select-search";
     return {
         added_class: props.added_class,
         countries_options: props.countries_options,
+        current_language: props.current_language,
         disabled: props.disabled,
         error_message: props.error,
         invalid_message: props.invalid_message,
         label: props.label,
+        placeholder: props.placeholder,
         valid_message: props.valid_message,
         value: props.value,
     };
@@ -38,17 +42,13 @@ import SelectSearch from "react-select-search";
   componentDidUpdate(prevProps, prevState){
     
   }
-  handleChange = (value, selected_country) => {
+  handleChange = (option) => {
     if(this.props.on_change){
         this.props.on_change();
     }
     else{
-        this.setState({value: value});
+        this.setState({value: option ? option.value : ""});
     }
-    // searchInput.current.querySelector("input").value = "";
-    console.log("ARGS:", value);
-
-    console.log("CHANGE:");
   };
 
   handleFilter = (items) => {
@@ -69,23 +69,27 @@ import SelectSearch from "react-select-search";
   };
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, valid_message, countries_options, value} = this.state;
-    // var selected_country_option = props.value ? props.countries_options.filter(c_o => c_o.value === props.value)[0] : props.countries_options[0];
+    const {added_class, disabled, error_message, invalid_message, label, valid_message, placeholder, countries_options, value, current_language} = this.state;
+    var selected_country_option = value ? countries_options.filter(c_o => c_o.value === value)[0] : null;
 
     return (
       <InputSelectStyle className={`field_input input_select ${added_class || ""}`}>
         <div className="field">
             <label>{label}</label>
-            <SelectSearch
-              ref={this.searchInput}
-              options={countries_options}
-              filterOptions={this.handleFilter}
-              value={value}
-              name="country"
-              placeholder={label}
-              search
-              onChange={this.handleChange}
-              disabled={disabled}
+            <Select
+                key={value || "default"}
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue={selected_country_option}
+                isDisabled={disabled}
+                isLoading={false}
+                isClearable={true}
+                isRtl={current_language === "ar"}
+                isSearchable={true}
+                name="country"
+                placeholder={placeholder}
+                options={countries_options}
+                onChange={this.handleChange}
             />
         </div>
         {(error_message || invalid_message) &&

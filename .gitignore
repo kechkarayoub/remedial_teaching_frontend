@@ -32,6 +32,7 @@ build/
 # testing
 /coverage
 **/coverage
+**/__snapshots__
 
 # production
 /build
