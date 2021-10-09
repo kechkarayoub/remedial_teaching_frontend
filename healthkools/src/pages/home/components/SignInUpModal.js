@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import DatePicker from "react-datepicker";
 import $ from 'jquery';
-import { withTranslation, Trans } from 'react-i18next';
+import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import { get_geo_info } from '../../../services/api';
 import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
@@ -140,10 +140,10 @@ class SignInUpModal extends Component {
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body data-testid="body">
             <InputText label="ffff" value={country_code} invalid_message={"error_message"} valid_message={"valid_message"} />
-            <InputSelect label="country" value={country_code} countries_options={this.countries_options}
-            invalid_message={"error_message"} valid_message={"valid_message"} />
+            <InputSelect label="country" placeholder={this.props.t("Choose a country")} value={country_code} countries_options={this.countries_options}
+              invalid_message={"error_message"} valid_message={"valid_message"} current_language={current_language}/>
           </Modal.Body>
           <Modal.Footer>
             
