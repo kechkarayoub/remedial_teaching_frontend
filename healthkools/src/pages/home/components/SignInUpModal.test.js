@@ -59,7 +59,7 @@ describe('SignInUpModal component', () => {
     await act(async () => {
       const { container } = render(<SignInUpModal i18n={i18next} show={true}/>);
       expect(screen.getAllByTestId('body').length).toBe(1);
-      console.log(screen.getAllByTestId('body')[0].innerHTML)
+      // console.log(screen.getAllByTestId('body')[0].innerHTML)
     });
   });
 });

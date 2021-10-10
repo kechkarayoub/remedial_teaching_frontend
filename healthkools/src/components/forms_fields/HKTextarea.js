@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
 
- class InputText extends Component {
+ class HKTextarea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +13,8 @@ import FieldValid from "./FieldValid";
       error_message: props.error,
       invalid_message: props.invalid_message,
       label: props.label,
+      placeholder: props.placeholder,
+      rows: props.rows,
       valid_message: props.valid_message,
       value: props.value,
     };
@@ -25,25 +27,28 @@ import FieldValid from "./FieldValid";
         error_message: props.error,
         invalid_message: props.invalid_message,
         label: props.label,
+        placeholder: props.placeholder,
+        rows: props.rows,
         valid_message: props.valid_message,
         value: props.value,
     };
 }
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, valid_message, value} = this.state;
+    const {added_class, disabled, error_message, invalid_message, label, placeholder, rows, valid_message, value} = this.state;
     return (
-      <InputTextStyle className={`field_input input_text ${added_class || ""}`}>
+      <HKTextareaStyle className={`field_input input_textarea ${added_class || ""}`}>
         <div className="field">
-            <label>{label}</label>
-            <input disabled={disabled} defaultValue={value} placeholder={label} onChange={evt => {
+            <label data-testid="label">{label}</label>
+            <textarea data-testid="textarea" disabled={disabled} defaultValue={value} placeholder={placeholder} rows={rows}
+              onChange={evt => {
                 if(this.props.on_change){
                     this.props.on_change(evt.target.value);
                 }
                 else{
-                    this.setState({value: value});
+                    this.setState({value: evt.target.value});
                 }
-            }} />
+            }}/>
         </div>
         {(error_message || invalid_message) &&
             <FieldError error_message={error_message || invalid_message} />
@@ -51,24 +56,29 @@ import FieldValid from "./FieldValid";
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </InputTextStyle>
+      </HKTextareaStyle>
     );
   }
 }
 
-const InputTextStyle = styled.div`
+const HKTextareaStyle = styled.div`
   border-radius: 6.3px;
-  box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.1);
   padding: 13px 15px;
   overflow: hidden;
-  margin-bottom: 20px;
-  margin: 10px 5px;
-  width: calc(100% - 10px)!important;
+  .field{
+    label{
+    }
+  }
+  &.no_resize{
+    textarea{
+      resize: none;
+    }
+  }
   @media screen and (max-width: 1199px){
   }
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(InputText);
+export default withTranslation('translations')(HKTextarea);
 
 

@@ -1707,7 +1707,7 @@ export const countries = [
     },
 ];
 
-export const get_contries_select_options = (current_language , t) => {
+export const get_contries_select_options = (current_language) => {
     current_language = current_language || get("current_language");
     var countries_ = countries.sort((a, b) => {
         return a.translations[current_language] < b.translations[current_language] ? -1 : 1;

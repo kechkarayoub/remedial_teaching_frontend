@@ -9,8 +9,9 @@ import { get_geo_info } from '../../../services/api';
 import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
 import { get } from "../../../services/storage";
-import InputText from "../../../components/forms_fields/InputText";
-import InputSelect from "../../../components/forms_fields/InputSelect";
+import HKInput from "../../../components/forms_fields/HKInput";
+import HKSelect from "../../../components/forms_fields/HKSelect";
+import HKTextarea from "../../../components/forms_fields/HKTextarea";
 
 class SignInUpModal extends Component {
   constructor(props) {
@@ -22,12 +23,15 @@ class SignInUpModal extends Component {
       current_language: get("current_language"),
       default_view: props.default_sign_in_up_view,
       email: "",
+      error_messages: {},
       first_name: "",
       gender: "",
+      invalid_messages: {},
       is_submitting: false,
       last_name: "",
       phone_number: "",
       username: "",
+      valid_messages: {},
     };
     this.geo_info_api_done = true;
     this.countries_options = get_contries_select_options(get("current_language"), this.props.t);
@@ -47,7 +51,7 @@ class SignInUpModal extends Component {
   componentDidUpdate(prevProps, prevState){
     var new_state = {};
     if(prevState.current_language !== this.state.current_language){
-      this.countries_options = get_contries_select_options(this.state.current_language, this.props.t);
+      this.countries_options = get_contries_select_options(this.state.current_language);
       new_state.random = parseInt(Math.random() * 100000);
     }
     if(Object.keys(new_state).length !== 0){
@@ -71,45 +75,10 @@ class SignInUpModal extends Component {
     }
   }
 
-  handleChangeImageSource = (evt) =>{
-    this.setState({
-      type_img: evt.target.value
-    });
-  }
-
-  handleBrowseImage = (evt, setFieldValue) => {
-    setFieldValue('img', evt.target.files[0]);
-    setFieldValue('is_browsed', true);
-  }
-
-  handleBrowseFile = (evt, setFieldValue) => {
-    this.ref_file_label.current.value = evt.target.files[0].name;
-    setFieldValue('file', evt.target.files[0]);
-  }
-
-  handleSubmit = form => {
-    let data = new FormData();
-    if(this.state.type_img == "new" && (!this.props.book || this.props.book.image_src!=form.img))
-      data.set('img_file', form.img);
-    else if(this.state.type_img == "exist")
-      data.set('img_src', form.img);
-    data.set('author_name', form.author_name);
-    data.set('edition_date', form.edition_date ? moment(form.edition_date).format("YYYY-MM-DD") : "");
-    data.set('editor_name', form.editor_name);
-    data.set('isbn', form.isbn);
-    data.set('langue', form.langue);
-    data.set('nbr_copies', form.nbr_copies);
-    data.set('name', form.name);
-    if(this.props.book){
-      data.set('book_id', this.props.book.id);
-      data.set('action', 'update_book');
-    }
-    else
-      data.set('action', 'create_book');
-
-    data.set('school_id', this.props.school_id);
-    
-
+  handleFieldChange = (val, field) => {
+    var state = this.state;
+    state[field] = val;
+    this.setState(state);
   }
 
 //   componentDidMount(){
@@ -123,7 +92,7 @@ class SignInUpModal extends Component {
 
   render() {
     var pat = /^http?:\/\//i;
-    const {current_language, default_view, country_code} = this.state;
+    const {address, current_language, default_view, error_messages, country_code, first_name, invalid_messages, last_name, valid_messages} = this.state;
     return (
       <>
       <Modal
@@ -141,9 +110,21 @@ class SignInUpModal extends Component {
             </Button>
           </Modal.Header>
           <Modal.Body data-testid="body">
-            <InputText label="ffff" value={country_code} invalid_message={"error_message"} valid_message={"valid_message"} />
-            <InputSelect label="country" placeholder={this.props.t("Choose a country")} value={country_code} countries_options={this.countries_options}
-              invalid_message={"error_message"} valid_message={"valid_message"} current_language={current_language}/>
+            <Row>
+              <HKInput added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
+                value={first_name} invalid_message={invalid_messages.first_name} valid_message={valid_messages.first_name}
+                error_message={error_messages.first_name} on_change={(val) => this.handleFieldChange(val, "first_name")}/>
+              <HKInput added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
+                value={last_name} invalid_message={invalid_messages.last_name} valid_message={valid_messages.last_name}
+                error_message={error_messages.last_name} on_change={(val) => this.handleFieldChange(val, "last_name")}/>
+              <HKSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
+                placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
+                invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} 
+                error_message={error_messages.country_code} on_change={(val) => this.handleFieldChange(val, "country_code")}/>
+              <HKTextarea added_class="col-12 col-md-12 no_resize" label={this.props.t("Address")} placeholder={this.props.t("Address")} 
+                value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
+                error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
+            </Row>
           </Modal.Body>
           <Modal.Footer>
             
@@ -179,6 +160,9 @@ const SignInUpModalModal = styled.div`
         padding-bottom: 6px;
       }
     }
+  }
+  .modal-body{
+    padding: 10px 0;
   }
 `;
 export default withTranslation('translations')(SignInUpModal);
