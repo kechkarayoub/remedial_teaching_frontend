@@ -44,7 +44,7 @@ import Select from 'react-select';
   }
   handleChange = (option) => {
     if(this.props.on_change){
-        this.props.on_change(option ? option.value : "");
+        this.props.on_change(option ? option.value : "", option ? option.name : "");
     }
     else{
         this.setState({value: option ? option.value : ""});

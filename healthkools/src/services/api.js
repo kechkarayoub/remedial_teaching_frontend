@@ -26,6 +26,24 @@ const mapAuthError = message => {
   //return "Erreur d'authentification";
 };
 
+var check_if_email_or_username_exists_api_sent = false;
+export const check_if_email_or_username_exists_api_get = (data) => {
+  if(!check_if_email_or_username_exists_api_sent){
+    check_if_email_or_username_exists_api_sent = true;
+    return instance.get('/user/check_if_email_or_username_exists',
+      {params: data},
+    )
+    .then(res => {
+      check_if_email_or_username_exists_api_sent = false;
+      return res.data;
+    })
+    .catch(err => {
+      check_if_email_or_username_exists_api_sent = false;
+      console.log(err);
+    });
+  }
+};
+
 
 export const feeds_api_get = (api_key, url) => {
   return axios.get('https://api.rss2json.com/v1/api.json?api_key='+api_key+'&rss_url=' + url)

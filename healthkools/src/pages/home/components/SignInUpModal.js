@@ -5,10 +5,11 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import $ from 'jquery';
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import { get_geo_info } from '../../../services/api';
+import { get_geo_info, check_if_email_or_username_exists_api_get } from '../../../services/api';
 import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
 import { get } from "../../../services/storage";
+import HKGender from "../../../components/forms_fields/HKGender";
 import HKInput from "../../../components/forms_fields/HKInput";
 import HKSelect from "../../../components/forms_fields/HKSelect";
 import HKTextarea from "../../../components/forms_fields/HKTextarea";
@@ -20,6 +21,7 @@ class SignInUpModal extends Component {
       address: "",
       birthday: moment().add(-30, "years").toDate(),
       country_code: "",
+      country_name: "",
       current_language: get("current_language"),
       default_view: props.default_sign_in_up_view,
       email: "",
@@ -75,10 +77,73 @@ class SignInUpModal extends Component {
     }
   }
 
-  handleFieldChange = (val, field) => {
+  handleFieldChange = (val, field, val2) => {
     var state = this.state;
     state[field] = val;
-    this.setState(state);
+    if(field === "email"){
+      if(val){
+        if(this.typingTimerEmail){
+          clearTimeout(this.typingTimerEmail);
+        }
+        this.typingTimerEmail = setTimeout(() => {
+          var data = {
+            email_or_username: val,
+            current_language: this.state.current_language,
+          };
+          check_if_email_or_username_exists_api_get(data).then(res => {
+            if(res.user_exists){
+              state.invalid_messages.email = res.message;
+              state.valid_messages.email = undefined;
+            }
+            else{
+              state.invalid_messages.email = undefined;
+              state.valid_messages.email = undefined;
+            }
+            this.setState(state);
+          });
+        }, 500);
+      }
+      else{
+        state.invalid_messages.email = undefined;
+        state.valid_messages.email = undefined;
+        this.setState(state);
+      }
+    }
+    else if(field === "username"){
+      if(val){
+        if(this.typingTimerUsername){
+          clearTimeout(this.typingTimerUsername);
+        }
+        this.typingTimerUsername = setTimeout(() => {
+          var data = {
+            email_or_username: val,
+            current_language: this.state.current_language,
+          };
+          check_if_email_or_username_exists_api_get(data).then(res => {
+            if(res.user_exists){
+              state.invalid_messages.username = res.message;
+              state.valid_messages.username = undefined;
+            }
+            else{
+              state.invalid_messages.username = undefined;
+              state.valid_messages.username = undefined;
+            }
+            this.setState(state);
+          });
+        }, 500);
+      }
+      else{
+        state.invalid_messages.username = undefined;
+        state.valid_messages.username = undefined;
+        this.setState(state);
+      }
+    }
+    else if(field === "country_code"){
+      state.country_name = val2;
+    }
+    else{
+      this.setState(state);
+    }
   }
 
 //   componentDidMount(){
@@ -92,7 +157,7 @@ class SignInUpModal extends Component {
 
   render() {
     var pat = /^http?:\/\//i;
-    const {address, current_language, default_view, error_messages, country_code, first_name, invalid_messages, last_name, valid_messages} = this.state;
+    const {address, country_code, current_language, default_view, email, error_messages, first_name, gender, invalid_messages, last_name, username, valid_messages} = this.state;
     return (
       <>
       <Modal
@@ -117,10 +182,19 @@ class SignInUpModal extends Component {
               <HKInput added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
                 value={last_name} invalid_message={invalid_messages.last_name} valid_message={valid_messages.last_name}
                 error_message={error_messages.last_name} on_change={(val) => this.handleFieldChange(val, "last_name")}/>
+              <HKInput added_class="col-12 col-md-6" label={this.props.t("Email")} placeholder={this.props.t("Email")} 
+                value={email} invalid_message={invalid_messages.email} valid_message={valid_messages.email}
+                error_message={error_messages.email} on_change={(val) => this.handleFieldChange(val, "email")}/>
+              <HKInput added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
+                value={username} invalid_message={invalid_messages.username} valid_message={valid_messages.username}
+                error_message={error_messages.username} on_change={(val) => this.handleFieldChange(val, "username")}/>
+              <HKGender added_class="col-12 col-md-6" label={this.props.t("Gender")} 
+                value={gender} invalid_message={invalid_messages.gender} valid_message={valid_messages.gender}
+                error_message={error_messages.gender} on_change={(val) => this.handleFieldChange(val, "gender")}/>
               <HKSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
                 placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
                 invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} 
-                error_message={error_messages.country_code} on_change={(val) => this.handleFieldChange(val, "country_code")}/>
+                error_message={error_messages.country_code} on_change={(val, val2) => this.handleFieldChange(val, "country_code", val2)}/>
               <HKTextarea added_class="col-12 col-md-12 no_resize" label={this.props.t("Address")} placeholder={this.props.t("Address")} 
                 value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
                 error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
