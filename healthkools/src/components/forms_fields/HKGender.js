@@ -82,7 +82,7 @@ const HKGenderStyle = styled.div`
         cursor:pointer;
         width: 34.3px;
         height: 34.3px;
-        margin: 10px 10px 10px 10px;
+        margin: 0px 10px 0px 10px;
         cursor: pointer;
         border: 0.8px solid #3eb6ad;
         border-radius: 50%;

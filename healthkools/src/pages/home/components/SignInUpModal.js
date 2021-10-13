@@ -10,7 +10,9 @@ import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
 import { get } from "../../../services/storage";
 import HKGender from "../../../components/forms_fields/HKGender";
+import HKDate from "../../../components/forms_fields/HKDate";
 import HKInput from "../../../components/forms_fields/HKInput";
+import HKPassword from "../../../components/forms_fields/HKPassword";
 import HKSelect from "../../../components/forms_fields/HKSelect";
 import HKTextarea from "../../../components/forms_fields/HKTextarea";
 
@@ -19,7 +21,7 @@ class SignInUpModal extends Component {
     super(props);
     this.state= {
       address: "",
-      birthday: moment().add(-30, "years").toDate(),
+      birthday: null,//moment().add(-30, "years").toDate(),
       country_code: "",
       country_name: "",
       current_language: get("current_language"),
@@ -31,6 +33,8 @@ class SignInUpModal extends Component {
       invalid_messages: {},
       is_submitting: false,
       last_name: "",
+      password: "",
+      password_confirmation: "",
       phone_number: "",
       username: "",
       valid_messages: {},
@@ -129,6 +133,8 @@ class SignInUpModal extends Component {
               state.valid_messages.username = undefined;
             }
             this.setState(state);
+          }).catch(err => {
+            console.log(err);
           });
         }, 500);
       }
@@ -140,6 +146,25 @@ class SignInUpModal extends Component {
     }
     else if(field === "country_code"){
       state.country_name = val2;
+      this.setState(state);
+    }
+    else if(field === "password"){
+      if(val && state.password_confirmation && val !== state.password_confirmation){
+        state.invalid_messages.password_confirmation = this.props.t("Passwords not match");
+      }
+      else{
+        state.invalid_messages.password_confirmation = null;
+      }
+      this.setState(state);
+    }
+    else if(field === "password_confirmation"){
+      if(val && state.password && val !== state.password){
+        state.invalid_messages.password_confirmation = this.props.t("Passwords not match");
+      }
+      else{
+        state.invalid_messages.password_confirmation = null;
+      }
+      this.setState(state);
     }
     else{
       this.setState(state);
@@ -157,7 +182,8 @@ class SignInUpModal extends Component {
 
   render() {
     var pat = /^http?:\/\//i;
-    const {address, country_code, current_language, default_view, email, error_messages, first_name, gender, invalid_messages, last_name, username, valid_messages} = this.state;
+    const {address, birthday, country_code, current_language, default_view, email, error_messages, first_name, gender,
+      invalid_messages, last_name, password, password_confirmation, username, valid_messages} = this.state;
     return (
       <>
       <Modal
@@ -188,6 +214,15 @@ class SignInUpModal extends Component {
               <HKInput added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
                 value={username} invalid_message={invalid_messages.username} valid_message={valid_messages.username}
                 error_message={error_messages.username} on_change={(val) => this.handleFieldChange(val, "username")}/>
+              <HKPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
+                value={password} invalid_message={invalid_messages.password} valid_message={valid_messages.password}
+                error_message={error_messages.password} on_change={(val) => this.handleFieldChange(val, "password")}/>
+              <HKPassword added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")} 
+                value={password_confirmation} invalid_message={invalid_messages.password_confirmation} valid_message={valid_messages.password_confirmation}
+                error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
+              <HKDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
+                value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
+                error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}/>
               <HKGender added_class="col-12 col-md-6" label={this.props.t("Gender")} 
                 value={gender} invalid_message={invalid_messages.gender} valid_message={valid_messages.gender}
                 error_message={error_messages.gender} on_change={(val) => this.handleFieldChange(val, "gender")}/>

@@ -5,6 +5,8 @@ import Language from "./component/Language";
 import {colors} from "../../assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 import { get, set } from "../../services/storage";
+import { changeLocale } from "../../utils/date_picker";
+
 export const languages = [
    { name: "Arabic", short_name: "Ar", value: "ar", flag: flags.flagAr16, alt:"Morocco flag" },
    { name: "English", short_name: "En", value: "en", flag: flags.flagEn16, alt:"United States flag" },
@@ -20,6 +22,7 @@ class LanguageSelect extends Component {
     }
     handleSelectLanguage = (evt, language) => {
         evt.stopPropagation();
+        changeLocale(language);
         set("current_language", language);
         this.props.i18n.changeLanguage(language);
         this.setState({
