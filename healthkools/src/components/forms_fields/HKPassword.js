@@ -48,7 +48,7 @@ class HKPassword extends Component {
                       this.setState({value: evt.target.value});
                   }
               }} type={show_password ? "text" : "password"}/>
-              <i className={`show_hide_password fa ${show_password ? "fa-eye" : "fa-eye-slash"}`} onClick={() => this.setState({show_password: !show_password})}></i>
+              <i data-testid="toggle_show_password" className={`show_hide_password fa ${show_password ? "fa-eye" : "fa-eye-slash"}`} onClick={() => this.setState({show_password: !show_password})}></i>
               <PasswordStrengthBar password={value} shortScoreWord={this.props.t("Too short")}
                 scoreWords={[this.props.t("Weak"), this.props.t("Weak"), this.props.t("Okay"), this.props.t("Good"), this.props.t("Strong")]}/>
             </div>
