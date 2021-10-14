@@ -13,6 +13,7 @@ import HKGender from "../../../components/forms_fields/HKGender";
 import HKDate from "../../../components/forms_fields/HKDate";
 import HKInput from "../../../components/forms_fields/HKInput";
 import HKPassword from "../../../components/forms_fields/HKPassword";
+import HKPhoneNumber from "../../../components/forms_fields/HKPhoneNumber";
 import HKSelect from "../../../components/forms_fields/HKSelect";
 import HKTextarea from "../../../components/forms_fields/HKTextarea";
 
@@ -32,6 +33,7 @@ class SignInUpModal extends Component {
       gender: "",
       invalid_messages: {},
       is_submitting: false,
+      is_valid_phone_number: false,
       last_name: "",
       password: "",
       password_confirmation: "",
@@ -148,6 +150,10 @@ class SignInUpModal extends Component {
       state.country_name = val2;
       this.setState(state);
     }
+    else if(field === "phone_number"){
+      state.is_valid_phone_number = val2;
+      this.setState(state);
+    }
     else if(field === "password"){
       if(val && state.password_confirmation && val !== state.password_confirmation){
         state.invalid_messages.password_confirmation = this.props.t("Passwords not match");
@@ -183,7 +189,7 @@ class SignInUpModal extends Component {
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, error_messages, first_name, gender,
-      invalid_messages, last_name, password, password_confirmation, username, valid_messages} = this.state;
+      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation, phone_number, username, valid_messages} = this.state;
     return (
       <>
       <Modal
@@ -220,6 +226,9 @@ class SignInUpModal extends Component {
               <HKPassword added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")} 
                 value={password_confirmation} invalid_message={invalid_messages.password_confirmation} valid_message={valid_messages.password_confirmation}
                 error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
+              <HKPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Phone number")} placeholder={this.props.t("Phone number")} 
+                value={phone_number} invalid_message={invalid_messages.phone_number} valid_message={valid_messages.phone_number} is_valid_phone_number={is_valid_phone_number}
+                error_message={error_messages.phone_number} on_change={(val, is_valid_phone_number_) => this.handleFieldChange(val, "phone_number", is_valid_phone_number_)} default_country={country_code}/>
               <HKDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
                 value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
                 error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}/>
