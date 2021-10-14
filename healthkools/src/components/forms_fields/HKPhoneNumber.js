@@ -54,6 +54,7 @@ import fr from 'react-phone-input-2/lang/fr.json';
               placeholder={placeholder} country={(default_country || "").toLowerCase()}
               value={value} disabled={disabled} localization={current_language == "ar" ? ar : current_language == "fr" ? fr : undefined}
               containerStyle={{direction: current_language == "ar" ? "rtl" : "ltr"}}
+              containerClass={"tel_input_container " + (current_language == "ar" ? "rtl" : "ltr")}
               onChange={(phone_number) => {
                 if(phone_number){
                   if(this.props.on_change){
@@ -80,11 +81,48 @@ import fr from 'react-phone-input-2/lang/fr.json';
 const HKPhoneNumberStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
-  overflow: hidden;
+  // overflow: hidden;
   .field{
     label{
     }
-    input{
+    .tel_input_container{
+      input{
+        background: #f7f7f7;
+        width: 100%;
+        height: 38px;
+        &:focus{
+          background: #f7f7f7;
+          box-shadow: 0 0 0 2px #1fa1cf;
+        }
+      }
+      .flag-dropdown{
+        &.open{
+          .country-list{
+            width: 100%;
+            min-width: 200px;
+          }
+        }
+      }
+      &.rtl{
+        input{
+          direction: ltr;
+          padding-left: 8px;
+          padding-right: 48px;
+          text-align: right;
+        }
+        .flag-dropdown{
+          border-radius: 0 3px 3px 0;
+          .selected-flag{
+            padding: 0 8px 0 0;
+            .flag{
+              .arrow{
+                left: unset;
+                right: 20px;
+              }
+            }
+          }
+        }
+      }
     }
   }
   @media screen and (max-width: 1199px){

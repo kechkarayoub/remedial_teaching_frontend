@@ -26,6 +26,7 @@
   "Okay": "حسن",
   "Password": "كلمة المرور",
   "Passwords not match": "كلمات المرور غير متطابقة",
+  "Phone number": "رقم الهاتف",
   "Read more...": "اقرأ أكثر...",
   "Choose a country": "اختر بلدا",
   "Sign in": "تسجيل الدخول",
@@ -37,5 +38,6 @@
   "Try again": "حاول مجددا",
   "United States flag": "علم الولايات المتحدة",
   "Username": "اسم المستخدم",
+  "Username or email": "اسم المستخدم أو البريد الالكتروني",
   "Weak": "ضعيف"
 }

@@ -26,6 +26,7 @@
   "Okay": "Okay",
   "Password": "Password",
   "Passwords not match": "Passwords not match",
+  "Phone number": "Phone number",
   "Read more...": "Read more...",
   "Choose a country": "Choose a country",
   "Sign in": "Sign in",
@@ -37,5 +38,6 @@
   "Try again": "Try again",
   "United States flag": "United States flag",
   "Username": "Username",
+  "Username or email": "Username or email",
   "Weak": "Weak"
 }

@@ -15,6 +15,7 @@ class HKPassword extends Component {
       label: props.label,
       placeholder: props.placeholder,
       show_password: false,
+      show_trength_bar: props.show_trength_bar,
       valid_message: props.valid_message,
       value: props.value,
     };
@@ -28,13 +29,14 @@ class HKPassword extends Component {
         invalid_message: props.invalid_message,
         label: props.label,
         placeholder: props.placeholder,
+        show_trength_bar: props.show_trength_bar,
         valid_message: props.valid_message,
         value: props.value,
     };
 }
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, placeholder, show_password, valid_message, value} = this.state;
+    const {added_class, disabled, error_message, invalid_message, label, placeholder, show_password, show_trength_bar, valid_message, value} = this.state;
     return (
       <HKPasswordStyle className={`field_input input_password ${added_class || ""}`}>
         <div className="field">
@@ -49,8 +51,10 @@ class HKPassword extends Component {
                   }
               }} type={show_password ? "text" : "password"}/>
               <i data-testid="toggle_show_password" className={`show_hide_password fa ${show_password ? "fa-eye" : "fa-eye-slash"}`} onClick={() => this.setState({show_password: !show_password})}></i>
-              <PasswordStrengthBar password={value} shortScoreWord={this.props.t("Too short")}
-                scoreWords={[this.props.t("Weak"), this.props.t("Weak"), this.props.t("Okay"), this.props.t("Good"), this.props.t("Strong")]}/>
+              {show_trength_bar &&
+                <PasswordStrengthBar password={value} shortScoreWord={this.props.t("Too short")}
+                  scoreWords={[this.props.t("Weak"), this.props.t("Weak"), this.props.t("Okay"), this.props.t("Good"), this.props.t("Strong")]}/>
+              }
             </div>
         </div>
         {(error_message || invalid_message) &&

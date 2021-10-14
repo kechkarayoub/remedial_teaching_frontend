@@ -26,6 +26,7 @@
   "Okay": "Bien",
   "Password": "Mot de passe",
   "Passwords not match": "Les mots de passe ne correspondent pas",
+  "Phone number": "Numéro de téléphone",
   "Read more...": "Lire la suite...",
   "Choose a country": "Choisissez un pays",
   "Sign in": "Connexion",
@@ -37,5 +38,6 @@
   "Try again": "Réessayer",
   "United States flag": "Drapeau des États-Unis",
   "Username": "Nom d'utilisateur",
+  "Username or email": "Nom d'utilisateur ou email",
   "Weak": "Faible"
 }
