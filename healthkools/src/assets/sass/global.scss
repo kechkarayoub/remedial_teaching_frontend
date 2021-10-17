@@ -6,6 +6,10 @@
 @import "./variables.scss";
 @import "../css/animate.css";
 
+
+.backdrop_custom_z_index_1055{
+    z-index: 1055 !important;
+}
 .btnn{
     border: 0;
     cursor: pointer;
@@ -53,15 +57,18 @@
     }
     &.terms_of_service{
         .modal-dialog{
-            height: 100%;
+            border-radius: 15px;
+            height: calc(100% - 60px);
             margin-bottom: 0;
             margin-top: 0;
+            margin-top: 30px;
             max-width: unset;
             min-width: 500px;
+            overflow: hidden;
             width: 50%;
             .modal-content{
                 border: 0;
-                border-radius: 0;
+                border-radius: 15px;
                 height: 100%;
             }
         }

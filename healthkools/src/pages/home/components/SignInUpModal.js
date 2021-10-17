@@ -9,6 +9,7 @@ import { get_geo_info, check_if_email_or_username_exists_api_get } from '../../.
 import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
 import { get } from "../../../services/storage";
+import HKTSNotice from "../../../components/forms_fields/HKTSNotice";
 import HKGender from "../../../components/forms_fields/HKGender";
 import HKDate from "../../../components/forms_fields/HKDate";
 import HKInput from "../../../components/forms_fields/HKInput";
@@ -39,6 +40,7 @@ class SignInUpModal extends Component {
       password_sign_in: "",
       password_confirmation: "",
       phone_number: "",
+      registration_label: this.props.t("Sign up"),
       username: "",
       username_or_email: "",
       valid_messages: {},
@@ -191,14 +193,15 @@ class SignInUpModal extends Component {
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, error_messages, first_name, gender,
-      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation, password_sign_in, phone_number, username, username_or_email, valid_messages} = this.state;
+      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation, password_sign_in,
+      phone_number, registration_label, username, username_or_email, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     return (
       <>
       <Modal
         show={this.props.show} 
         onHide={() => this.props.onHide()}
-        className={`custom_modal sign_in_up_modal ${current_language == "ar" ? "rtl" : ""}`}
+        className={`custom_modal sign_in_up_modal ${current_language === "ar" ? "rtl" : ""}`}
         animation={false}
       >
         <SignInUpModalModal className="custom_scroll_bar">
@@ -247,6 +250,7 @@ class SignInUpModal extends Component {
                 <HKTextarea added_class="col-12 col-md-12 no_resize" label={this.props.t("Address")} placeholder={this.props.t("Address")} 
                   value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
                   error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
+                <HKTSNotice added_class="col-12 col-md-12" registration_label={registration_label}/>
               </>
               :
               <>

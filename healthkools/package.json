@@ -19,6 +19,7 @@
     "pretty-checkbox": "^3.0.3",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.4",
+    "react-custom-checkbox": "^2.0.0",
     "react-datepicker": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.12.0",

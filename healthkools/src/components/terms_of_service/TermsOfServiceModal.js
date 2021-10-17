@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 import styled from "styled-components";
 
-import DatePicker from "react-datepicker";
-import $ from 'jquery';
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import { get_geo_info, check_if_email_or_username_exists_api_get } from '../../../services/api';
-import { get_contries_select_options } from '../../../utils/countries_list';
 import moment from 'moment';
-import { get } from "../../../services/storage";
-import HKGender from "../../../components/forms_fields/HKGender";
-import HKDate from "../../../components/forms_fields/HKDate";
-import HKInput from "../../../components/forms_fields/HKInput";
-import HKPassword from "../../../components/forms_fields/HKPassword";
-import HKPhoneNumber from "../../../components/forms_fields/HKPhoneNumber";
-import HKSelect from "../../../components/forms_fields/HKSelect";
-import HKTextarea from "../../../components/forms_fields/HKTextarea";
+import { get } from "../../services/storage";
+import { colors } from "../../assets/variables/colors";
+import { get_articles } from "./terms_of_service";
 
-class TermsOfService extends Component {
+class TermsOfServiceModal extends Component {
   constructor(props) {
     super(props);
+    var data = {
+      company_address: "",
+      company_capital: "",
+      company_legal_status: "",
+      company_name: "",
+      responsable_address: "",
+      responsable_full_name: "",
+      site_url: "http://localhost:3000",
+    };
     this.state= {
+      articles: get_articles(data),
       current_language: get("current_language"),
     };
   }
@@ -54,16 +55,17 @@ class TermsOfService extends Component {
 
 
   render() {
-    const {current_language, default_view} = this.state;
+    const {current_language, articles} = this.state;
     return (
       <>
       <Modal
         show={this.props.show} 
         onHide={() => this.props.onHide()}
-        className={`custom_modal terms_of_service ${current_language == "ar" ? "rtl" : ""}`}
+        className={`custom_modal terms_of_service ${current_language === "ar" ? "rtl" : ""}`}
+        backdropClassName='backdrop_custom_z_index_1055'
         animation={false}
       >
-        <TermsOfServiceModal className="custom_scroll_bar">
+        <TermsOfServiceModalStyle className="custom_scroll_bar">
           <Modal.Header>
             <span className="visibility_hidden"></span>
             { this.props.t('Terms of service') }
@@ -73,22 +75,45 @@ class TermsOfService extends Component {
           </Modal.Header>
           <Modal.Body data-testid="body">
             <Row>
+              {articles.map((article, idx) => {
+                return <div className={`article `}>
+                  <p key={idx} className={`title `}>
+                    <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span>
+                    <span>{article.title[current_language]}</span>
+                  </p>
+                  {article.paragraphs.map((paragraph, idx_p) => {
+                    return <>
+                      <p key={idx + "_" + idx_p} className={` `} dangerouslySetInnerHTML={{
+                        __html: paragraph[current_language]
+                      }}></p>
+                      {paragraph.list_items &&
+                        <ul>
+                          {paragraph.list_items.map((li, idx) => {
+                            return <li key={idx} dangerouslySetInnerHTML={{__html: li[current_language]}}></li>
+                          })}
+                        </ul>
+                      }
+                    </>
+                  })}
+                </div>
+              })}
             </Row>
           </Modal.Body>
           <Modal.Footer>
             
           </Modal.Footer>
-        </TermsOfServiceModal>
+        </TermsOfServiceModalStyle>
       </Modal>
       </>
     );
   }
 }
-const TermsOfServiceModal = styled.div`
+const TermsOfServiceModalStyle = styled.div`
   height: 100%;
-  padding: 10px 25px;
+  padding: 10px 25px 10px 15px;
   .modal-header{
     color: #1fa1cf;
+    font-size: 20px;
     font-weight: bold;
     padding: 5px 0;
     .close-modal{
@@ -112,6 +137,16 @@ const TermsOfServiceModal = styled.div`
   }
   .modal-body{
     padding: 10px 0;
+    .article{
+      margin-bottom: 15px;
+      p{
+        text-align: justify;
+        &.title{
+          color: ${colors.default_color};
+          font-weight: bold;
+        }
+      }
+    }
   }
 `;
-export default withTranslation('translations')(TermsOfService);
+export default withTranslation('translations')(TermsOfServiceModal);

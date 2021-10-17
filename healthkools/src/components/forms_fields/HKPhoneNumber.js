@@ -52,9 +52,9 @@ import fr from 'react-phone-input-2/lang/fr.json';
             <label data-testid="label">{label}</label>
             <PhoneInput
               placeholder={placeholder} country={(default_country || "").toLowerCase()}
-              value={value} disabled={disabled} localization={current_language == "ar" ? ar : current_language == "fr" ? fr : undefined}
-              containerStyle={{direction: current_language == "ar" ? "rtl" : "ltr"}}
-              containerClass={"tel_input_container " + (current_language == "ar" ? "rtl" : "ltr")}
+              value={value} disabled={disabled} localization={current_language === "ar" ? ar : current_language === "fr" ? fr : undefined}
+              containerStyle={{direction: current_language === "ar" ? "rtl" : "ltr"}}
+              containerClass={"tel_input_container " + (current_language === "ar" ? "rtl" : "ltr")}
               onChange={(phone_number) => {
                 if(phone_number){
                   if(this.props.on_change){

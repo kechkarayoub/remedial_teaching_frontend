@@ -6,10 +6,10 @@ import { get } from "../services/storage";
 
 export const setInitLocale = current_language => {
     current_language = current_language || get("current_language");
-    if(current_language == "ar"){
+    if(current_language === "ar"){
         registerLocale('ar', ar);
     }
-    else if(current_language == "en"){
+    else if(current_language === "en"){
         registerLocale('en', en);
     }
     else{
@@ -19,10 +19,10 @@ export const setInitLocale = current_language => {
 
 export const changeLocale = current_language => {
     current_language = current_language || get("current_language");
-    if(current_language == "ar"){
+    if(current_language === "ar"){
         setDefaultLocale('ar', ar);
     }
-    else if(current_language == "en"){
+    else if(current_language === "en"){
         setDefaultLocale('en', en);
     }
     else{
