@@ -6,7 +6,8 @@ import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import moment from 'moment';
 import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
-import { get_intro_articles } from "./data_use_policy";
+import { get_intro_items } from "./data_use_policy";
+import HKButton from "../HKButton";
 
 class DataUsePolicyModal extends Component {
   constructor(props) {
@@ -21,11 +22,11 @@ class DataUsePolicyModal extends Component {
       site_name: get("general_information") && get("general_information").site_name ? get("general_information").site_name : "HealthKools",
       site_url: "http://localhost:3000",
     };
-    var intro_articles = get_intro_articles(this.data);
+    var intro_items = get_intro_items(this.data);
     this.state= {
-      articles: intro_articles.articles,
+      items: intro_items.items,
       current_language: get("current_language"),
-      intro: intro_articles.intro,
+      intro: intro_items.intro,
     };
   }
 
@@ -58,7 +59,7 @@ class DataUsePolicyModal extends Component {
 
 
   render() {
-    const {current_language, articles, intro} = this.state;
+    const {current_language, items, intro} = this.state;
     return (
       <>
       <Modal
@@ -78,15 +79,19 @@ class DataUsePolicyModal extends Component {
           </Modal.Header>
           <Modal.Body data-testid="body">
             <Row>
-              <p className={`intro `}dangerouslySetInnerHTML={{__html: intro[current_language]}}>
+              <p className={`intro `} dangerouslySetInnerHTML={{__html: intro[current_language]}}>
               </p>
-              {articles.map((article, idx) => {
+              {items.map((item, idx) => {
                 return <div className={`article `}>
                   <p key={idx} className={`title `}>
-                    <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span>
-                    <span>{article.title[current_language]}</span>
+                    {/* <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span> */}
+                    <span>{item.title[current_language]}</span>
                   </p>
-                  {article.paragraphs.map((paragraph, idx_p) => {
+                  {item.intro &&
+                    <p key={idx+"_intro"} className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
+                    </p>
+                  }
+                  {item.paragraphs.map((paragraph, idx_p) => {
                     return <>
                       <p key={idx + "_" + idx_p} className={` `} dangerouslySetInnerHTML={{
                         __html: paragraph[current_language]
@@ -94,7 +99,16 @@ class DataUsePolicyModal extends Component {
                       {paragraph.list_items &&
                         <ul>
                           {paragraph.list_items.map((li, idx) => {
-                            return <li key={idx} dangerouslySetInnerHTML={{__html: li[current_language]}}></li>
+                            return <li key={idx} >
+                              <span dangerouslySetInnerHTML={{__html: li[current_language]}}></span>
+                              {li.sub_list_items &&
+                                <ul>
+                                  {li.sub_list_items.map((sli, idxs) => {
+                                    return <li key={idxs} dangerouslySetInnerHTML={{__html: sli[current_language]}}></li>
+                                  })}
+                                </ul>
+                              }
+                            </li>
                           })}
                         </ul>
                       }
@@ -105,7 +119,13 @@ class DataUsePolicyModal extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            
+            <HKButton
+              added_class="default-bg-color btn-rounded" text={"Close"}
+              on_click={() => {
+                this.props.onHide();
+              }}
+              style={{color: "white", }}
+            />
           </Modal.Footer>
         </DataUsePolicyModalStyle>
       </Modal>
@@ -141,13 +161,17 @@ const DataUsePolicyModalStyle = styled.div`
     }
   }
   .modal-body{
-    padding: 10px 0;
+    padding: 10px 20px;
+    .intro{
+      text-align: justify;
+    }
     .article{
       margin-bottom: 15px;
       p{
         text-align: justify;
         &.title{
           color: ${colors.default_color};
+          font-size: 20px;
           font-weight: bold;
         }
       }

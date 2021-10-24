@@ -7,6 +7,7 @@ import moment from 'moment';
 import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import { get_articles } from "./terms_of_service";
+import HKButton from "../HKButton";
 
 class TermsOfServiceModal extends Component {
   constructor(props) {
@@ -100,7 +101,13 @@ class TermsOfServiceModal extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            
+            <HKButton
+              added_class="default-bg-color btn-rounded" text={"Close"}
+              on_click={() => {
+                this.props.onHide();
+              }}
+              style={{color: "white", }}
+            />
           </Modal.Footer>
         </TermsOfServiceModalStyle>
       </Modal>
@@ -136,13 +143,14 @@ const TermsOfServiceModalStyle = styled.div`
     }
   }
   .modal-body{
-    padding: 10px 0;
+    padding: 10px 20px;
     .article{
       margin-bottom: 15px;
       p{
         text-align: justify;
         &.title{
           color: ${colors.default_color};
+          font-size: 20px;
           font-weight: bold;
         }
       }
