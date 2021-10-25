@@ -6,6 +6,7 @@ import {get_terms_service_notice} from "../terms_of_service/terms_of_service";
 import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import TermsOfServiceModal from "../terms_of_service/TermsOfServiceModal";
+import CookiesPolicyModal from "../terms_of_service/CookiesPolicyModal";
 import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
 
  class HKTSNotice extends Component {
@@ -59,7 +60,7 @@ import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
       </HKTSNoticeStyle>
 
       {open_cookie_policy &&
-        <TermsOfServiceModal show={open_cookie_policy} onHide={() => this.setState({open_cookie_policy: false})}/>
+        <CookiesPolicyModal show={open_cookie_policy} onHide={() => this.setState({open_cookie_policy: false})}/>
       }
       {open_data_use_policy &&
         <DataUsePolicyModal show={open_data_use_policy} onHide={() => this.setState({open_data_use_policy: false})}/>

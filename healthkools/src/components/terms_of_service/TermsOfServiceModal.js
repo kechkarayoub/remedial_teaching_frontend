@@ -7,22 +7,15 @@ import moment from 'moment';
 import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import { get_articles } from "./terms_of_service";
+import { get_data } from "./data";
 import HKButton from "../HKButton";
 
 class TermsOfServiceModal extends Component {
   constructor(props) {
     super(props);
-    var data = {
-      company_address: "",
-      company_capital: "",
-      company_legal_status: "",
-      company_name: "",
-      responsable_address: "",
-      responsable_full_name: "",
-      site_url: "http://localhost:3000",
-    };
+    this.data = get_data();
     this.state= {
-      articles: get_articles(data),
+      articles: get_articles(this.data),
       current_language: get("current_language"),
     };
   }

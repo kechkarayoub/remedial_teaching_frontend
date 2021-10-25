@@ -6,11 +6,11 @@ import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import moment from 'moment';
 import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
-import { get_intro_items } from "./data_use_policy";
+import { get_intro_items } from "./cookies_policy";
 import { get_data } from "./data";
 import HKButton from "../HKButton";
 
-class DataUsePolicyModal extends Component {
+class CookiesPolicyModal extends Component {
   constructor(props) {
     super(props);
     this.data = get_data();
@@ -61,10 +61,10 @@ class DataUsePolicyModal extends Component {
         backdropClassName='backdrop_custom_z_index_1055'
         animation={false}
       >
-        <DataUsePolicyModalStyle className="custom_scroll_bar">
+        <CookiesPolicyModalStyle className="custom_scroll_bar">
           <Modal.Header>
             <span className="visibility_hidden"></span>
-            { this.props.t('Data use policy') }
+            { this.props.t('Cookies and other storage technologies') }
             <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
@@ -119,13 +119,13 @@ class DataUsePolicyModal extends Component {
               style={{color: "white", }}
             />
           </Modal.Footer>
-        </DataUsePolicyModalStyle>
+        </CookiesPolicyModalStyle>
       </Modal>
       </>
     );
   }
 }
-const DataUsePolicyModalStyle = styled.div`
+const CookiesPolicyModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
   .modal-header{
@@ -170,4 +170,4 @@ const DataUsePolicyModalStyle = styled.div`
     }
   }
 `;
-export default withTranslation('translations')(DataUsePolicyModal);
+export default withTranslation('translations')(CookiesPolicyModal);
