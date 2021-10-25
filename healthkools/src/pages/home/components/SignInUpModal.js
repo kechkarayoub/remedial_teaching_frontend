@@ -7,6 +7,7 @@ import $ from 'jquery';
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import { get_geo_info, check_if_email_or_username_exists_api_get } from '../../../services/api';
 import { get_contries_select_options } from '../../../utils/countries_list';
+import { format_as_date } from '../../../utils/datetime_format';
 import moment from 'moment';
 import { get } from "../../../services/storage";
 import HKTSNotice from "../../../components/forms_fields/HKTSNotice";
@@ -17,13 +18,18 @@ import HKPassword from "../../../components/forms_fields/HKPassword";
 import HKPhoneNumber from "../../../components/forms_fields/HKPhoneNumber";
 import HKSelect from "../../../components/forms_fields/HKSelect";
 import HKTextarea from "../../../components/forms_fields/HKTextarea";
+import HKButton from "../../../components/HKButton";
+import * as EmailValidator from 'email-validator';
+import FieldError from "../../../components/forms_fields/FieldError";
+
+const usernameRegex = /^[a-zA-Z0-9_]+$/;
 
 class SignInUpModal extends Component {
   constructor(props) {
     super(props);
     this.state= {
       address: "",
-      birthday: null,//moment().add(-30, "years").toDate(),
+      birthday: moment().add(-30, "years").toDate(),
       country_code: "",
       country_name: "",
       current_language: get("current_language"),
@@ -90,27 +96,41 @@ class SignInUpModal extends Component {
   handleFieldChange = (val, field, val2) => {
     var state = this.state;
     state[field] = val;
+    state.error_messages[field] = undefined;
+    state.invalid_messages[field] = undefined;
+    state.network_error = undefined;
     if(field === "email"){
       if(val){
         if(this.typingTimerEmail){
           clearTimeout(this.typingTimerEmail);
         }
         this.typingTimerEmail = setTimeout(() => {
-          var data = {
-            email_or_username: val,
-            current_language: this.state.current_language,
-          };
-          check_if_email_or_username_exists_api_get(data).then(res => {
-            if(res.user_exists){
-              state.invalid_messages.email = res.message;
-              state.valid_messages.email = undefined;
-            }
-            else{
-              state.invalid_messages.email = undefined;
-              state.valid_messages.email = undefined;
-            }
+          if(!EmailValidator.validate(val)){
+            state.invalid_messages.email = this.props.t("This email is invalid.");
             this.setState(state);
-          });
+          }
+          else{
+            // state.invalid_messages.email = undefined;
+            var data = {
+              email_or_username: val,
+              current_language: this.state.current_language,
+            };
+            check_if_email_or_username_exists_api_get(data).then(res => {
+              if(res.user_exists){
+                state.invalid_messages.email = res.message;
+                state.valid_messages.email = undefined;
+              }
+              else{
+                state.invalid_messages.email = undefined;
+                state.valid_messages.email = undefined;
+              }
+              this.setState(state);
+            }).catch(err => {
+              state.network_error = this.props.t("Network error!")
+              this.setState(state);
+              console.log(err);
+            });
+          }
         }, 500);
       }
       else{
@@ -125,23 +145,31 @@ class SignInUpModal extends Component {
           clearTimeout(this.typingTimerUsername);
         }
         this.typingTimerUsername = setTimeout(() => {
-          var data = {
-            email_or_username: val,
-            current_language: this.state.current_language,
-          };
-          check_if_email_or_username_exists_api_get(data).then(res => {
-            if(res.user_exists){
-              state.invalid_messages.username = res.message;
-              state.valid_messages.username = undefined;
-            }
-            else{
-              state.invalid_messages.username = undefined;
-              state.valid_messages.username = undefined;
-            }
+          if(!usernameRegex.test(val)){
+            state.invalid_messages.username = this.props.t("This username is invalid.");
             this.setState(state);
-          }).catch(err => {
-            console.log(err);
-          });
+          }
+          else{
+            var data = {
+              email_or_username: val,
+              current_language: this.state.current_language,
+            };
+            check_if_email_or_username_exists_api_get(data).then(res => {
+              if(res.user_exists){
+                state.invalid_messages.username = res.message;
+                state.valid_messages.username = undefined;
+              }
+              else{
+                state.invalid_messages.username = undefined;
+                state.valid_messages.username = undefined;
+              }
+              this.setState(state);
+            }).catch(err => {
+              state.network_error = this.props.t("Network error!")
+              this.setState(state);
+              console.log(err);
+            });
+          }
         }, 500);
       }
       else{
@@ -189,11 +217,85 @@ class SignInUpModal extends Component {
 //     $('.selectpicker').selectpicker("refresh");
 //   }
 
+  handleRegistration = () => {
+    const {address, birthday, country_code, current_language, email, error_messages, first_name, gender,
+      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation,
+      phone_number, username} = this.state;
+    var valid_form = true;
+    var new_state = {
+      network_error: undefined,
+    };
+    var data = {
+      address: address,
+      birthday: format_as_date(birthday),
+      country_code: country_code,
+      current_language: current_language,
+      gender: gender,
+      is_valid_phone_number: is_valid_phone_number,
+      phone_number: phone_number,
+    };
+    if(!email){
+      error_messages.email = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else if(invalid_messages.email){
+      valid_form = false;
+    }
+    else{
+      data.email = email;
+    }
+    if(!first_name){
+      error_messages.first_name = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else{
+      data.first_name = first_name;
+    }
+    if(!last_name){
+      error_messages.last_name = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else{
+      data.last_name = last_name;
+    }
+    if(!password){
+      error_messages.password = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else if(invalid_messages.password){
+      valid_form = false;
+    }
+    else if(password !== password_confirmation){
+      invalid_messages.password_confirmation = this.props.t("Passwords not match");
+      valid_form = false;
+    }
+    else{
+      data.password = password;
+    }
+    if(!username){
+      error_messages.username = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else if(invalid_messages.username){
+      valid_form = false;
+    }
+    else{
+      data.username = username;
+    }
+    if(valid_form){
+
+    }
+    else{
+      new_state.error_messages = error_messages;
+      new_state.invalid_messages = invalid_messages;
+      this.setState(new_state);
+    }
+  }
 
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, error_messages, first_name, gender,
-      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation, password_sign_in,
+      invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
       phone_number, registration_label, username, username_or_email, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     return (
@@ -251,6 +353,9 @@ class SignInUpModal extends Component {
                   value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
                   error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
                 <HKTSNotice added_class="col-12 col-md-12" registration_label={registration_label}/>
+                {network_error &&
+                  <FieldError error_message={network_error} />
+                }
               </>
               :
               <>
@@ -265,7 +370,20 @@ class SignInUpModal extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            
+            {is_sign_up ?
+              <>
+                <HKButton
+                  added_class="default-bg-color btn-rounded" text={registration_label}
+                  on_click={() => {
+                    this.handleRegistration();
+                  }}
+                  style={{color: "white", }}
+                />
+              </>
+              :
+              <>
+              </>
+            }
           </Modal.Footer>
         </SignInUpModalModal>
       </Modal>

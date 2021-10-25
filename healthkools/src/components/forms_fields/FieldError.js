@@ -11,6 +11,12 @@ import styled from "styled-components";
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      error_message: props.error_message,
+    };
+  }
+
   render() {
     const {error_message} = this.state;
     return (

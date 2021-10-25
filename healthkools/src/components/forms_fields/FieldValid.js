@@ -10,6 +10,11 @@ import styled from "styled-components";
       valid_message: props.valid_message,
     };
   }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      valid_message: props.valid_message,
+    };
+  }
 
   render() {
     const {valid_message} = this.state;

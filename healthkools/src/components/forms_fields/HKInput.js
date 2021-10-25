@@ -10,7 +10,7 @@ import FieldValid from "./FieldValid";
     this.state = {
       added_class: props.added_class,
       disabled: props.disabled,
-      error_message: props.error,
+      error_message: props.error_message,
       invalid_message: props.invalid_message,
       label: props.label,
       placeholder: props.placeholder,
@@ -23,14 +23,14 @@ import FieldValid from "./FieldValid";
     return {
         added_class: props.added_class,
         disabled: props.disabled,
-        error_message: props.error,
+        error_message: props.error_message,
         invalid_message: props.invalid_message,
         label: props.label,
         placeholder: props.placeholder,
         valid_message: props.valid_message,
         value: props.value,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;

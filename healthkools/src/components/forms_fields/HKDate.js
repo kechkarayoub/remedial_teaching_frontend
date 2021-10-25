@@ -18,7 +18,7 @@ class HKDate extends Component {
     this.state = {
       added_class: props.added_class,
       disabled: props.disabled,
-      error_message: props.error,
+      error_message: props.error_message,
       invalid_message: props.invalid_message,
       label: props.label,
       placeholder: props.placeholder,
@@ -31,7 +31,7 @@ class HKDate extends Component {
     return {
         added_class: props.added_class,
         disabled: props.disabled,
-        error_message: props.error,
+        error_message: props.error_message,
         invalid_message: props.invalid_message,
         label: props.label,
         placeholder: props.placeholder,
