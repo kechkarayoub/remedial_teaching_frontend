@@ -5,6 +5,7 @@ export const set_vh_vw_properties = () => {
     document.documentElement.style.setProperty('--vw', `${vw}px`);
 }
 
+
 export const shuffle = (array) => {
     array.sort(() => Math.random() - 0.5);
     return array;
