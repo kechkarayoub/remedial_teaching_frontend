@@ -19,4 +19,19 @@ describe('HKSelect component', () => {
         expect(label.textContent).toBe('Label test');
         expect(select_text.textContent).toBe('Maroc');
     });
+    test('Should contains props values (invalid_message)', async () => {
+        render(<HKSelect value={""}  invalid_message={"Invalid message"}/>);
+        var invalid_message = screen.getByText('Invalid message');
+        expect(invalid_message.textContent).toBe("Invalid message");
+    });
+    test('Should contains props values (error_message)', async () => {
+        render(<HKSelect value={""}  error_message={"Error message"}  invalid_message={"Invalid message"}/>);
+        var error_message = screen.getByText('Error message');
+        expect(error_message.textContent).toBe("Error message");
+    });
+    test('Should contains props values (valid_message)', async () => {
+        render(<HKSelect value={""}  valid_message={"Valid message"} />);
+        var valid_message = screen.getByText('Valid message');
+        expect(valid_message.textContent).toBe("Valid message");
+    });
 });
