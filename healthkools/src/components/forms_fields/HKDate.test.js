@@ -26,7 +26,8 @@ describe('HKDate component', () => {
         expect(label.textContent).toBe('Label test');
         expect(input.value).toBe(moment().format("DD/MM/YYYY"));
         expect(input.placeholder).toBe('Placeholder test');
-    });test('Should contains props values (disabled)', async () => {
+    });
+    test('Should contains props values (disabled)', async () => {
         render(<HKDate placeholder={"Placeholder test"}  value={moment().toDate()} disabled={true}/>);
         const input = screen.getByPlaceholderText('Placeholder test');
         expect(input.disabled).toBe(true);

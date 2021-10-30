@@ -40,22 +40,26 @@ import FieldValid from "./FieldValid";
               <span data-testid={'mars' + (value === 'm' ? '_a' : '')}>
                 <i data-testid={'mars_i' + (value === 'm' ? '_a' : '')} className={'fa fa-mars ' + (value === 'm' ? 'active' : '')}
                   onClick={() => {
-                    if(this.props.on_change){
-                      this.props.on_change(value === 'm' ? '' : 'm');
-                    }
-                    else{
-                      this.setState({value: value === 'm' ? '' : 'm'});
+                    if(!disabled){
+                      if(this.props.on_change){
+                        this.props.on_change(value === 'm' ? '' : 'm');
+                      }
+                      else{
+                        this.setState({value: value === 'm' ? '' : 'm'});
+                      }
                     }
                 }}/>{ this.props.t('Male') } 
               </span>
               <span data-testid={'venus' + (value === 'f' ? '_a' : '')}>
                 <i data-testid={'venus_i' + (value === 'f' ? '_a' : '')} className={'fa fa-venus ' + (value === 'f' ? 'active' : '')}
                   onClick={() => {
-                    if(this.props.on_change){
-                      this.props.on_change(value === 'f' ? '' : 'f');
-                    }
-                    else{
-                      this.setState({value: value === 'f' ? '' : 'f'});
+                    if(!disabled){
+                      if(this.props.on_change){
+                        this.props.on_change(value === 'f' ? '' : 'f');
+                      }
+                      else{
+                        this.setState({value: value === 'f' ? '' : 'f'});
+                      }
                     }
                   }}/>{ this.props.t('Female') } 
               </span>
