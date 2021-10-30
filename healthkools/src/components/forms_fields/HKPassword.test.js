@@ -26,4 +26,24 @@ describe('HKPassword component', () => {
         fireEvent.click(toggle_show_password);
         expect(input.type).toBe('password');
     });
+    test('Should contains props values (disabled)', async () => {
+        render(<HKPassword placeholder={"Placeholder test"}  value={""} disabled={true}/>);
+        const input = screen.getByTestId('input');
+        expect(input.disabled).toBe(true);
+    });
+    test('Should contains props values (invalid_message)', async () => {
+        render(<HKPassword value={""}  invalid_message={"Invalid message"}/>);
+        var invalid_message = screen.getByText('Invalid message');
+        expect(invalid_message.textContent).toBe("Invalid message");
+    });
+    test('Should contains props values (error_message)', async () => {
+        render(<HKPassword value={""}  error_message={"Error message"}  invalid_message={"Invalid message"}/>);
+        var error_message = screen.getByText('Error message');
+        expect(error_message.textContent).toBe("Error message");
+    });
+    test('Should contains props values (valid_message)', async () => {
+        render(<HKPassword value={""}  valid_message={"Valid message"} />);
+        var valid_message = screen.getByText('Valid message');
+        expect(valid_message.textContent).toBe("Valid message");
+    });
 });
