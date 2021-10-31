@@ -74,24 +74,24 @@ class CookiesPolicyModal extends Component {
               <p className={`intro `} dangerouslySetInnerHTML={{__html: intro[current_language]}}>
               </p>
               {items.map((item, idx) => {
-                return <div className={`article `}>
-                  <p key={idx} className={`title `}>
+                return <div key={idx} className={`article `}>
+                  <p className={`title `}>
                     {/* <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span> */}
                     <span>{item.title[current_language]}</span>
                   </p>
                   {item.intro &&
-                    <p key={idx+"_intro"} className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
+                    <p className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
                     </p>
                   }
                   {item.paragraphs.map((paragraph, idx_p) => {
-                    return <>
-                      <p key={idx + "_" + idx_p} className={` `} dangerouslySetInnerHTML={{
+                    return <div key={idx_p}>
+                      <p className={` `} dangerouslySetInnerHTML={{
                         __html: paragraph[current_language]
                       }}></p>
                       {paragraph.list_items &&
                         <ul>
-                          {paragraph.list_items.map((li, idx) => {
-                            return <li key={idx} >
+                          {paragraph.list_items.map((li, idxi) => {
+                            return <li key={idxi} >
                               <span dangerouslySetInnerHTML={{__html: li[current_language]}}></span>
                               {li.sub_list_items &&
                                 <ul>
@@ -104,7 +104,7 @@ class CookiesPolicyModal extends Component {
                           })}
                         </ul>
                       }
-                    </>
+                    </div>
                   })}
                 </div>
               })}
