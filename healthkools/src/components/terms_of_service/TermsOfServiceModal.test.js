@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render, screen, act } from '@testing-library/react';
-import DataUsePolicyModal from "./DataUsePolicyModal";
+import TermsOfServiceModal from "./TermsOfServiceModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -8,7 +8,7 @@ import { mount, configure, shallow } from 'enzyme'
 import { unmountComponentAtNode } from "react-dom";
 import { async } from "q";
 import {get_data} from "./data";
-import {get_intro_items} from "./data_use_policy";
+import {get_articles} from "./terms_of_service";
 import { get } from "../../services/storage";
 import { split_html_string } from "../../utils/tests_utils";
 configure({adapter: new Adapter()});
@@ -20,36 +20,20 @@ jest.mock('react-i18next', () => ({
   },
 }));
 jest.mock('axios');
-describe('DataUsePolicyModal component', () => {
+describe('TermsOfServiceModal component', () => {
   test('Should render without crash', async () => {
-    render(<DataUsePolicyModal show={true} />);
+    render(<TermsOfServiceModal show={true} />);
   });
-  test('Should contains data use policy data', async () => {
-    let wrapper = mount(<DataUsePolicyModal show={true}/>);
+  test('Should contains terms of service data', async () => {
+    let wrapper = mount(<TermsOfServiceModal show={true}/>);
     var current_language = get("current_language");
     var data = get_data();
-    var intro_items = get_intro_items(data);
-    var intro = intro_items.intro;
-    var items = intro_items.items;
+    var articles = get_articles(data);
     expect(wrapper.find('.modal-body').length).toEqual(1);
-    let item_strings = split_html_string(intro[current_language]);
     let nbr_found = 0;
     let nbr_items = 0;
-    item_strings.map(i_s => {
-      let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
-      let item;
-      try{
-        item = screen.getAllByText(reg);
-      }
-      catch{
-      }
-      if(item){
-        nbr_found++;
-      }
-      nbr_items++;
-    });
-    items.map(item_ => {
-      let title_strings = split_html_string(item_.title[current_language]);
+    articles.map(article => {
+      let title_strings = split_html_string(article.title[current_language]);
       title_strings.map(i_s => {
         let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
         let item;
@@ -63,8 +47,8 @@ describe('DataUsePolicyModal component', () => {
         }
         nbr_items++;
       });
-      if(item_.intro){
-        let intro_strings = split_html_string(item_.intro[current_language]);
+      if(article.intro){
+        let intro_strings = split_html_string(article.intro[current_language]);
         intro_strings.map(i_s => {
           let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
           let item;
@@ -79,7 +63,7 @@ describe('DataUsePolicyModal component', () => {
           nbr_items++;
         });
       }
-      item_.paragraphs && item_.paragraphs.map(p => {
+      article.paragraphs && article.paragraphs.map(p => {
         let p_strings = split_html_string(p[current_language]);
         p_strings.map(i_s => {
           let reg = new RegExp(i_s.replace("(", "").replace(")", ""));

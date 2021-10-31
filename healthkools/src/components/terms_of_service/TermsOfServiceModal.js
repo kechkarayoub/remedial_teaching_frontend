@@ -70,14 +70,14 @@ class TermsOfServiceModal extends Component {
           <Modal.Body data-testid="body">
             <Row>
               {articles.map((article, idx) => {
-                return <div className={`article `}>
-                  <p key={idx} className={`title `}>
+                return <div key={idx} className={`article `}>
+                  <p className={`title `}>
                     <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span>
                     <span>{article.title[current_language]}</span>
                   </p>
                   {article.paragraphs.map((paragraph, idx_p) => {
-                    return <>
-                      <p key={idx + "_" + idx_p} className={` `} dangerouslySetInnerHTML={{
+                    return <div key={idx_p}>
+                      <p className={` `} dangerouslySetInnerHTML={{
                         __html: paragraph[current_language]
                       }}></p>
                       {paragraph.list_items &&
@@ -87,7 +87,7 @@ class TermsOfServiceModal extends Component {
                           })}
                         </ul>
                       }
-                    </>
+                    </div>
                   })}
                 </div>
               })}
