@@ -6,7 +6,8 @@ export const set_vh_vw_properties = () => {
 }
 
 
-export const shuffle = (array) => {
+export const shuffle = (array_, create_new_array) => {
+    var array = create_new_array ? array_.concat([]) : array_;
     array.sort(() => Math.random() - 0.5);
     return array;
 }
