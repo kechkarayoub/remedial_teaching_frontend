@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render, screen, act } from '@testing-library/react';
-import CookiesPolicyModal from "./CookiesPolicyModal";
+import DataUsePolicyModal from "./DataUsePolicyModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -8,9 +8,9 @@ import { mount, configure, shallow } from 'enzyme'
 import { unmountComponentAtNode } from "react-dom";
 import { async } from "q";
 import {get_data} from "./data";
-import {get_intro_items} from "./cookies_policy";
+import {get_intro_items} from "./data_use_policy";
 import { get } from "../../services/storage";
-import { remove_html_tags_from_string, split_html_string } from "../../utils/tests_utils";
+import { split_html_string } from "../../utils/tests_utils";
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -20,12 +20,12 @@ jest.mock('react-i18next', () => ({
   },
 }));
 jest.mock('axios');
-describe('CookiesPolicyModal component', () => {
+describe('DataUsePolicyModal component', () => {
   test('Should render without crash', async () => {
-    render(<CookiesPolicyModal show={true} />);
+    render(<DataUsePolicyModal show={true} />);
   });
   test('Should contains cookies policy data', async () => {
-    let wrapper = mount(<CookiesPolicyModal show={true}/>);
+    let wrapper = mount(<DataUsePolicyModal show={true}/>);
     var current_language = get("current_language");
     var data = get_data();
     var intro_items = get_intro_items(data);
@@ -36,7 +36,7 @@ describe('CookiesPolicyModal component', () => {
     let nbr_found = 0;
     let nbr_items = 0;
     item_strings.map(i_s => {
-      let reg = new RegExp(i_s);
+      let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
       let item;
       try{
         item = screen.getAllByText(reg);
@@ -51,7 +51,7 @@ describe('CookiesPolicyModal component', () => {
     items.map(item_ => {
       let title_strings = split_html_string(item_.title[current_language]);
       title_strings.map(i_s => {
-        let reg = new RegExp(i_s);
+        let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
         let item;
         try{
           item = screen.getAllByText(reg);
@@ -66,7 +66,7 @@ describe('CookiesPolicyModal component', () => {
       if(item_.intro){
         let intro_strings = split_html_string(item_.intro[current_language]);
         intro_strings.map(i_s => {
-          let reg = new RegExp(i_s);
+          let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
           let item;
           try{
             item = screen.getAllByText(reg);
@@ -82,7 +82,7 @@ describe('CookiesPolicyModal component', () => {
       item_.paragraphs && item_.paragraphs.map(p => {
         let p_strings = split_html_string(p[current_language]);
         p_strings.map(i_s => {
-          let reg = new RegExp(i_s);
+          let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
           let item;
           try{
             item = screen.getAllByText(reg);
@@ -97,7 +97,7 @@ describe('CookiesPolicyModal component', () => {
         p.list_items && p.list_items.map(il => {
           let il_strings = split_html_string(il[current_language]);
           il_strings.map(i_s => {
-            let reg = new RegExp(i_s);
+            let reg = new RegExp(i_s.replace("(", "").replace(")", ""));
             let item;
             try{
               item = screen.getAllByText(reg);
