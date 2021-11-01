@@ -73,6 +73,7 @@ class HomeHeader extends Component {
         </HomeHeaderStyle>
         {open_sign_in_up &&
           <SignInUpModal 
+            changeDefaultSignInUpView={view => this.setState({default_sign_in_up_view: view})}
             default_sign_in_up_view={default_sign_in_up_view}
             onHide={() => this.setState({open_sign_in_up: false})}
             show={open_sign_in_up}

@@ -19,6 +19,7 @@ import HKPhoneNumber from "../../../components/forms_fields/HKPhoneNumber";
 import HKSelect from "../../../components/forms_fields/HKSelect";
 import HKTextarea from "../../../components/forms_fields/HKTextarea";
 import HKButton from "../../../components/HKButton";
+import QuestionButton from "../../../components/QuestionButton";
 import * as EmailValidator from 'email-validator';
 import FieldError from "../../../components/forms_fields/FieldError";
 
@@ -48,7 +49,7 @@ class SignInUpModal extends Component {
       phone_number: "",
       registration_label: this.props.t("Sign up"),
       username: "",
-      username_or_email: "",
+      email_or_username: "",
       valid_messages: {},
     };
     this.geo_info_api_done = true;
@@ -60,8 +61,11 @@ class SignInUpModal extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
-    if(current_language !== state.current_language){
-      var new_state = {current_language: current_language};
+    if(current_language !== state.current_language || props.default_sign_in_up_view != state.default_view){
+      var new_state = {
+        current_language: current_language,
+        default_view: props.default_sign_in_up_view,
+      };
       return new_state;
     }
     return null;
@@ -292,11 +296,42 @@ class SignInUpModal extends Component {
     }
   }
 
+  handleConnexion = () => {
+    const {email_or_username, error_messages, password_sign_in} = this.state;
+    var valid_form = true;
+    var new_state = {
+      network_error: undefined,
+    };
+    var data = {
+    };
+    if(!email_or_username){
+      error_messages.email_or_username = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else{
+      data.email_or_username = email_or_username;
+    }
+    if(!password_sign_in){
+      error_messages.password_sign_in = this.props.t("This field is required.");
+      valid_form = false;
+    }
+    else{
+      data.password = password_sign_in;
+    }
+    if(valid_form){
+
+    }
+    else{
+      new_state.error_messages = error_messages;
+      this.setState(new_state);
+    }
+  }
+
   render() {
     var pat = /^http?:\/\//i;
-    const {address, birthday, country_code, current_language, default_view, email, error_messages, first_name, gender,
+    const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name, gender,
       invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
-      phone_number, registration_label, username, username_or_email, valid_messages} = this.state;
+      phone_number, registration_label, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     return (
       <>
@@ -360,8 +395,8 @@ class SignInUpModal extends Component {
               :
               <>
               <HKInput added_class="col-12 col-md-6" label={this.props.t("Username or email")} placeholder={this.props.t("Username or email")} 
-                value={username_or_email} invalid_message={invalid_messages.username_or_email} valid_message={valid_messages.username_or_email}
-                error_message={error_messages.username_or_email} on_change={(val) => this.handleFieldChange(val, "username_or_email")}/>
+                value={email_or_username} invalid_message={invalid_messages.email_or_username} valid_message={valid_messages.email_or_username}
+                error_message={error_messages.email_or_username} on_change={(val) => this.handleFieldChange(val, "email_or_username")}/>
               <HKPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
                 value={password_sign_in} invalid_message={invalid_messages.password_sign_in} valid_message={valid_messages.password_sign_in} show_trength_bar={false}
                 error_message={error_messages.password_sign_in} on_change={(val) => this.handleFieldChange(val, "password_sign_in")}/>
@@ -379,9 +414,26 @@ class SignInUpModal extends Component {
                   }}
                   style={{color: "white", }}
                 />
+                <QuestionButton text={this.props.t("Already have an account? Log in here.")}
+                  on_click={evt => {
+                    this.props.changeDefaultSignInUpView("sign_in");
+                  }}
+                />
               </>
               :
               <>
+                <HKButton
+                  added_class="default-bg-color btn-rounded" text={this.props.t("Sign in")}
+                  on_click={() => {
+                    this.handleConnexion();
+                  }}
+                  style={{color: "white", }}
+                />
+                <QuestionButton text={this.props.t("You don't have an account yet? Register here.")}
+                  on_click={evt => {
+                    this.props.changeDefaultSignInUpView("sign_up");
+                  }}
+                />
               </>
             }
           </Modal.Footer>
@@ -418,6 +470,10 @@ const SignInUpModalModal = styled.div`
     }
   }
   .modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100% - 130px);
     padding: 10px 0;
   }
 `;

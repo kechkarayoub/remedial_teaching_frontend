@@ -1,5 +1,6 @@
 {
   "Address": "العنوان",
+  "Already have an account? Log in here.": "هل لديك حساب؟ سجل الدخول من هنا.",
   "Ar": "عر",
   "Arabic": "العربية",
   "Close": "إغلاق",
@@ -48,5 +49,6 @@
   "United States flag": "علم الولايات المتحدة",
   "Username": "اسم المستخدم",
   "Username or email": "اسم المستخدم أو البريد الالكتروني",
-  "Weak": "ضعيف"
+  "Weak": "ضعيف",
+  "You don't have an account yet? Register here.": "ليس لديك حساب؟ سجل من هنا."
 }

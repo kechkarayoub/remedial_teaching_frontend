@@ -1,5 +1,6 @@
 {
   "Address": "Adresse",
+  "Already have an account? Log in here.": "Vous avez déjà un compte? Connectez-vous ici.",
   "Ar": "Ar",
   "Arabic": "Arabe",
   "Close": "Fermer",
@@ -48,5 +49,6 @@
   "United States flag": "Drapeau des États-Unis",
   "Username": "Nom d'utilisateur",
   "Username or email": "Nom d'utilisateur ou email",
-  "Weak": "Faible"
+  "Weak": "Faible",
+  "You don't have an account yet? Register here.": "Vous n'avez pas encore de compte ? Inscrivez-vous ici."
 }
