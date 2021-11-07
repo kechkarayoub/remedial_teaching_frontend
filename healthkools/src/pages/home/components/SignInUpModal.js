@@ -10,6 +10,7 @@ import { get_contries_select_options } from '../../../utils/countries_list';
 import { format_as_date } from '../../../utils/datetime_format';
 import moment from 'moment';
 import { get } from "../../../services/storage";
+import { register } from "../../../services/api";
 import HKTSNotice from "../../../components/forms_fields/HKTSNotice";
 import HKGender from "../../../components/forms_fields/HKGender";
 import HKDate from "../../../components/forms_fields/HKDate";
@@ -130,7 +131,7 @@ class SignInUpModal extends Component {
               }
               this.setState(state);
             }).catch(err => {
-              state.network_error = this.props.t("Network error!")
+              state.network_error = this.props.t("Network error!");
               this.setState(state);
               console.log(err);
             });
@@ -169,7 +170,7 @@ class SignInUpModal extends Component {
               }
               this.setState(state);
             }).catch(err => {
-              state.network_error = this.props.t("Network error!")
+              state.network_error = this.props.t("Network error!");
               this.setState(state);
               console.log(err);
             });
@@ -287,7 +288,15 @@ class SignInUpModal extends Component {
       data.username = username;
     }
     if(valid_form){
-
+      register(data).then(res => {
+        new_state.network_error = null;
+        this.setState(new_state);
+      })
+      .catch(err => {
+        new_state.network_error = this.props.t("Network error!");
+        this.setState(new_state);
+        console.log(err);
+      });
     }
     else{
       new_state.error_messages = error_messages;

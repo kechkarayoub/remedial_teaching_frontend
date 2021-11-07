@@ -119,3 +119,15 @@ export const login = data => {
       console.log(err);
     });
 };
+
+export const register = data => {
+  return instance
+    .post("/user/register/", data)
+    .then(response => {
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
