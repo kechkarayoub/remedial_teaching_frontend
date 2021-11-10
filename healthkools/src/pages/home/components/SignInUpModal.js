@@ -9,6 +9,7 @@ import { get_geo_info, check_if_email_or_username_exists_api_get } from '../../.
 import { get_contries_select_options } from '../../../utils/countries_list';
 import { format_as_date } from '../../../utils/datetime_format';
 import moment from 'moment';
+import SignInUpConfirmationModal from './SignInUpConfirmationModal';
 import { get } from "../../../services/storage";
 import { register } from "../../../services/api";
 import HKTSNotice from "../../../components/forms_fields/HKTSNotice";
@@ -62,7 +63,7 @@ class SignInUpModal extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
-    if(current_language !== state.current_language || props.default_sign_in_up_view != state.default_view){
+    if(current_language !== state.current_language || props.default_sign_in_up_view !== state.default_view){
       var new_state = {
         current_language: current_language,
         default_view: props.default_sign_in_up_view,
@@ -96,6 +97,28 @@ class SignInUpModal extends Component {
         this.geo_info_api_done = true;
       });
     }
+  }
+
+  getClearedFormState = () => {
+    return {
+      address: "",
+      birthday: moment().add(-30, "years").toDate(),
+      current_language: get("current_language"),
+      email: "",
+      error_messages: {},
+      first_name: "",
+      gender: "",
+      invalid_messages: {},
+      is_submitting: false,
+      is_valid_phone_number: false,
+      last_name: "",
+      password: "",
+      password_confirmation: "",
+      phone_number: "",
+      registration_label: this.props.t("Sign up"),
+      username: "",
+      valid_messages: {},
+    };
   }
 
   handleFieldChange = (val, field, val2) => {
@@ -289,7 +312,12 @@ class SignInUpModal extends Component {
     }
     if(valid_form){
       register(data).then(res => {
+        new_state = this.getClearedFormState();
         new_state.network_error = null;
+        if(res.success){
+          new_state.registration_messages = res.messages;
+          this.props.changeDefaultSignInUpView("sign_in");
+        }
         this.setState(new_state);
       })
       .catch(err => {
@@ -340,119 +368,126 @@ class SignInUpModal extends Component {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name, gender,
       invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
-      phone_number, registration_label, username, valid_messages} = this.state;
+      phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     return (
       <>
-      <Modal
-        show={this.props.show} 
-        onHide={() => this.props.onHide()}
-        className={`custom_modal sign_in_up_modal ${current_language === "ar" ? "rtl" : ""}`}
-        animation={false}
-      >
-        <SignInUpModalModal className="custom_scroll_bar">
-          <Modal.Header>
-            <span className="visibility_hidden"></span>
-            { this.props.t(default_view === "sign_in" ? 'Sign in' : 'Sign up') }
-            <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
-                <span className="close_ico">×</span>
-            </Button>
-          </Modal.Header>
-          <Modal.Body data-testid="body">
-            <Row>
-              {is_sign_up ?
-              <>
-                <HKInput added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
-                  value={first_name} invalid_message={invalid_messages.first_name} valid_message={valid_messages.first_name}
-                  error_message={error_messages.first_name} on_change={(val) => this.handleFieldChange(val, "first_name")}/>
-                <HKInput added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
-                  value={last_name} invalid_message={invalid_messages.last_name} valid_message={valid_messages.last_name}
-                  error_message={error_messages.last_name} on_change={(val) => this.handleFieldChange(val, "last_name")}/>
-                <HKInput added_class="col-12 col-md-6" label={this.props.t("Email")} placeholder={this.props.t("Email")} 
-                  value={email} invalid_message={invalid_messages.email} valid_message={valid_messages.email}
-                  error_message={error_messages.email} on_change={(val) => this.handleFieldChange(val, "email")}/>
-                <HKInput added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
-                  value={username} invalid_message={invalid_messages.username} valid_message={valid_messages.username}
-                  error_message={error_messages.username} on_change={(val) => this.handleFieldChange(val, "username")}/>
+        <Modal
+          show={this.props.show} 
+          onHide={() => this.props.onHide()}
+          className={`custom_modal sign_in_up_modal ${current_language === "ar" ? "rtl" : ""}`}
+          animation={false}
+        >
+          <SignInUpModalStyle className="custom_scroll_bar">
+            <Modal.Header>
+              <span className="visibility_hidden"></span>
+              { this.props.t(default_view === "sign_in" ? 'Sign in' : 'Sign up') }
+              <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
+                  <span className="close_ico">×</span>
+              </Button>
+            </Modal.Header>
+            <Modal.Body data-testid="body">
+              <Row>
+                {is_sign_up ?
+                <>
+                  <HKInput added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
+                    value={first_name} invalid_message={invalid_messages.first_name} valid_message={valid_messages.first_name}
+                    error_message={error_messages.first_name} on_change={(val) => this.handleFieldChange(val, "first_name")}/>
+                  <HKInput added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
+                    value={last_name} invalid_message={invalid_messages.last_name} valid_message={valid_messages.last_name}
+                    error_message={error_messages.last_name} on_change={(val) => this.handleFieldChange(val, "last_name")}/>
+                  <HKInput added_class="col-12 col-md-6" label={this.props.t("Email")} placeholder={this.props.t("Email")} 
+                    value={email} invalid_message={invalid_messages.email} valid_message={valid_messages.email}
+                    error_message={error_messages.email} on_change={(val) => this.handleFieldChange(val, "email")}/>
+                  <HKInput added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
+                    value={username} invalid_message={invalid_messages.username} valid_message={valid_messages.username}
+                    error_message={error_messages.username} on_change={(val) => this.handleFieldChange(val, "username")}/>
+                  <HKPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
+                    value={password} invalid_message={invalid_messages.password} valid_message={valid_messages.password} show_trength_bar={true}
+                    error_message={error_messages.password} on_change={(val) => this.handleFieldChange(val, "password")}/>
+                  <HKPassword added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")}  show_trength_bar={true}
+                    value={password_confirmation} invalid_message={invalid_messages.password_confirmation} valid_message={valid_messages.password_confirmation}
+                    error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
+                  <HKSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
+                    placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
+                    invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} 
+                    error_message={error_messages.country_code} on_change={(val, val2) => this.handleFieldChange(val, "country_code", val2)}/>
+                  <HKPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Phone number")} placeholder={this.props.t("Phone number")} 
+                    value={phone_number} invalid_message={invalid_messages.phone_number} valid_message={valid_messages.phone_number} is_valid_phone_number={is_valid_phone_number}
+                    error_message={error_messages.phone_number} on_change={(val, is_valid_phone_number_) => this.handleFieldChange(val, "phone_number", is_valid_phone_number_)} default_country={country_code}/>
+                  <HKDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
+                    value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
+                    error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}/>
+                  <HKGender added_class="col-12 col-md-6" label={this.props.t("Gender")} 
+                    value={gender} invalid_message={invalid_messages.gender} valid_message={valid_messages.gender}
+                    error_message={error_messages.gender} on_change={(val) => this.handleFieldChange(val, "gender")}/>
+                  <HKTextarea added_class="col-12 col-md-12 no_resize" label={this.props.t("Address")} placeholder={this.props.t("Address")} 
+                    value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
+                    error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
+                  <HKTSNotice added_class="col-12 col-md-12" registration_label={registration_label}/>
+                  {network_error &&
+                    <FieldError error_message={network_error} />
+                  }
+                </>
+                :
+                <>
+                <HKInput added_class="col-12 col-md-6" label={this.props.t("Username or email")} placeholder={this.props.t("Username or email")} 
+                  value={email_or_username} invalid_message={invalid_messages.email_or_username} valid_message={valid_messages.email_or_username}
+                  error_message={error_messages.email_or_username} on_change={(val) => this.handleFieldChange(val, "email_or_username")}/>
                 <HKPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
-                  value={password} invalid_message={invalid_messages.password} valid_message={valid_messages.password} show_trength_bar={true}
-                  error_message={error_messages.password} on_change={(val) => this.handleFieldChange(val, "password")}/>
-                <HKPassword added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")}  show_trength_bar={true}
-                  value={password_confirmation} invalid_message={invalid_messages.password_confirmation} valid_message={valid_messages.password_confirmation}
-                  error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
-                <HKSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
-                  placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
-                  invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} 
-                  error_message={error_messages.country_code} on_change={(val, val2) => this.handleFieldChange(val, "country_code", val2)}/>
-                <HKPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Phone number")} placeholder={this.props.t("Phone number")} 
-                  value={phone_number} invalid_message={invalid_messages.phone_number} valid_message={valid_messages.phone_number} is_valid_phone_number={is_valid_phone_number}
-                  error_message={error_messages.phone_number} on_change={(val, is_valid_phone_number_) => this.handleFieldChange(val, "phone_number", is_valid_phone_number_)} default_country={country_code}/>
-                <HKDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
-                  value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
-                  error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}/>
-                <HKGender added_class="col-12 col-md-6" label={this.props.t("Gender")} 
-                  value={gender} invalid_message={invalid_messages.gender} valid_message={valid_messages.gender}
-                  error_message={error_messages.gender} on_change={(val) => this.handleFieldChange(val, "gender")}/>
-                <HKTextarea added_class="col-12 col-md-12 no_resize" label={this.props.t("Address")} placeholder={this.props.t("Address")} 
-                  value={address} invalid_message={invalid_messages.address} valid_message={valid_messages.address} rows={2}
-                  error_message={error_messages.address} on_change={(val) => this.handleFieldChange(val, "address")}/>
-                <HKTSNotice added_class="col-12 col-md-12" registration_label={registration_label}/>
-                {network_error &&
-                  <FieldError error_message={network_error} />
+                  value={password_sign_in} invalid_message={invalid_messages.password_sign_in} valid_message={valid_messages.password_sign_in} show_trength_bar={false}
+                  error_message={error_messages.password_sign_in} on_change={(val) => this.handleFieldChange(val, "password_sign_in")}/>
+                </>
                 }
-              </>
-              :
-              <>
-              <HKInput added_class="col-12 col-md-6" label={this.props.t("Username or email")} placeholder={this.props.t("Username or email")} 
-                value={email_or_username} invalid_message={invalid_messages.email_or_username} valid_message={valid_messages.email_or_username}
-                error_message={error_messages.email_or_username} on_change={(val) => this.handleFieldChange(val, "email_or_username")}/>
-              <HKPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
-                value={password_sign_in} invalid_message={invalid_messages.password_sign_in} valid_message={valid_messages.password_sign_in} show_trength_bar={false}
-                error_message={error_messages.password_sign_in} on_change={(val) => this.handleFieldChange(val, "password_sign_in")}/>
-              </>
+              </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              {is_sign_up ?
+                <>
+                  <HKButton
+                    added_class="default-bg-color btn-rounded" text={registration_label}
+                    on_click={() => {
+                      this.handleRegistration();
+                    }}
+                    style={{color: "white", }}
+                  />
+                  <QuestionButton text={this.props.t("Already have an account? Log in here.")}
+                    on_click={evt => {
+                      this.props.changeDefaultSignInUpView("sign_in");
+                    }}
+                  />
+                </>
+                :
+                <>
+                  <HKButton
+                    added_class="default-bg-color btn-rounded" text={this.props.t("Sign in")}
+                    on_click={() => {
+                      this.handleConnexion();
+                    }}
+                    style={{color: "white", }}
+                  />
+                  <QuestionButton text={this.props.t("You don't have an account yet? Register here.")}
+                    on_click={evt => {
+                      this.props.changeDefaultSignInUpView("sign_up");
+                    }}
+                  />
+                </>
               }
-            </Row>
-          </Modal.Body>
-          <Modal.Footer>
-            {is_sign_up ?
-              <>
-                <HKButton
-                  added_class="default-bg-color btn-rounded" text={registration_label}
-                  on_click={() => {
-                    this.handleRegistration();
-                  }}
-                  style={{color: "white", }}
-                />
-                <QuestionButton text={this.props.t("Already have an account? Log in here.")}
-                  on_click={evt => {
-                    this.props.changeDefaultSignInUpView("sign_in");
-                  }}
-                />
-              </>
-              :
-              <>
-                <HKButton
-                  added_class="default-bg-color btn-rounded" text={this.props.t("Sign in")}
-                  on_click={() => {
-                    this.handleConnexion();
-                  }}
-                  style={{color: "white", }}
-                />
-                <QuestionButton text={this.props.t("You don't have an account yet? Register here.")}
-                  on_click={evt => {
-                    this.props.changeDefaultSignInUpView("sign_up");
-                  }}
-                />
-              </>
-            }
-          </Modal.Footer>
-        </SignInUpModalModal>
-      </Modal>
+            </Modal.Footer>
+          </SignInUpModalStyle>
+        </Modal>
+        {registration_messages && 
+          <SignInUpConfirmationModal
+            onHide={() => this.setState({registration_messages: null})}
+            registration_messages={registration_messages}
+            show={!!registration_messages}
+          />
+        }
       </>
     );
   }
 }
-const SignInUpModalModal = styled.div`
+const SignInUpModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px;
   .modal-header{

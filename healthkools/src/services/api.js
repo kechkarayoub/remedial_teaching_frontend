@@ -131,3 +131,15 @@ export const register = data => {
       throw err;
     });
 };
+
+export const resend_activation_email = data => {
+  return instance
+    .post("/user/resend_activation_email/", data)
+    .then(response => {
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
