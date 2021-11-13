@@ -1,4 +1,4 @@
-import * as storage from "../storage";
+import * as storage from "../../services/storage";
 import {LOGIN} from "../actions"
 import {createSlice} from "@reduxjs/toolkit";
 
