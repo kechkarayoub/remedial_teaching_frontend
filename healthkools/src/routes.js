@@ -8,7 +8,7 @@ const AppHomeRoute = ({
   history,
   ...rest
 }) => {
-  var user = get("session_user");
+  var user = get("user");
   return (
     <>
       <Route

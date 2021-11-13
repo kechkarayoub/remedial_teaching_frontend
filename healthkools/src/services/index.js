@@ -1,6 +1,11 @@
-import {applyMiddleware, createStore} from 'redux'
-import promiseMiddleware from 'redux-promise';
-import reducers from './reducers';
+import loginReducer from './reducers/loginReducer';
 
-const store = createStore(reducers, {}, applyMiddleware(promiseMiddleware));
+import {configureStore} from '@reduxjs/toolkit';
+
+const store = configureStore({
+  reducer: {
+      login: loginReducer,
+  },
+})
+// const store = createStore(reducers, {}, applyMiddleware(promiseMiddleware));
 export default store;

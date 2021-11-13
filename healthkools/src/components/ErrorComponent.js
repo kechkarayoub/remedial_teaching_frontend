@@ -23,7 +23,7 @@ class ErrorComponent extends Component {
       <HKButton
         added_class="default-bg-color btn-rounded" text={"Try again"}
         on_click={() => {
-          // var user = get("session_user");
+          // var user = get("user");
           // if(user) {
           // }
           // else
