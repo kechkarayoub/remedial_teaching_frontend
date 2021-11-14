@@ -24,7 +24,8 @@ import HKButton from "../../../components/HKButton";
 import QuestionButton from "../../../components/QuestionButton";
 import * as EmailValidator from 'email-validator';
 import FieldError from "../../../components/forms_fields/FieldError";
-
+import {login_action} from "../../../store/actions";
+import { connect } from "react-redux";
 const usernameRegex = /^[a-zA-Z0-9_]+$/;
 
 class SignInUpModal extends Component {
@@ -357,6 +358,7 @@ class SignInUpModal extends Component {
     }
     if(valid_form){
 
+      this.props.login_action({user: {username: "xxxxx"}});
     }
     else{
       new_state.error_messages = error_messages;
@@ -521,4 +523,9 @@ const SignInUpModalStyle = styled.div`
     padding: 10px 0;
   }
 `;
-export default withTranslation('translations')(SignInUpModal);
+function mapDispatchToProps(dispatch) {
+  return {
+    login_action: data => dispatch(login_action(data))
+  };
+}
+export default connect(null, mapDispatchToProps)(withTranslation('translations')(SignInUpModal));

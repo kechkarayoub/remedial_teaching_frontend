@@ -9,6 +9,7 @@ import {images} from "../_resources";
 import HKButtonIcon from '../../../components/HKButtonIcon';
 import SignInUpModal from './SignInUpModal';
 import moment from "moment"
+import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 class HomeHeader extends Component {
   constructor(props){
@@ -17,12 +18,13 @@ class HomeHeader extends Component {
       current_language: get("current_language"),
       open_sign_in_up: false,
       default_sign_in_up_view: "sign_in",
+      user: props.user,
     };
   }
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
-    if(current_language !== state.current_language){
+    if(current_language !== state.current_language || state.user !== props.user){
       var new_state = {current_language: current_language};
       return new_state;
     }
@@ -118,5 +120,7 @@ const HomeHeaderStyle = styles.header`
     overflow-x: inherit;
   }
 `;
-
-export default withTranslation('translations')(HomeHeader);
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));

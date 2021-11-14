@@ -1,11 +1,16 @@
+export const GLOBAL = "GLOBAL";
 export const LOGIN = "LOGIN";
 
 
-export const LOGIN_ACTION = () => {
+export const global_action = (payload) => {
+    return {
+        type: GLOBAL,
+        payload: payload,
+    };
+};
+export const login_action = (payload) => {
     return {
         type: LOGIN,
-        payload: {
-            user: {username: 'test'}
-        }
+        payload: payload
     };
-  };
+};
