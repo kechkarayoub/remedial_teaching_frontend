@@ -528,4 +528,5 @@ function mapDispatchToProps(dispatch) {
     login_action: data => dispatch(login_action(data))
   };
 }
-export default connect(null, mapDispatchToProps)(withTranslation('translations')(SignInUpModal));
+// export default connect(null, mapDispatchToProps)(withTranslation('translations')(SignInUpModal));
+export default withTranslation('translations')(SignInUpModal);

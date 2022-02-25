@@ -152,4 +152,5 @@ const HomeHeaderStyle = styles.header`
 const mapStateToProps = state => {
   return { user: state.user };
 };
-export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));
+// export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));
+export default withTranslation('translations')(HomeHeader);
