@@ -113,11 +113,40 @@ const HomeHeaderStyle = styles.header`
     }
   }
   @media(max-width: 1199px){
-    
+    .header-bottom{
+      padding: 5px 50px;
+      .left{
+      }
+      .right{
+  
+      }
+    }
+    .header-top{
+      padding: 5px 50px;
+      .left{
+      }
+      .right{
+      }
+    }
   }  
 
   @media(max-width: 767px){
     overflow-x: inherit;
+    .header-bottom{
+      padding: 5px 15px;
+      .left{
+      }
+      .right{
+  
+      }
+    }
+    .header-top{
+      padding: 5px 15px;
+      .left{
+      }
+      .right{
+      }
+    }
   }
 `;
 const mapStateToProps = state => {

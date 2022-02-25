@@ -71,6 +71,11 @@ const HomeStyle = styled.div`
       margin-bottom: 150px;
     }
   }
+  @media (max-width: 767px) {
+    .news-feed{
+      padding: 0 20px;
+    }
+  }
 `;
 const mapState2Props = state => ({ session: state.session });
 export default connect(mapState2Props)(withRouter(Home));
