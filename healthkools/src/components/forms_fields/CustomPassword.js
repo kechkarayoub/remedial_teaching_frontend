@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
 import PasswordStrengthBar from 'react-password-strength-bar';
-class HKPassword extends Component {
+class CustomPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class HKPassword extends Component {
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, show_password, show_trength_bar, valid_message, value} = this.state;
     return (
-      <HKPasswordStyle className={`field_input input_password ${added_class || ""}`}>
+      <CustomPasswordStyle className={`field_input input_password ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <div className="input_div">
@@ -63,12 +63,12 @@ class HKPassword extends Component {
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKPasswordStyle>
+      </CustomPasswordStyle>
     );
   }
 }
 
-const HKPasswordStyle = styled.div`
+const CustomPasswordStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   overflow: hidden;
@@ -94,6 +94,6 @@ const HKPasswordStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKPassword);
+export default withTranslation('translations')(CustomPassword);
 
 

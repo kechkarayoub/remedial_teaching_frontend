@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { withTranslation } from 'react-i18next';
 
-class HKButtonIcon extends Component {
+class CustomButtonIcon extends Component {
     render(){
         return(
-            <HKButtonIconStyle 
+            <CustomButtonIconStyle 
                 className={`btnn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
                 style={this.props.style || {}}
             >
                 <img src={this.props.image} alt={this.props.alt} />
-            </HKButtonIconStyle>
+            </CustomButtonIconStyle>
         )
     }
 }
-const HKButtonIconStyle = styled.button`
+const CustomButtonIconStyle = styled.button`
     border: 0;
     border-radius: 50%;
     cursor: pointer;
@@ -33,4 +33,4 @@ const HKButtonIconStyle = styled.button`
         height: 28px;
     }
 `;
-export default withTranslation('translations')(HKButtonIcon);
+export default withTranslation('translations')(CustomButtonIcon);

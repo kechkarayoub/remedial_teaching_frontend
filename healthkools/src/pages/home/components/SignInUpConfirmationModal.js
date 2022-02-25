@@ -8,7 +8,7 @@ import moment from 'moment';
 import { get } from "../../../services/storage";
 import { resend_activation_email } from "../../../services/api";
 import TextDiv from "../../../components/TextDiv";
-import HKButton from "../../../components/HKButton";
+import CustomButton from "../../../components/CustomButton";
 import FieldError from "../../../components/forms_fields/FieldError";
 import FieldValid from "../../../components/forms_fields/FieldValid";
 
@@ -98,7 +98,7 @@ class SignInUpConfirmationModal extends Component {
               </Row>
             </Modal.Body>
             <Modal.Footer>
-              <HKButton
+              <CustomButton
                 added_class="default-bg-color btn-rounded" text={this.props.t("Sign in")}
                 on_click={() => {
                   this.props.onHide();

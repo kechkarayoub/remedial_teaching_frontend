@@ -5,7 +5,7 @@ import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
 import Select from 'react-select';
 
- class HKSelect extends Component {
+ class CustomSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,7 +73,7 @@ import Select from 'react-select';
     var selected_country_option = value ? countries_options.filter(c_o => c_o.value === value)[0] : null;
 
     return (
-      <HKSelectStyle className={`field_input input_select ${added_class || ""}`}>
+      <CustomSelectStyle className={`field_input input_select ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <Select
@@ -98,12 +98,12 @@ import Select from 'react-select';
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKSelectStyle>
+      </CustomSelectStyle>
     );
   }
 }
 
-const HKSelectStyle = styled.div`
+const CustomSelectStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   border: 0;
@@ -124,6 +124,6 @@ const HKSelectStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKSelect);
+export default withTranslation('translations')(CustomSelect);
 
 

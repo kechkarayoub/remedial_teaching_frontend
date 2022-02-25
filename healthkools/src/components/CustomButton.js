@@ -3,22 +3,22 @@ import styled from "styled-components";
 import {colors} from "../assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
-class HKButton extends Component {
+class CustomButton extends Component {
     // constructor(props) {
     //     super(props);
     // }
     render(){
         return(
-            <HKButtonStyle 
+            <CustomButtonStyle 
                 className={`btnn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
                 style={this.props.style || {}}
             >
                 {this.props.t(this.props.text)}
-            </HKButtonStyle>
+            </CustomButtonStyle>
         )
     }
 }
-const HKButtonStyle = styled.button`
+const CustomButtonStyle = styled.button`
     &.btnn{
         border: 0;
         cursor: pointer;
@@ -44,4 +44,4 @@ const HKButtonStyle = styled.button`
         color: ${colors.default_color};
     }
 `;
-export default withTranslation('translations')(HKButton);
+export default withTranslation('translations')(CustomButton);

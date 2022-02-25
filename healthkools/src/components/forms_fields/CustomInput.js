@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
 
- class HKInput extends Component {
+ class CustomInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ import FieldValid from "./FieldValid";
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
     return (
-      <HKInputStyle className={`field_input input_text ${added_class || ""}`}>
+      <CustomInputStyle className={`field_input input_text ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <input data-testid="input" disabled={disabled} defaultValue={value} placeholder={placeholder} onChange={evt => {
@@ -53,12 +53,12 @@ import FieldValid from "./FieldValid";
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKInputStyle>
+      </CustomInputStyle>
     );
   }
 }
 
-const HKInputStyle = styled.div`
+const CustomInputStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   overflow: hidden;
@@ -73,6 +73,6 @@ const HKInputStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKInput);
+export default withTranslation('translations')(CustomInput);
 
 

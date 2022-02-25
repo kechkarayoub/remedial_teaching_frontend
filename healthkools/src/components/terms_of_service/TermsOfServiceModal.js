@@ -8,7 +8,7 @@ import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import { get_articles } from "./terms_of_service";
 import { get_data } from "./data";
-import HKButton from "../HKButton";
+import CustomButton from "../CustomButton";
 
 class TermsOfServiceModal extends Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class TermsOfServiceModal extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <HKButton
+            <CustomButton
               added_class="default-bg-color btn-rounded" text={"Close"}
               on_click={() => {
                 this.props.onHide();

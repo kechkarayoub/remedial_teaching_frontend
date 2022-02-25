@@ -9,7 +9,7 @@ import TermsOfServiceModal from "../terms_of_service/TermsOfServiceModal";
 import CookiesPolicyModal from "../terms_of_service/CookiesPolicyModal";
 import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
 
- class HKTSNotice extends Component {
+ class CustomTSNotice extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,11 +53,11 @@ import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
     const {added_class, current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label} = this.state;
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label})
     return (<>
-      <HKTSNoticeStyle className={`terms_service_notice ${added_class || ""}`}>
+      <CustomTSNoticeStyle className={`terms_service_notice ${added_class || ""}`}>
         <div className="notice" dangerouslySetInnerHTML={{
         __html: terms_service_notice[current_language]
       }} onClick={this.handleTermsOfServiceNoticeClicked}></div>
-      </HKTSNoticeStyle>
+      </CustomTSNoticeStyle>
 
       {open_cookie_policy &&
         <CookiesPolicyModal show={open_cookie_policy} onHide={() => this.setState({open_cookie_policy: false})}/>
@@ -72,7 +72,7 @@ import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
   }
 }
 
-const HKTSNoticeStyle = styled.div`
+const CustomTSNoticeStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   overflow: hidden;
@@ -94,6 +94,6 @@ const HKTSNoticeStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKTSNotice);
+export default withTranslation('translations')(CustomTSNotice);
 
 

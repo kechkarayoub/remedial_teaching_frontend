@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FieldError from "./FieldError";
 import FieldValid from "./FieldValid";
 
- class HKGender extends Component {
+ class CustomGender extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ import FieldValid from "./FieldValid";
   render() {
     const {added_class, disabled, error_message, invalid_message, label, valid_message, value} = this.state;
     return (
-      <HKGenderStyle data-testid="input_gender" className={`field_input input_gender ${added_class || ""}`}>
+      <CustomGenderStyle data-testid="input_gender" className={`field_input input_gender ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <div className={`choices ${disabled ? 'disabled' : ''}`}>
@@ -71,12 +71,12 @@ import FieldValid from "./FieldValid";
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKGenderStyle>
+      </CustomGenderStyle>
     );
   }
 }
 
-const HKGenderStyle = styled.div`
+const CustomGenderStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   overflow: hidden;
@@ -107,6 +107,6 @@ const HKGenderStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKGender);
+export default withTranslation('translations')(CustomGender);
 
 

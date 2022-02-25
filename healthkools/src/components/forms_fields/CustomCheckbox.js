@@ -6,7 +6,7 @@ import FieldValid from "./FieldValid";
 import Checkbox from 'react-custom-checkbox';
 import { colors } from "../../assets/variables/colors";
 
- class HKCheckbox extends Component {
+ class CustomCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ import { colors } from "../../assets/variables/colors";
   render() {
     const {added_class, disabled, error_message, invalid_message, label, valid_message, checked} = this.state;
     return (
-      <HKCheckboxStyle className={`field_input input_checkbox ${added_class || ""}`}>
+      <CustomCheckboxStyle className={`field_input input_checkbox ${added_class || ""}`}>
         <div className="field">
             {/* <label data-testid="label">{label}</label> */}
             <Checkbox icon={
@@ -67,12 +67,12 @@ import { colors } from "../../assets/variables/colors";
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKCheckboxStyle>
+      </CustomCheckboxStyle>
     );
   }
 }
 
-const HKCheckboxStyle = styled.div`
+const CustomCheckboxStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   overflow: hidden;
@@ -93,6 +93,6 @@ const HKCheckboxStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKCheckbox);
+export default withTranslation('translations')(CustomCheckbox);
 
 

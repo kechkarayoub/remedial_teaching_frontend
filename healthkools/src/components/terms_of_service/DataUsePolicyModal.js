@@ -8,7 +8,7 @@ import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import { get_intro_items } from "./data_use_policy";
 import { get_data } from "./data";
-import HKButton from "../HKButton";
+import CustomButton from "../CustomButton";
 
 class DataUsePolicyModal extends Component {
   constructor(props) {
@@ -111,7 +111,7 @@ class DataUsePolicyModal extends Component {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <HKButton
+            <CustomButton
               added_class="default-bg-color btn-rounded" text={"Close"}
               on_click={() => {
                 this.props.onHide();

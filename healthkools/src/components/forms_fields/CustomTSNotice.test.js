@@ -1,4 +1,4 @@
-import HKTSNotice from "./HKTSNotice";
+import CustomTSNotice from "./CustomTSNotice";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
@@ -6,8 +6,8 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
-describe('HKTSNotice component', () => {
+describe('CustomTSNotice component', () => {
     test('Should render without crash', async () => {
-        render(<HKTSNotice />);
+        render(<CustomTSNotice />);
     });
 });

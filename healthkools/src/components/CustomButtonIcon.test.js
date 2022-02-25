@@ -1,4 +1,4 @@
-import HKButtonIcon from "./HKButtonIcon";
+import CustomButtonIcon from "./CustomButtonIcon";
 import { render, screen } from '@testing-library/react';
 import sign_in from "../assets/img/sign_in.svg";
 jest.mock('react-i18next', () => ({
@@ -8,12 +8,12 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
-describe('HKButtonIcon component', () => {
+describe('CustomButtonIcon component', () => {
     test('Should render without crash', async () => {
-        render(<HKButtonIcon />);
+        render(<CustomButtonIcon />);
     });
     test('Should contains image props', async () => {
-        render(<HKButtonIcon image={sign_in} alt="Sign in icon"/>);
+        render(<CustomButtonIcon image={sign_in} alt="Sign in icon"/>);
         const image = screen.getByAltText('Sign in icon');
         expect(image.src).toContain(sign_in);
     });

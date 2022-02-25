@@ -11,7 +11,7 @@ import ar from 'react-phone-input-2/lang/ar.json';
 import fr from 'react-phone-input-2/lang/fr.json';
 // import 'react-phone-number-input/style.css';
 
- class HKPhoneNumber extends Component {
+ class CustomPhoneNumber extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ import fr from 'react-phone-input-2/lang/fr.json';
     const {added_class, disabled, default_country, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
     var current_language = get("current_language");
     return (
-      <HKPhoneNumberStyle className={`field_input input_phone_number ${added_class || ""}`}>
+      <CustomPhoneNumberStyle className={`field_input input_phone_number ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <PhoneInput
@@ -73,12 +73,12 @@ import fr from 'react-phone-input-2/lang/fr.json';
         {valid_message &&
             <FieldValid valid_message={valid_message} />
         }
-      </HKPhoneNumberStyle>
+      </CustomPhoneNumberStyle>
     );
   }
 }
 
-const HKPhoneNumberStyle = styled.div`
+const CustomPhoneNumberStyle = styled.div`
   border-radius: 6.3px;
   padding: 13px 15px;
   // overflow: hidden;
@@ -130,6 +130,6 @@ const HKPhoneNumberStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
-export default withTranslation('translations')(HKPhoneNumber);
+export default withTranslation('translations')(CustomPhoneNumber);
 
 

@@ -6,7 +6,7 @@ import LanguageSelect from "../../../components/LanguageSelect/index";
 import { colors } from "../../../assets/variables/colors";
 import { get } from "../../../services/storage";
 import {images} from "../_resources";
-import HKButtonIcon from '../../../components/HKButtonIcon';
+import CustomButtonIcon from '../../../components/CustomButtonIcon';
 import SignInUpModal from './SignInUpModal';
 import moment from "moment"
 import { connect } from "react-redux";
@@ -41,13 +41,13 @@ class HomeHeader extends Component {
             </div>
             <div className={`right ${current_language === "ar" ? "rtl" : ""}`}>
               <LanguageSelect />
-              <HKButtonIcon image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
+              <CustomButtonIcon image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_in",
                 });
               }} />
-              <HKButtonIcon image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
+              <CustomButtonIcon image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_up",
