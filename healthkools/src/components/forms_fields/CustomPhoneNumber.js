@@ -88,8 +88,8 @@ const CustomPhoneNumberStyle = styled.div`
     .tel_input_container{
       input{
         background: #f7f7f7;
-        width: 100%;
         height: 38px;
+        width: 100%;
         &:focus{
           background: #f7f7f7;
           box-shadow: 0 0 0 2px #1fa1cf;

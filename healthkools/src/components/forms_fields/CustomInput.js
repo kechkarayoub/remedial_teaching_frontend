@@ -60,8 +60,8 @@ import FieldValid from "./FieldValid";
 
 const CustomInputStyle = styled.div`
   border-radius: 6.3px;
-  padding: 13px 15px;
   overflow: hidden;
+  padding: 13px 15px;
   .field{
     label{
     }

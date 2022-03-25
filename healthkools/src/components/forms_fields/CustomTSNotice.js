@@ -74,8 +74,8 @@ import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
 
 const CustomTSNoticeStyle = styled.div`
   border-radius: 6.3px;
-  padding: 13px 15px;
   overflow: hidden;
+  padding: 13px 15px;
   .notice{
     color: #777;
     font-size: 12px;

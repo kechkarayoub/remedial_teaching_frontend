@@ -10,7 +10,7 @@ class CustomButton extends Component {
     render(){
         return(
             <CustomButtonStyle 
-                className={`btnn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
+                className={`btn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
                 style={this.props.style || {}}
             >
                 {this.props.t(this.props.text)}
@@ -19,7 +19,7 @@ class CustomButton extends Component {
     }
 }
 const CustomButtonStyle = styled.button`
-    &.btnn{
+    &.btn{
         border: 0;
         cursor: pointer;
         font-size: 14px;

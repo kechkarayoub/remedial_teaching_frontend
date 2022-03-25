@@ -6,7 +6,7 @@ class CustomButtonIcon extends Component {
     render(){
         return(
             <CustomButtonIconStyle 
-                className={`btnn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
+                className={`btn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
                 style={this.props.style || {}}
             >
                 <img src={this.props.image} alt={this.props.alt} />

@@ -1,5 +1,6 @@
 import CustomDate from "./CustomDate";
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import moment from "moment";
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
@@ -18,6 +19,11 @@ describe('CustomDate component', () => {
         expect(label.textContent).toBe('Label test');
         expect(input.value).toBe('');
         expect(input.placeholder).toBe('Placeholder test');
+    });
+    test('Should date change', async () => {
+        render(<CustomDate label={"Label test"} placeholder={"Placeholder test"}  value={new Date()}/>);
+        const input = screen.getByPlaceholderText('Placeholder test');
+        expect(input.value).toBe('25/03/2022');
     });
     test('Should contains props values', async () => {
         render(<CustomDate label={"Label test"} placeholder={"Placeholder test"}  value={moment().toDate()}/>);

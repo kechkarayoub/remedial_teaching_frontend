@@ -104,13 +104,9 @@ import Select from 'react-select';
 }
 
 const CustomSelectStyle = styled.div`
+  border: 0;
   border-radius: 6.3px;
   padding: 13px 15px;
-  border: 0;
-  .select__control{
-    background: #f7f7f7;
-    max-height: 38px;
-  }
   .basic-single >div{
     border: 1px solid #cccccc;
     border-radius: 4px;
@@ -118,7 +114,10 @@ const CustomSelectStyle = styled.div`
       border: 1px solid #1fa1cf;
     }
   }
-  
+  .select__control{
+    background: #f7f7f7;
+    max-height: 38px;
+  }
   @media screen and (max-width: 1199px){
   }
   @media screen and (max-width: 767px){

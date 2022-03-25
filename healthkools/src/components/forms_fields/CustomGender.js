@@ -78,25 +78,24 @@ import FieldValid from "./FieldValid";
 
 const CustomGenderStyle = styled.div`
   border-radius: 6.3px;
-  padding: 13px 15px;
   overflow: hidden;
+  padding: 13px 15px;
   .field{
     .choices{
       i.fa{
-        cursor:pointer;
-        width: 34.3px;
-        height: 34.3px;
-        margin: 0px 10px 0px 10px;
-        cursor: pointer;
         border: 0.8px solid #3eb6ad;
         border-radius: 50%;
         color: #d6d9e0;
+        cursor: pointer;
         font-size: 18px;
+        height: 34.3px;
         line-height: 34px;
+        margin: 0px 10px 0px 10px;
         text-align: center;
+        width: 34.3px;
         &.active{
+          background-color: #3eb6ad;
           border: solid 0.8px #d6d9e0;
-          background-color:#3eb6ad;
           color:#fff
         }
       }

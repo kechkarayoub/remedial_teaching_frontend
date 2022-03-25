@@ -11,24 +11,24 @@ import { colors } from "../../assets/variables/colors";
     super(props);
     this.state = {
       added_class: props.added_class,
+      checked: props.checked,
       disabled: props.disabled,
       error_message: props.error_message,
       invalid_message: props.invalid_message,
       label: props.label,
       valid_message: props.valid_message,
-      checked: props.checked,
     };
   }
 
   static getDerivedStateFromProps(props, state) {
     return {
         added_class: props.added_class,
+        checked: props.checked,
         disabled: props.disabled,
         error_message: props.error_message,
         invalid_message: props.invalid_message,
         label: props.label,
         valid_message: props.valid_message,
-        checked: props.checked,
     };
 }
 
@@ -37,7 +37,6 @@ import { colors } from "../../assets/variables/colors";
     return (
       <CustomCheckboxStyle className={`field_input input_checkbox ${added_class || ""}`}>
         <div className="field">
-            {/* <label data-testid="label">{label}</label> */}
             <Checkbox icon={
                 <div
                   style={{
@@ -74,8 +73,8 @@ import { colors } from "../../assets/variables/colors";
 
 const CustomCheckboxStyle = styled.div`
   border-radius: 6.3px;
-  padding: 13px 15px;
   overflow: hidden;
+  padding: 13px 15px;
   .field{
     label{
     }

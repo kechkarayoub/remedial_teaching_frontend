@@ -131,27 +131,27 @@ const BlocFeedsStyle = styled.div`
     margin: 10px 7px 0;
     position:relative;
     .slick-arrow{
-      position: absolute;
-      top: 50%;
-      margin-top: -6px;
       background-color: ${colors.default_color};
-      width: 36px;
-      height: 36px;
       border-radius: 50%;
-      text-align: center;
       cursor: pointer;
-      line-height: 36px;
-      font-size: 25px;
       font-family: FontAwesome;
+      font-size: 25px;
+      line-height: 36px;
+      margin-top: -6px;
+      height: 36px;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      width: 36px;
       z-index: 9;
       i{
         color: ${colors.white};
       }
       &:before{
-        line-height: 36px;
-        font-size: 25px;
         content: "\f105";
         font-family: FontAwesome;
+        font-size: 25px;
+        line-height: 36px;
       }
     }
     .slick-list{

@@ -70,12 +70,15 @@ class CustomPassword extends Component {
 
 const CustomPasswordStyle = styled.div`
   border-radius: 6.3px;
-  padding: 13px 15px;
   overflow: hidden;
+  padding: 13px 15px;
   .field{
     label{
     }
     .input_div{
+      input{
+        padding-right: 25px;
+      }
       position: relative;
       .show_hide_password{
         cursor: pointer;
@@ -83,9 +86,6 @@ const CustomPasswordStyle = styled.div`
         right: 5px;
         top: 19px;
         transform: translateY(-50%);
-      }
-      input{
-        padding-right: 25px;
       }
     }
   }
