@@ -33,21 +33,22 @@ class HomeHeader extends Component {
 
   render(){
     const {current_language, open_sign_in_up, default_sign_in_up_view} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
         <HomeHeaderStyle>
-          <div className={`header-top ${current_language === "ar" ? "rtl" : ""}`}>
+          <div className={`header-top ${direction_class}`}>
             <div className={`left`}>
             </div>
-            <div className={`right ${current_language === "ar" ? "rtl" : ""}`}>
+            <div className={`right ${direction_class}`}>
               <LanguageSelect />
-              <CustomButtonIcon image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
+              <CustomButtonIcon added_class={"btn_white"} image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_in",
                 });
               }} />
-              <CustomButtonIcon image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
+              <CustomButtonIcon added_class={"btn_white"} image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_up",
@@ -55,7 +56,7 @@ class HomeHeader extends Component {
               }} />
             </div>
           </div>
-          <div className={`header-bottom ${current_language === "ar" ? "rtl" : ""}`}>
+          <div className={`header-bottom ${direction_class}`}>
             <div className={`left `}>
               <LogoImage style={{
                   cursor: "pointer",

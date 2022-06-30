@@ -37,12 +37,13 @@ export class Home extends Component {
 
   render() {
     const {current_language} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <HomeStyle className="home-container">
         <HomeHeader {...this.props}/>
         <section className="one">
           <div className="container">
-            <div className={`row ${current_language === "ar" ? "rtl" : ""}`}>
+            <div className={`row ${direction_class}`}>
               <div className="col-xl-8 col-lg-12 ">
                 {/* <Carousel
                   handleOpenModalConnexion={() =>

@@ -372,19 +372,20 @@ class SignInUpModal extends Component {
       invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
       phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
         <Modal
           show={this.props.show} 
           onHide={() => this.props.onHide()}
-          className={`custom_modal sign_in_up_modal ${current_language === "ar" ? "rtl" : ""}`}
+          className={`custom_modal sign_in_up_modal ${direction_class}`}
           animation={false}
         >
           <SignInUpModalStyle className="custom_scroll_bar">
             <Modal.Header>
               <span className="visibility_hidden"></span>
               { this.props.t(default_view === "sign_in" ? 'Sign in' : 'Sign up') }
-              <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
+              <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                   <span className="close_ico">×</span>
               </Button>
             </Modal.Header>
@@ -493,8 +494,10 @@ const SignInUpModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px;
   .modal-header{
+    align-items: center;
     color: #1fa1cf;
     font-weight: bold;
+    justify-content: center;
     padding: 5px 0;
     .close-modal{
       background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
@@ -504,9 +507,17 @@ const SignInUpModalStyle = styled.div`
       font-size: 40px;
       height: 30px;
       line-height: 30px;
+      min-width: unset;
       padding: 0;
+      position: absolute;
+      left: 5px;
       text-align: center;
+      top: 5px;
       width: 30px;
+      &.rtl{
+        right: 5px;
+        left: unset;
+      }
       .close_ico{
         display: block;
         height: 100%;

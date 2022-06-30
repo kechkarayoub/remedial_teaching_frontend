@@ -52,12 +52,13 @@ class DataUsePolicyModal extends Component {
 
   render() {
     const {current_language, items, intro} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
       <Modal
         show={this.props.show} 
         onHide={() => this.props.onHide()}
-        className={`custom_modal terms_of_service ${current_language === "ar" ? "rtl" : ""}`}
+        className={`custom_modal terms_of_service ${direction_class}`}
         backdropClassName='backdrop_custom_z_index_1055'
         animation={false}
       >

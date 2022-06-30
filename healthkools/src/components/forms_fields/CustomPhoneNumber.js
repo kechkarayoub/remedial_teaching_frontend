@@ -46,6 +46,7 @@ import fr from 'react-phone-input-2/lang/fr.json';
   render() {
     const {added_class, disabled, default_country, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
     var current_language = get("current_language");
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <CustomPhoneNumberStyle className={`field_input input_phone_number ${added_class || ""}`}>
         <div className="field">
@@ -53,8 +54,8 @@ import fr from 'react-phone-input-2/lang/fr.json';
             <PhoneInput
               placeholder={placeholder} country={(default_country || "").toLowerCase()}
               value={value} disabled={disabled} localization={current_language === "ar" ? ar : current_language === "fr" ? fr : undefined}
-              containerStyle={{direction: current_language === "ar" ? "rtl" : "ltr"}}
-              containerClass={"tel_input_container " + (current_language === "ar" ? "rtl" : "ltr")}
+              containerStyle={{direction: direction_class}}
+              containerClass={"tel_input_container " + direction_class}
               onChange={(phone_number) => {
                 if(phone_number){
                   if(this.props.on_change){

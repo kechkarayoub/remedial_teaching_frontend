@@ -60,12 +60,13 @@ class SignInUpConfirmationModal extends Component {
 
   render() {
     const {current_language, invalid_message, network_error, registration_messages, valid_message, valid_message2} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
         <Modal
           show={this.props.show} 
           onHide={() => this.props.onHide()}
-          className={`custom_modal sign_in_up_modal ${current_language === "ar" ? "rtl" : ""}`}
+          className={`custom_modal sign_in_up_modal ${direction_class}`}
           animation={false}
         >
           <SignInUpConfirmationModalStyle className="custom_scroll_bar">

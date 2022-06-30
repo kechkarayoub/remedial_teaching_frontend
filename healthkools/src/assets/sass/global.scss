@@ -20,6 +20,9 @@
     min-width: 100px;
     padding: 0 10px;
     width: max-content;
+    &.btn_white{
+        background-color: #efefef;
+    }
     &:focus{
         outline: none;
     }

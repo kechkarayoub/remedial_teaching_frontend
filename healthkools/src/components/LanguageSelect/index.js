@@ -33,9 +33,10 @@ class LanguageSelect extends Component {
     render(){
         const {open, selected_language} = this.state;
         var language_ = languages.filter(l => l.value === selected_language)[0];
+        var direction_class = selected_language === "ar" ? "rtl" : "ltr";
         return(
             <LanguageSelectStyle 
-                className={`${this.props.added_class || ""} ${selected_language === "ar" ? "rtl" : "ltr"}`} 
+                className={`${this.props.added_class || ""} ${direction_class}`} 
                 style={this.props.style || {}} role="languages_select"
                 onClick={() => this.setState({open: !open})}
                 onMouseLeave={() => this.setState({open: false})}
