@@ -256,10 +256,15 @@ export const get_articles = (data) => {
                     en: `The site is declared to the National Commission for the Protection of Personal Data (CNDP) under the following number: ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
                     fr: `Le site est déclaré auprès de la Commission Nationale de Contrôle de la Protection des Données à Caractère Personnel (CNDP) sous le numéro suivant : ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
                 },
+                // {
+                //     ar: `يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها. يمارس المستخدم هذا الحق عن طريق:`,
+                //     en: `The User has the right to access, rectify, delete and oppose his personal data. The User exercises this right via:`,
+                //     fr: `L'Utilisateur dispose du droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles. L'Utilisateur exerce ce droit via :`,
+                // },
                 {
-                    ar: `يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها. يمارس المستخدم هذا الحق عن طريق:`,
-                    en: `The User has the right to access, rectify, delete and oppose his personal data. The User exercises this right via:`,
-                    fr: `L'Utilisateur dispose du droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles. L'Utilisateur exerce ce droit via :`,
+                    ar: `يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها.`,
+                    en: `The User has the right to access, rectify, delete and oppose his personal data.`,
+                    fr: `L'Utilisateur dispose du droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles.`,
                 },
             ]
         },

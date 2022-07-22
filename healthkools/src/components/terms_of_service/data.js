@@ -3,6 +3,7 @@ const code_mode = process.env.REACT_APP_CODE_MODE;
 export const get_data = () => {
     return {
         company_address: "",
+        cndp_declaration_number: "",
         company_capital: "",
         company_legal_status: "",
         company_name: "",

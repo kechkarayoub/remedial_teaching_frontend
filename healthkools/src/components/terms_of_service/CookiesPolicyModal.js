@@ -78,7 +78,7 @@ class CookiesPolicyModal extends Component {
                 return <div key={idx} className={`article `}>
                   <p className={`title `}>
                     {/* <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span> */}
-                    <span>{item.title[current_language]}</span>
+                    <span dangerouslySetInnerHTML={{__html: item.title[current_language]}}></span>
                   </p>
                   {item.intro &&
                     <p className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
