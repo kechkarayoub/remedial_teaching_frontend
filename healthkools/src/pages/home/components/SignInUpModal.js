@@ -494,37 +494,11 @@ const SignInUpModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px;
   .modal-header{
-    align-items: center;
-    color: #1fa1cf;
-    font-weight: bold;
-    justify-content: center;
-    padding: 5px 0;
-    .close-modal{
-      background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
-      border-radius: 50%;
-      box-shadow: 0 10px 20px 0 #1fa1cf5c;
-      color: #fff;
-      font-size: 40px;
-      height: 30px;
-      line-height: 30px;
-      min-width: unset;
-      padding: 0;
-      position: absolute;
-      left: 5px;
-      text-align: center;
-      top: 5px;
-      width: 30px;
-      &.rtl{
-        right: 5px;
-        left: unset;
-      }
-      .close_ico{
-        display: block;
-        height: 100%;
-        line-height: 24px;
-        padding-bottom: 6px;
-      }
-    }
+    position: absolute;
+    margin: auto;
+    margin-top: -52px;
+    left: 0;
+    width: 100%;
   }
   .modal-body{
     display: flex;

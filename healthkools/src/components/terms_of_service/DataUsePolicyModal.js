@@ -66,7 +66,7 @@ class DataUsePolicyModal extends Component {
           <Modal.Header>
             <span className="visibility_hidden"></span>
             { this.props.t('Data use policy') }
-            <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
+            <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>
@@ -129,30 +129,6 @@ class DataUsePolicyModal extends Component {
 const DataUsePolicyModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
-  .modal-header{
-    color: #1fa1cf;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 5px 0;
-    .close-modal{
-      background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
-      border-radius: 50%;
-      box-shadow: 0 10px 20px 0 #1fa1cf5c;
-      color: #fff;
-      font-size: 40px;
-      height: 30px;
-      line-height: 30px;
-      padding: 0;
-      text-align: center;
-      width: 30px;
-      .close_ico{
-        display: block;
-        height: 100%;
-        line-height: 24px;
-        padding-bottom: 6px;
-      }
-    }
-  }
   .modal-body{
     padding: 10px 20px;
     .intro{
