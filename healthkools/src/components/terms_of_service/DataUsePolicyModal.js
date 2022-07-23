@@ -8,7 +8,7 @@ import { get } from "../../services/storage";
 import { colors } from "../../assets/variables/colors";
 import { get_intro_items } from "./data_use_policy";
 import { get_data } from "./data";
-import HKButton from "../HKButton";
+import CustomButton from "../CustomButton";
 
 class DataUsePolicyModal extends Component {
   constructor(props) {
@@ -52,12 +52,13 @@ class DataUsePolicyModal extends Component {
 
   render() {
     const {current_language, items, intro} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
       <Modal
         show={this.props.show} 
         onHide={() => this.props.onHide()}
-        className={`custom_modal terms_of_service ${current_language === "ar" ? "rtl" : ""}`}
+        className={`custom_modal terms_of_service ${direction_class}`}
         backdropClassName='backdrop_custom_z_index_1055'
         animation={false}
       >
@@ -65,7 +66,7 @@ class DataUsePolicyModal extends Component {
           <Modal.Header>
             <span className="visibility_hidden"></span>
             { this.props.t('Data use policy') }
-            <Button variant="circle" className="close-modal" onClick={() => this.props.onHide()}>
+            <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>
@@ -74,18 +75,18 @@ class DataUsePolicyModal extends Component {
               <p className={`intro `} dangerouslySetInnerHTML={{__html: intro[current_language]}}>
               </p>
               {items.map((item, idx) => {
-                return <div className={`article `}>
-                  <p key={idx} className={`title `}>
+                return <div key={idx} className={`article `}>
+                  <p className={`title `}>
                     {/* <span className="article_number">{this.props.t("Item") + " " + (idx + 1) + ": "}</span> */}
                     <span>{item.title[current_language]}</span>
                   </p>
                   {item.intro &&
-                    <p key={idx+"_intro"} className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
+                    <p className={`intro `} dangerouslySetInnerHTML={{__html: item.intro[current_language]}}>
                     </p>
                   }
                   {item.paragraphs.map((paragraph, idx_p) => {
-                    return <>
-                      <p key={idx + "_" + idx_p} className={` `} dangerouslySetInnerHTML={{
+                    return <div key={idx_p}>
+                      <p className={` `} dangerouslySetInnerHTML={{
                         __html: paragraph[current_language]
                       }}></p>
                       {paragraph.list_items &&
@@ -104,14 +105,14 @@ class DataUsePolicyModal extends Component {
                           })}
                         </ul>
                       }
-                    </>
+                    </div>
                   })}
                 </div>
               })}
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <HKButton
+            <CustomButton
               added_class="default-bg-color btn-rounded" text={"Close"}
               on_click={() => {
                 this.props.onHide();
@@ -128,30 +129,6 @@ class DataUsePolicyModal extends Component {
 const DataUsePolicyModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
-  .modal-header{
-    color: #1fa1cf;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 5px 0;
-    .close-modal{
-      background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
-      border-radius: 50%;
-      box-shadow: 0 10px 20px 0 #1fa1cf5c;
-      color: #fff;
-      font-size: 40px;
-      height: 30px;
-      line-height: 30px;
-      padding: 0;
-      text-align: center;
-      width: 30px;
-      .close_ico{
-        display: block;
-        height: 100%;
-        line-height: 24px;
-        padding-bottom: 6px;
-      }
-    }
-  }
   .modal-body{
     padding: 10px 20px;
     .intro{

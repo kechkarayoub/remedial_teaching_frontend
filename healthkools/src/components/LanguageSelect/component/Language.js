@@ -19,8 +19,9 @@ class Language extends Component {
     }
     render(){
         const {language, selected_language} = this.state;
+        var direction_class = selected_language === "ar" ? "rtl" : "ltr";
         return(
-            <LanguageStyle className={`${selected_language === "ar" ? "rtl" : "ltr"}`}  key={language.value} 
+            <LanguageStyle className={`${direction_class}`}  key={language.value} 
                 onClick={(evt) => this.props.handleSelectLanguage(evt, language.value)} role="language"
             >
                 <img src={language.flag} alt={this.props.t(language.alt)} />{this.props.t(language.short_name)}

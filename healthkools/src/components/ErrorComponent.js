@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import HKButton from "./HKButton";
+import CustomButton from "./CustomButton";
 import LogoImage from "./LogoImage";
 import styled from "styled-components";
 import { withTranslation } from 'react-i18next';
@@ -20,10 +20,10 @@ class ErrorComponent extends Component {
           minWidth: "200px",
         }} 
       />
-      <HKButton
+      <CustomButton
         added_class="default-bg-color btn-rounded" text={"Try again"}
         on_click={() => {
-          // var user = get("session_user");
+          // var user = get("user");
           // if(user) {
           // }
           // else

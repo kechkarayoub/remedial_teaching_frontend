@@ -45,6 +45,7 @@ class Footer extends Component {
   render(){
     var {current_language, general_information} = this.state;
     general_information = general_information || {};
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
         <FooterStyle>
@@ -64,7 +65,7 @@ class Footer extends Component {
           </div>
           <div className="container">
             <div className="contact_mail">
-              <h3 className={current_language === "ar" ? "rtl" : "ltr"}>{ this.props.t("Contact us") }{": "}<a href={`mailto:${general_information.contact_email}`}>{general_information.contact_email}</a></h3>
+              <h3 className={direction_class}>{ this.props.t("Contact us") }{": "}<a href={`mailto:${general_information.contact_email}`}>{general_information.contact_email}</a></h3>
             </div>
           </div>
         </FooterStyle>

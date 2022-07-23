@@ -39,56 +39,56 @@ import defaultRssImg from "../../../assets/img/default_rss_img.png";
 }
 
 const FeedItemStyle = styled.div`
+  background-color: ${colors.white};
   border-radius: 6.3px;
   box-shadow: 1px 1px 18px 1px rgba(0, 0, 0, 0.1);
-  background-color: ${colors.white};
-  padding: 13px 15px;
-  overflow: hidden;
-  margin-bottom: 20px;
   margin: 10px 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 13px 15px;
   width: calc(100% - 10px)!important;
   .feed-img{
     float: left;
-    width: 60%;
-    margin-right: 17px;
     height: 100px;
+    margin-right: 17px;
     overflow: hidden;
+    width: 60%;
     img{
-      width: 100%;
       height: 100%;
+      width: 100%;
     }
   }
   a {
+    color: ${colors.default_color};
     font-family: Montserrat, sans-serif;
     font-size: 11px;
-    font-weight: bold;
-    font-style: normal;
     font-stretch: normal;
-    line-height: normal;
+    font-style: normal;
+    font-weight: bold;
     letter-spacing: .2px;
-    text-transform: uppercase;
+    line-height: normal;
     text-align: center;
-    color: ${colors.default_color};
+    text-transform: uppercase;
     img{
-      width: 15px;
       margin-left: 5px;
+      width: 15px;
     }
   }
   @media screen and (max-width: 1199px){
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
-    padding: 13px 15px;
     margin: 10px 5px;
+    padding: 13px 15px;
     width: calc(100% - 10px)!important;
     .feed-img{
-      width: 57%;
       margin-right: 15px;
+      width: 57%;
     }
   }
   @media screen and (max-width: 767px){
     margin-bottom: 15px;
     .feed-img{
-      width: 56%;
       margin-right: 12px;
+      width: 56%;
     }
     p{
       &.link{

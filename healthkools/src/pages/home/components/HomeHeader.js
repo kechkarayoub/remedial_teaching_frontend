@@ -6,9 +6,10 @@ import LanguageSelect from "../../../components/LanguageSelect/index";
 import { colors } from "../../../assets/variables/colors";
 import { get } from "../../../services/storage";
 import {images} from "../_resources";
-import HKButtonIcon from '../../../components/HKButtonIcon';
+import CustomButtonIcon from '../../../components/CustomButtonIcon';
 import SignInUpModal from './SignInUpModal';
 import moment from "moment"
+import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 class HomeHeader extends Component {
   constructor(props){
@@ -17,12 +18,13 @@ class HomeHeader extends Component {
       current_language: get("current_language"),
       open_sign_in_up: false,
       default_sign_in_up_view: "sign_in",
+      user: props.user,
     };
   }
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
-    if(current_language !== state.current_language){
+    if(current_language !== state.current_language || state.user !== props.user){
       var new_state = {current_language: current_language};
       return new_state;
     }
@@ -31,21 +33,22 @@ class HomeHeader extends Component {
 
   render(){
     const {current_language, open_sign_in_up, default_sign_in_up_view} = this.state;
+    var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
       <>
         <HomeHeaderStyle>
-          <div className={`header-top ${current_language === "ar" ? "rtl" : ""}`}>
+          <div className={`header-top ${direction_class}`}>
             <div className={`left`}>
             </div>
-            <div className={`right ${current_language === "ar" ? "rtl" : ""}`}>
+            <div className={`right ${direction_class}`}>
               <LanguageSelect />
-              <HKButtonIcon image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
+              <CustomButtonIcon added_class={"btn_white"} image={images.sign_in} alt={this.props.t("Sign in icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_in",
                 });
               }} />
-              <HKButtonIcon image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
+              <CustomButtonIcon added_class={"btn_white"} image={images.sign_up} alt={this.props.t("Sign up icon")} on_click={() => {
                 this.setState({
                   open_sign_in_up: true,
                   default_sign_in_up_view: "sign_up",
@@ -53,7 +56,7 @@ class HomeHeader extends Component {
               }} />
             </div>
           </div>
-          <div className={`header-bottom ${current_language === "ar" ? "rtl" : ""}`}>
+          <div className={`header-bottom ${direction_class}`}>
             <div className={`left `}>
               <LogoImage style={{
                   cursor: "pointer",
@@ -73,6 +76,7 @@ class HomeHeader extends Component {
         </HomeHeaderStyle>
         {open_sign_in_up &&
           <SignInUpModal 
+            changeDefaultSignInUpView={view => this.setState({default_sign_in_up_view: view})}
             default_sign_in_up_view={default_sign_in_up_view}
             onHide={() => this.setState({open_sign_in_up: false})}
             show={open_sign_in_up}
@@ -110,12 +114,44 @@ const HomeHeaderStyle = styles.header`
     }
   }
   @media(max-width: 1199px){
-    
+    .header-bottom{
+      padding: 5px 50px;
+      .left{
+      }
+      .right{
+  
+      }
+    }
+    .header-top{
+      padding: 5px 50px;
+      .left{
+      }
+      .right{
+      }
+    }
   }  
 
   @media(max-width: 767px){
     overflow-x: inherit;
+    .header-bottom{
+      padding: 5px 15px;
+      .left{
+      }
+      .right{
+  
+      }
+    }
+    .header-top{
+      padding: 5px 15px;
+      .left{
+      }
+      .right{
+      }
+    }
   }
 `;
-
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+// export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));
 export default withTranslation('translations')(HomeHeader);

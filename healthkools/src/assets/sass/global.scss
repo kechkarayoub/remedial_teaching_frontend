@@ -10,7 +10,7 @@
 .backdrop_custom_z_index_1055{
     z-index: 1055 !important;
 }
-.btnn{
+.btn{
     border: 0;
     cursor: pointer;
     font-size: 14px;
@@ -20,6 +20,9 @@
     min-width: 100px;
     padding: 0 10px;
     width: max-content;
+    &.btn_white{
+        background-color: #efefef !important;
+    }
     &:focus{
         outline: none;
     }
@@ -31,6 +34,48 @@
     border-radius: 20px;
 }
 .custom_modal{
+    .modal-content{
+        padding-top: 45px !important;
+    }
+    .modal-header{
+        align-items: center;
+        color: #1fa1cf;
+        font-size: 20px;
+        font-weight: bold;
+        justify-content: center;
+        padding: 5px 0;
+        position: absolute;
+        margin: auto;
+        margin-top: -52px;
+        left: 0;
+        width: 100%;
+        .close-modal{
+            background-image: linear-gradient(225deg,#67d3f9,#1fa1cf);
+            border-radius: 50%;
+            box-shadow: 0 10px 20px 0 #1fa1cf5c;
+            color: #fff;
+            font-size: 30px;
+            height: 30px;
+            left: 10px;
+            line-height: 30px;
+            min-width: unset;
+            padding: 0;
+            position: absolute;
+            text-align: center;
+            top: 5px;
+            width: 30px;
+            &.rtl{
+              right: 10px;
+              left: unset;
+            }
+            .close_ico{
+                display: block;
+                height: 100%;
+                line-height: 24px;
+                padding-bottom: 6px;
+            }
+        }
+    }
     &.sign_in_up_modal{
         .modal-dialog{
             height: 100%;
@@ -38,13 +83,14 @@
             margin-right: 0;
             margin-top: 0;
             max-width: unset;
-            min-width: 500px;
-            width: 35%;
+            min-width: 550px;
+            width: 40%;
             .modal-content{
                 border: 0;
                 border-radius: 0;
                 height: 100%;
                 padding: 10px 0;
+                padding-top: 40px;
             }
         }
         &.rtl{
@@ -84,6 +130,8 @@
 }
 .custom_scroll_bar{
     overflow-y: auto;
+    scrollbar-color: $default_color #F5F5F5;
+    scrollbar-width: thin;
     &::-webkit-scrollbar-track{
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             background-color: #F5F5F5;

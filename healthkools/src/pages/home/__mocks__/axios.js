@@ -19,6 +19,33 @@ module.exports = {
             return res;
           });
         }
+      },
+      post: (url, data) => {
+        if(url.indexOf("/user/resend_activation_email/") !== -1){
+          var res = {};
+          if(data.username === "resent_success"){
+            res = {
+              success: true, 
+              message: "A new activation email is sent to the address test@example.com.",
+            };
+          }
+          else if(data.username === "resent_failed"){
+            res = {
+              success: false, 
+              message1: "Your email address is already validated!",
+              message2: "You can now log in with your username/email and password.",
+            };
+          }
+          else if(data.username === "no_username"){
+            res = {
+              success: false, 
+              message: "We couldn't find an account with that username: no_username!",
+            };
+          }
+          return Promise.resolve({data: res}).then(res => {
+            return res;
+          });
+        }
       }
     }
   },

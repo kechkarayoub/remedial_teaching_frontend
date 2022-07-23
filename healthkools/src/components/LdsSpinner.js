@@ -26,12 +26,12 @@ export default ({type, msg, added_class, revert}) => {
 }
 
 const SpinnerStyle = styled.div`
-    position: absolute;
-    top: 0px;
-    left: 0px;
     background: #646464;
     opacity: 0.5;
+    left: 0px;
+    position: absolute;
     text-align: left;
+    top: 0px;
     &.revert{
         background: #fff;
         .lds-spinner div:after{
@@ -42,101 +42,99 @@ const SpinnerStyle = styled.div`
         color: #fff;
         font-size: 20px;
         font-weight: bold;
+        left: 50%;
         position: absolute;
         top: 70%;
-        left: 50%;
         transform: translateX(-50%);
     }
     .lds-spinner{
-        top:calc(50% - 32px);
-        left:calc(50% - 32px);
         color: official;
         display: inline-block;
-        position: relative;
-        width: 64px;
         height: 64px;
+        left:calc(50% - 32px);
+        position: relative;
+        top:calc(50% - 32px);
+        width: 64px;
         div{
-            transform-origin: 32px 32px;
             animation: lds-spinner 1.2s linear infinite;
+            transform-origin: 32px 32px;
             &:after{
+                background: #fff;
+                border-radius: 20%;
                 content: " ";
                 display: block;
+                height: 14px;
+                left: 29px;
                 position: absolute;
                 top: 3px;
-                left: 29px;
                 width: 5px;
-                height: 14px;
-                border-radius: 20%;
-                background: #fff;
             }
             &:nth-child(1){
-                transform: rotate(0deg);
                 animation-delay: -1.1s;
+                transform: rotate(0deg);
             }
             &:nth-child(2){
-                transform: rotate(30deg);
                 animation-delay: -1s;
+                transform: rotate(30deg);
             }
             &:nth-child(3){
-                transform: rotate(60deg);
                 animation-delay: -0.9s;
+                transform: rotate(60deg);
             }
             &:nth-child(4){
-                transform: rotate(90deg);
                 animation-delay: -0.8s;
+                transform: rotate(90deg);
             }
             &:nth-child(5){
-                transform: rotate(120deg);
                 animation-delay: -0.7s;
+                transform: rotate(120deg);
             }
             &:nth-child(6){
-                transform: rotate(150deg);
                 animation-delay: -0.6s;
+                transform: rotate(150deg);
             }
             &:nth-child(7){
-                transform: rotate(180deg);
                 animation-delay: -0.5s;
+                transform: rotate(180deg);
             }
             &:nth-child(8){
-                transform: rotate(210deg);
                 animation-delay: -0.4s;
+                transform: rotate(210deg);
             }
             &:nth-child(9){
-                transform: rotate(240deg);
                 animation-delay: -0.3s;
+                transform: rotate(240deg);
             }
             &:nth-child(10){
-                transform: rotate(270deg);
                 animation-delay: -0.2s;
+                transform: rotate(270deg);
             }
             &:nth-child(11){
-                transform: rotate(300deg);
                 animation-delay: -0.1s;
+                transform: rotate(300deg);
             }
             &:nth-child(12){
-                transform: rotate(330deg);
                 animation-delay: -0s;
+                transform: rotate(330deg);
             }
-
         }
     }
-
     &.relative{
-        position: relative;
         background: #fff;
+        position: relative;
         .lds-spinner{
-            top:calc(50% - 16px)!important;
-            left:calc(50% - 16px)!important;
-            width: 32px!important;
             height: 32px!important;
+            left:calc(50% - 16px)!important;
+            top:calc(50% - 16px)!important;
+            width: 32px!important;
             div{
                 transform-origin: 16px 16px!important;
                 &:after{
-                    top: 2px!important;
-                    left: 15px!important;
-                    width: 3px!important;
-                    height: 7px!important;
-                    background: #8f3a3a!important;
+                    background: #8f3a3a !important;
+                    height: 7px !important;
+                    left: 15px !important;
+                    top: 2px !important;
+                    width: 3px !important;
                 }
             }
         }

@@ -1,5 +1,6 @@
 {
   "Address": "Address",
+  "Already have an account? Log in here.": "Already have an account? Log in here.",
   "Ar": "Ar",
   "Arabic": "Arabic",
   "Close": "Close",
@@ -48,5 +49,7 @@
   "United States flag": "United States flag",
   "Username": "Username",
   "Username or email": "Username or email",
-  "Weak": "Weak"
+  "Weak": "Weak",
+  "You don't have an account yet? Register here.": "You don't have an account yet? Register here.",
+  "Your account is created": "Your account is created"
 }
