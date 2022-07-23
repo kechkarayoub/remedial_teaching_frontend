@@ -106,7 +106,7 @@ class SignInUpModal extends Component {
         }
         this.typingTimerEmail = setTimeout(() => {
           if(!EmailValidator.validate(val)){
-            state.invalid_messages.email = this.props.t("This email is invalid.");
+            state.invalid_messages.email = this.props.t("This email is invalid");
             this.setState(state);
           }
           else{
@@ -146,7 +146,7 @@ class SignInUpModal extends Component {
         }
         this.typingTimerUsername = setTimeout(() => {
           if(!usernameRegex.test(val)){
-            state.invalid_messages.username = this.props.t("This username is invalid.");
+            state.invalid_messages.username = this.props.t("This username is invalid");
             this.setState(state);
           }
           else{
@@ -235,7 +235,7 @@ class SignInUpModal extends Component {
       phone_number: phone_number,
     };
     if(!email){
-      error_messages.email = this.props.t("This field is required.");
+      error_messages.email = this.props.t("This field is required");
       valid_form = false;
     }
     else if(invalid_messages.email){
@@ -245,21 +245,21 @@ class SignInUpModal extends Component {
       data.email = email;
     }
     if(!first_name){
-      error_messages.first_name = this.props.t("This field is required.");
+      error_messages.first_name = this.props.t("This field is required");
       valid_form = false;
     }
     else{
       data.first_name = first_name;
     }
     if(!last_name){
-      error_messages.last_name = this.props.t("This field is required.");
+      error_messages.last_name = this.props.t("This field is required");
       valid_form = false;
     }
     else{
       data.last_name = last_name;
     }
     if(!password){
-      error_messages.password = this.props.t("This field is required.");
+      error_messages.password = this.props.t("This field is required");
       valid_form = false;
     }
     else if(invalid_messages.password){
@@ -273,7 +273,7 @@ class SignInUpModal extends Component {
       data.password = password;
     }
     if(!username){
-      error_messages.username = this.props.t("This field is required.");
+      error_messages.username = this.props.t("This field is required");
       valid_form = false;
     }
     else if(invalid_messages.username){
