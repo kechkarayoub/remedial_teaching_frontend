@@ -23,7 +23,7 @@ describe('CustomDate component', () => {
     test('Should date change', async () => {
         render(<CustomDate label={"Label test"} placeholder={"Placeholder test"}  value={new Date()}/>);
         const input = screen.getByPlaceholderText('Placeholder test');
-        expect(input.value).toBe('25/03/2022');
+        expect(input.value).toBe(moment().format("DD/MM/YYYY"));
     });
     test('Should contains props values', async () => {
         render(<CustomDate label={"Label test"} placeholder={"Placeholder test"}  value={moment().toDate()}/>);
