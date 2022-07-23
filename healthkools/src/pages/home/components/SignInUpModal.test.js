@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import SignInUpModal from "./SignInUpModal";
 import { withRouter, Redirect } from "react-router-dom";
 import axios from 'axios';
@@ -60,6 +60,16 @@ describe('SignInUpModal component', () => {
       const { container } = render(<SignInUpModal i18n={i18next} show={true}/>);
       expect(screen.getAllByTestId('body').length).toBe(1);
       // console.log(screen.getAllByTestId('body')[0].innerHTML)
+    });
+  });
+
+  test('Should close button calls onHide', async () => {
+    const closeFn = jest.fn();
+    await act(async () => {
+      const { container } = render(<SignInUpModal i18n={i18next} show={true} onHide={closeFn}/>);
+      var close_btn_sium = screen.getByTestId('close_btn_sium');
+      fireEvent.click(close_btn_sium, {target: {}});
+      expect(closeFn).toHaveBeenCalledTimes(1);
     });
   });
 });

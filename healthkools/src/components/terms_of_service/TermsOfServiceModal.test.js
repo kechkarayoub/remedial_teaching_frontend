@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import TermsOfServiceModal from "./TermsOfServiceModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
@@ -24,6 +24,17 @@ describe('TermsOfServiceModal component', () => {
   test('Should render without crash', async () => {
     render(<TermsOfServiceModal show={true} />);
   });
+
+  test('Should close button calls onHide', async () => {
+    const closeFn = jest.fn();
+    await act(async () => {
+      const { container } = render(<TermsOfServiceModal show={true} onHide={closeFn}/>);
+      var close_btn_tsm = screen.getByTestId('close_btn_tsm');
+      fireEvent.click(close_btn_tsm, {target: {}});
+      expect(closeFn).toHaveBeenCalledTimes(1);
+    });
+  });
+
   test('Should contains terms of service data', async () => {
     let wrapper = mount(<TermsOfServiceModal show={true}/>);
     var current_language = get("current_language");

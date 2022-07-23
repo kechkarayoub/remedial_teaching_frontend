@@ -80,4 +80,14 @@ describe('SignInUpConfirmationModal component', () => {
       });
     });
   });
+
+  test('Should close button calls onHide', async () => {
+    const closeFn = jest.fn();
+    await act(async () => {
+      const { container } = render(<SignInUpConfirmationModal i18n={i18next} show={true} registration_messages={registration_messages} onHide={closeFn}/>);
+      var close_btn_siucm = screen.getByTestId('close_btn_siucm');
+      fireEvent.click(close_btn_siucm, {target: {}});
+      expect(closeFn).toHaveBeenCalledTimes(1);
+    });
+  });
 });

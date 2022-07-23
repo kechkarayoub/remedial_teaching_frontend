@@ -64,7 +64,7 @@ class TermsOfServiceModal extends Component {
           <Modal.Header>
             <span className="visibility_hidden"></span>
             { this.props.t('Terms of service') }
-            <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
+            <Button variant="circle" data-testid="close_btn_tsm" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>

@@ -66,7 +66,7 @@ class DataUsePolicyModal extends Component {
           <Modal.Header>
             <span className="visibility_hidden"></span>
             { this.props.t('Data use policy') }
-            <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
+            <Button variant="circle" data-testid="close_btn_dupm" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                 <span className="close_ico">×</span>
             </Button>
           </Modal.Header>

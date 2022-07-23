@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import DataUsePolicyModal from "./DataUsePolicyModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
@@ -23,6 +23,16 @@ jest.mock('axios');
 describe('DataUsePolicyModal component', () => {
   test('Should render without crash', async () => {
     render(<DataUsePolicyModal show={true} />);
+  });
+
+  test('Should close button calls onHide', async () => {
+    const closeFn = jest.fn();
+    await act(async () => {
+      const { container } = render(<DataUsePolicyModal show={true} onHide={closeFn}/>);
+      var close_btn_dupm = screen.getByTestId('close_btn_dupm');
+      fireEvent.click(close_btn_dupm, {target: {}});
+      expect(closeFn).toHaveBeenCalledTimes(1);
+    });
   });
   test('Should contains data use policy data', async () => {
     let wrapper = mount(<DataUsePolicyModal show={true}/>);

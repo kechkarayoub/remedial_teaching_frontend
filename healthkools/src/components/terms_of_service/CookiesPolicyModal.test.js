@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import CookiesPolicyModal from "./CookiesPolicyModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
@@ -23,6 +23,16 @@ jest.mock('axios');
 describe('CookiesPolicyModal component', () => {
   test('Should render without crash', async () => {
     render(<CookiesPolicyModal show={true} />);
+  });
+
+  test('Should close button calls onHide', async () => {
+    const closeFn = jest.fn();
+    await act(async () => {
+      const { container } = render(<CookiesPolicyModal show={true} onHide={closeFn}/>);
+      var close_btn_cpm = screen.getByTestId('close_btn_cpm');
+      fireEvent.click(close_btn_cpm, {target: {}});
+      expect(closeFn).toHaveBeenCalledTimes(1);
+    });
   });
   test('Should contains cookies policy data', async () => {
     let wrapper = mount(<CookiesPolicyModal show={true}/>);

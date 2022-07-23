@@ -385,7 +385,7 @@ class SignInUpModal extends Component {
             <Modal.Header>
               <span className="visibility_hidden"></span>
               { this.props.t(default_view === "sign_in" ? 'Sign in' : 'Sign up') }
-              <Button variant="circle" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
+              <Button variant="circle" data-testid="close_btn_sium" className={`close-modal ${direction_class}`} onClick={() => this.props.onHide()}>
                   <span className="close_ico">×</span>
               </Button>
             </Modal.Header>
