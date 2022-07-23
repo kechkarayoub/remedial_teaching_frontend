@@ -7,6 +7,7 @@ import { withTranslation } from 'react-i18next';
 import { get, set } from "../../services/storage";
 import { changeLocale } from "../../utils/date_picker";
 
+// List of languages
 export const languages = [
    { name: "Arabic", short_name: "Ar", value: "ar", flag: flags.flagAr16, alt:"Morocco flag" },
    { name: "English", short_name: "En", value: "en", flag: flags.flagEn16, alt:"United States flag" },

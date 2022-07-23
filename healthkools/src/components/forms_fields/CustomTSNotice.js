@@ -36,6 +36,7 @@ import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
   }
 
   handleTermsOfServiceNoticeClicked = (evt) => {
+    // Triggred when Terms of service, Data Use Policy or Cookie Policy links was clicked 
     evt.stopPropagation();
     let el = evt.target;
     if(el && el.classList.contains("term_of_service_span")){
