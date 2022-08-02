@@ -20,7 +20,6 @@ module.exports = {
           });
         }
         else if(url.indexOf("/user/check_if_email_or_username_exists") !== -1){
-          console.log(data)
           return Promise.resolve({
             data: {
               user_exists: data.email_or_username == "exists",
