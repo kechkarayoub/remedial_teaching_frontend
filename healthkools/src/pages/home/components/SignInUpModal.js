@@ -145,7 +145,6 @@ class SignInUpModal extends Component {
               current_language: this.state.current_language,
             };
             check_if_email_or_username_exists_api_get(data).then(res => {
-              console.log(res)
               if(res.user_exists){
                 state.invalid_messages.email = res.message;
                 state.valid_messages.email = undefined;
