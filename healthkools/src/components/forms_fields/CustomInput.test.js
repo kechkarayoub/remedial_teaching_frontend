@@ -13,7 +13,7 @@ describe('CustomInput component', () => {
     test('Should contains props values', async () => {
         render(<CustomInput label={"Label test"} placeholder={"Placeholder test"}  value={"Value test"}/>);
         const label = screen.getByTestId('label');
-        const input = screen.getByTestId('input');
+        const input = screen.getByTestId('custom_input');
         expect(label.textContent).toBe('Label test');
         expect(input.value).toBe('Value test');
         expect(input.placeholder).toBe('Placeholder test');
@@ -22,7 +22,7 @@ describe('CustomInput component', () => {
     });
     test('Should contains props values (disabled)', async () => {
         render(<CustomInput placeholder={"Placeholder test"}  value={""} disabled={true}/>);
-        const input = screen.getByTestId('input');
+        const input = screen.getByTestId('custom_input');
         expect(input.disabled).toBe(true);
     });
     test('Should contains props values (invalid_message)', async () => {
@@ -39,5 +39,10 @@ describe('CustomInput component', () => {
         render(<CustomInput value={""}  valid_message={"Valid message"} />);
         var valid_message = screen.getByText('Valid message');
         expect(valid_message.textContent).toBe("Valid message");
+    });
+    test('Should contains test id', async () => {
+        render(<CustomInput value={"xxx"}  valid_message={"Valid message"} test_id="test_id"/>);
+        const input = screen.getByTestId("test_id");
+        expect(input.value).toBe('xxx');
     });
 });

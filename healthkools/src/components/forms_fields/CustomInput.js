@@ -34,11 +34,12 @@ import FieldValid from "./FieldValid";
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
+    var test_id = this.props.test_id || "custom_input";
     return (
       <CustomInputStyle className={`field_input input_text ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
-            <input data-testid="input" disabled={disabled} defaultValue={value} placeholder={placeholder} onChange={evt => {
+            <input data-testid={test_id} disabled={disabled} defaultValue={value} placeholder={placeholder} onChange={evt => {
                 if(this.props.on_change){
                     this.props.on_change(evt.target.value);
                 }
