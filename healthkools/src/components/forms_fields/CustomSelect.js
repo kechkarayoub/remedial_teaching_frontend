@@ -18,6 +18,7 @@ import Select from 'react-select';
       label: props.label,
       random: props.random,
       placeholder: props.placeholder,
+      test_id: props.test_id || ("custom_select_" + parseInt(Math.random() * 100)),
       valid_message: props.valid_message,
       value: props.value,
     };
@@ -69,12 +70,12 @@ import Select from 'react-select';
   };
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, valid_message, placeholder, countries_options, value, current_language} = this.state;
+    const {added_class, disabled, error_message, invalid_message, label, valid_message, placeholder, countries_options, value, current_language, test_id} = this.state;
     var selected_country_option = value ? countries_options.filter(c_o => c_o.value === value)[0] : null;
 
     return (
       <CustomSelectStyle className={`field_input input_select ${added_class || ""}`}>
-        <div className="field">
+        <div className="field" data-testid={test_id}>
             <label data-testid="label">{label}</label>
             <Select
               key={value || "default"}

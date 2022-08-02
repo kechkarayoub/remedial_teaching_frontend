@@ -20,13 +20,13 @@ jest.mock('react-i18next', () => ({
 jest.mock('axios');
 export const geo_info_data =  {
   IPv4: "xx.x.xx.x",
-  city: "TEST_CITY",
-  country_code: "TEST_CODE",
-  country_name: "TEST_COUNTRY",
-  latitude: 0,
-  longitude: -0,
+  city: "Casablanca",
+  country_code: "MA",
+  country_name: "Morocco",
+  latitude: 33.5928,
+  longitude: -7.6192,
   postal: null,
-  state: "TEST_STATE",
+  state: "Casablanca-Settat",
 };
 describe('SignInUpModal component', () => {
   beforeAll(() => {
@@ -43,25 +43,6 @@ describe('SignInUpModal component', () => {
   test('Should render without crash', async () => {
     render(<SignInUpModal i18n={i18next} show={true} />);
   });
-  // test('Should render without crash', () => {  
-  //   mount(<SignInUpModal i18n={i18next} show={true}/>);  
-  //  });
-  test('Should contains geo info data', async () => {
-    // let wrapper = mount(<SignInUpModal i18n={i18next} show={true}/>);
-    // wrapper.instance().componentDidMount();
-    // expect(wrapper.find('.modal-body').length).toEqual(1);
-    // expect(wrapper.find('.field_input').hostNodes().length).toEqual(1);
-
-    // expect(wrapper.find('.field_input').children()).toHaveLength(4); 
-    // console.log(wrapper.find('.field_input').first().html())
-    // console.log(wrapper.find('.field_input').last().html())
-    // console.log(wrapper.last().html())
-    await act(async () => {
-      const { container } = render(<SignInUpModal i18n={i18next} show={true}/>);
-      expect(screen.getAllByTestId('body').length).toBe(1);
-      // console.log(screen.getAllByTestId('body')[0].innerHTML)
-    });
-  });
 
   test('Should close button calls onHide', async () => {
     const closeFn = jest.fn();
@@ -70,6 +51,18 @@ describe('SignInUpModal component', () => {
       var close_btn_sium = screen.getByTestId('close_btn_sium');
       fireEvent.click(close_btn_sium, {target: {}});
       expect(closeFn).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  test('Should contains geo info data', async () => {
+    await act(async () => {
+      const wrapper = mount(<SignInUpModal i18n={i18next} show={true} default_sign_in_up_view="sign_up" />);
+    });
+
+    await act(async () => {
+      var country_custom_select = screen.getByTestId('country_custom_select');
+      const input = country_custom_select.querySelector("input[name='country']");
+      expect(input.value).toBe('MA');
     });
   });
 });

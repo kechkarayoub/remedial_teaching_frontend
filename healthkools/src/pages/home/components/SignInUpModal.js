@@ -37,7 +37,7 @@ class SignInUpModal extends Component {
       country_code: "",
       country_name: "",
       current_language: get("current_language"),
-      default_view: props.default_sign_in_up_view,
+      default_view: props.default_sign_in_up_view || "sign_in",
       email: "",
       error_messages: {},
       first_name: "",
@@ -413,7 +413,7 @@ class SignInUpModal extends Component {
                     error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
                   <CustomSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
                     placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
-                    invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} 
+                    invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} test_id="country_custom_select"
                     error_message={error_messages.country_code} on_change={(val, val2) => this.handleFieldChange(val, "country_code", val2)}/>
                   <CustomPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Phone number")} placeholder={this.props.t("Phone number")} 
                     value={phone_number} invalid_message={invalid_messages.phone_number} valid_message={valid_messages.phone_number} is_valid_phone_number={is_valid_phone_number}
