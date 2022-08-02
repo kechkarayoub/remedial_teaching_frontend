@@ -11,4 +11,9 @@ describe('CustomButton component', () => {
         const button = screen.getByRole('button');
         expect(button.textContent).toBe("Button");
     });
+    test('Should contains test id', async () => {
+        render(<CustomButton text={"Button"} i18n={i18next} test_id="test_id"/>);
+        const button = screen.getByTestId("test_id");
+        expect(button.textContent).toBe("Button");
+    });
 });

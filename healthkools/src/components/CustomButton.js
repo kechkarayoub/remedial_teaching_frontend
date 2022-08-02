@@ -8,8 +8,9 @@ class CustomButton extends Component {
     //     super(props);
     // }
     render(){
+        var test_id = this.props.test_id || ("custom_buttopn_" + parseInt(Math.random() * 100));
         return(
-            <CustomButtonStyle 
+            <CustomButtonStyle data-testid={test_id}
                 className={`btn ${this.props.added_class || ""}`} type='button' onClick={this.props.on_click}
                 style={this.props.style || {}}
             >
