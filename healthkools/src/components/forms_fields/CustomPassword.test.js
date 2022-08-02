@@ -13,7 +13,7 @@ describe('CustomPassword component', () => {
     test('Should contains props values', async () => {
         render(<CustomPassword label={"Label test"} placeholder={"Placeholder test"}  value={"Value test"}/>);
         const label = screen.getByTestId('label');
-        const input = screen.getByTestId('input');
+        const input = screen.getByTestId('custom_password');
         const toggle_show_password = screen.getByTestId('toggle_show_password');
         expect(label.textContent).toBe('Label test');
         expect(input.type).toBe('password');
@@ -28,7 +28,7 @@ describe('CustomPassword component', () => {
     });
     test('Should contains props values (disabled)', async () => {
         render(<CustomPassword placeholder={"Placeholder test"}  value={""} disabled={true}/>);
-        const input = screen.getByTestId('input');
+        const input = screen.getByTestId('custom_password');
         expect(input.disabled).toBe(true);
     });
     test('Should contains props values (invalid_message)', async () => {
@@ -45,5 +45,10 @@ describe('CustomPassword component', () => {
         render(<CustomPassword value={""}  valid_message={"Valid message"} />);
         var valid_message = screen.getByText('Valid message');
         expect(valid_message.textContent).toBe("Valid message");
+    });
+    test('Should contains test id', async () => {
+        render(<CustomPassword value={"xxx"}  valid_message={"Valid message"} test_id="test_id"/>);
+        const input = screen.getByTestId("test_id");
+        expect(input.value).toBe('xxx');
     });
 });

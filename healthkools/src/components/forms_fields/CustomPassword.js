@@ -37,12 +37,13 @@ class CustomPassword extends Component {
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, show_password, show_trength_bar, valid_message, value} = this.state;
+    var test_id = this.props.test_id || "custom_password";
     return (
       <CustomPasswordStyle className={`field_input input_password ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
             <div className="input_div">
-              <input data-testid="input" disabled={disabled} defaultValue={value} placeholder={placeholder} onChange={evt => {
+              <input data-testid={test_id} disabled={disabled} defaultValue={value} placeholder={placeholder} onChange={evt => {
                   if(this.props.on_change){
                       this.props.on_change(evt.target.value);
                   }
