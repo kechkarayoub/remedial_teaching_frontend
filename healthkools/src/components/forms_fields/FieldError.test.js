@@ -15,4 +15,9 @@ describe('FieldError component', () => {
         const field_error = container.getElementsByClassName('field_error')[0];
         expect(field_error.textContent).toBe('error_message');
     });
+    test('Should contains test id', async () => {
+        render(<FieldError error_message="error_message" test_id="test_id"/>);
+        const field_error = screen.getByTestId("test_id");
+        expect(field_error.textContent).toBe('error_message');
+    });
 });

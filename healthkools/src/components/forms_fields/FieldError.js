@@ -19,8 +19,9 @@ import styled from "styled-components";
 
   render() {
     const {error_message} = this.state;
+    var test_id = this.props.test_id || "field_error_test_id";
     return (
-      <FieldErrorStyle className={`field_error`}>
+      <FieldErrorStyle className={`field_error`} data-testid={test_id}>
         {error_message}
       </FieldErrorStyle>
     );
