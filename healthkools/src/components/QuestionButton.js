@@ -5,10 +5,11 @@ import { withTranslation } from 'react-i18next';
 
 class QuestionButton extends Component {
     render(){
+        var test_id = this.props.test_id || "question_button";
         return(
             <QuestionButtonStyle 
                 className={`${this.props.added_class || ""}`} onClick={this.props.on_click}
-                style={this.props.style || {}}
+                style={this.props.style || {}} data-testid={test_id}
             >
                 {this.props.t(this.props.text)}
             </QuestionButtonStyle>
