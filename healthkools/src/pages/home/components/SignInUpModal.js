@@ -145,6 +145,7 @@ class SignInUpModal extends Component {
               current_language: this.state.current_language,
             };
             check_if_email_or_username_exists_api_get(data).then(res => {
+              console.log(res)
               if(res.user_exists){
                 state.invalid_messages.email = res.message;
                 state.valid_messages.email = undefined;
@@ -368,8 +369,8 @@ class SignInUpModal extends Component {
 
   render() {
     var pat = /^http?:\/\//i;
-    const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name, gender,
-      invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
+    const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name,
+      gender, invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
       phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     var direction_class = current_language === "ar" ? "rtl" : "ltr";
@@ -393,22 +394,22 @@ class SignInUpModal extends Component {
               <Row>
                 {is_sign_up ?
                 <>
-                  <CustomInput added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
+                  <CustomInput test_id="first_name_test_id" added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
                     value={first_name} invalid_message={invalid_messages.first_name} valid_message={valid_messages.first_name}
                     error_message={error_messages.first_name} on_change={(val) => this.handleFieldChange(val, "first_name")}/>
-                  <CustomInput added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
+                  <CustomInput test_id="last_name_test_id" added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
                     value={last_name} invalid_message={invalid_messages.last_name} valid_message={valid_messages.last_name}
                     error_message={error_messages.last_name} on_change={(val) => this.handleFieldChange(val, "last_name")}/>
-                  <CustomInput added_class="col-12 col-md-6" label={this.props.t("Email")} placeholder={this.props.t("Email")} 
+                  <CustomInput test_id="email_test_id" added_class="col-12 col-md-6" label={this.props.t("Email")} placeholder={this.props.t("Email")} 
                     value={email} invalid_message={invalid_messages.email} valid_message={valid_messages.email}
                     error_message={error_messages.email} on_change={(val) => this.handleFieldChange(val, "email")}/>
-                  <CustomInput added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
+                  <CustomInput test_id="username_test_id" added_class="col-12 col-md-6" label={this.props.t("Username")} placeholder={this.props.t("Username")} 
                     value={username} invalid_message={invalid_messages.username} valid_message={valid_messages.username}
                     error_message={error_messages.username} on_change={(val) => this.handleFieldChange(val, "username")}/>
-                  <CustomPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
+                  <CustomPassword test_id="password_test_id" added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
                     value={password} invalid_message={invalid_messages.password} valid_message={valid_messages.password} show_trength_bar={true}
                     error_message={error_messages.password} on_change={(val) => this.handleFieldChange(val, "password")}/>
-                  <CustomPassword added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")}  show_trength_bar={true}
+                  <CustomPassword test_id="password_confirmation_test_id" added_class="col-12 col-md-6" label={this.props.t("Confirm password")} placeholder={this.props.t("Confirm password")}  show_trength_bar={true}
                     value={password_confirmation} invalid_message={invalid_messages.password_confirmation} valid_message={valid_messages.password_confirmation}
                     error_message={error_messages.password_confirmation} on_change={(val) => this.handleFieldChange(val, "password_confirmation")}/>
                   <CustomSelect added_class="col-12 col-md-6" label={this.props.t("Country")} countries_options={this.countries_options}
@@ -434,10 +435,10 @@ class SignInUpModal extends Component {
                 </>
                 :
                 <>
-                <CustomInput added_class="col-12 col-md-6" label={this.props.t("Username or email")} placeholder={this.props.t("Username or email")} 
+                <CustomInput test_id="email_or_username_test_id" added_class="col-12 col-md-6" label={this.props.t("Username or email")} placeholder={this.props.t("Username or email")} 
                   value={email_or_username} invalid_message={invalid_messages.email_or_username} valid_message={valid_messages.email_or_username}
                   error_message={error_messages.email_or_username} on_change={(val) => this.handleFieldChange(val, "email_or_username")}/>
-                <CustomPassword added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
+                <CustomPassword test_id="password_test_id" added_class="col-12 col-md-6" label={this.props.t("Password")} placeholder={this.props.t("Password")} 
                   value={password_sign_in} invalid_message={invalid_messages.password_sign_in} valid_message={valid_messages.password_sign_in} show_trength_bar={false}
                   error_message={error_messages.password_sign_in} on_change={(val) => this.handleFieldChange(val, "password_sign_in")}/>
                 </>
@@ -447,7 +448,7 @@ class SignInUpModal extends Component {
             <Modal.Footer>
               {is_sign_up ?
                 <>
-                  <CustomButton
+                  <CustomButton test_id={"sign_up_btn_test_id"}
                     added_class="default-bg-color btn-rounded" text={registration_label}
                     on_click={() => {
                       this.handleRegistration();
@@ -455,6 +456,7 @@ class SignInUpModal extends Component {
                     style={{color: "white", }}
                   />
                   <QuestionButton text={this.props.t("Already have an account? Log in here.")}
+                    test_id={"sign_in_question_btn_test_id"}
                     on_click={evt => {
                       this.props.changeDefaultSignInUpView("sign_in");
                     }}
@@ -462,7 +464,7 @@ class SignInUpModal extends Component {
                 </>
                 :
                 <>
-                  <CustomButton
+                  <CustomButton  test_id={"sign_in_btn_test_id"}
                     added_class="default-bg-color btn-rounded" text={this.props.t("Sign in")}
                     on_click={() => {
                       this.handleConnexion();
@@ -470,6 +472,7 @@ class SignInUpModal extends Component {
                     style={{color: "white", }}
                   />
                   <QuestionButton text={this.props.t("You don't have an account yet? Register here.")}
+                    test_id={"sign_up_question_btn_test_id"}
                     on_click={evt => {
                       this.props.changeDefaultSignInUpView("sign_up");
                     }}

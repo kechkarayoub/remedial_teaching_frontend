@@ -4,7 +4,7 @@ import {geo_info_data} from "../components/SignInUpModal.test";
 module.exports = {
   create: (url) => {
     return {
-      get: (url) => {
+      get: (url, data) => {
         if(url.indexOf("general_information_api") !== -1){
           return Promise.resolve({data: {general_information: general_information_response}}).then(res => {
             return res;
@@ -14,6 +14,17 @@ module.exports = {
           return Promise.resolve({
             data: {
               feeds_languages: {en: feeds_items_data.items}
+            }
+          }).then(res => {
+            return res;
+          });
+        }
+        else if(url.indexOf("/user/check_if_email_or_username_exists") !== -1){
+          console.log(data)
+          return Promise.resolve({
+            data: {
+              user_exists: data.email_or_username == "exists",
+              message: "message",
             }
           }).then(res => {
             return res;
