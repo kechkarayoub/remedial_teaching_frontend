@@ -1114,14 +1114,6 @@ export const countries = [
         },
     },
     {
-        country_code: "AN",
-        translations: {
-            ar: "جزر الأنتيل الهولندية",
-            en: "Netherlands Antilles",
-            fr: "Antilles néerlandaises",
-        },
-    },
-    {
         country_code: "NC",
         translations: {
             ar: "كاليدونيا الجديدة",
