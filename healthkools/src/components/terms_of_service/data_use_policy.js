@@ -357,7 +357,7 @@ export const get_intro_items = (data) => {
                     {
                         ar: `نحتفظ بالبيانات إلى أن تصبح غير ضرورية لتقديم خدماتنا، أو إلى أن يتم حذف حسابك.`,
                         en: `We store data until it is no longer necessary to provide our services or until your account is deleted.`,
-                        fr: `Nous conservons les données jusqu’à ce qu’il ne soit plus nécessaire de fournir nos services, ou jusqu’à ce que votre compte soit supprimé.`,
+                        fr: `Nous conservons les données jusqu'à ce qu'il ne soit plus nécessaire de fournir nos services, ou jusqu'à ce que votre compte soit supprimé.`,
                     },
                 ]
             },

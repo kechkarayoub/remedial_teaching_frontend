@@ -11,7 +11,7 @@ export const get_articles = (data) => {
                 {
                     ar: `الغرض من "شروط الاستخدام العامة" هذه هو توفير إطار قانوني لاستخدام موقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> وخدماته.`,
                     en: `The purpose of these "general conditions of use" is to provide a legal framework for the use of the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> and its services.`,
-                    fr: `Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique de l’utilisation du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> et de ses services.`,
+                    fr: `Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique de l'utilisation du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> et de ses services.`,
                 },
                 {
                     ar: `يُبرم هذا العقد بين:`,
@@ -21,12 +21,12 @@ export const get_articles = (data) => {
                 {
                     ar: `مدير الموقع ، المشار إليه فيما يلي باسم "الناشر" ،`,
                     en: `The manager of the website, hereinafter referred to as "the Publisher",`,
-                    fr: `Le gérant du site internet, ci-après désigné « l’Éditeur »,`,
+                    fr: `Le gérant du site internet, ci-après désigné « l'Éditeur »,`,
                 },
                 {
                     ar: `أي شخص طبيعي أو اعتباري يرغب في الوصول إلى الموقع وخدماته ، المشار إليه فيما بعد باسم "المستخدم".`,
                     en: `Any natural or legal person wishing to access the site and its services, hereinafter referred to as "the User".`,
-                    fr: `Toute personne physique ou morale souhaitant accéder au site et à ses services, ci-après appelé « l’Utilisateur ».`,
+                    fr: `Toute personne physique ou morale souhaitant accéder au site et à ses services, ci-après appelé « l'Utilisateur ».`,
                 },
                 {
                     ar: `يجب قبول الشروط العامة للاستخدام من قبل أي مستخدم ، ويشكل الوصول إلى الموقع قبولًا لهذه الشروط.`,
@@ -106,12 +106,12 @@ export const get_articles = (data) => {
                 {
                     ar: `يمكن لأي مستخدم لديه اتصال بالإنترنت الوصول إلى الموقع مجانًا ومن أي مكان. التكاليف التي يتكبدها المستخدم للوصول إليه (اتصال الإنترنت ، أجهزة الكمبيوتر ، إلخ) ليست من مسؤولية الناشر.`,
                     en: `Any User with internet access can access the site for free and from anywhere. The costs incurred by the User to access it (internet connection, computer equipment, etc.) are not the responsibility of the Publisher.`,
-                    fr: `Tout Utilisateur ayant accès a internet peut accéder gratuitement et depuis n'importe où au site. Les frais supportés par l'Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l’Éditeur.`,
+                    fr: `Tout Utilisateur ayant accès a internet peut accéder gratuitement et depuis n'importe où au site. Les frais supportés par l'Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l'Éditeur.`,
                 },
                 {
                     ar: `لا يمكن للمستخدم الوصول إلى الخدمات التالية ما لم يكن عضوًا في الموقع (أي يتم تحديد هويته باستخدام تفاصيل تسجيل الدخول الخاصة به):`,
                     en: `The following services are not accessible to the User unless he is a member of the site (i.e. he is identified using his login details):`,
-                    fr: `Les services suivants ne sont pas accessible pour l'Utilisateur que s’il est membre du site (c’est-à-dire qu’ile st identifié à l’aide de ses identifiants de connexion) :`,
+                    fr: `Les services suivants ne sont pas accessible pour l'Utilisateur que s'il est membre du site (c'est-à-dire qu'il est identifié à l'aide de ses identifiants de connexion) :`,
                     list_items: [
                         {
                             ar: "تسجيل الدخول إلى حسابه الخاص",
@@ -186,7 +186,7 @@ export const get_articles = (data) => {
                 {
                     ar: `يتعهد الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بتنفيذ جميع الوسائل اللازمة لضمان أمن وسرية البيانات. ومع ذلك ، فإنه لا يوفر ضمانًا للأمان الكامل.`,
                     en: `The site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> undertakes to implement all necessary means to guarantee the security and confidentiality of data. However, it does not provide a guarantee of total security.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> s'engage à mettre en œuvre tous les moyens nécessaires pour garantir la sécurité et la confidentialité des données. Toutefois, il n’apporte pas une garantie de sécurité totale.`,
+                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> s'engage à mettre en œuvre tous les moyens nécessaires pour garantir la sécurité et la confidentialité des données. Toutefois, il n'apporte pas une garantie de sécurité totale.`,
                 },
                 {
                     ar: `يحتفظ الناشر بالحق في عدم ضمان موثوقية المصادر ، على الرغم من أن المعلومات المنشورة على الموقع تعتبر موثوقة.`,
@@ -210,7 +210,7 @@ export const get_articles = (data) => {
                 {
                     ar: `يجب على المستخدم الحصول على إذن من ناشر الموقع قبل أي إعادة إنتاج أو نسخ أو نشر لهذه المحتويات المختلفة.`,
                     en: `The User must obtain the authorization of the site editor before any reproduction, copy or publication of these various contents.`,
-                    fr: `L'Utilisateur devra obtenir l’autorisation de l'éditeur du site avant toute reproduction, copie ou publication de ces différents contenus.`,
+                    fr: `L'Utilisateur devra obtenir l'autorisation de l'éditeur du site avant toute reproduction, copie ou publication de ces différents contenus.`,
                 },
                 {
                     ar: `يمكن استخدامها من قبل المستخدمين لأغراض خاصة ؛ يحظر جميع الاستخدامات التجارية.`,
@@ -244,12 +244,12 @@ export const get_articles = (data) => {
                 {
                     ar: `قد يتم استخدام العنوان الإلكتروني للمستخدم على وجه الخصوص بواسطة الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> لتوصيل المعلومات المختلفة وإدارة الحساب.`,
                     en: `The User's electronic address (e-mail) may in particular be used by the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> for the communication of various information and the management of the account.`,
-                    fr: `L'adresse électronique (e-mail) de l'Utilisateur pourra notamment être utilisée par le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> pour la communication d’informations diverses et la gestion du compte.`,
+                    fr: `L'adresse électronique (e-mail) de l'Utilisateur pourra notamment être utilisée par le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> pour la communication d'informations diverses et la gestion du compte.`,
                 },
                 {
                     ar: `يضمن <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> احترام خصوصية المستخدم ، وفقًا للقانون رقم 09-08 بشأن حماية الأفراد فيما يتعلق بمعالجة البيانات الشخصية.`,
                     en: `<a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> guarantees respect for the User's privacy, in accordance with Law No. 09-08 on the protection of individuals with regard to the processing of personal data.`,
-                    fr: `<a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> garantie le respect de la vie privée de l'Utilisateur, conformément à la loi n°09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel.`,
+                    fr: `<a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> garantie le respect de la vie privée de l'Utilisateur, conformément à la loi n°09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel.`,
                 },
                 {
                     ar: `يتم الإعلان عن الموقع إلى اللجنة الوطنية لحماية البيانات الشخصية (CNDP) تحت الرقم التالي: ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
@@ -278,12 +278,12 @@ export const get_articles = (data) => {
                 {
                     ar: `المجالات التي تؤدي إليها روابط النص التشعبي على الموقع ليست من مسؤولية ناشر <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> ، الذي لا يتحكم في هذه الروابط.`,
                     en: `The domains to which the hypertext links on the site lead are not the responsibility of the Publisher of <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>, who has no control over these links.`,
-                    fr: `Les domaines vers lesquels mènent les liens hypertextes présents sur le site n’engagent pas la responsabilité de l’Éditeur de <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>, qui n’a pas de contrôle sur ces liens.`,
+                    fr: `Les domaines vers lesquels mènent les liens hypertextes présents sur le site n'engagent pas la responsabilité de l'Éditeur de <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>, qui n'a pas de contrôle sur ces liens.`,
                 },
                 {
                     ar: `من الممكن لطرف ثالث إنشاء رابط لصفحة على الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بدون إذن صريح من الناشر.`,
                     en: `It is possible for a third party to create a link to a page on the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> without the express permission of the publisher.`,
-                    fr: `Il est possible pour un tiers de créer un lien vers une page du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> sans autorisation expresse de l’éditeur.`,
+                    fr: `Il est possible pour un tiers de créer un lien vers une page du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> sans autorisation expresse de l'éditeur.`,
                 },
             ]
         },
@@ -291,13 +291,13 @@ export const get_articles = (data) => {
             title: {
                 ar: "تطور الشروط العامة للاستخدام",
                 en: "Evolution of the general conditions of use",
-                fr: "Évolution des conditions générales d’utilisation",
+                fr: "Évolution des conditions générales d'utilisation",
             },
             paragraphs: [
                 {
                     ar: `يحتفظ الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بالحق في تعديل بنود هذه الشروط العامة للاستخدام في أي وقت وبدون مبرر.`,
                     en: `The site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> reserves the right to modify the clauses of these general conditions of use at any time and without justification.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> se réserve le droit de modifier les clauses de ces conditions générales d’utilisation à tout moment et sans justification.`,
+                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> se réserve le droit de modifier les clauses de ces conditions générales d'utilisation à tout moment et sans justification.`,
                 },
             ]
         },
@@ -325,7 +325,7 @@ export const get_articles = (data) => {
                 {
                     ar: `هذا العقد يعتمد على التشريع المغربي. في حالة وجود نزاع لم يتم حله وديًا بين المستخدم والناشر ، فإن المحاكم المغربية هي المختصة بتسوية النزاع.`,
                     en: `This contract depends on Moroccan legislation. In the event of a dispute not resolved amicably between the User and the Publisher, the courts of Morocco are competent to settle the dispute.`,
-                    fr: `Le présent contrat dépend de la législation marocaine. En cas de litige non résolu à l’amiable entre l'Utilisateur et l'Éditeur, les tribunaux de Maroc sont compétents pour régler le contentieux.`,
+                    fr: `Le présent contrat dépend de la législation marocaine. En cas de litige non résolu à l'amiable entre l'Utilisateur et l'Éditeur, les tribunaux de Maroc sont compétents pour régler le contentieux.`,
                 },
             ]
         },
@@ -336,6 +336,6 @@ export const get_terms_service_notice = (props) => {
     return {
         ar: `بالضغط على <b>${props.registration_label}</b> ، فإنك توافق على <span class="span_link term_of_service_span">شروط الخدمة</span> الخاصة بنا ، و<span class="span_link data_use_policy_span">سياسة استخدام البيانات</span> و<span class="span_link cookie_policy_span">سياسة ملفات تعريف الارتباط</span> الخاصة بنا.`,
         en: `By pressing <b>${props.registration_label}</b>, you agree to our <span class="span_link term_of_service_span">Terms of service</span>, our <span class="span_link data_use_policy_span">Data Use Policy</span> and our <span class="span_link cookie_policy_span">Cookie Policy</span>.`,
-        fr: `En appuyant sur <b>${props.registration_label}</b>, vous acceptez nos <span class="span_link term_of_service_span">Conditions d'utilisation</span>, notre <span class="span_link data_use_policy_span">Politique d’utilisation des données</span> et notre <span class="span_link cookie_policy_span">Politique d’utilisation des cookies</span>.`,
+        fr: `En appuyant sur <b>${props.registration_label}</b>, vous acceptez nos <span class="span_link term_of_service_span">Conditions d'utilisation</span>, notre <span class="span_link data_use_policy_span">Politique d'utilisation des données</span> et notre <span class="span_link cookie_policy_span">Politique d'utilisation des cookies</span>.`,
     };
 };
