@@ -1,4 +1,5 @@
 import {get} from "../../services/storage";
+import {render_term_service_url, render_term_service_custom_text} from "./utils";
 export const get_articles = (data) => {
     return [
         {
@@ -9,9 +10,9 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `الغرض من "شروط الاستخدام العامة" هذه هو توفير إطار قانوني لاستخدام موقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> وخدماته.`,
-                    en: `The purpose of these "general conditions of use" is to provide a legal framework for the use of the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> and its services.`,
-                    fr: `Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique de l'utilisation du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> et de ses services.`,
+                    ar: `الغرض من "شروط الاستخدام العامة" هذه هو توفير إطار قانوني لاستخدام موقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} وخدماته.`,
+                    en: `The purpose of these "general conditions of use" is to provide a legal framework for the use of the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} and its services.`,
+                    fr: `Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique de l'utilisation du site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} et de ses services.`,
                 },
                 {
                     ar: `يُبرم هذا العقد بين:`,
@@ -48,14 +49,14 @@ export const get_articles = (data) => {
                     fr: `Pour les personnes morales :`,
                 },
                 {
-                    ar: `يتم نشر موقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> من قبل شركة <b>${data.company_legal_status || "company_legal_status"}</b> ، <b>${data.company_name || "company_name"}</b>  برأس مال قدره <b>${data.company_capital || "company_capital"}</b> د.م ، التي يقع مكتبها الرئيسي في <b>${data.company_address || "company_address"}</b>.`,
-                    en: `The site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> is published by the company <b>${data.company_name || "company_name"}</b>, <b>${data.company_legal_status || "company_legal_status"}</b> with a capital of <b>${data.company_capital || "company_capital"}</b> MAD, whose head office is located at <b>${data.company_address || "company_address"}</b>.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> est édité par la société <b>${data.company_name || "company_name"}</b>, <b>${data.company_legal_status || "company_legal_status"}</b> au capital de <b>${data.company_capital || "company_capital"}</b> MAD, dont le siège social est situé au <b>${data.company_address || "company_address"}</b>.`,
+                    ar: `يتم نشر موقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} من قبل شركة ${render_term_service_custom_text(data.company_legal_status || "company_legal_status")} ، ${render_term_service_custom_text(data.company_name || "company_name")}  برأس مال قدره ${render_term_service_custom_text(data.company_capital || "company_capital")} د.م ، التي يقع مكتبها الرئيسي في ${render_term_service_custom_text(data.company_address || "company_capital")}.`,
+                    en: `The site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} is published by the company ${render_term_service_custom_text(data.company_name || "company_name")}, ${render_term_service_custom_text(data.company_legal_status || "company_legal_status")} with a capital of ${render_term_service_custom_text(data.company_capital || "company_capital")} MAD, whose head office is located at ${render_term_service_custom_text(data.company_address || "company_capital")}.`,
+                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} est édité par la société ${render_term_service_custom_text(data.company_name || "company_name")}, ${render_term_service_custom_text(data.company_legal_status || "company_legal_status")} au capital de ${render_term_service_custom_text(data.company_capital || "company_capital")} MAD, dont le siège social est situé au ${render_term_service_custom_text(data.company_address || "company_capital")}.`,
                 },
                 {
-                    ar: `ويمثل الشركة <b>${data.responsable_full_name || "responsable_full_name"}</b>.`,
-                    en: `The company is represented by <b>${data.responsable_full_name || "responsable_full_name"}</b>.`,
-                    fr: `La société est représentée par <b>${data.responsable_full_name || "responsable_full_name"}</b>.`,
+                    ar: `ويمثل الشركة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
+                    en: `The company is represented by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
+                    fr: `La société est représentée par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
                 },
                 {
                     ar: `للأفراد:`,
@@ -63,9 +64,9 @@ export const get_articles = (data) => {
                     fr: `Pour les personnes physiques :`,
                 },
                 {
-                    ar: `يتم تحرير موقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بواسطة <b>${data.responsable_full_name || "responsable_full_name"}</b> ، ومقره في <b>${data.responsable_address || "responsable_address"}</b>.`,
-                    en: `The <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> site is edited by <b>${data.responsable_full_name || "responsable_full_name"}</b>, domiciled at <b>${data.responsable_address || "responsable_address"}</b>.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> est édité par <b>${data.responsable_full_name || "responsable_full_name"}</b>, domicilié au <b>${data.responsable_address || "responsable_address"}</b>.`,
+                    ar: `يتم تحرير موقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بواسطة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b> ، ومقره في ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
+                    en: `The ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} site is edited by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>, domiciled at ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
+                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} est édité par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>, domicilié au ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
                 },
             ]
         },
@@ -77,9 +78,9 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `مستخدم الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> لديه حق الوصول إلى الخدمات التالية:`,
-                    en: `The User of the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> has access to the following services:`,
-                    fr: `L'Utilisateur du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> a accès aux services suivants :`,
+                    ar: `مستخدم الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} لديه حق الوصول إلى الخدمات التالية:`,
+                    en: `The User of the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} has access to the following services:`,
+                    fr: `L'Utilisateur du site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} a accès aux services suivants :`,
                     list_items: [
                         {
                             ar: "الوصول إلى الأخبار الصحية عبر بروتوكول RSS.",
@@ -92,9 +93,9 @@ export const get_articles = (data) => {
                             fr: "Possibilité de créer un compte.",
                         },
                         {
-                            ar: `يمكن للمستخدم الوصول إلى محتوى الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بثلاث لغات: العربية ،الإنجليزية والفرنسية.`,
-                            en: `The User can access the content of the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> in three languages: Arabic, English and French.`,
-                            fr: `L'Utilisateur peut accéder au contenu du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> en trois langues : Arabe, Anglais et Français.`,
+                            ar: `يمكن للمستخدم الوصول إلى محتوى الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بثلاث لغات: العربية ،الإنجليزية والفرنسية.`,
+                            en: `The User can access the content of the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} in three languages: Arabic, English and French.`,
+                            fr: `L'Utilisateur peut accéder au contenu du site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} en trois langues : Arabe, Anglais et Français.`,
                         },
                         {
                             ar: "...",
@@ -155,9 +156,9 @@ export const get_articles = (data) => {
                     fr: `Le mot de passe de l'Utilisateur doit rester secret. En cas de divulgation de mot de passe, l'Éditeur décline toute responsabilité.`,
                 },
                 {
-                    ar: `يتحمل المستخدم المسؤولية الكاملة عن استخدامه للمعلومات والمحتوى الموجود على الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>.`,
-                    en: `The User assumes full responsibility for the use he makes of the information and content on the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>.`,
-                    fr: `L'Utilisateur assume l'entière responsabilité de l'utilisation qu'il fait des informations et contenus présents sur le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>.`,
+                    ar: `يتحمل المستخدم المسؤولية الكاملة عن استخدامه للمعلومات والمحتوى الموجود على الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")}.`,
+                    en: `The User assumes full responsibility for the use he makes of the information and content on the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")}.`,
+                    fr: `L'Utilisateur assume l'entière responsabilité de l'utilisation qu'il fait des informations et contenus présents sur le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")}.`,
                 },
                 {
                     ar: `أي استخدام للخدمة من قبل المستخدم يؤدي بشكل مباشر أو غير مباشر إلى الضرر يجب أن يتم تعويضه لصالح الموقع.`,
@@ -184,9 +185,9 @@ export const get_articles = (data) => {
                     fr: `De même, la responsabilité du site ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.`,
                 },
                 {
-                    ar: `يتعهد الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بتنفيذ جميع الوسائل اللازمة لضمان أمن وسرية البيانات. ومع ذلك ، فإنه لا يوفر ضمانًا للأمان الكامل.`,
-                    en: `The site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> undertakes to implement all necessary means to guarantee the security and confidentiality of data. However, it does not provide a guarantee of total security.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> s'engage à mettre en œuvre tous les moyens nécessaires pour garantir la sécurité et la confidentialité des données. Toutefois, il n'apporte pas une garantie de sécurité totale.`,
+                    ar: `يتعهد الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بتنفيذ جميع الوسائل اللازمة لضمان أمن وسرية البيانات. ومع ذلك ، فإنه لا يوفر ضمانًا للأمان الكامل.`,
+                    en: `The site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} undertakes to implement all necessary means to guarantee the security and confidentiality of data. However, it does not provide a guarantee of total security.`,
+                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} s'engage à mettre en œuvre tous les moyens nécessaires pour garantir la sécurité et la confidentialité des données. Toutefois, il n'apporte pas une garantie de sécurité totale.`,
                 },
                 {
                     ar: `يحتفظ الناشر بالحق في عدم ضمان موثوقية المصادر ، على الرغم من أن المعلومات المنشورة على الموقع تعتبر موثوقة.`,
@@ -203,9 +204,9 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `محتويات الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> (الشعارات والنصوص والرسومات ومقاطع الفيديو وما إلى ذلك) محمية بموجب حقوق النشر بموجب قانون الملكية الفكرية.`,
-                    en: `The contents of the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> (logos, texts, graphics, videos, etc.) are protected by copyright, under the Intellectual Property Code.`,
-                    fr: `Les contenus du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> (logos, textes, éléments graphiques, vidéos, etc.) son protégés par le droit d'auteur, en vertu du Code de la propriété intellectuelle.`,
+                    ar: `محتويات الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} (الشعارات والنصوص والرسومات ومقاطع الفيديو وما إلى ذلك) محمية بموجب حقوق النشر بموجب قانون الملكية الفكرية.`,
+                    en: `The contents of the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} (logos, texts, graphics, videos, etc.) are protected by copyright, under the Intellectual Property Code.`,
+                    fr: `Les contenus du site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} (logos, textes, éléments graphiques, vidéos, etc.) son protégés par le droit d'auteur, en vertu du Code de la propriété intellectuelle.`,
                 },
                 {
                     ar: `يجب على المستخدم الحصول على إذن من ناشر الموقع قبل أي إعادة إنتاج أو نسخ أو نشر لهذه المحتويات المختلفة.`,
@@ -237,24 +238,24 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `محتويات الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> (يجب على المستخدم تقديم معلومات شخصية من أجل التسجيل في الموقع.`,
+                    ar: `محتويات الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} (يجب على المستخدم تقديم معلومات شخصية من أجل التسجيل في الموقع.`,
                     en: `The User must provide personal information in order to register on the site.`,
                     fr: `L'Utilisateur doit obligatoirement fournir des informations personnelles pour procéder à son inscription sur le site.`,
                 },
                 {
-                    ar: `قد يتم استخدام العنوان الإلكتروني للمستخدم على وجه الخصوص بواسطة الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> لتوصيل المعلومات المختلفة وإدارة الحساب.`,
-                    en: `The User's electronic address (e-mail) may in particular be used by the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> for the communication of various information and the management of the account.`,
-                    fr: `L'adresse électronique (e-mail) de l'Utilisateur pourra notamment être utilisée par le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> pour la communication d'informations diverses et la gestion du compte.`,
+                    ar: `قد يتم استخدام العنوان الإلكتروني للمستخدم على وجه الخصوص بواسطة الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} لتوصيل المعلومات المختلفة وإدارة الحساب.`,
+                    en: `The User's electronic address (e-mail) may in particular be used by the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} for the communication of various information and the management of the account.`,
+                    fr: `L'adresse électronique (e-mail) de l'Utilisateur pourra notamment être utilisée par le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} pour la communication d'informations diverses et la gestion du compte.`,
                 },
                 {
-                    ar: `يضمن <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> احترام خصوصية المستخدم ، وفقًا للقانون رقم 09-08 بشأن حماية الأفراد فيما يتعلق بمعالجة البيانات الشخصية.`,
-                    en: `<a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> guarantees respect for the User's privacy, in accordance with Law No. 09-08 on the protection of individuals with regard to the processing of personal data.`,
-                    fr: `<a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> garantie le respect de la vie privée de l'Utilisateur, conformément à la loi n°09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel.`,
+                    ar: `يضمن ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} احترام خصوصية المستخدم ، وفقًا للقانون رقم 09-08 بشأن حماية الأفراد فيما يتعلق بمعالجة البيانات الشخصية.`,
+                    en: `${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} guarantees respect for the User's privacy, in accordance with Law No. 09-08 on the protection of individuals with regard to the processing of personal data.`,
+                    fr: `${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} garantie le respect de la vie privée de l'Utilisateur, conformément à la loi n°09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel.`,
                 },
                 {
-                    ar: `يتم الإعلان عن الموقع إلى اللجنة الوطنية لحماية البيانات الشخصية (CNDP) تحت الرقم التالي: ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
-                    en: `The site is declared to the National Commission for the Protection of Personal Data (CNDP) under the following number: ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
-                    fr: `Le site est déclaré auprès de la Commission Nationale de Contrôle de la Protection des Données à Caractère Personnel (CNDP) sous le numéro suivant : ${data.cndp_declaration_number || "cndp_declaration_number"}.`,
+                    ar: `يتم الإعلان عن الموقع إلى اللجنة الوطنية لحماية البيانات الشخصية (CNDP) تحت الرقم التالي: ${render_term_service_custom_text(data.cndp_declaration_number || "cndp_declaration_number")}.`,
+                    en: `The site is declared to the National Commission for the Protection of Personal Data (CNDP) under the following number: ${render_term_service_custom_text(data.cndp_declaration_number || "cndp_declaration_number")}.`,
+                    fr: `Le site est déclaré auprès de la Commission Nationale de Contrôle de la Protection des Données à Caractère Personnel (CNDP) sous le numéro suivant : ${render_term_service_custom_text(data.cndp_declaration_number || "cndp_declaration_number")}.`,
                 },
                 // {
                 //     ar: `يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها. يمارس المستخدم هذا الحق عن طريق:`,
@@ -276,14 +277,14 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `المجالات التي تؤدي إليها روابط النص التشعبي على الموقع ليست من مسؤولية ناشر <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> ، الذي لا يتحكم في هذه الروابط.`,
-                    en: `The domains to which the hypertext links on the site lead are not the responsibility of the Publisher of <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>, who has no control over these links.`,
-                    fr: `Les domaines vers lesquels mènent les liens hypertextes présents sur le site n'engagent pas la responsabilité de l'Éditeur de <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a>, qui n'a pas de contrôle sur ces liens.`,
+                    ar: `المجالات التي تؤدي إليها روابط النص التشعبي على الموقع ليست من مسؤولية ناشر ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} ، الذي لا يتحكم في هذه الروابط.`,
+                    en: `The domains to which the hypertext links on the site lead are not the responsibility of the Publisher of ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")}, who has no control over these links.`,
+                    fr: `Les domaines vers lesquels mènent les liens hypertextes présents sur le site n'engagent pas la responsabilité de l'Éditeur de ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")}, qui n'a pas de contrôle sur ces liens.`,
                 },
                 {
-                    ar: `من الممكن لطرف ثالث إنشاء رابط لصفحة على الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بدون إذن صريح من الناشر.`,
-                    en: `It is possible for a third party to create a link to a page on the site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> without the express permission of the publisher.`,
-                    fr: `Il est possible pour un tiers de créer un lien vers une page du site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> sans autorisation expresse de l'éditeur.`,
+                    ar: `من الممكن لطرف ثالث إنشاء رابط لصفحة على الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بدون إذن صريح من الناشر.`,
+                    en: `It is possible for a third party to create a link to a page on the site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} without the express permission of the publisher.`,
+                    fr: `Il est possible pour un tiers de créer un lien vers une page du site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} sans autorisation expresse de l'éditeur.`,
                 },
             ]
         },
@@ -295,9 +296,9 @@ export const get_articles = (data) => {
             },
             paragraphs: [
                 {
-                    ar: `يحتفظ الموقع <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> بالحق في تعديل بنود هذه الشروط العامة للاستخدام في أي وقت وبدون مبرر.`,
-                    en: `The site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> reserves the right to modify the clauses of these general conditions of use at any time and without justification.`,
-                    fr: `Le site <a href='${data.site_url || "site_url"}' target="_blank">${data.site_url || "site_url"}</a> se réserve le droit de modifier les clauses de ces conditions générales d'utilisation à tout moment et sans justification.`,
+                    ar: `يحتفظ الموقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بالحق في تعديل بنود هذه الشروط العامة للاستخدام في أي وقت وبدون مبرر.`,
+                    en: `The site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} reserves the right to modify the clauses of these general conditions of use at any time and without justification.`,
+                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} se réserve le droit de modifier les clauses de ces conditions générales d'utilisation à tout moment et sans justification.`,
                 },
             ]
         },
