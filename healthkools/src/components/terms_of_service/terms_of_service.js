@@ -54,9 +54,9 @@ export const get_articles = (data) => {
                     fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} est édité par la société ${render_term_service_custom_text(data.company_name || "company_name")}, ${render_term_service_custom_text(data.company_legal_status || "company_legal_status")} au capital de ${render_term_service_custom_text(data.company_capital || "company_capital")} MAD, dont le siège social est situé au ${render_term_service_custom_text(data.company_address || "company_capital")}.`,
                 },
                 {
-                    ar: `ويمثل الشركة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
-                    en: `The company is represented by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
-                    fr: `La société est représentée par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>.`,
+                    ar: `ويمثل الشركة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}.`,
+                    en: `The company is represented by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}.`,
+                    fr: `La société est représentée par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}.`,
                 },
                 {
                     ar: `للأفراد:`,
@@ -64,9 +64,9 @@ export const get_articles = (data) => {
                     fr: `Pour les personnes physiques :`,
                 },
                 {
-                    ar: `يتم تحرير موقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بواسطة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b> ، ومقره في ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
-                    en: `The ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} site is edited by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>, domiciled at ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
-                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} est édité par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}</b>, domicilié au ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
+                    ar: `يتم تحرير موقع ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} بواسطة ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")} ، ومقره في ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
+                    en: `The ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} site is edited by ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}, domiciled at ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
+                    fr: `Le site ${render_term_service_url(data.site_url || "site_url", data.site_url || "site_url")} est édité par ${render_term_service_custom_text(data.responsable_full_name || "responsable_full_name")}, domicilié au ${render_term_service_custom_text(data.responsable_address || "responsable_address")}.`,
                 },
             ]
         },
