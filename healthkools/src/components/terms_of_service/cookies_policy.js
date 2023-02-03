@@ -1,3 +1,5 @@
+import {render_term_service_url, render_term_service_custom_text} from "./utils";
+
 export const get_intro_items = (data) => {
     return {
         intro: {
