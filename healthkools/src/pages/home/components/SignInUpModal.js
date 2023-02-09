@@ -25,7 +25,7 @@ import CustomButton from "components/CustomButton";
 import QuestionButton from "components/QuestionButton";
 import * as EmailValidator from 'email-validator';
 import FieldError from "components/forms_fields/FieldError";
-import {login_action} from "store/actions";
+import {login_action} from "app_store/actions";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 const usernameRegex = /^[a-zA-Z0-9_]+$/;

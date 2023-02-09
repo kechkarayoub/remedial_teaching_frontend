@@ -1,4 +1,4 @@
-import loginReducer from 'store/reducers/loginReducer';
+import loginReducer from 'app_store/reducers/loginReducer';
 
 // import {configureStore} from '@reduxjs/toolkit';
 
@@ -10,7 +10,7 @@ import loginReducer from 'store/reducers/loginReducer';
 // // const store = createStore(reducers, {}, applyMiddleware(promiseMiddleware));
 // export default store;
 import { createStore } from "redux";
-import rootReducer from "store/reducers";
+import rootReducer from "app_store/reducers";
 
 const store = createStore(rootReducer);
 

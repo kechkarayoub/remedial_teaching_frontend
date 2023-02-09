@@ -1,5 +1,5 @@
 import * as storage from "services/storage";
-import {LOGIN} from "store/actions"
+import {LOGIN} from "app_store/actions"
 import {createSlice} from "@reduxjs/toolkit";
 
 var initialState = {
