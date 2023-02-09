@@ -1,8 +1,8 @@
-import LdsEllipses from './LdsEllipses';
+import LdsEllipses from 'components/LdsEllipses';
 import React, { Component } from "react";
 import styled from "styled-components";
-import LogoImage from "./LogoImage";
-import {colors} from "../assets/variables/colors";
+import LogoImage from "components/LogoImage";
+import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
 class LoadingAssets extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import styles from "styled-components";
-import logo from "../assets/img/logo_temp.jpg";
+import logo from "assets/img/logo_temp.jpg";
 import { withTranslation } from 'react-i18next';
 class LogoImage extends Component {
   // constructor(props){

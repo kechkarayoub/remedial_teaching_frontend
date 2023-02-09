@@ -1,6 +1,6 @@
-import FeedItem from "./FeedItem";
+import FeedItem from "pages/home/components/FeedItem";
 import { render, screen } from '@testing-library/react';
-import i18next from '../../../i18n_init';
+import i18next from 'i18n_init';
  
 describe('FeedItem component', () => {
     const feed_test = {

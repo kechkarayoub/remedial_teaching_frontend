@@ -1,4 +1,4 @@
-import {feeds_urls, get_feeds_url} from "./feeds"
+import {feeds_urls, get_feeds_url} from "utils/feeds"
 
 describe('Get_feeds_url function', () => {
     test('Get arabic feeds url ', () => {

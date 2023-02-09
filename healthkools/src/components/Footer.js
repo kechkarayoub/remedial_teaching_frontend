@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import styles from "styled-components";
-import LogoImage from "./LogoImage";
+import LogoImage from "components/LogoImage";
 import { withTranslation } from 'react-i18next';
-import { images } from "./_resources";
-import { colors } from "../assets/variables/colors";
-import { get } from "../services/storage";
+import { images } from "components/_resources";
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
 import moment from "moment"
 // import { Link } from "react-router-dom";
 class Footer extends Component {

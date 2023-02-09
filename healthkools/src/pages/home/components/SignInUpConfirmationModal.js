@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 import styled from "styled-components";
 
-import {colors} from "../../../assets/variables/colors";
+import {colors} from "assets/variables/colors";
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import moment from 'moment';
-import { get } from "../../../services/storage";
-import { resend_activation_email } from "../../../services/api";
-import TextDiv from "../../../components/TextDiv";
-import CustomButton from "../../../components/CustomButton";
-import FieldError from "../../../components/forms_fields/FieldError";
-import FieldValid from "../../../components/forms_fields/FieldValid";
+import { get } from "services/storage";
+import { resend_activation_email } from "services/api";
+import TextDiv from "components/TextDiv";
+import CustomButton from "components/CustomButton";
+import FieldError from "components/forms_fields/FieldError";
+import FieldValid from "components/forms_fields/FieldValid";
 
 
 class SignInUpConfirmationModal extends Component {

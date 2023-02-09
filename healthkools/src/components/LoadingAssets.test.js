@@ -1,4 +1,4 @@
-import LoadingAssets from "./LoadingAssets";
+import LoadingAssets from "components/LoadingAssets";
 import { render } from '@testing-library/react';
  
 jest.mock('react-i18next', () => ({

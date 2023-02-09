@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import $ from "jquery";
 import styled from "styled-components";
-import BlocFeeds from "./components/BlocFeeds";
-import Footer from "../../components/Footer";
-import HomeHeader from "./components/HomeHeader";
-import { get } from "../../services/storage";
-import { general_information_api_get } from "../../services/api";
+import BlocFeeds from "pages/home/components/BlocFeeds";
+import Footer from "components/Footer";
+import HomeHeader from "pages/home/components/HomeHeader";
+import { get } from "services/storage";
+import { general_information_api_get } from "services/api";
 
 window.jQuery = $;
 

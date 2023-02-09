@@ -1,4 +1,4 @@
-import {GLOBAL} from "../actions"
+import {GLOBAL} from "store/actions"
 const initialState = {};
   
 const rootReducer = (state, action) => {

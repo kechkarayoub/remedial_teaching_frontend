@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import {colors} from "../assets/variables/colors";
+import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
 class TextDiv extends Component {

@@ -1,5 +1,5 @@
-import {get_data} from "./data";
-import {get_articles, get_terms_service_notice} from "./terms_of_service";
+import {get_data} from "components/terms_of_service/data";
+import {get_articles, get_terms_service_notice} from "components/terms_of_service/terms_of_service";
 describe('Get_articles function', () => {
     test('Test get_articles', () => {
         var data = get_data();

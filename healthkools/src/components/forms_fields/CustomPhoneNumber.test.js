@@ -1,4 +1,4 @@
-import CustomPhoneNumber from "./CustomPhoneNumber";
+import CustomPhoneNumber from "components/forms_fields/CustomPhoneNumber";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

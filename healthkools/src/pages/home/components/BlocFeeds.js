@@ -4,12 +4,12 @@ import Slider from "react-slick";
 // import Feed from "rss-to-json";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import {feeds_api_get, feeds_languages_api_get} from "../../../services/api";
-import { colors } from "../../../assets/variables/colors";
-import FeedItem from "./FeedItem";
-import { get } from "../../../services/storage";
-import {get_feeds_url} from "../../../utils/feeds";
-import {shuffle} from "../../../utils/index";
+import {feeds_api_get, feeds_languages_api_get} from "services/api";
+import { colors } from "assets/variables/colors";
+import FeedItem from "pages/home/components/FeedItem";
+import { get } from "services/storage";
+import {get_feeds_url} from "utils/feeds";
+import {shuffle} from "utils/index";
 
  class BlocFeeds extends Component {
   constructor(props) {

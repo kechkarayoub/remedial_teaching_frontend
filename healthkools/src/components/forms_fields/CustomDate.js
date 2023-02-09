@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import FieldError from "./FieldError";
-import FieldValid from "./FieldValid";
+import FieldError from "components/forms_fields/FieldError";
+import FieldValid from "components/forms_fields/FieldValid";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import fr from "date-fns/locale/fr";
 import "react-datepicker/dist/react-datepicker.css";
-import { get } from "../../services/storage";
-import { setInitLocale } from "../../utils/date_picker";
+import { get } from "services/storage";
+import { setInitLocale } from "utils/date_picker";
 setInitLocale(get("current_language"));
 
 class CustomDate extends Component {

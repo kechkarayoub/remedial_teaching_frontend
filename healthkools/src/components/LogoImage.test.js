@@ -1,8 +1,8 @@
-import LogoImage from "./LogoImage";
+import LogoImage from "components/LogoImage";
 import { render, screen } from '@testing-library/react';
-import {images} from "./_resources";
-import defaultRssImg from "../assets/img/default_rss_img.png";
-import i18next from '../i18n_init';
+import {images} from "components/_resources";
+import defaultRssImg from "assets/img/default_rss_img.png";
+import i18next from 'i18n_init';
  
 describe('LogoImage component', () => {
     test('Should render without crash', async () => {

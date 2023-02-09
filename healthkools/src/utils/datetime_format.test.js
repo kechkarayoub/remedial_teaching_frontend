@@ -1,4 +1,4 @@
-import {format_as_date} from "./datetime_format";
+import {format_as_date} from "utils/datetime_format";
 import moment from "moment";
 describe('Format_as_date function', () => {
     test('Test format_as_date', () => {

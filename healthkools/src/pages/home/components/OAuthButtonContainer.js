@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import { colors } from "../../../assets/variables/colors";
+import { colors } from "assets/variables/colors";
 import { GoogleLogin } from '@react-oauth/google';
-import { get } from "../../../services/storage";
+import { get } from "services/storage";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 

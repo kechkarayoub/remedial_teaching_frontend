@@ -1,4 +1,4 @@
-import CustomGender from "./CustomGender";
+import CustomGender from "components/forms_fields/CustomGender";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

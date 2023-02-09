@@ -1,4 +1,4 @@
-import LdsEllipses from "./LdsEllipses";
+import LdsEllipses from "components/LdsEllipses";
 import { render } from '@testing-library/react';
  
 describe('LdsEllipses component', () => {

@@ -1,5 +1,5 @@
-import {get_data} from "./data";
-import {get_intro_items} from "./cookies_policy";
+import {get_data} from "components/terms_of_service/data";
+import {get_intro_items} from "components/terms_of_service/cookies_policy";
 describe('Get_intro_items function', () => {
     test('Test get_intro_items', () => {
         var data = get_data();

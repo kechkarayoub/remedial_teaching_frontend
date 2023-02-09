@@ -1,4 +1,4 @@
-import CustomCheckbox from "./CustomCheckbox";
+import CustomCheckbox from "components/forms_fields/CustomCheckbox";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

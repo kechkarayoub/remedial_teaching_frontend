@@ -1,4 +1,4 @@
-import CustomTextarea from "./CustomTextarea";
+import CustomTextarea from "components/forms_fields/CustomTextarea";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

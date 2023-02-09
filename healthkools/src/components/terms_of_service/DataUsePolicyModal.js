@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import moment from 'moment';
-import { get } from "../../services/storage";
-import { colors } from "../../assets/variables/colors";
-import { get_intro_items } from "./data_use_policy";
-import { get_data } from "./data";
-import CustomButton from "../CustomButton";
+import { get } from "services/storage";
+import { colors } from "assets/variables/colors";
+import { get_intro_items } from "components/terms_of_service/data_use_policy";
+import { get_data } from "components/terms_of_service/data";
+import CustomButton from "components/CustomButton";
 
 class DataUsePolicyModal extends Component {
   constructor(props) {

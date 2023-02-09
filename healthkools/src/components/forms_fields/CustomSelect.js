@@ -1,8 +1,8 @@
 import React, { Component, useRef } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import FieldError from "./FieldError";
-import FieldValid from "./FieldValid";
+import FieldError from "components/forms_fields/FieldError";
+import FieldValid from "components/forms_fields/FieldValid";
 import Select from 'react-select';
 
  class CustomSelect extends Component {

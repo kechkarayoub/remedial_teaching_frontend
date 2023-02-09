@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import { colors } from "../../../assets/variables/colors";
-import defaultRssImg from "../../../assets/img/default_rss_img.png";
+import { colors } from "assets/variables/colors";
+import defaultRssImg from "assets/img/default_rss_img.png";
 
  class FeedItem extends Component {
   constructor(props) {

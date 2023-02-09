@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import FieldError from "./FieldError";
-import {get_terms_service_notice} from "../terms_of_service/terms_of_service";
-import { get } from "../../services/storage";
-import { colors } from "../../assets/variables/colors";
-import TermsOfServiceModal from "../terms_of_service/TermsOfServiceModal";
-import CookiesPolicyModal from "../terms_of_service/CookiesPolicyModal";
-import DataUsePolicyModal from "../terms_of_service/DataUsePolicyModal";
+import FieldError from "components/forms_fields/FieldError";
+import {get_terms_service_notice} from "components/terms_of_service/terms_of_service";
+import { get } from "services/storage";
+import { colors } from "assets/variables/colors";
+import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
+import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
+import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
 
  class CustomTSNotice extends Component {
   constructor(props) {

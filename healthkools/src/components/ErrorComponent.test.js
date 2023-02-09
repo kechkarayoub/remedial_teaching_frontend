@@ -1,6 +1,6 @@
-import ErrorComponent from "./ErrorComponent";
+import ErrorComponent from "components/ErrorComponent";
 import { render, screen } from '@testing-library/react';
-import i18next from '../i18n_init';
+import i18next from 'i18n_init';
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {

@@ -1,6 +1,6 @@
-import QuestionButton from "./QuestionButton";
+import QuestionButton from "components/QuestionButton";
 import { render, screen } from '@testing-library/react';
-import i18next from '../i18n_init';
+import i18next from 'i18n_init';
  
 describe('QuestionButton component', () => {
     test('Should render without crash', async () => {

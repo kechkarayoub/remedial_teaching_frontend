@@ -1,4 +1,4 @@
-import LdsSpinner from "./LdsSpinner";
+import LdsSpinner from "components/LdsSpinner";
 import { render } from '@testing-library/react';
  
 describe('LdsSpinner component', () => {

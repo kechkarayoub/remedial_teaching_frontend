@@ -1,4 +1,4 @@
-import CustomInput from "./CustomInput";
+import CustomInput from "components/forms_fields/CustomInput";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import moment from 'moment';
-import { get } from "../../services/storage";
-import { colors } from "../../assets/variables/colors";
-import { get_articles } from "./terms_of_service";
-import { get_data } from "./data";
-import CustomButton from "../CustomButton";
+import { get } from "services/storage";
+import { colors } from "assets/variables/colors";
+import { get_articles } from "components/terms_of_service/terms_of_service";
+import { get_data } from "components/terms_of_service/data";
+import CustomButton from "components/CustomButton";
 
 class TermsOfServiceModal extends Component {
   constructor(props) {

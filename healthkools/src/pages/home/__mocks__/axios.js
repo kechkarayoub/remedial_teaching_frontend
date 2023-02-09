@@ -1,6 +1,6 @@
 'use strict';
-import {general_information_response, feeds_items_data} from "../index.test";
-import {geo_info_data} from "../components/SignInUpModal.test";
+import {general_information_response, feeds_items_data} from "pages/home/index.test";
+import {geo_info_data} from "pages/home/components/SignInUpModal.test";
 module.exports = {
   create: (url) => {
     return {

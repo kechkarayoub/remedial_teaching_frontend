@@ -1,4 +1,4 @@
-import {shuffle} from "./index";
+import {shuffle} from "utils/index";
 describe('Shuffle function', () => {
     test('Test shuffle', () => {
         var array = [1, 2, 3, 4, 5, 6];

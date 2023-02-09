@@ -1,5 +1,5 @@
 import axios from "axios";
-import { set, get, clear } from "./storage";
+import { set, get, clear } from "services/storage";
 
 // import {get_instanceID_info} from './cms/api'
 

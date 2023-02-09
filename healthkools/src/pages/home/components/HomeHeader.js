@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import styles from "styled-components";
-import LogoImage from "../../../components/LogoImage";
+import LogoImage from "components/LogoImage";
 import { withTranslation } from 'react-i18next';
-import LanguageSelect from "../../../components/LanguageSelect/index";
-import { colors } from "../../../assets/variables/colors";
-import { get } from "../../../services/storage";
-import {images} from "../_resources";
-import CustomButtonIcon from '../../../components/CustomButtonIcon';
-import SignInUpModal from './SignInUpModal';
+import LanguageSelect from "components/LanguageSelect/index";
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
+import {images} from "pages/home/_resources";
+import CustomButtonIcon from 'components/CustomButtonIcon';
+import SignInUpModal from 'pages/home/components/SignInUpModal';
 import moment from "moment"
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";

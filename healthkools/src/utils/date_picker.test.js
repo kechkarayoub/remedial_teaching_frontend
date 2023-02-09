@@ -1,5 +1,5 @@
 import { getDefaultLocale } from  "react-datepicker";
-import {changeLocale} from "./date_picker";
+import {changeLocale} from "utils/date_picker";
 describe('ChangeLocale function', () => {
     test('Test changeLocale', () => {
         changeLocale("ar");

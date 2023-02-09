@@ -1,4 +1,4 @@
-import CustomTSNotice from "./CustomTSNotice";
+import CustomTSNotice from "components/forms_fields/CustomTSNotice";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

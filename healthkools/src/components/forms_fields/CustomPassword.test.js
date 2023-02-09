@@ -1,4 +1,4 @@
-import CustomPassword from "./CustomPassword";
+import CustomPassword from "components/forms_fields/CustomPassword";
 import { render, screen, fireEvent } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

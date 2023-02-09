@@ -1,6 +1,6 @@
-import TextDiv from "./TextDiv";
+import TextDiv from "components/TextDiv";
 import { render, screen } from '@testing-library/react';
-import i18next from '../i18n_init';
+import i18next from 'i18n_init';
  
 describe('TextDiv component', () => {
     test('Should render without crash', async () => {

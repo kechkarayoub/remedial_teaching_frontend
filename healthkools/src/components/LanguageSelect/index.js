@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import {flags} from "../_resources";
-import Language from "./component/Language";
-import {colors} from "../../assets/variables/colors";
+import {flags} from "components/_resources";
+import Language from "components/LanguageSelect/component/Language";
+import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
-import { get, set } from "../../services/storage";
-import { changeLocale } from "../../utils/date_picker";
+import { get, set } from "services/storage";
+import { changeLocale } from "utils/date_picker";
 
 // List of languages
 export const languages = [

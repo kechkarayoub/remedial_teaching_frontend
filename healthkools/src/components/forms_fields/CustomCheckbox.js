@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
-import FieldError from "./FieldError";
-import FieldValid from "./FieldValid";
+import FieldError from "components/forms_fields/FieldError";
+import FieldValid from "components/forms_fields/FieldValid";
 import Checkbox from 'react-custom-checkbox';
-import { colors } from "../../assets/variables/colors";
+import { colors } from "assets/variables/colors";
 
  class CustomCheckbox extends Component {
   constructor(props) {

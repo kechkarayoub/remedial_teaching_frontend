@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CustomButton from "./CustomButton";
-import LogoImage from "./LogoImage";
+import CustomButton from "components/CustomButton";
+import LogoImage from "components/LogoImage";
 import styled from "styled-components";
 import { withTranslation } from 'react-i18next';
 

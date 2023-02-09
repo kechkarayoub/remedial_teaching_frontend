@@ -1,6 +1,6 @@
-import BlocFeeds from "./BlocFeeds";
+import BlocFeeds from "pages/home/components/BlocFeeds";
 import { render } from '@testing-library/react';
-import i18next from '../../../i18n_init';
+import i18next from 'i18n_init';
  
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

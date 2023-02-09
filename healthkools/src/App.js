@@ -1,24 +1,24 @@
 import React, { Component, Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import './App.css';
-import './assets/sass/global.scss';
+import 'App.css';
+import 'assets/sass/global.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import "react-datepicker/dist/react-datepicker.css";
-import store from "./store";
-import { messaging } from "./init_fcm";
+import store from "store";
+import { messaging } from "init_fcm";
 
-import { set } from "./services/storage";
+import { set } from "services/storage";
 import { withTranslation, Trans } from "react-i18next";
-import RouteSystem from "./routes";
+import RouteSystem from "routes";
 
-import Home from "./pages/home";
-import ErrorComponent from './components/ErrorComponent';
-import LoadingAssets from './components/LoadingAssets';
+import Home from "pages/home";
+import ErrorComponent from 'components/ErrorComponent';
+import LoadingAssets from 'components/LoadingAssets';
 class App extends Component {
 
   constructor(props){

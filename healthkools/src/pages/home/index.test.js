@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { render, screen } from '@testing-library/react';
-import {Home} from "./index";
+import {Home} from "pages/home/index";
 import { withRouter, Redirect } from "react-router-dom";
-import api from '../../services/api';
+import api from 'services/api';
 import axios from 'axios';
-import i18next from '../../init_fcm';
+import i18next from 'init_fcm';
 import moment from 'moment';
 jest.mock('react-i18next', () => ({
   withTranslation: () => Component => {
@@ -13,7 +13,7 @@ jest.mock('react-i18next', () => ({
   },
 }));
 jest.mock('axios');
-// jest.mock('../../services/api', () => jest.fn());
+// jest.mock('services/api', () => jest.fn());
 export const general_information_response =  {
   contact_email: 'email@email.com',
   site_name: 'Test name',

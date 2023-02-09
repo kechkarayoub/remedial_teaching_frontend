@@ -1,4 +1,4 @@
-import FieldValid from "./FieldValid";
+import FieldValid from "components/forms_fields/FieldValid";
 import { render, screen } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

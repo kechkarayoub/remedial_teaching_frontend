@@ -1,4 +1,4 @@
-import {get} from "../services/storage";
+import {get} from "services/storage";
 
 export const countries = [
     {

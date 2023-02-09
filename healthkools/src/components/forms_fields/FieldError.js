@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
-import { get } from "../../services/storage";
+import { get } from "services/storage";
 import styled from "styled-components";
 
  class FieldError extends Component {

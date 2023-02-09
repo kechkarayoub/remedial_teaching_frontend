@@ -1,6 +1,6 @@
-import OAuthButtonContainer from "./OAuthButtonContainer";
+import OAuthButtonContainer from "pages/home/components/OAuthButtonContainer";
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import i18next from '../../../i18n_init';
+import i18next from 'i18n_init';
  
 describe('OAuthButtonContainer component', () => {
   test('Should render without crash', async () => {

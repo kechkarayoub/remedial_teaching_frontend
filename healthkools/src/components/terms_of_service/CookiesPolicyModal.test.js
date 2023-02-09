@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { render, screen, act, fireEvent } from '@testing-library/react';
-import CookiesPolicyModal from "./CookiesPolicyModal";
+import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
 import { withRouter, Redirect } from "react-router-dom";
 import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { mount, configure, shallow } from 'enzyme'
 import { unmountComponentAtNode } from "react-dom";
 import { async } from "q";
-import {get_data} from "./data";
-import {get_intro_items} from "./cookies_policy";
-import { get } from "../../services/storage";
-import { remove_html_tags_from_string, split_html_string } from "../../utils/tests_utils";
+import {get_data} from "components/terms_of_service/data";
+import {get_intro_items} from "components/terms_of_service/cookies_policy";
+import { get } from "services/storage";
+import { remove_html_tags_from_string, split_html_string } from "utils/tests_utils";
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({

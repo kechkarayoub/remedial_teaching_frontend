@@ -1,6 +1,6 @@
-import CustomSelect from "./CustomSelect";
+import CustomSelect from "components/forms_fields/CustomSelect";
 import { render, screen, fireEvent } from '@testing-library/react';
-import { get_contries_select_options } from '../../utils/countries_list';
+import { get_contries_select_options } from 'utils/countries_list';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };

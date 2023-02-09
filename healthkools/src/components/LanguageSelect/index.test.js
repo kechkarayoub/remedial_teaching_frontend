@@ -1,4 +1,4 @@
-import LanguagesSelect, {languages} from "./index";
+import LanguagesSelect, {languages} from "components/LanguageSelect/index";
 import { render, screen } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop

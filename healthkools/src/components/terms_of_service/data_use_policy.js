@@ -1,4 +1,4 @@
-import {render_term_service_url, render_term_service_custom_text} from "./utils";
+import {render_term_service_url, render_term_service_custom_text} from "components/terms_of_service/utils";
 
 export const get_intro_items = (data) => {
     return {

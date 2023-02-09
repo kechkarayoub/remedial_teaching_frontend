@@ -1,4 +1,4 @@
-import FieldError from "./FieldError";
+import FieldError from "components/forms_fields/FieldError";
 import { render, screen } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {

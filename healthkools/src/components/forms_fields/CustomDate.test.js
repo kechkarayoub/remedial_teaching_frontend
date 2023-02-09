@@ -1,4 +1,4 @@
-import CustomDate from "./CustomDate";
+import CustomDate from "components/forms_fields/CustomDate";
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import moment from "moment";

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { render, screen, act, fireEvent, waitFor } from '@testing-library/react';
-import SignInUpConfirmationModal from "./SignInUpConfirmationModal";
+import SignInUpConfirmationModal from "pages/home/components/SignInUpConfirmationModal";
 import { withRouter, Redirect } from "react-router-dom";
 import axios from 'axios';
-import i18next from '../../../init_fcm';
+import i18next from 'init_fcm';
 import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { mount, configure, shallow } from 'enzyme'
