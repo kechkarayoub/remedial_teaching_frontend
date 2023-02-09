@@ -1,7 +1,6 @@
 import axios from "axios";
 import { set, get, clear } from "services/storage";
 
-// import {get_instanceID_info} from './cms/api'
 
 const instance = axios.create({ baseURL: process.env.REACT_APP_URL_WS });
 

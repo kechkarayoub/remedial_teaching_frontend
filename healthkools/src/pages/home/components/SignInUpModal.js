@@ -9,8 +9,8 @@ import { get_geo_info, check_if_email_or_username_exists_api_get } from 'service
 import { get_contries_select_options } from 'utils/countries_list';
 import { format_as_date } from 'utils/datetime_format';
 import moment from 'moment';
-import SignInUpConfirmationModal from './SignInUpConfirmationModal';
-import OAuthButtonContainer from './OAuthButtonContainer';
+import SignInUpConfirmationModal from 'pages/home/components/SignInUpConfirmationModal';
+import OAuthButtonContainer from 'pages/home/components/OAuthButtonContainer';
 import { get } from "services/storage";
 import { register } from "services/api";
 import CustomTSNotice from "components/forms_fields/CustomTSNotice";
