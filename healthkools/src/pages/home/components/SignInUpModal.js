@@ -10,6 +10,7 @@ import { get_contries_select_options } from '../../../utils/countries_list';
 import { format_as_date } from '../../../utils/datetime_format';
 import moment from 'moment';
 import SignInUpConfirmationModal from './SignInUpConfirmationModal';
+import OAuthButtonContainer from './OAuthButtonContainer';
 import { get } from "../../../services/storage";
 import { register } from "../../../services/api";
 import CustomTSNotice from "../../../components/forms_fields/CustomTSNotice";
@@ -26,11 +27,13 @@ import * as EmailValidator from 'email-validator';
 import FieldError from "../../../components/forms_fields/FieldError";
 import {login_action} from "../../../store/actions";
 import { connect } from "react-redux";
+import jwt_decode from "jwt-decode";
 const usernameRegex = /^[a-zA-Z0-9_]+$/;
 
 class SignInUpModal extends Component {
   constructor(props) {
     super(props);
+    this._isMounted = false;
     this.state= {
       address: "",
       birthday: moment().add(-30, "years").toDate(),
@@ -60,7 +63,12 @@ class SignInUpModal extends Component {
   }
 
   componentDidMount(){
+    this._isMounted = true;
     this.getGeoInfo();
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
@@ -153,10 +161,14 @@ class SignInUpModal extends Component {
                 state.invalid_messages.email = undefined;
                 state.valid_messages.email = undefined;
               }
-              this.setState(state);
+              if(this._isMounted){
+                this.setState(state);
+              }
             }).catch(err => {
               state.network_error = this.props.t("Network error!");
-              this.setState(state);
+              if(this._isMounted){
+                this.setState(state);
+              }
               console.log(err);
             });
           }
@@ -165,7 +177,9 @@ class SignInUpModal extends Component {
       else{
         state.invalid_messages.email = undefined;
         state.valid_messages.email = undefined;
-        this.setState(state);
+        if(this._isMounted){
+          this.setState(state);
+        }
       }
     }
     else if(field === "username"){
@@ -192,10 +206,14 @@ class SignInUpModal extends Component {
                 state.invalid_messages.username = undefined;
                 state.valid_messages.username = undefined;
               }
-              this.setState(state);
+              if(this._isMounted){
+                this.setState(state);
+              }
             }).catch(err => {
               state.network_error = this.props.t("Network error!");
-              this.setState(state);
+              if(this._isMounted){
+                this.setState(state);
+              }
               console.log(err);
             });
           }
@@ -204,7 +222,9 @@ class SignInUpModal extends Component {
       else{
         state.invalid_messages.username = undefined;
         state.valid_messages.username = undefined;
-        this.setState(state);
+        if(this._isMounted){
+          this.setState(state);
+        }
       }
     }
     else if(field === "country_code"){
@@ -366,6 +386,15 @@ class SignInUpModal extends Component {
     }
   }
 
+  handleOAuthSuccess = res => {
+    if(res.credential)
+    console.log("success, res: ", jwt_decode(res.credential))
+  }
+
+  handleOAuthFailure = res => {
+    console.log("failure, res: ", res)
+  }
+
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name,
@@ -391,6 +420,13 @@ class SignInUpModal extends Component {
             </Modal.Header>
             <Modal.Body data-testid="body">
               <Row>
+                <OAuthButtonContainer added_class={"google_oauth_button"} id={"googleSignInUpButton"} 
+                  current_language={current_language} test_id="google_oauth_button_test_id"
+                  buttonText={is_sign_up ? "signup_with" : "signin_with"}
+                  onSuccess={(res) => this.handleOAuthSuccess(res)}
+                  onFailure={(res) => this.handleOAuthFailure(res)}
+                  oauth_type="google"
+                />
                 {is_sign_up ?
                 <>
                   <CustomInput test_id="first_name_test_id" added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 

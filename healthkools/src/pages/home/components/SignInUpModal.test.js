@@ -52,6 +52,8 @@ describe('SignInUpModal component', () => {
     var sign_up_question_button = screen.getByTestId('sign_up_question_btn_test_id');
     var email_or_username_input = screen.getByTestId('email_or_username_test_id');
     var password_input = screen.getByTestId('password_test_id');
+    var oauth_buttons = screen.getAllByTestId('google_oauth_button_test_id');
+    expect(oauth_buttons.length).toBe(1);
     fireEvent.click(sign_in_button);
     var fields_errors = screen.getAllByTestId('field_error_test_id');
     expect(fields_errors.length).toBe(2);
@@ -83,6 +85,8 @@ describe('SignInUpModal component', () => {
     var username_input = screen.getByTestId('username_test_id');
     var password_input = screen.getByTestId('password_test_id');
     var password_confirmation_input = screen.getByTestId('password_confirmation_test_id');
+    var oauth_buttons = screen.getAllByTestId('google_oauth_button_test_id');
+    expect(oauth_buttons.length).toBe(1);
     fireEvent.click(sign_up_button);
     var fields_errors = screen.getAllByTestId('field_error_test_id');
     expect(fields_errors.length).toBe(5);
