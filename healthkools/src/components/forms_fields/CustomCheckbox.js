@@ -5,6 +5,7 @@ import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
 import Checkbox from 'react-custom-checkbox';
 import { colors } from "assets/variables/colors";
+import PropTypes from 'prop-types';
 
  class CustomCheckbox extends Component {
   constructor(props) {
@@ -20,6 +21,17 @@ import { colors } from "assets/variables/colors";
     };
   }
 
+  static defaultProps = {
+    added_class: "",
+    checked: false,
+    disabled: false,
+    error_message: "",
+    invalid_message: "",
+    label: "",
+    on_change: null,
+    valid_message: "",
+  }
+
   static getDerivedStateFromProps(props, state) {
     return {
         added_class: props.added_class,
@@ -30,7 +42,7 @@ import { colors } from "assets/variables/colors";
         label: props.label,
         valid_message: props.valid_message,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, valid_message, checked} = this.state;
@@ -92,6 +104,19 @@ const CustomCheckboxStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomCheckbox.propTypes = {
+  added_class: PropTypes.string,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  label: PropTypes.string,
+  invalid_message: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  valid_message: PropTypes.string,
+};
 export default withTranslation('translations')(CustomCheckbox);
 
 
