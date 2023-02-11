@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import { get } from "services/storage";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
  class FieldValid extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ import styled from "styled-components";
       valid_message: props.valid_message,
     };
   }
+  static defaultProps = {
+    valid_message: "",
+    // test_id: "",
+  };
   static getDerivedStateFromProps(props, state) {
     return {
       valid_message: props.valid_message,
@@ -29,6 +34,10 @@ import styled from "styled-components";
 const FieldValidStyle = styled.div`
   color: green;
 `;
+FieldValid.propTypes = {
+  valid_message: PropTypes.string,
+  // test_id: PropTypes.string,
+};
 export default withTranslation('translations')(FieldValid);
 
 

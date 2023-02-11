@@ -9,6 +9,7 @@ import 'react-phone-input-2/lib/style.css';
 import { get } from "services/storage";
 import ar from 'react-phone-input-2/lang/ar.json';
 import fr from 'react-phone-input-2/lang/fr.json';
+import PropTypes from 'prop-types';
 // import 'react-phone-number-input/style.css';
 
  class CustomPhoneNumber extends Component {
@@ -27,6 +28,19 @@ import fr from 'react-phone-input-2/lang/fr.json';
       value: props.value,
     };
   }
+
+  static defaultProps = {
+    added_class: "",
+    default_country: "",
+    disabled: false,
+    error_message: "",
+    invalid_message: "",
+    is_valid_phone_number: false,
+    label: "",
+    placeholder: "",
+    valid_message: "",
+    value: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     return {
@@ -131,6 +145,22 @@ const CustomPhoneNumberStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomPhoneNumber.propTypes = {
+  added_class: PropTypes.string,
+  default_country: PropTypes.string,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  invalid_message: PropTypes.string,
+  is_valid_phone_number: PropTypes.bool,
+  label: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  placeholder: PropTypes.string,
+  valid_message: PropTypes.string,
+  value: PropTypes.string,
+};
 export default withTranslation('translations')(CustomPhoneNumber);
 
 

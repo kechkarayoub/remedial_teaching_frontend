@@ -8,6 +8,7 @@ import { colors } from "assets/variables/colors";
 import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
 import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
 import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
+import PropTypes from 'prop-types';
 
  class CustomTSNotice extends Component {
   constructor(props) {
@@ -21,6 +22,11 @@ import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
       registration_label: props.registration_label,
     };
   }
+  
+  static defaultProps = {
+    added_class: "",
+    registration_label: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
@@ -95,6 +101,10 @@ const CustomTSNoticeStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomTSNotice.propTypes = {
+  added_class: PropTypes.string,
+  registration_label: PropTypes.string,
+};
 export default withTranslation('translations')(CustomTSNotice);
 
 

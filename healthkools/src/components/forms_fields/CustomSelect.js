@@ -4,6 +4,7 @@ import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
  class CustomSelect extends Component {
   constructor(props) {
@@ -16,14 +17,29 @@ import Select from 'react-select';
       error_message: props.error_message,
       invalid_message: props.invalid_message,
       label: props.label,
-      random: props.random,
       placeholder: props.placeholder,
+      random: props.random,
       test_id: props.test_id || ("custom_select_" + parseInt(Math.random() * 100)),
       valid_message: props.valid_message,
       value: props.value,
     };
     this.searchInput = React.createRef();
   }
+  static defaultProps = {
+    added_class: "",
+    countries_options: [],
+    current_language: "en",
+    disabled: false,
+    error_message: "",
+    invalid_message: "",
+    label: "",
+    on_change: null,
+    placeholder: "",
+    random: parseInt(Math.random() * 100),
+    test_id: "",
+    valid_message: "",
+    value: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     return {
@@ -124,6 +140,24 @@ const CustomSelectStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomSelect.propTypes = {
+  added_class: PropTypes.string,
+  countries_options: PropTypes.array,
+  current_language: PropTypes.string,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  invalid_message: PropTypes.string,
+  label: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  placeholder: PropTypes.string,
+  random: PropTypes.number,
+  test_id: PropTypes.string,
+  valid_message: PropTypes.string,
+  value: PropTypes.string,
+};
 export default withTranslation('translations')(CustomSelect);
 
 

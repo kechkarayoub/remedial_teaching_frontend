@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
+import PropTypes from 'prop-types';
 
  class CustomInput extends Component {
   constructor(props) {
@@ -18,6 +19,19 @@ import FieldValid from "components/forms_fields/FieldValid";
       value: props.value,
     };
   }
+
+  static defaultProps = {
+    added_class: "",
+    disabled: false,
+    error_message: "",
+    invalid_message: "",
+    label: "",
+    on_change: null,
+    placeholder: "",
+    test_id: "",
+    valid_message: "",
+    value: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     return {
@@ -74,6 +88,22 @@ const CustomInputStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
+CustomInput.propTypes = {
+  added_class: PropTypes.string,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  invalid_message: PropTypes.string,
+  label: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  placeholder: PropTypes.string,
+  test_id: PropTypes.string,
+  valid_message: PropTypes.string,
+  value: PropTypes.string,
+};
 export default withTranslation('translations')(CustomInput);
 
 

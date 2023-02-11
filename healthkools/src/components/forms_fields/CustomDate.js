@@ -10,6 +10,7 @@ import fr from "date-fns/locale/fr";
 import "react-datepicker/dist/react-datepicker.css";
 import { get } from "services/storage";
 import { setInitLocale } from "utils/date_picker";
+import PropTypes from 'prop-types';
 setInitLocale(get("current_language"));
 
 class CustomDate extends Component {
@@ -25,6 +26,18 @@ class CustomDate extends Component {
       valid_message: props.valid_message,
       value: props.value || null,
     };
+  }
+
+  static defaultProps = {
+    added_class: "",
+    disabled: false,
+    error_message: "",
+    label: "",
+    invalid_message: "",
+    on_change: null,
+    placeholder: "",
+    valid_message: "",
+    value: null,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -84,6 +97,23 @@ const CustomDateStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomDate.propTypes = {
+  added_class: PropTypes.string,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  label: PropTypes.string,
+  invalid_message: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  placeholder: PropTypes.string,
+  valid_message: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+};
 export default withTranslation('translations')(CustomDate);
 
 

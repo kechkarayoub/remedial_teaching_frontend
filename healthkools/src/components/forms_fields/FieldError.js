@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import { get } from "services/storage";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
  class FieldError extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ import styled from "styled-components";
       error_message: props.error_message,
     };
   }
+  static defaultProps = {
+    error_message: "",
+    test_id: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     return {
@@ -31,6 +36,10 @@ import styled from "styled-components";
 const FieldErrorStyle = styled.div`
   color: red;
 `;
+FieldError.propTypes = {
+  error_message: PropTypes.string,
+  test_id: PropTypes.string,
+};
 export default withTranslation('translations')(FieldError);
 
 

@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
+import PropTypes from 'prop-types';
 
  class CustomGender extends Component {
   constructor(props) {
@@ -17,6 +18,18 @@ import FieldValid from "components/forms_fields/FieldValid";
       value: props.value,
     };
   }
+
+  static defaultProps = {
+    added_class: "",
+    disabled: false,
+    error_message: "",
+    label: "",
+    invalid_message: "",
+    on_change: null,
+    t: w => w,
+    valid_message: "",
+    value: "",
+  };
 
   static getDerivedStateFromProps(props, state) {
     return {
@@ -106,6 +119,20 @@ const CustomGenderStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+CustomGender.propTypes = {
+  added_class: PropTypes.string,
+  disabled: PropTypes.bool,
+  error_message: PropTypes.string,
+  label: PropTypes.string,
+  invalid_message: PropTypes.string,
+  on_change: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  t: PropTypes.func,
+  valid_message: PropTypes.string,
+  value: PropTypes.string,
+};
 export default withTranslation('translations')(CustomGender);
 
 
