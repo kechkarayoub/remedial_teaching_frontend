@@ -6,6 +6,7 @@ import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 import { get, set } from "services/storage";
 import { changeLocale } from "utils/date_picker";
+import PropTypes from 'prop-types';
 
 // List of languages
 export const languages = [
@@ -21,6 +22,11 @@ class LanguageSelect extends Component {
             selected_language: get("current_language") || "fr",
         };
     }
+    static defaultProps = {
+        added_class: "",
+        style: null,
+        t: val => val,
+    };
     handleSelectLanguage = (evt, language) => {
         evt.stopPropagation();
         changeLocale(language);
@@ -107,4 +113,9 @@ const LanguageSelectStyle = styled.div`
         }
     }
 `;
+LanguageSelect.propTypes = {
+    added_class: PropTypes.string,
+    style: PropTypes.object,
+    t: PropTypes.func,
+};
 export default withTranslation('translations')(LanguageSelect);

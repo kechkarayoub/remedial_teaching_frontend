@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 class Language extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +11,12 @@ class Language extends Component {
             selected_language: props.selected_language,
         };
     }
+    static defaultProps = {
+        language: {},
+        handleSelectLanguage: null,
+        selected_language: "",
+        t: val => val,
+      };
     static getDerivedStateFromProps(props, state) {
         if(props.selected_language !== state.selected_language){
           var new_state = {selected_language: props.selected_language};
@@ -22,7 +29,11 @@ class Language extends Component {
         var direction_class = selected_language === "ar" ? "rtl" : "ltr";
         return(
             <LanguageStyle className={`${direction_class}`}  key={language.value} 
-                onClick={(evt) => this.props.handleSelectLanguage(evt, language.value)} role="language"
+                onClick={(evt) => {
+                    if(this.props.handleSelectLanguage){
+                        this.props.handleSelectLanguage(evt, language.value)
+                    }
+                }} role="language"
             >
                 <img src={language.flag} alt={this.props.t(language.alt)} />{this.props.t(language.short_name)}
             </LanguageStyle>
@@ -50,4 +61,13 @@ const LanguageStyle = styled.li`
         width: 16px;
     }
 `;
+Language.propTypes = {
+    language: PropTypes.object,
+    handleSelectLanguage: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.object,
+      ]),
+    selected_language: PropTypes.string,
+    t: PropTypes.func,
+  };
 export default withTranslation('translations')(Language);
