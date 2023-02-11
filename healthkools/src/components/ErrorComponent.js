@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CustomButton from "components/CustomButton";
 import LogoImage from "components/LogoImage";
+import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { withTranslation } from 'react-i18next';
 
@@ -9,6 +10,9 @@ class ErrorComponent extends Component {
     super(props);
     this.state = {};
   }
+  static defaultProps = {
+    history: null,
+};
 
   render() {
     return <ErrorComponentStyle className="container-error-component">
@@ -27,7 +31,9 @@ class ErrorComponent extends Component {
           // if(user) {
           // }
           // else
-          this.props.history.push(`/`);
+          if(this.props.history){
+            this.props.history.push(`/`);
+          }
         }}
         style={{color: "white", }}
       />
@@ -51,4 +57,10 @@ const ErrorComponentStyle = styled.div`
         min-width: 200px;
     }
 `;
+ErrorComponent.propTypes = {
+    history: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.object,
+    ]),
+};
 export default withTranslation('translations')(ErrorComponent);

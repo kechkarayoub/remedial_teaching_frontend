@@ -9,6 +9,7 @@ import { colors } from "assets/variables/colors";
 import { get_articles } from "components/terms_of_service/terms_of_service";
 import { get_data } from "components/terms_of_service/data";
 import CustomButton from "components/CustomButton";
+import PropTypes from 'prop-types';
 
 class TermsOfServiceModal extends Component {
   constructor(props) {
@@ -19,6 +20,11 @@ class TermsOfServiceModal extends Component {
       current_language: get("current_language"),
     };
   }
+  static defaultProps = {
+    onHide: () => {},
+    show: true,
+    t: val => val,
+  };
 
   componentDidMount(){
   }
@@ -127,4 +133,12 @@ const TermsOfServiceModalStyle = styled.div`
     }
   }
 `;
+TermsOfServiceModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+    ]),
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(TermsOfServiceModal);

@@ -9,6 +9,7 @@ import { colors } from "assets/variables/colors";
 import { get_intro_items } from "components/terms_of_service/cookies_policy";
 import { get_data } from "components/terms_of_service/data";
 import CustomButton from "components/CustomButton";
+import PropTypes from 'prop-types';
 
 class CookiesPolicyModal extends Component {
   constructor(props) {
@@ -21,6 +22,11 @@ class CookiesPolicyModal extends Component {
       intro: intro_items.intro,
     };
   }
+  static defaultProps = {
+    onHide: () => {},
+    show: true,
+    t: val => val,
+  };
 
   componentDidMount(){
   }
@@ -147,4 +153,12 @@ const CookiesPolicyModalStyle = styled.div`
     }
   }
 `;
+CookiesPolicyModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+    ]),
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(CookiesPolicyModal);
