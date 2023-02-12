@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
+import Checkbox from 'react-custom-checkbox';
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
-import Checkbox from 'react-custom-checkbox';
-import { colors } from "assets/variables/colors";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { colors } from "assets/variables/colors";
+import { withTranslation } from 'react-i18next';
 
  class CustomCheckbox extends Component {
   constructor(props) {
@@ -45,11 +45,14 @@ import PropTypes from 'prop-types';
   }
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, valid_message, checked} = this.state;
+    const {added_class, checked, disabled, error_message, invalid_message, label, valid_message} = this.state;
     return (
       <CustomCheckboxStyle className={`field_input input_checkbox ${added_class || ""}`}>
         <div className="field">
-            <Checkbox icon={
+            <Checkbox 
+              borderColor={colors.default_color} disabled={disabled} checked={checked} 
+              className={`input_div ${disabled ? "disabled " : ""}`}
+              icon={
                 <div
                   style={{
                     display: "flex",
@@ -60,6 +63,7 @@ import PropTypes from 'prop-types';
                   <i className="fa fa-check checkbox_icon" color={colors.default_color} size={20} />
                 </div>
               } 
+              label={label}
               onChange={check_value => {
                 if(this.props.on_change){
                     this.props.on_change(check_value);
@@ -68,8 +72,6 @@ import PropTypes from 'prop-types';
                     this.setState({checked: check_value});
                 }
               }}
-              label={label}
-              borderColor={colors.default_color} disabled={disabled} checked={checked} className={`input_div ${disabled ? "disabled " : ""}`}
             />
         </div>
         {(error_message || invalid_message) &&
