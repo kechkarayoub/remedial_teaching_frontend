@@ -5,7 +5,8 @@ import { withTranslation } from 'react-i18next';
 import { images } from "components/_resources";
 import { colors } from "assets/variables/colors";
 import { get } from "services/storage";
-import moment from "moment"
+import moment from "moment";
+import PropTypes from 'prop-types';
 // import { Link } from "react-router-dom";
 class Footer extends Component {
   constructor(props){
@@ -16,6 +17,11 @@ class Footer extends Component {
     }
     this._isMounted = false;
   }
+  static defaultProps = {
+    history: null,
+    i18n: null,
+    t: val => val,
+  };
 
   static getDerivedStateFromProps(props, state) {
     if(props.i18n && props.i18n.language !== state.current_language){
@@ -59,7 +65,9 @@ class Footer extends Component {
                 minWidth: "200px",
               }}
               on_click={() => {
-                this.props.history.push(`/`);
+                if(this.props.history){
+                  this.props.history.push(`/`);
+                }
               }} 
             />
           </div>
@@ -133,4 +141,15 @@ const FooterStyle = styles.footer`
   }
 `;
 
+Footer.propTypes = {
+  history: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+  ]),
+  i18n: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+  ]),
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(Footer);

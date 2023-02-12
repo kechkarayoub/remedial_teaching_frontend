@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
 import { colors } from "assets/variables/colors";
 import defaultRssImg from "assets/img/default_rss_img.png";
+import PropTypes from 'prop-types';
 
  class FeedItem extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ import defaultRssImg from "assets/img/default_rss_img.png";
       feed: props.feed,
     };
   }
+  static defaultProps = {
+    feed: {},
+    t: val => val,
+  };
 
   static getDerivedStateFromProps(props, state) {
     if(props.feed.title !== state.feed.title){
@@ -97,6 +102,10 @@ const FeedItemStyle = styled.div`
     }
   }
 `;
+FeedItem.propTypes = {
+  feed: PropTypes.object,
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(FeedItem);
 
 

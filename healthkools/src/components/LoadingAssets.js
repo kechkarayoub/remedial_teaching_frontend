@@ -2,13 +2,17 @@ import LdsEllipses from 'components/LdsEllipses';
 import React, { Component } from "react";
 import styled from "styled-components";
 import LogoImage from "components/LogoImage";
+import PropTypes from 'prop-types';
 import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
 class LoadingAssets extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+    }
+    static defaultProps = {
+      t: val => val,
+    };
     render(){
         return(
             <LoadingAssetsStyle className="container-loading-assets">    
@@ -47,4 +51,7 @@ const LoadingAssetsStyle = styled.div`
         margin-bottom: 20px;
     }
 `;
+LoadingAssets.propTypes = {
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(LoadingAssets);

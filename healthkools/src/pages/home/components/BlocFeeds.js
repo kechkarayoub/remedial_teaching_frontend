@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {feeds_api_get, feeds_languages_api_get} from "services/api";
 import { colors } from "assets/variables/colors";
 import FeedItem from "pages/home/components/FeedItem";
+import PropTypes from 'prop-types';
 import { get } from "services/storage";
 import {get_feeds_url} from "utils/feeds";
 import {shuffle} from "utils/index";
@@ -22,6 +23,9 @@ import {shuffle} from "utils/index";
     this.feeds_api_done = true;
     this.saved_feeds_api_done = true;
   }
+  static defaultProps = {
+    t: val => val,
+  };
 
   componentDidMount() {
     this.getSavedFeeds();
@@ -204,6 +208,9 @@ const BlocFeedsStyle = styled.div`
     }
   }
 `;
+BlocFeeds.propTypes = {
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(BlocFeeds);
 
 

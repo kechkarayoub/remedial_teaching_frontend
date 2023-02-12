@@ -1,5 +1,5 @@
 import QuestionButton from "components/QuestionButton";
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import i18next from 'i18n_init';
  
 describe('QuestionButton component', () => {
@@ -15,5 +15,13 @@ describe('QuestionButton component', () => {
         render(<QuestionButton i18n={i18next} text="Text" test_id="test_id"/>);
         const question_button = screen.getByTestId("test_id");
         expect(question_button.textContent).toBe('Text');
+    });
+    test('On_click should called on click', async () => {
+        const on_click = jest.fn();
+        render(<QuestionButton i18n={i18next} text="Text" test_id="test_id" on_click={on_click}/>);
+        const question_button = screen.getByTestId("test_id");
+        expect(on_click).toHaveBeenCalledTimes(0);
+        fireEvent.click(question_button, {target: {}});
+        expect(on_click).toHaveBeenCalledTimes(1);
     });
 });

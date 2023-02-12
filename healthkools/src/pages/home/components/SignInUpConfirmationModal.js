@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
-import styled from "styled-components";
-
-import {colors} from "assets/variables/colors";
-import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import moment from 'moment';
-import { get } from "services/storage";
-import { resend_activation_email } from "services/api";
-import TextDiv from "components/TextDiv";
 import CustomButton from "components/CustomButton";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import TextDiv from "components/TextDiv";
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import {colors} from "assets/variables/colors";
+import { get } from "services/storage";
+import { resend_activation_email } from "services/api";
+import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 
 
 class SignInUpConfirmationModal extends Component {
@@ -22,6 +22,12 @@ class SignInUpConfirmationModal extends Component {
       registration_messages: props.registration_messages,
     };
   }
+  static defaultProps = {
+    onHide: () => {},
+    registration_messages: {},
+    show: true,
+    t: val => val,
+  };
 
   handleResentEmailActivation = () => {
     const {registration_messages, current_language} = this.state;
@@ -148,4 +154,13 @@ const SignInUpConfirmationModalStyle = styled.div`
     padding: 10px 0;
   }
 `;
+SignInUpConfirmationModal.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+  ]),
+  registration_messages: PropTypes.object,
+  t: PropTypes.func,
+};
 export default withTranslation('translations')(SignInUpConfirmationModal);

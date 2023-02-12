@@ -1,33 +1,35 @@
-import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
-import styled from "styled-components";
-
-import DatePicker from "react-datepicker";
-import $ from 'jquery';
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import { get_geo_info, check_if_email_or_username_exists_api_get } from 'services/api';
 import { get_contries_select_options } from 'utils/countries_list';
 import { format_as_date } from 'utils/datetime_format';
-import moment from 'moment';
-import SignInUpConfirmationModal from 'pages/home/components/SignInUpConfirmationModal';
-import OAuthButtonContainer from 'pages/home/components/OAuthButtonContainer';
-import { get } from "services/storage";
-import { register } from "services/api";
-import CustomTSNotice from "components/forms_fields/CustomTSNotice";
-import CustomGender from "components/forms_fields/CustomGender";
+import CustomButton from "components/CustomButton";
 import CustomDate from "components/forms_fields/CustomDate";
+import CustomGender from "components/forms_fields/CustomGender";
 import CustomInput from "components/forms_fields/CustomInput";
 import CustomPassword from "components/forms_fields/CustomPassword";
 import CustomPhoneNumber from "components/forms_fields/CustomPhoneNumber";
 import CustomSelect from "components/forms_fields/CustomSelect";
 import CustomTextarea from "components/forms_fields/CustomTextarea";
-import CustomButton from "components/CustomButton";
-import QuestionButton from "components/QuestionButton";
-import * as EmailValidator from 'email-validator';
+import CustomTSNotice from "components/forms_fields/CustomTSNotice";
+import DatePicker from "react-datepicker";
 import FieldError from "components/forms_fields/FieldError";
-import {login_action} from "app_store/actions";
-import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
+import moment from 'moment';
+import OAuthButtonContainer from 'pages/home/components/OAuthButtonContainer';
+import PropTypes from 'prop-types';
+import QuestionButton from "components/QuestionButton";
+import React, { Component } from "react";
+import SignInUpConfirmationModal from 'pages/home/components/SignInUpConfirmationModal';
+import styled from "styled-components";
+import * as EmailValidator from 'email-validator';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import { connect } from "react-redux";
+import { get } from "services/storage";
+import { register } from "services/api";
+import {login_action} from "app_store/actions";
+import $ from 'jquery';
+
+
 const usernameRegex = /^[a-zA-Z0-9_]+$/;
 
 class SignInUpModal extends Component {
@@ -61,6 +63,14 @@ class SignInUpModal extends Component {
     this.geo_info_api_done = true;
     this.countries_options = get_contries_select_options(get("current_language"), this.props.t);
   }
+  static defaultProps = {
+    changeDefaultSignInUpView: null,
+    default_sign_in_up_view: "",
+    login_action: null,
+    onHide: () => {},
+    show: true,
+    t: val => val,
+  };
 
   componentDidMount(){
     this._isMounted = true;
@@ -377,8 +387,9 @@ class SignInUpModal extends Component {
       data.password = password_sign_in;
     }
     if(valid_form){
-
-      this.props.login_action({user: {username: "xxxxx"}});
+      if(this.props.login_action){
+        this.props.login_action({user: {username: "xxxxx"}});
+      }
     }
     else{
       new_state.error_messages = error_messages;
@@ -493,7 +504,9 @@ class SignInUpModal extends Component {
                   <QuestionButton text={this.props.t("Already have an account? Log in here.")}
                     test_id={"sign_in_question_btn_test_id"}
                     on_click={evt => {
-                      this.props.changeDefaultSignInUpView("sign_in");
+                      if(this.props.changeDefaultSignInUpView){
+                        this.props.changeDefaultSignInUpView("sign_in");
+                      }
                     }}
                   />
                 </>
@@ -509,7 +522,9 @@ class SignInUpModal extends Component {
                   <QuestionButton text={this.props.t("You don't have an account yet? Register here.")}
                     test_id={"sign_up_question_btn_test_id"}
                     on_click={evt => {
-                      this.props.changeDefaultSignInUpView("sign_up");
+                      if(this.props.changeDefaultSignInUpView){
+                        this.props.changeDefaultSignInUpView("sign_up");
+                      }
                     }}
                   />
                 </>
@@ -551,5 +566,22 @@ function mapDispatchToProps(dispatch) {
     login_action: data => dispatch(login_action(data))
   };
 }
+SignInUpModal.propTypes = {
+  changeDefaultSignInUpView: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  default_sign_in_up_view: PropTypes.string,
+  login_action: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  onHide: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+  ]),
+  show: PropTypes.bool,
+  t: PropTypes.func,
+};
 // export default connect(null, mapDispatchToProps)(withTranslation('translations')(SignInUpModal));
 export default withTranslation('translations')(SignInUpModal);

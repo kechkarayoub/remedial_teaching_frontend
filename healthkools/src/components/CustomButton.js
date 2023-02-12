@@ -63,7 +63,7 @@ CustomButton.propTypes = {
     on_click: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.object,
-      ]),
+    ]),
     style: PropTypes.object,
     t: PropTypes.func,
     test_id: PropTypes.string,

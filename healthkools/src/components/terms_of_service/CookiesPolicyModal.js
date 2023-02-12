@@ -154,11 +154,11 @@ const CookiesPolicyModalStyle = styled.div`
   }
 `;
 CookiesPolicyModal.propTypes = {
-  show: PropTypes.bool,
   onHide: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.object,
-    ]),
+  ]),
+  show: PropTypes.bool,
   t: PropTypes.func,
 };
 export default withTranslation('translations')(CookiesPolicyModal);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withTranslation } from 'react-i18next';
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 import { colors } from "assets/variables/colors";
 import { GoogleLogin } from '@react-oauth/google';
 import { get } from "services/storage";
@@ -14,6 +15,15 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
       current_language: get("current_language"),
     };
   }
+  static defaultProps = {
+    added_class: "",
+    buttonText: "",
+    id: "",
+    oauth_type: "",
+    onFailure: null,
+    onSuccess: null,
+    test_id: "",
+  };
 
   componentDidMount() {
   }
@@ -78,6 +88,21 @@ const OAuthButtonContainerStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+OAuthButtonContainer.propTypes = {
+  added_class: PropTypes.string,
+  buttonText: PropTypes.string,
+  id: PropTypes.string,
+  oauth_type: PropTypes.string,
+  onFailure: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  onSuccess: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  test_id: PropTypes.string,
+};
 export default withTranslation('translations')(OAuthButtonContainer);
 
 

@@ -12,7 +12,7 @@ class ErrorComponent extends Component {
   }
   static defaultProps = {
     history: null,
-};
+  };
 
   render() {
     return <ErrorComponentStyle className="container-error-component">

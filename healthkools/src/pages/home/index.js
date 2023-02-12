@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
-import $ from "jquery";
-import styled from "styled-components";
 import BlocFeeds from "pages/home/components/BlocFeeds";
 import Footer from "components/Footer";
 import HomeHeader from "pages/home/components/HomeHeader";
-import { get } from "services/storage";
+import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
 import { general_information_api_get } from "services/api";
+import { get } from "services/storage";
+import { withRouter, Redirect } from "react-router-dom";
+import $ from "jquery";
 
 window.jQuery = $;
 
@@ -19,6 +20,8 @@ export class Home extends Component {
       current_language: get("current_language"),
     };
   }
+  static defaultProps = {
+  };
 
   componentDidMount() {
     // if(window.scrollTo)
@@ -78,5 +81,22 @@ const HomeStyle = styled.div`
     }
   }
 `;
+Home.propTypes = {
+  changeDefaultSignInUpView: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  default_sign_in_up_view: PropTypes.string,
+  login_action: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  onHide: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object,
+  ]),
+  show: PropTypes.bool,
+  t: PropTypes.func,
+};
 const mapState2Props = state => ({ session: state.session });
 export default connect(mapState2Props)(withRouter(Home));

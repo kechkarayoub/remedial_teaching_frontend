@@ -1,5 +1,5 @@
 import LogoImage from "components/LogoImage";
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import {images} from "components/_resources";
 import defaultRssImg from "assets/img/default_rss_img.png";
 import i18next from 'i18n_init';
@@ -17,5 +17,13 @@ describe('LogoImage component', () => {
         render(<LogoImage i18n={i18next}/>);
         const image = screen.getByRole('img');
         expect(image.src).toContain("/" + images.logo);
+    });
+    test('On_click should called on click', async () => {
+        const on_click = jest.fn();
+        render(<LogoImage i18n={i18next} on_click={on_click}/>);
+        const image = screen.getByRole('img');
+        expect(on_click).toHaveBeenCalledTimes(0);
+        fireEvent.click(image, {target: {}});
+        expect(on_click).toHaveBeenCalledTimes(1);
     });
 });

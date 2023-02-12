@@ -9,6 +9,7 @@ import {images} from "pages/home/_resources";
 import CustomButtonIcon from 'components/CustomButtonIcon';
 import SignInUpModal from 'pages/home/components/SignInUpModal';
 import moment from "moment"
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 class HomeHeader extends Component {
@@ -21,6 +22,11 @@ class HomeHeader extends Component {
       user: props.user,
     };
   }
+  static defaultProps = {
+    history: null,
+    t: val => val,
+    user: null,
+  };
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
@@ -152,6 +158,11 @@ const HomeHeaderStyle = styles.header`
 `;
 const mapStateToProps = state => {
   return { user: state.user };
+};
+HomeHeader.propTypes = {
+  history: PropTypes.object,
+  t: PropTypes.func,
+  user: PropTypes.object,
 };
 // export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));
 export default withTranslation('translations')(HomeHeader);
