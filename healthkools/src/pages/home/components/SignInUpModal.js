@@ -437,6 +437,7 @@ class SignInUpModal extends Component {
                   onSuccess={(res) => this.handleOAuthSuccess(res)}
                   onFailure={(res) => this.handleOAuthFailure(res)}
                   oauth_type="google"
+                  show_separator={true}
                 />
                 {is_sign_up ?
                 <>

@@ -22,6 +22,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
     oauth_type: "",
     onFailure: null,
     onSuccess: null,
+    show_separator: false,
+    t: val => val,
     test_id: "",
   };
 
@@ -69,6 +71,11 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
             />
           </GoogleOAuthProvider>
         }
+        {this.props.show_separator &&
+          <div className="separator">
+            <span data-testid={"oauth_separator"}>{this.props.t("Or")}</span>
+          </div>
+        }
       </OAuthButtonContainerStyle>
     );
   }
@@ -81,6 +88,23 @@ const OAuthButtonContainerStyle = styled.div`
     
     iframe{
       margin: auto !important;
+    }
+  }
+  .separator{
+    border: 1px solid #dee2e6;
+    margin: 15px 0;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    span{
+      background-color: white;
+      color: #dee2e6;
+      font-weight: bold;
+      left: 50%;
+      padding: 0 3px;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
   @media screen and (max-width: 1199px){
@@ -101,6 +125,8 @@ OAuthButtonContainer.propTypes = {
     PropTypes.func,
     PropTypes.object,
   ]),
+  show_separator: PropTypes.bool,
+  t: PropTypes.func,
   test_id: PropTypes.string,
 };
 export default withTranslation('translations')(OAuthButtonContainer);

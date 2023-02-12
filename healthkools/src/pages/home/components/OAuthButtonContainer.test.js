@@ -22,4 +22,14 @@ describe('OAuthButtonContainer component', () => {
     //screen.debug()
     expect(oauth_buttons.length).toBe(1);
   });
+  test('Should separator not appear', async () => {
+    render(<OAuthButtonContainer i18n={i18next}  oauth_type="google" test_id="teeesttt" />);
+    var oauth_separator = screen.queryAllByTestId('oauth_separator');
+    expect(oauth_separator.length).toBe(0);
+  });
+  test('Should separator appear', async () => {
+    render(<OAuthButtonContainer i18n={i18next}  oauth_type="google" test_id="teeesttt" show_separator={true} />);
+    var oauth_separator = screen.getAllByTestId('oauth_separator');
+    expect(oauth_separator.length).toBe(1);
+  });
 });
