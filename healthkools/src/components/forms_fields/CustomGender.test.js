@@ -33,6 +33,26 @@ describe('CustomGender component', () => {
         venus = screen.getByTestId('venus');
         expect(venus.textContent).toBe('Female');
     });
+    test('Should on_change called', async () => {
+        const on_change = jest.fn();
+        render(<CustomGender label={"Label test"} value={""} on_change={on_change}/>);
+        var mars_i = screen.getByTestId('mars_i');
+        var venus_i = screen.getByTestId('venus_i');
+        expect(on_change).toHaveBeenCalledTimes(0);
+        fireEvent.click(mars_i);
+        fireEvent.click(venus_i);
+        expect(on_change).toHaveBeenCalledTimes(2);
+    });
+    test('Should on_change not called because of disabled', async () => {
+        const on_change = jest.fn();
+        render(<CustomGender label={"Label test"} value={""} on_change={on_change} disabled={true}/>);
+        var mars_i = screen.getByTestId('mars_i');
+        var venus_i = screen.getByTestId('venus_i');
+        expect(on_change).toHaveBeenCalledTimes(0);
+        fireEvent.click(mars_i);
+        fireEvent.click(venus_i);
+        expect(on_change).toHaveBeenCalledTimes(0);
+    });
     test('Should contains props values (invalid_message)', async () => {
         render(<CustomGender value={""}  invalid_message={"Invalid message"}/>);
         var invalid_message = screen.getByText('Invalid message');

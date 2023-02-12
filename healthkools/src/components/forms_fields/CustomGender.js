@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
 
  class CustomGender extends Component {
   constructor(props) {

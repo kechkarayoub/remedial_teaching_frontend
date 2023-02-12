@@ -52,6 +52,20 @@ describe('CustomDate component', () => {
         expect(days_options.length).toBe(42);
         expect(on_change).toHaveBeenCalledTimes(0);
     });
+    test('Should on_change not called because of disabled', async () => {
+        const on_change = jest.fn();
+        render(<CustomDate label={"Label test"} disabled={true} placeholder={"Placeholder test"} max_date={moment().add(-6, "years").toDate()}
+            on_change={on_change} value={moment("2023-01-01", 'YYYY-MM-DD').toDate()} 
+        />);
+        var input = screen.getByPlaceholderText('Placeholder test');
+        expect(input.value).toBe(moment("2023-01-01", 'YYYY-MM-DD').format("DD/MM/YYYY"));
+        var days_options = screen.queryAllByRole('option');
+        expect(on_change).toHaveBeenCalledTimes(0);
+        fireEvent.click(input, {target: {}});
+        days_options = screen.queryAllByRole('option');
+        expect(days_options.length).toBe(0);
+        expect(on_change).toHaveBeenCalledTimes(0);
+    });
     test('Should on_change not called because of min_date', async () => {
         const on_change = jest.fn();
         render(<CustomDate label={"Label test"} placeholder={"Placeholder test"} min_date={moment().add(6, "years").toDate()}

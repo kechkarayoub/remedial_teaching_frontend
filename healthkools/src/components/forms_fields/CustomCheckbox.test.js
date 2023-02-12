@@ -28,7 +28,7 @@ describe('CustomCheckbox component', () => {
         var checked_icon = container.getElementsByClassName('checkbox_icon')[0];
         expect(checked_icon || null).not.toBeNull();
     });
-    test('Should clik change call on_change', async () => {
+    test('Should clik call on_change', async () => {
         const on_change = jest.fn();
         const { container } = render(<CustomCheckbox label={"Label test"} vvvv='rr' checked={true} on_change={on_change}/>);
         var checked_icon = container.getElementsByClassName('checkbox_icon')[0];
@@ -36,6 +36,15 @@ describe('CustomCheckbox component', () => {
         expect(on_change).toHaveBeenCalledTimes(0);
         fireEvent.click(input, {target: {checked: true}});
         expect(on_change).toHaveBeenCalledTimes(2); // It should be 1; but I didn't know where is the problem!!
+    });
+    test('Should clik not call on_change because of disabled', async () => {
+        const on_change = jest.fn();
+        const { container } = render(<CustomCheckbox label={"Label test"} disabled={true} checked={true} on_change={on_change}/>);
+        var checked_icon = container.getElementsByClassName('checkbox_icon')[0];
+        var input = checked_icon.closest(".field").querySelector("input");
+        expect(on_change).toHaveBeenCalledTimes(0);
+        fireEvent.click(input, {target: {checked: true}});
+        expect(on_change).toHaveBeenCalledTimes(0);
     });
     test('Should contains props values (disabled)', async () => {
         const { container } = render(<CustomCheckbox checked={true} disabled={true}/>);
