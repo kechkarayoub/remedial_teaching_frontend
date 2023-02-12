@@ -468,7 +468,9 @@ class SignInUpModal extends Component {
                     error_message={error_messages.phone_number} on_change={(val, is_valid_phone_number_) => this.handleFieldChange(val, "phone_number", is_valid_phone_number_)} default_country={country_code}/>
                   <CustomDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
                     value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
-                    error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}/>
+                    error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}
+                    max_date={moment().add(-6, "years").toDate()}
+                  />
                   <CustomGender added_class="col-12 col-md-6" label={this.props.t("Gender")} 
                     value={gender} invalid_message={invalid_messages.gender} valid_message={valid_messages.gender}
                     error_message={error_messages.gender} on_change={(val) => this.handleFieldChange(val, "gender")}/>

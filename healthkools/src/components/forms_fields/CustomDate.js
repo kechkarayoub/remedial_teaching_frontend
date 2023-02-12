@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
+import DatePicker from "react-datepicker";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
-import moment from "moment";
-import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import fr from "date-fns/locale/fr";
-import "react-datepicker/dist/react-datepicker.css";
-import { get } from "services/storage";
-import { setInitLocale } from "utils/date_picker";
+import moment from "moment";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { get } from "services/storage";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import { setInitLocale } from "utils/date_picker";
+import { withTranslation } from 'react-i18next';
+
+import "react-datepicker/dist/react-datepicker.css";
+
 setInitLocale(get("current_language"));
 
 class CustomDate extends Component {
@@ -22,6 +24,8 @@ class CustomDate extends Component {
       error_message: props.error_message,
       invalid_message: props.invalid_message,
       label: props.label,
+      max_date: props.max_date,
+      min_date: props.min_date,
       placeholder: props.placeholder,
       valid_message: props.valid_message,
       value: props.value || null,
@@ -35,6 +39,8 @@ class CustomDate extends Component {
     label: "",
     invalid_message: "",
     on_change: null,
+    max_date: null,
+    min_date: null,
     placeholder: "",
     valid_message: "",
     value: null,
@@ -47,6 +53,8 @@ class CustomDate extends Component {
         error_message: props.error_message,
         invalid_message: props.invalid_message,
         label: props.label,
+        max_date: props.max_date,
+        min_date: props.min_date,
         placeholder: props.placeholder,
         valid_message: props.valid_message,
         value: props.value || null,
@@ -54,12 +62,12 @@ class CustomDate extends Component {
 }
 
   render() {
-    const {added_class, disabled, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
+    const {added_class, disabled, error_message, invalid_message, label, max_date, min_date, placeholder, valid_message, value} = this.state;
     return (
       <CustomDateStyle className={`field_input input_date ${added_class || ""}`}>
         <div className="field">
             <label data-testid="label">{label}</label>
-            <DatePicker className={``} maxDate={moment().add(-6, "years").toDate()} selected={value} onChange={(date) => {
+            <DatePicker className={``} minDate={min_date} maxDate={max_date} selected={value} onChange={(date) => {
                 if(this.props.on_change){
                   this.props.on_change(date);
                 }
@@ -107,6 +115,8 @@ CustomDate.propTypes = {
     PropTypes.func,
     PropTypes.object,
   ]),
+  max_date: PropTypes.object,
+  min_date: PropTypes.object,
   placeholder: PropTypes.string,
   valid_message: PropTypes.string,
   value: PropTypes.oneOfType([
