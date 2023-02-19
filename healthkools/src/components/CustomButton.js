@@ -10,6 +10,7 @@ class CustomButton extends Component {
     }
     static defaultProps = {
         added_class: "",
+        disabled: false,
         on_click: null,
         style: {},
         t: val => val,
@@ -19,9 +20,9 @@ class CustomButton extends Component {
     render(){
         var test_id = this.props.test_id || ("custom_button_" + parseInt(Math.random() * 100));
         return(
-            <CustomButtonStyle data-testid={test_id}
-                className={`btn ${this.props.added_class || ""}`} type='button' onClick={evt => {
-                    if(this.props.on_click){
+            <CustomButtonStyle data-testid={test_id} disabled={this.props.disabled}
+                className={`btn ${this.props.added_class || ""} ${this.props.disabled ? "disabled" : ""}`} type='button' onClick={evt => {
+                    if(this.props.on_click && !this.props.disabled){
                         this.props.on_click(evt);
                     }
                 }}
@@ -47,7 +48,9 @@ const CustomButtonStyle = styled.button`
             outline: none;
         }
     }
-
+    &.disabled{
+        cursor: not-allowed;
+    }
     &.btn-rounded{
         border-radius: 20px;
     }
@@ -60,6 +63,7 @@ const CustomButtonStyle = styled.button`
 `;
 CustomButton.propTypes = {
     added_class: PropTypes.string,
+    disabled: PropTypes.bool,
     on_click: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.object,
