@@ -49,12 +49,12 @@ class SignInUpModal extends Component {
       gender: "",
       invalid_messages: {},
       is_submitting: false,
-      is_valid_phone_number: false,
+      is_valid_mobile_phone_number: false,
       last_name: "",
+      mobile_phone_number: "",
       password: "",
       password_sign_in: "",
       password_confirmation: "",
-      phone_number: "",
       registration_label: this.props.t("Sign up"),
       username: "",
       email_or_username: "",
@@ -129,11 +129,11 @@ class SignInUpModal extends Component {
       gender: "",
       invalid_messages: {},
       is_submitting: false,
-      is_valid_phone_number: false,
+      is_valid_mobile_phone_number: false,
       last_name: "",
       password: "",
       password_confirmation: "",
-      phone_number: "",
+      mobile_phone_number: "",
       registration_label: this.props.t("Sign up"),
       username: "",
       valid_messages: {},
@@ -241,8 +241,8 @@ class SignInUpModal extends Component {
       state.country_name = val2;
       this.setState(state);
     }
-    else if(field === "phone_number"){
-      state.is_valid_phone_number = val2;
+    else if(field === "mobile_phone_number"){
+      state.is_valid_mobile_phone_number = val2;
       this.setState(state);
     }
     else if(field === "password"){
@@ -278,8 +278,8 @@ class SignInUpModal extends Component {
 
   handleRegistration = () => {
     const {address, birthday, country_code, current_language, email, error_messages, first_name, gender,
-      invalid_messages, is_valid_phone_number, last_name, password, password_confirmation,
-      phone_number, username} = this.state;
+      invalid_messages, is_valid_mobile_phone_number, last_name, password, password_confirmation,
+      mobile_phone_number, username} = this.state;
     var valid_form = true;
     var new_state = {
       network_error: undefined,
@@ -290,8 +290,8 @@ class SignInUpModal extends Component {
       country_code: country_code,
       current_language: current_language,
       gender: gender,
-      is_valid_phone_number: is_valid_phone_number,
-      phone_number: phone_number,
+      is_valid_mobile_phone_number: is_valid_mobile_phone_number,
+      mobile_phone_number: mobile_phone_number,
     };
     if(!email){
       error_messages.email = this.props.t("This field is required");
@@ -409,8 +409,8 @@ class SignInUpModal extends Component {
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name,
-      gender, invalid_messages, is_valid_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
-      phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
+      gender, invalid_messages, is_valid_mobile_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
+      mobile_phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     var direction_class = current_language === "ar" ? "rtl" : "ltr";
     return (
@@ -463,9 +463,9 @@ class SignInUpModal extends Component {
                     placeholder={this.props.t("Choose a country")} value={country_code} current_language={current_language}
                     invalid_message={invalid_messages.country_code} valid_message={valid_messages.country_code} test_id="country_custom_select"
                     error_message={error_messages.country_code} on_change={(val, val2) => this.handleFieldChange(val, "country_code", val2)}/>
-                  <CustomPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Phone number")} placeholder={this.props.t("Phone number")} 
-                    value={phone_number} invalid_message={invalid_messages.phone_number} valid_message={valid_messages.phone_number} is_valid_phone_number={is_valid_phone_number}
-                    error_message={error_messages.phone_number} on_change={(val, is_valid_phone_number_) => this.handleFieldChange(val, "phone_number", is_valid_phone_number_)} default_country={country_code}/>
+                  <CustomPhoneNumber added_class="col-12 col-md-6" label={this.props.t("Mobile phone number")} placeholder={this.props.t("Mobile phone number")}
+                    value={mobile_phone_number} invalid_message={invalid_messages.mobile_phone_number} valid_message={valid_messages.mobile_phone_number} is_valid_mobile_phone_number={is_valid_mobile_phone_number}
+                    error_message={error_messages.mobile_phone_number} on_change={(val, is_valid_mobile_phone_number_) => this.handleFieldChange(val, "mobile_phone_number", is_valid_mobile_phone_number_)} default_country={country_code}/>
                   <CustomDate added_class="col-12 col-md-6" label={this.props.t("Date of Birth")} placeholder={this.props.t("Date of Birth")} 
                     value={birthday} invalid_message={invalid_messages.birthday} valid_message={valid_messages.birthday}
                     error_message={error_messages.birthday} on_change={(val) => this.handleFieldChange(val, "birthday")}
