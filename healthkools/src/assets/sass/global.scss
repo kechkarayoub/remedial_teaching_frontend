@@ -203,3 +203,9 @@ textarea{
     }
 }
 
+.hidden{
+    position: absolute;
+    visibility: hidden;
+    z-index: -1;
+}
+
