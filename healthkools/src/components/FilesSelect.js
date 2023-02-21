@@ -8,7 +8,7 @@ class FilesSelect extends Component {
     super(props);
   }
   static defaultProps = {
-    accept: "*/*",
+    accept: "*/*", // It must be one of: - "*/*"(default): All files. - "image/*": Images. - "application/pdf": Pdfs. - ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel": Excels. - ...
     added_className: "",
     containerStyle: null,
     disabled: false,
