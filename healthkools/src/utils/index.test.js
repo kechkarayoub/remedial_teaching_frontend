@@ -1,4 +1,5 @@
-import {shuffle} from "utils/index";
+import {COLORS, get_random_color, shuffle} from "utils/index";
+
 describe('Shuffle function', () => {
     test('Test shuffle', () => {
         var array = [1, 2, 3, 4, 5, 6];
@@ -19,5 +20,13 @@ describe('Shuffle function', () => {
         expect(shuffled_array.length).toBe(array.length);
         expect(are_the_same).toBe(true);
         expect(are_the_same2).toBe(false);
+    });
+});
+
+describe('Get_random_color function', () => {
+    test('Test get_random_color', () => {
+        var random_color = get_random_color();
+        var index_color = COLORS.indexOf(random_color);
+        expect(index_color).not.toBe(-1);
     });
 });
