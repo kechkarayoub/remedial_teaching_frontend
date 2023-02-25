@@ -60,7 +60,6 @@ const FilesSelectStyle = styles.div`
 FilesSelect.propTypes = {
   accept: PropTypes.string,
   added_className: PropTypes.string,
-  bg_color: PropTypes.string,
   containerStyle: PropTypes.object,
   disabled: PropTypes.bool,
   multiple: PropTypes.bool,

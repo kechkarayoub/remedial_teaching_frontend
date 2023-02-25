@@ -43,18 +43,20 @@ class InitialsColor extends Component {
   }
 };
 const InitialsColorStyle = styles.div`
+  height: 130px;
   margin: auto;
-  height: 120px;
-  width: 120px;
+  padding: 10px;
+  width: 130px;
   .initials_content{
     border-radius: 50%;
     color: white;
-    font-size: 2.2em;
+    font-size: 3em;
     font-weight: bold;
     height: 110px;
     line-height: 110px;
     margin: auto;
     text-align: center;
+    text-transform: uppercase;
     vertical-align: middle;
     width: 110px;
   }
