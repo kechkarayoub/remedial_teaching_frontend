@@ -54,6 +54,22 @@ export const feeds_api_get = (api_key, url) => {
   });
 };
 
+var check_if_files_storage_api_sent = false;
+export const files_storage_api_post = (data) => {
+  if(!check_if_files_storage_api_sent){
+    check_if_files_storage_api_sent = true;
+    return instance.post('/utils/files_storage_api', data,
+    )
+    .then(res => {
+      check_if_files_storage_api_sent = false;
+      return res.data;
+    })
+    .catch(err => {
+      check_if_files_storage_api_sent = false;
+      console.log(err);
+    });
+  }
+};
 
 export const get_geo_info = (api_key) => {
   return axios.get('https://geolocation-db.com/json/'+api_key)

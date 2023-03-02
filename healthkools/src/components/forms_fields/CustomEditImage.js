@@ -4,6 +4,7 @@ import styles from "styled-components";
 import FilesSelect from "components/FilesSelect";
 import InitialsColor from "components/InitialsColor";
 import UserImage from "components/UserImage";
+import {store_files} from "utils/files_storage";
 import { withTranslation } from 'react-i18next';
 class CustomEditImage extends Component {
   constructor(props){
@@ -13,6 +14,7 @@ class CustomEditImage extends Component {
       image_url: props.value,
       initials: props.initials,
       initials_bg_color: props.initials_bg_color,
+      uploading: false,
     };
   }
   static defaultProps = {
@@ -37,12 +39,60 @@ class CustomEditImage extends Component {
     };
   }
 
+  handleImageChange2 = (evt) => {
+    let files = evt.target.files;
+    let formData = new FormData();
+    for(var i=0; i < files.length; i++){
+      formData.append("file" + "_" + (i + 1), files[i], files[i].name);
+    }
+    // this.setState({
+    //   uploading: true,
+    // });
+    store_files(formData).then(res => {
+      if(res && res.files){
+        let file_res = res.files[0];
+        this.props.on_change(file_res.url);
+      }
+      else{
+        console.log("Error...");
+      }
+    })
+    .catch(err => {
+      this.setState({
+        uploading: false,
+      });
+      console.log(err);
+    });
+  }
+
   handleImageChange = (evt) => {
-    this.props.on_change("");
+    let files = evt.target.files;
+    let formData = new FormData();
+    for(var i=0; i < files.length; i++){
+      formData.append("file" + "_" + (i + 1), files[i], files[i].name);
+    }
+    // this.setState({
+    //   uploading: true,
+    // });
+    store_files(formData).then(res => {
+      if(res && res.files){
+        let file_res = res.files[0];
+        this.props.on_change(file_res.url);
+      }
+      else{
+        console.log("Error...");
+      }
+    })
+    .catch(err => {
+      this.setState({
+        uploading: false,
+      });
+      console.log(err);
+    });
   }
 
   render(){
-    const {full_name, image_url, initials, initials_bg_color} = this.state;
+    const {full_name, image_url, initials, initials_bg_color, uploading} = this.state;
     return (
       <CustomEditImageStyle className={this.props.added_class} style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
         {image_url || !initials ?
