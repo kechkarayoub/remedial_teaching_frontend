@@ -1,10 +1,14 @@
 {
   "Address": "العنوان",
   "Already have an account? Log in here.": "هل لديك حساب؟ سجل الدخول من هنا.",
+  "An error has occurred. Please try again or contact the development team.": "حدث خطأ. يرجى المحاولة مرة أخرى أو اتصل بفريق التطوير.",
   "Ar": "عر",
   "Arabic": "العربية",
+  "Change": "غير",
+  "Choose a country": "اختر بلدا",
   "Close": "إغلاق",
   "Confirm password": "تأكيد كلمة المرور",
+  "Confirm": "أكد",
   "Contact us": "اتصل بنا",
   "Cookies and other storage technologies": "ملفات تعريف الارتباط وتقنيات التخزين الأخرى",
   "Country": "البلد",
@@ -36,7 +40,7 @@
   "Passwords not match": "كلمات المرور غير متطابقة",
   "Phone number": "رقم الهاتف",
   "Read more...": "اقرأ أكثر...",
-  "Choose a country": "اختر بلدا",
+  "Select": "اختر",
   "Sign in": "تسجيل الدخول",
   "Sign in icon": "أيقونة تسجيل الدخول",
   "Sign up": "التسجيل",
@@ -49,9 +53,11 @@
   "Too short": "قصير جدا",
   "Try again": "حاول مجددا",
   "United States flag": "علم الولايات المتحدة",
+  "Uploading...": "تحميل...",
   "Username": "اسم المستخدم",
   "Username or email": "اسم المستخدم أو البريد الالكتروني",
   "Weak": "ضعيف",
   "You don't have an account yet? Register here.": "ليس لديك حساب؟ سجل من هنا.",
-  "Your account is created": "تم إنشاء حسابك"
+  "Your account is created": "تم إنشاء حسابك",
+  "You must validate the cropping or delete the selected image": "يجب تاكيد الاقتصاص أو حذف الصورة المحددة"
 }

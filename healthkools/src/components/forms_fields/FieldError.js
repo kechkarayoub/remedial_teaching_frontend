@@ -8,25 +8,28 @@ import PropTypes from 'prop-types';
   constructor(props) {
     super(props);
     this.state = {
+      added_class: props.added_class,
       error_message: props.error_message,
     };
   }
   static defaultProps = {
+    added_class: "",
     error_message: "",
     test_id: "",
   };
 
   static getDerivedStateFromProps(props, state) {
     return {
+      added_class: props.added_class,
       error_message: props.error_message,
     };
   }
 
   render() {
-    const {error_message} = this.state;
+    const {added_class, error_message} = this.state;
     var test_id = this.props.test_id || "field_error_test_id";
     return (
-      <FieldErrorStyle className={`field_error`} data-testid={test_id}>
+      <FieldErrorStyle className={`field_error ${added_class}`} data-testid={test_id}>
         {error_message}
       </FieldErrorStyle>
     );

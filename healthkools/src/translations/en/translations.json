@@ -1,10 +1,14 @@
 {
   "Address": "Address",
   "Already have an account? Log in here.": "Already have an account? Log in here.",
+  "An error has occurred. Please try again or contact the development team.": "An error has occurred. Please try again or contact the development team.",
   "Ar": "Ar",
   "Arabic": "Arabic",
+  "Change": "Change",
+  "Choose a country": "Choose a country",
   "Close": "Close",
   "Confirm password": "Confirm password",
+  "Confirm": "Confirm",
   "Contact us": "Contact us",
   "Cookies and other storage technologies": "Cookies and other storage technologies",
   "Country": "Country",
@@ -36,7 +40,7 @@
   "Passwords not match": "Passwords not match",
   "Phone number": "Phone number",
   "Read more...": "Read more...",
-  "Choose a country": "Choose a country",
+  "Select": "Select",
   "Sign in": "Sign in",
   "Sign in icon": "Sign in icon",
   "Sign up": "Sign up",
@@ -49,9 +53,11 @@
   "Too short": "Too short",
   "Try again": "Try again",
   "United States flag": "United States flag",
+  "Uploading...": "Uploading...",
   "Username": "Username",
   "Username or email": "Username or email",
   "Weak": "Weak",
   "You don't have an account yet? Register here.": "You don't have an account yet? Register here.",
-  "Your account is created": "Your account is created"
+  "Your account is created": "Your account is created",
+  "You must validate the cropping or delete the selected image": "You must validate the cropping or delete the selected image"
 }
