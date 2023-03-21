@@ -51,6 +51,8 @@ describe('CropImage component', () => {
         const on_change = jest.fn();
         const wrapper = mount(<CropImage text={"Button"} on_change={on_change} raise_error={true} is_test={true} image_url="image_url"/>);
         const button = wrapper.find(".validate_div .validate");
+        var errors = wrapper.find("div.field_error");
+        expect(errors.length).toEqual(0);
         // Nous simulons un clic sur le bouton
         button.simulate('click');
 
@@ -63,6 +65,8 @@ describe('CropImage component', () => {
         expect(wrapper.state('error_message')).toEqual("An error has occurred. Please try again or contact the development team.");
         expect(wrapper.state('uploading')).toEqual(false);
         expect(on_change).toHaveBeenCalledTimes(0);
+        errors = wrapper.find("div.field_error");
+        expect(errors.length).toEqual(1);
     });
     test('Should call on_change', async () => {
         const on_change = jest.fn();
