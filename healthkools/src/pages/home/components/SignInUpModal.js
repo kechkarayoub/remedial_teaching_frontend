@@ -2,8 +2,10 @@ import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
 import { get_geo_info, check_if_email_or_username_exists_api_get } from 'services/api';
 import { get_contries_select_options } from 'utils/countries_list';
 import { format_as_date } from 'utils/datetime_format';
+import { get_random_color} from "utils/index";
 import CustomButton from "components/CustomButton";
 import CustomDate from "components/forms_fields/CustomDate";
+import CustomEditImage from "components/forms_fields/CustomEditImage";
 import CustomGender from "components/forms_fields/CustomGender";
 import CustomInput from "components/forms_fields/CustomInput";
 import CustomPassword from "components/forms_fields/CustomPassword";
@@ -13,6 +15,9 @@ import CustomTextarea from "components/forms_fields/CustomTextarea";
 import CustomTSNotice from "components/forms_fields/CustomTSNotice";
 import DatePicker from "react-datepicker";
 import FieldError from "components/forms_fields/FieldError";
+// import FilesSelect from "components/FilesSelect";
+// import InitialsColor from "components/InitialsColor";
+// import UserImage from "components/UserImage";
 import jwt_decode from "jwt-decode";
 import moment from 'moment';
 import OAuthButtonContainer from 'pages/home/components/OAuthButtonContainer';
@@ -47,6 +52,8 @@ class SignInUpModal extends Component {
       error_messages: {},
       first_name: "",
       gender: "",
+      image_url: "",
+      initials_bg_color: get_random_color(),
       invalid_messages: {},
       is_submitting: false,
       is_valid_mobile_phone_number: false,
@@ -127,6 +134,8 @@ class SignInUpModal extends Component {
       error_messages: {},
       first_name: "",
       gender: "",
+      image_url: "",
+      initials_bg_color: get_random_color(),
       invalid_messages: {},
       is_submitting: false,
       is_valid_mobile_phone_number: false,
@@ -264,6 +273,9 @@ class SignInUpModal extends Component {
       this.setState(state);
     }
     else{
+      if(field == "image_url"){
+        this.image_url_is_cropping = false;
+      }
       this.setState(state);
     }
   }
@@ -278,6 +290,7 @@ class SignInUpModal extends Component {
 
   handleRegistration = () => {
     const {address, birthday, country_code, current_language, email, error_messages, first_name, gender,
+      image_url, initials_bg_color,
       invalid_messages, is_valid_mobile_phone_number, last_name, password, password_confirmation,
       mobile_phone_number, username} = this.state;
     var valid_form = true;
@@ -290,9 +303,14 @@ class SignInUpModal extends Component {
       country_code: country_code,
       current_language: current_language,
       gender: gender,
+      image_url: image_url,
+      initials_bg_color: initials_bg_color,
       is_valid_mobile_phone_number: is_valid_mobile_phone_number,
       mobile_phone_number: mobile_phone_number,
     };
+    if(this.image_url_is_cropping){
+      error_messages.image_url = this.props.t("You must validate the cropping or delete the selected image")
+    }
     if(!email){
       error_messages.email = this.props.t("This field is required");
       valid_form = false;
@@ -409,7 +427,7 @@ class SignInUpModal extends Component {
   render() {
     var pat = /^http?:\/\//i;
     const {address, birthday, country_code, current_language, default_view, email, email_or_username, error_messages, first_name,
-      gender, invalid_messages, is_valid_mobile_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
+      gender, image_url, initials_bg_color, invalid_messages, is_valid_mobile_phone_number, last_name, network_error, password, password_confirmation, password_sign_in,
       mobile_phone_number, registration_label, registration_messages, username, valid_messages} = this.state;
     var is_sign_up = default_view === "sign_up";
     var direction_class = current_language === "ar" ? "rtl" : "ltr";
@@ -441,7 +459,14 @@ class SignInUpModal extends Component {
                 />
                 {is_sign_up ?
                 <>
-                  <CustomInput test_id="first_name_test_id" added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")} 
+                  <CustomEditImage added_class="col-12" initials={(last_name ? last_name.charAt(0) : "") + (first_name ? first_name.charAt(0) : "")} label={this.props.t("Image")} initials_bg_color={initials_bg_color}  title={last_name + " " + first_name}
+                    value={image_url} on_change={(val) => this.handleFieldChange(val, "image_url")}
+                    handleCropping={(image_url_is_cropping) => {
+                      this.image_url_is_cropping = image_url_is_cropping;
+                    }}
+                    error_message={error_messages.image_url}
+                  />
+                  <CustomInput test_id="first_name_test_id" added_class="col-12 col-md-6" label={this.props.t("First name")} placeholder={this.props.t("First name")}
                     value={first_name} invalid_message={invalid_messages.first_name} valid_message={valid_messages.first_name}
                     error_message={error_messages.first_name} on_change={(val) => this.handleFieldChange(val, "first_name")}/>
                   <CustomInput test_id="last_name_test_id" added_class="col-12 col-md-6" label={this.props.t("Last name")} placeholder={this.props.t("Last name")} 
