@@ -24,7 +24,7 @@ class FilesSelect extends Component {
     style.color = "white";
     style.fontWeight = "bold";
     return (
-      <FilesSelectStyle className={"files_select " + this.props.added_className} style={this.props.containerStyle || {}} >
+      <FilesSelectStyle className={"files_select " + this.props.added_className} style={this.props.containerStyle || {}} data-testid={"files_select_container_test_id"}>
         <input type="file" className="hidden" multiple={this.props.multiple} accept={this.props.accept} ref={inp => (this.files_select=inp)} onChange={evt => {
           if(this.props.on_change && !this.props.disabled){
             this.props.on_change(evt);

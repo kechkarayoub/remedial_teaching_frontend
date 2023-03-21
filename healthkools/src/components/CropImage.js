@@ -175,7 +175,7 @@ class CropImage extends Component {
   render(){
     const {crop, error_message, image_url, uploading} = this.state;
     return (
-      <CropImageStyle >
+      <CropImageStyle className="crop_image_container">
         <div className="crop_container" ref={ref => (this.crop_container = ref)} style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
           {this.props.on_remove && image_url &&
             <i className="fa fa-times remove_icon" onClick={evt => {

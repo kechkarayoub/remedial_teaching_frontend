@@ -11,6 +11,8 @@ jest.mock('react-i18next', () => ({
 describe('FilesSelect component', () => {
     test('Should render without crash', async () => {
         render(<FilesSelect/>);
+        const files_selects = screen.getAllByTestId("files_select_container_test_id");
+        expect(files_selects.length).toBe(1);
     });
     test('Should contains text', async () => {
         render(<FilesSelect text={"Files select"}/>);
