@@ -56,6 +56,30 @@ module.exports = {
             return res;
           });
         }
+        else if(url.indexOf("/utils/files_storage_api") !== -1){
+          var res = {};
+          if(data.file_1){
+            res = {
+              success: true, 
+              files: [
+                {
+                  content_type: "image/jpeg",
+                  name: "file_name",
+                  url: "file_url",
+                },
+              ],
+              raise_error: data.raise_error,
+            };
+            if(data.raise_error){
+              res = {};
+            }
+          }
+          return Promise.resolve({data: res}).then(res => {
+            return res;
+          }).catch(err => {
+            return err;
+          });
+        }
       }
     }
   },
