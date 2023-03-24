@@ -25,7 +25,6 @@ describe('CustomEditImage component', () => {
         expect(initials_colors.length).toBe(1);
         const initials_colors_by_txt = screen.queryAllByText('in');
         expect(initials_colors_by_txt.length).toBe(1);
-        
         const custom_edit_images = screen.queryAllByTestId('test_id');
         expect(custom_edit_images.length).toBe(1);
         const files_selects = custom_edit_images[0].querySelectorAll(".files_select");
@@ -60,7 +59,7 @@ describe('CustomEditImage component', () => {
         expect(errors.length).toBe(1);
         expect(errors_txt.length).toBe(1);
     });
-    test('Should on_change not called if crop_image is true', async () => {
+    test('Should on_change not called if crop_image is true and called after croping validation', async () => {
         const on_change = jest.fn();
         const wrapper = mount(<CustomEditImage on_change={on_change} raise_error={true} is_test={true} />);
         const button = wrapper.find(".files_select input");
@@ -68,9 +67,10 @@ describe('CustomEditImage component', () => {
         expect(errors.length).toEqual(0);
         var crop_image_containers = wrapper.find("div.crop_image_container");
         expect(crop_image_containers.length).toEqual(0);
+        var validate_crop_btns = wrapper.find("div.crop_image_container .validate_div .validate");
+        expect(validate_crop_btns.length).toEqual(0);
         // Nous simulons un clic sur le bouton
         button.simulate('change');
-
         // Nous attendons que l'API soit appelée et que le composant se mette à jour
         await new Promise(resolve => {
             setImmediate(resolve);
@@ -85,7 +85,16 @@ describe('CustomEditImage component', () => {
         expect(errors.length).toEqual(0);
         crop_image_containers = wrapper.find("div.crop_image_container");
         expect(crop_image_containers.length).toEqual(1);
-        //...
+        var validate_crop_btns = wrapper.find("div.crop_image_container .validate_div .validate");
+        expect(validate_crop_btns.length).toEqual(1);
+        var validate_crop_button = wrapper.find("div.crop_image_container .validate_div .validate");
+        validate_crop_button.simulate('click');
+        await new Promise(resolve => {
+            setImmediate(resolve);
+        });
+        wrapper.update();
+        expect(wrapper.state('error_message')).toEqual("");
+        expect(on_change).toHaveBeenCalledTimes(1);
     });
     test('Should on_change called if crop_image is false', async () => {
         const on_change = jest.fn();
@@ -95,7 +104,6 @@ describe('CustomEditImage component', () => {
         expect(errors.length).toEqual(0);
         // Nous simulons un clic sur le bouton
         button.simulate('change');
-
         // Nous attendons que l'API soit appelée et que le composant se mette à jour
         await new Promise(resolve => {
             setImmediate(resolve);
@@ -109,54 +117,4 @@ describe('CustomEditImage component', () => {
         errors = wrapper.find("div.field_error");
         expect(errors.length).toEqual(1);
     });
-    // test('Should contains image_url', async () => {
-    //     render(<CustomEditImage image_url="http://localhost/image_url"/>);
-    //     const image = screen.getByRole('img');
-    //     expect(image.src).toBe("http://localhost/image_url");
-    // });
-    // test('Should remove icon not appear if not image_url and not on_remove props', async () => {
-    //     render(<CustomEditImage/>);
-    //     const remove_icons = screen.queryAllByTestId('user_image_remove_icon_test_id');
-    //     expect(remove_icons.length).toBe(0);
-    // });
-    // test('Should remove icon not appear if not image_url and on_remove props', async () => {
-    //     const on_remove = jest.fn();
-    //     render(<CustomEditImage on_remove={on_remove}/>);
-    //     const remove_icons = screen.queryAllByTestId('user_image_remove_icon_test_id');
-    //     expect(remove_icons.length).toBe(0);
-    // });
-    // test('Should remove icon not appear if image_url and not on_remove props', async () => {
-    //     render(<CustomEditImage image_url={"image_url"}/>);
-    //     const remove_icons = screen.queryAllByTestId('user_image_remove_icon_test_id');
-    //     expect(remove_icons.length).toBe(0);
-    // });
-    // test('Should remove icon appear if image_url and on_remove props', async () => {
-    //     const on_remove = jest.fn();
-    //     render(<CustomEditImage on_remove={on_remove} image_url={"image_url"}/>);
-    //     const remove_icons = screen.queryAllByTestId('user_image_remove_icon_test_id');
-    //     expect(remove_icons.length).toBe(1);
-    // });
-    // test('On_click should not called on clicking on remove icon but on_remove should called', async () => {
-    //     const on_click = jest.fn();
-    //     const on_remove = jest.fn();
-    //     render(<CustomEditImage on_click={on_click} on_remove={on_remove} image_url="image_url"/>);
-    //     const remove_icon = screen.getByTestId('user_image_remove_icon_test_id');
-    //     const image = screen.getByRole('img');
-    //     expect(on_click).toHaveBeenCalledTimes(0);
-    //     expect(on_remove).toHaveBeenCalledTimes(0);
-    //     fireEvent.click(remove_icon, {target: {}});
-    //     expect(on_click).toHaveBeenCalledTimes(0);
-    //     expect(on_remove).toHaveBeenCalledTimes(1);
-    //     fireEvent.click(image, {target: {}});
-    //     expect(on_click).toHaveBeenCalledTimes(1);
-    //     expect(on_remove).toHaveBeenCalledTimes(1);
-    // });
-    // test('On_click should called on click', async () => {
-    //     const on_click = jest.fn();
-    //     render(<CustomEditImage on_click={on_click}/>);
-    //     const image = screen.getByRole('img');
-    //     expect(on_click).toHaveBeenCalledTimes(0);
-    //     fireEvent.click(image, {target: {}});
-    //     expect(on_click).toHaveBeenCalledTimes(1);
-    // });
 });

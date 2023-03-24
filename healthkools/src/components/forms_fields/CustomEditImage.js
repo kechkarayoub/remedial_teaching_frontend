@@ -160,7 +160,7 @@ class CustomEditImage extends Component {
       <CustomEditImageStyle className={this.props.added_class} style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
         {current_image_url && crop_start ?
         <>
-          <CropImage image_name={this.state.image_name} on_remove={() => this.on_remove()} image_url={(current_image_url)} title={title} on_change={this.props.on_change} />
+          <CropImage is_test={this.props.is_test} image_name={this.state.image_name} on_remove={() => this.on_remove()} image_url={(current_image_url)} title={title} on_change={this.props.on_change} />
         </>
         :
         <>
