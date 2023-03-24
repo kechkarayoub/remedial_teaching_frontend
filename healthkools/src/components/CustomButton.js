@@ -56,6 +56,9 @@ const CustomButtonStyle = styled.button`
     }
     &.default-bg-color{
         background-color: ${colors.default_color};
+        &:active{
+            background-color: ${colors.default_color};
+        }
     }
     &.default-color{
         color: ${colors.default_color};

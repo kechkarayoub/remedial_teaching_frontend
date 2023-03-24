@@ -43,17 +43,6 @@ const FilesSelectStyle = styles.div`
   margin: auto;
   text-align: center;
   width: 100%;
-  .initials_content{
-    border-radius: 50%;
-    color: white;
-    font-size: 2.2em;
-    font-weight: bold;
-    height: 110px;
-    line-height: 110px;
-    margin: auto;
-    text-align: center;
-    vertical-align: middle;
-    width: 110px;
   }
 `;
 

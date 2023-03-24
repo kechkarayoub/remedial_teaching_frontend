@@ -1,3 +1,4 @@
+import CustomButton from "components/CustomButton";
 import FieldError from "components/forms_fields/FieldError";
 import Loading from "components/Loading";
 import PropTypes from 'prop-types';
@@ -198,10 +199,14 @@ class CropImage extends Component {
           </ReactCrop>
         </div>
         <div className="validate_div">
-          <div className="validate" data-testid={"crop_validation_button_test_id"} onClick={evt => {
-            if(uploading) return;
-            this.handleValidCrop(evt);
-          }}>{this.props.t(uploading ? "Uploading..." : "Confirm")}</div>
+          <CustomButton
+            added_class="default-bg-color btn-rounded validate" text={uploading ? "Uploading..." : "Confirm"}
+            on_click={(evt) => {
+              if(uploading) return;
+              this.handleValidCrop(evt);
+            }}
+            style={{color: "white", }}
+          />
         </div>
         {error_message &&
             <FieldError error_message={error_message} added_class="ta_c" />
@@ -232,6 +237,7 @@ const CropImageStyle = styles.div`
     }
   }
   .validate_div{
+    text-align: center;
     .validate{
       background-color: ${colors.default_color};
       border-radius: 20px;
