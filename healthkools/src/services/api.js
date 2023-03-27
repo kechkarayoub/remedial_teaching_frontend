@@ -1,4 +1,5 @@
 import axios from "axios";
+import Compressor from 'compressorjs';
 import { set, get, clear } from "services/storage";
 
 
@@ -55,19 +56,71 @@ export const feeds_api_get = (api_key, url) => {
 };
 
 var check_if_files_storage_api_sent = false;
-export const files_storage_api_post = (data) => {
+export const files_storage_api_post = (data, do_not_compress_image) => {
   if(!check_if_files_storage_api_sent){
+    let images_files = {};  // Dict that will contains images to compress
+    let nbr_files = 0;  // Number of files to compress
+    // If file with key 'file_' + nbr_files exists and it's type is image, we will add it to images_files dict and we increment nbr_files
+    while(data.get("file_" + (nbr_files + 1))){
+      if(data.get("file_" + (nbr_files + 1)).type.indexOf('image/') >= 0){
+        images_files["file_" + (nbr_files + 1)] = data.get("file_" + (nbr_files + 1));
+      }
+      nbr_files++;
+    }
     check_if_files_storage_api_sent = true;
-    return instance.post('/utils/files_storage_api', data,
-    )
-    .then(res => {
-      check_if_files_storage_api_sent = false;
-      return res.data;
-    })
-    .catch(err => {
-      check_if_files_storage_api_sent = false;
-      console.log(err);
-    });
+    let images_files_keys = Object.keys(images_files);
+    // Check if do_not_compress_image flag is false and there ixists images to compress
+    if(!do_not_compress_image && images_files_keys.length > 0){
+      let nbr_compressed_files = 0;
+      return new Promise((resolve, reject) => {
+        for(let i=0; i < images_files_keys.length; i++){
+          let image_key = images_files_keys[i];
+          let file = images_files[image_key];
+          new Compressor(file, {
+            quality: 0.6,
+            maxWidth: 1024,
+            maxHeight: 1024,
+            // The compression process is asynchronous,
+            // which means you have to access the `result` in the `success` hook function.
+            success(result) {
+              // The third parameter is required for server
+              data.set(image_key, result, result.name);
+              nbr_compressed_files++;
+              if(nbr_compressed_files == images_files_keys.length){
+                // if all files are compressed we send the compressed image file to server with XMLHttpRequest.
+                return instance.post('/utils/files_storage_api', data, {
+                  headers: {
+                    "Content-Type": 'multipart/form-data' 
+                  },
+                }).then(res => {
+                  check_if_files_storage_api_sent = false;
+                  resolve(res.data);
+                })
+                .catch(err => {
+                  check_if_files_storage_api_sent = false;
+                  console.log(err);
+                  reject(err);
+                });
+              }
+            },
+            error(err) {
+              reject(err);
+            },
+          });
+        };
+      });
+    }
+    else{
+      return instance.post('/utils/files_storage_api', data,
+      ).then(res => {
+        check_if_files_storage_api_sent = false;
+        return res.data;
+      })
+      .catch(err => {
+        check_if_files_storage_api_sent = false;
+        console.log(err);
+      });
+    }
   }
 };
 
