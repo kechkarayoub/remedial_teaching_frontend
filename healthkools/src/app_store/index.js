@@ -9,9 +9,11 @@ import loginReducer from 'app_store/reducers/loginReducer';
 // })
 // // const store = createStore(reducers, {}, applyMiddleware(promiseMiddleware));
 // export default store;
-import { createStore } from "redux";
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from "app_store/reducers";
 
-const store = createStore(rootReducer);
-
+const store = configureStore({
+    reducer: rootReducer,
+    // Optionally, you can provide more configuration options here
+});
 export default store;
