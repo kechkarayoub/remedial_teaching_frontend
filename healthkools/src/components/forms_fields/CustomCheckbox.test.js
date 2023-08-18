@@ -1,5 +1,5 @@
 import CustomCheckbox from "components/forms_fields/CustomCheckbox";
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
@@ -35,7 +35,7 @@ describe('CustomCheckbox component', () => {
         var input = checked_icon.closest(".field").querySelector("input");
         expect(on_change).toHaveBeenCalledTimes(0);
         fireEvent.click(input, {target: {checked: true}});
-        expect(on_change).toHaveBeenCalledTimes(2); // It should be 1; but I didn't know where is the problem!!
+        expect(on_change).toHaveBeenCalledTimes(1);
     });
     test('Should clik not call on_change because of disabled', async () => {
         const on_change = jest.fn();

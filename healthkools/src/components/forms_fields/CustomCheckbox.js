@@ -64,7 +64,8 @@ import { withTranslation } from 'react-i18next';
                 </div>
               } 
               label={label}
-              onChange={check_value => {
+              onClick={evt => {
+                let check_value = !checked;
                 if(this.props.on_change){
                     this.props.on_change(check_value);
                 }
