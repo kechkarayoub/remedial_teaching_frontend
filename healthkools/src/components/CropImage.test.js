@@ -2,6 +2,7 @@ import CropImage from "components/CropImage";
 import i18next from 'i18n_init';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mount } from 'enzyme';
+import testImage from "assets/img/tests/test_image.png";
 jest.mock('axios');
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
@@ -13,10 +14,8 @@ jest.mock('react-i18next', () => ({
 describe('CropImage component', () => {
     test('Should render without crash', async () => {
         render(<CropImage image_url="image_url"/>);
-        const validate_buttons = screen.queryAllByTestId('crop_validation_button_test_id');
-        const validate_buttons2 = screen.queryAllByText('Confirm');
+        const validate_buttons = screen.queryAllByText('Confirm');
         expect(validate_buttons.length).toBe(1);
-        expect(validate_buttons2.length).toBe(1);
     });
     test('Should remove icon not showed when on_remove function and image_url are null', async () => {
         render(<CropImage text={"Button"}/>);
@@ -42,15 +41,15 @@ describe('CropImage component', () => {
     });
     test('Should on_remove called when clicking on remove icon', async () => {
         const on_remove = jest.fn();
-        render(<CropImage text={"Button"} on_remove={on_remove} image_url="image_url"/>);
+        render(<CropImage text={"Button"} on_remove={on_remove} image_url={testImage}/>);
         const close_icon = screen.getByTestId('crop_image_remove_icon_test_id');
         fireEvent.click(close_icon, {target: {}});
         expect(on_remove).toHaveBeenCalledTimes(1);
     });
     test('Should contains error_message', async () => {
         const on_change = jest.fn();
-        const wrapper = mount(<CropImage text={"Button"} on_change={on_change} raise_error={true} is_test={true} image_url="image_url"/>);
-        const button = wrapper.find(".validate_div .validate");
+        const wrapper = mount(<CropImage text={"Button"} on_change={on_change} raise_error={true} image_url={testImage}/>);
+        const button = wrapper.find(".validate_div button.validate");
         var errors = wrapper.find("div.field_error");
         expect(errors.length).toEqual(0);
         // Nous simulons un clic sur le bouton

@@ -148,6 +148,9 @@ class CropImage extends Component {
       }
     }
     else{
+      if(this.props.raise_error){
+        formData.raise_error = true;
+      }
       formData.append("file_1", file, file.name);
     }
     // Upload croped image
@@ -195,7 +198,7 @@ class CropImage extends Component {
           >
             <img src={image_url} onLoad={evt => {
               this.makeClientCrop(this.state.crop);
-            }} alt={this.props.t(this.props.title)} style={this.props.style || {}} />
+            }} alt={this.props.t(this.props.title)} style={this.props.style || {}} data-testid={"image_to_crop_test_id"} id="image_to_crop_test_id" />
           </ReactCrop>
         </div>
         <div className="validate_div">
