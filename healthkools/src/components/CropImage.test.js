@@ -70,7 +70,7 @@ describe('CropImage component', () => {
     test('Should call on_change', async () => {
         const on_change = jest.fn();
         const wrapper = mount(<CropImage text={"Button"} on_change={on_change} is_test={true} image_url="image_url"/>);
-        const button = wrapper.find(".validate_div .validate");
+        const button = wrapper.find(".validate_div button.validate");
         // Nous simulons un clic sur le bouton
         button.simulate('click');
 
