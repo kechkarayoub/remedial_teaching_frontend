@@ -58,7 +58,7 @@ module.exports = {
         }
         else if(url.indexOf("/utils/files_storage_api") !== -1){
           var res = {};
-          if(data.file_1){
+          if(data.get("file_1")){
             res = {
               success: true, 
               files: [
@@ -68,9 +68,9 @@ module.exports = {
                   url: "file_url",
                 },
               ],
-              raise_error: data.raise_error,
+              raise_error: data.get("raise_error"),
             };
-            if(data.raise_error){
+            if(data.get("raise_error")){
               res = {};
             }
           }

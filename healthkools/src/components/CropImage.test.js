@@ -1,8 +1,9 @@
 import CropImage from "components/CropImage";
+import fetchMock from 'jest-fetch-mock';
 import i18next from 'i18n_init';
-import { act, fireEvent, render, screen } from '@testing-library/react';
-import { mount } from 'enzyme';
 import testImage from "assets/img/tests/test_image.png";
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { jpeg_data_url } from "utils/tests_utils";
 jest.mock('axios');
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
@@ -12,6 +13,13 @@ jest.mock('react-i18next', () => ({
     },
 }));
 describe('CropImage component', () => {
+    beforeAll(() => {
+      fetchMock.enableMocks();
+    });
+  
+    afterEach(() => {
+      fetchMock.resetMocks();
+    });
     test('Should render without crash', async () => {
         render(<CropImage image_url="image_url"/>);
         const validate_buttons = screen.queryAllByText('Confirm');
@@ -48,39 +56,60 @@ describe('CropImage component', () => {
     });
     test('Should contains error_message', async () => {
         const on_change = jest.fn();
-        const wrapper = mount(<CropImage text={"Button"} on_change={on_change} raise_error={true} image_url={testImage}/>);
-        const button = wrapper.find(".validate_div button.validate");
-        var errors = wrapper.find("div.field_error");
-        expect(errors.length).toEqual(0);
+        const wrapper = render(<CropImage text={"Button"} on_change={on_change} raise_error={true} image_url={"https://cdn-icons-png.flaticon.com/512/1040/1040238.png"}/>);
+        const imageElement = wrapper.getByTestId('image_to_crop_test_id');
+        expect(imageElement.src).toContain('https://cdn-icons-png.flaticon.com/512/1040/1040238.png');
+        const button = wrapper.getByTestId('confirm_button_test_id');
+        var errors = wrapper.queryAllByTestId('field_error_test_id');
+        var loadings = wrapper.queryAllByTestId('loading_css_test_id');
+        expect(errors).toHaveLength(0);
+        expect(loadings).toHaveLength(0);
         // Nous simulons un clic sur le bouton
-        button.simulate('click');
-
-        // Nous attendons que l'API soit appelée et que le composant se mette à jour
-        await new Promise(resolve => {
-            setImmediate(resolve);
-        });
-        wrapper.update();
-        // Nous vérifions que le state du composant a été mis à jour
-        expect(wrapper.state('error_message')).toEqual("An error has occurred. Please try again or contact the development team.");
-        expect(wrapper.state('uploading')).toEqual(false);
+        fireEvent.click(button)
+        errors = wrapper.queryAllByTestId('field_error_test_id');
+        expect(errors).toHaveLength(1);
+        loadings = wrapper.queryAllByTestId('loading_css_test_id');
+        expect(loadings).toHaveLength(0);
         expect(on_change).toHaveBeenCalledTimes(0);
-        errors = wrapper.find("div.field_error");
-        expect(errors.length).toEqual(1);
     });
-    test('Should call on_change', async () => {
-        const on_change = jest.fn();
-        const wrapper = mount(<CropImage text={"Button"} on_change={on_change} is_test={true} image_url="image_url"/>);
-        const button = wrapper.find(".validate_div button.validate");
-        // Nous simulons un clic sur le bouton
-        button.simulate('click');
-
-        // Nous attendons que l'API soit appelée et que le composant se mette à jour
-        await new Promise(resolve => {
-            setImmediate(resolve);
-        });
-        wrapper.update();
-        // Nous vérifions que le state du composant a été mis à jour
-        expect(wrapper.state('error_message')).toEqual("");
+    
+    test('should crop and generate an image', async () => {
+      const on_change = jest.fn();
+      // Mock FileReader
+      const mockFileReader = {
+        readAsDataURL: jest.fn(),
+        result: jpeg_data_url,
+        onloadend: null,
+      };
+      window.FileReader = jest.fn(() => mockFileReader);
+      // Mock canvas methods
+      HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
+        drawImage: jest.fn(),
+      }));
+      // Mock toBlob method
+      HTMLCanvasElement.prototype.toBlob = jest.fn((callback, type, quality) => {
+        callback(new Blob());
+      });
+      // Render the component
+      render(<CropImage image_url="image_url"  on_change={on_change} do_not_compress_image={true} />);
+      // Simulate image load
+      const imageElement = screen.getByTestId('image_to_crop_test_id');
+      act(() => {
+        fireEvent.load(imageElement);
+      });
+      // Wait for image processing to complete
+      await waitFor(() => {
+        expect(HTMLCanvasElement.prototype.toBlob).toHaveBeenCalled();
+      });
+      // Simulate FileReader's onloadend
+      act(() => {
+        mockFileReader.onloadend(); // Simulate FileReader's onloadend event
+      });
+      // Simulate cropping
+      const button = screen.getByTestId('confirm_button_test_id');
+      fireEvent.click(button);
+      await waitFor(async () => {
         expect(on_change).toHaveBeenCalledTimes(1);
+      });
     });
 });

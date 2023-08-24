@@ -58,6 +58,7 @@ export const feeds_api_get = (api_key, url) => {
 var check_if_files_storage_api_sent = false;
 export const files_storage_api_post = (data, do_not_compress_image) => {
   if(!check_if_files_storage_api_sent){
+    // to test this part
     let images_files = {};  // Dict that will contains images to compress
     let nbr_files = 0;  // Number of files to compress
     // If file with key 'file_' + nbr_files exists and it's type is image, we will add it to images_files dict and we increment nbr_files

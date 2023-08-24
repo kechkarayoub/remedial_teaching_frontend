@@ -24,7 +24,6 @@ class CropImage extends Component {
       error_message: "",
       image_name: image_name_,  // Name of image to crop
       image_url: props.image_url,  // Url of image to crop
-      is_test: props.is_test,  // Flag to test if we're in test mode or not
       raise_error: props.raise_error,  // Flag to raise error in promise or not
       uploading: false,  // Uploading flag for animation
     };
@@ -41,7 +40,6 @@ class CropImage extends Component {
     },
     image_name: "",
     image_url: "",
-    is_test: false,
     on_crop_completed: null,
     on_remove: null,
     raise_error: false,
@@ -139,42 +137,42 @@ class CropImage extends Component {
       error_message: "",
       uploading: true,
     });
-    let formData = new FormData(),
-      file = this.state.croppedImage;
-    if(this.props.is_test){
-      formData = {"file_1": {}};
-      if(this.props.raise_error){
-        formData.raise_error = true;
-      }
-    }
-    else{
+    try{
+      let formData = new FormData(),
+        file = this.state.croppedImage;
       if(this.props.raise_error){
         formData.raise_error = true;
       }
       formData.append("file_1", file, file.name);
-    }
-    // Upload croped image
-    store_files(formData).then(res => {
-      if(res && res.files){
-        let file_res = res.files[0];
-        this.props.on_change(file_res.url);
-      }
-      else{
+      // Upload croped image
+      store_files(formData, this.props.do_not_compress_image).then(res => {
+        if(res && res.files){
+          let file_res = res.files[0];
+          this.props.on_change(file_res.url);
+        }
+        else{
+          this.setState({
+            error_message: this.props.t("An error has occurred. Please try again or contact the development team."),
+            uploading: false,
+          });
+          console.log("Error...");
+          console.log(res);
+        }
+      })
+      .catch(err => {
         this.setState({
           error_message: this.props.t("An error has occurred. Please try again or contact the development team."),
           uploading: false,
         });
-        console.log("Error...");
-        console.log(res);
-      }
-    })
-    .catch(err => {
+        console.log(err);
+      });
+    }
+    catch{
       this.setState({
         error_message: this.props.t("An error has occurred. Please try again or contact the development team."),
         uploading: false,
       });
-      console.log(err);
-    });
+    }
   }
   render(){
     const {crop, error_message, image_url, uploading} = this.state;
@@ -203,6 +201,7 @@ class CropImage extends Component {
         </div>
         <div className="validate_div">
           <CustomButton
+            test_id="confirm_button_test_id"
             added_class="default-bg-color btn-rounded validate" text={uploading ? "Uploading..." : "Confirm"}
             on_click={(evt) => {
               if(uploading) return;
@@ -212,7 +211,7 @@ class CropImage extends Component {
           />
         </div>
         {error_message &&
-            <FieldError error_message={error_message} added_class="ta_c" />
+            <FieldError error_message={error_message} added_class="ta_c" test_id="field_error_test_id" />
         }
       </CropImageStyle>
     );
@@ -265,7 +264,6 @@ CropImage.propTypes = {
   crop: PropTypes.object,
   image_name: PropTypes.string,
   image_url: PropTypes.string,
-  is_test: PropTypes.bool,
   on_crop_completed: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.object,
