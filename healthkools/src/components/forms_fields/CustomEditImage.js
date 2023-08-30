@@ -17,13 +17,12 @@ class CustomEditImage extends Component {
       crop_image: props.crop_image,  // Flag to check if the image will be cropped or not
       crop_start: false,  // Flag indicating if the crop is started or not
       current_image_url: props.value, // Contains the current image url 
+      do_not_compress_image: props.do_not_compress_image,
       error_message: props.error_message,
       image_url: props.value, // The original image url
       initials: props.initials,
       initials_bg_color: props.initials_bg_color, 
-      is_test: props.is_test,
       local_error_message: "",
-      raise_error: props.raise_error,
       title: props.title,  // The title
       uploading: false,  // Flag indicating if the upload is started or not
     };
@@ -31,13 +30,12 @@ class CustomEditImage extends Component {
   static defaultProps = {
     containerStyle: null,
     crop_image: true,
+    do_not_compress_image: true,
     error_message: "",
     handleCropping: null,
     initials: "",
     initials_bg_color: "",
-    is_test: false,
     on_change: null,
-    raise_error: false,
     style: null,
     label: "",
     test_id: "edit_image_test_id",
@@ -48,6 +46,7 @@ class CustomEditImage extends Component {
 
   static getDerivedStateFromProps(props, state) {
     let new_state = {
+      do_not_compress_image: props.do_not_compress_image,
       error_message: props.error_message,
       initials: props.initials,
       initials_bg_color: props.initials_bg_color,
@@ -64,24 +63,11 @@ class CustomEditImage extends Component {
 
   handleImageChange = (evt) => {
     let files = evt.target.files;
-    if(this.props.is_test){
-      // Handle cropping state to prevent validation if cropping not ended
-      if(this.state.crop_image && this.props.handleCropping){
-        this.props.handleCropping(true);
-      }
-      // Save file information
-      this.setState({
-        crop_start: this.state.crop_image,
-        current_image_url: "image_url",
-        image_name: "image_name",
-        local_error_message: "",
-        uploading: !this.state.crop_image,
-      });
-    }
-    else if (files && files.length > 0) {
+    if (files && files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         // Handle cropping state to prevent validation if cropping not ended
+
         if(this.state.crop_image && this.props.handleCropping){
           this.props.handleCropping(true);
         }
@@ -102,18 +88,10 @@ class CustomEditImage extends Component {
     }
     // If the crop_image flag is false, we upload files.
     let formData = new FormData();
-    if(this.props.is_test){
-      formData = {"file_1": {}};
-      if(this.props.raise_error){
-        formData.raise_error = true;
-      }
+    for(var i=0; i < files.length; i++){
+      formData.append("file" + "_" + (i + 1), files[i], files[i].name);
     }
-    else{
-      for(var i=0; i < files.length; i++){
-        formData.append("file" + "_" + (i + 1), files[i], files[i].name);
-      }
-    }
-    store_files(formData).then(res => {
+    store_files(formData, this.state.do_not_compress_image).then(res => {
       if(res && res.files){
         let file_res = res.files[0];
         if(this.state.crop_image && this.props.handleCropping){
@@ -160,7 +138,7 @@ class CustomEditImage extends Component {
       <CustomEditImageStyle className={this.props.added_class} style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
         {current_image_url && crop_start ?
         <>
-          <CropImage is_test={this.props.is_test} image_name={this.state.image_name} on_remove={() => this.on_remove()} image_url={(current_image_url)} title={title} on_change={this.props.on_change} />
+          <CropImage image_name={this.state.image_name} on_remove={() => this.on_remove()} image_url={(current_image_url)} title={title} on_change={this.props.on_change} />
         </>
         :
         <>
@@ -192,6 +170,7 @@ const CustomEditImageStyle = styles.div`
 CustomEditImage.propTypes = {
   containerStyle: PropTypes.string,
   crop_image: PropTypes.bool,
+  do_not_compress_image: PropTypes.bool,
   error_message: PropTypes.string,
   handleCropping: PropTypes.oneOfType([
       PropTypes.func,
@@ -199,12 +178,10 @@ CustomEditImage.propTypes = {
   ]),
   initials: PropTypes.string,
   initials_bg_color: PropTypes.string,
-  is_test: PropTypes.bool,
   on_change: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.object,
   ]),
-  raise_error: PropTypes.bool,
   style: PropTypes.object,
   label: PropTypes.string,
   test_id: PropTypes.string,

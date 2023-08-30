@@ -31,7 +31,7 @@ class UserImage extends Component {
   render(){
     const {image_url} = this.state;
     return (
-      <UserImageStyle style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
+      <UserImageStyle className='user_image' style={this.props.containerStyle || {}} data-testid={this.props.test_id} >
         {this.props.on_remove && image_url &&
           <i className="fa fa-times remove_icon" onClick={evt => {
             evt.stopPropagation();

@@ -21,10 +21,10 @@ class CropImage extends Component {
     }
     this.state = {
       crop: props.crop,  // Initial position of crop if exists
+      do_not_compress_image: props.do_not_compress_image,  // 
       error_message: "",
       image_name: image_name_,  // Name of image to crop
       image_url: props.image_url,  // Url of image to crop
-      raise_error: props.raise_error,  // Flag to raise error in promise or not
       uploading: false,  // Uploading flag for animation
     };
   }
@@ -38,11 +38,11 @@ class CropImage extends Component {
       x: 25,
       y: 25
     },
+    do_not_compress_image: true,
     image_name: "",
     image_url: "",
     on_crop_completed: null,
     on_remove: null,
-    raise_error: false,
     remove_icon_style: null,
     style: null,
     title: "",
@@ -140,12 +140,9 @@ class CropImage extends Component {
     try{
       let formData = new FormData(),
         file = this.state.croppedImage;
-      if(this.props.raise_error){
-        formData.raise_error = true;
-      }
       formData.append("file_1", file, file.name);
       // Upload croped image
-      store_files(formData, this.props.do_not_compress_image).then(res => {
+      store_files(formData, this.state.do_not_compress_image).then(res => {
         if(res && res.files){
           let file_res = res.files[0];
           this.props.on_change(file_res.url);
@@ -262,6 +259,7 @@ CropImage.propTypes = {
   circularCrop: PropTypes.bool,
   containerStyle: PropTypes.string,
   crop: PropTypes.object,
+  do_not_compress_image: PropTypes.bool,
   image_name: PropTypes.string,
   image_url: PropTypes.string,
   on_crop_completed: PropTypes.oneOfType([
@@ -272,7 +270,6 @@ CropImage.propTypes = {
       PropTypes.func,
       PropTypes.object,
   ]),
-  raise_error: PropTypes.bool,
   remove_icon_style: PropTypes.object,
   style: PropTypes.object,
   title: PropTypes.string,
