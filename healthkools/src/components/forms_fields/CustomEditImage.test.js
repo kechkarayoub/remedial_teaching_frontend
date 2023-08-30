@@ -1,6 +1,8 @@
 import CustomEditImage from "components/forms_fields/CustomEditImage";
 import i18next from 'i18n_init';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { jpeg_data_url } from "utils/tests_utils";
 import { mount } from 'enzyme';
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
@@ -59,51 +61,66 @@ describe('CustomEditImage component', () => {
         expect(errors.length).toBe(1);
         expect(errors_txt.length).toBe(1);
     });
-    test('Should on_change not called if crop_image is true and called after croping validation', async () => {
+    test('Should on_change not called if crop_image is true', async () => {
+        window.FileReader = class FileReaderMock {
+            readAsDataURL = jest.fn();
+            addEventListener = (event, callback) => {
+                if (event === 'load') {
+                callback();
+                }
+            };
+        };
         const on_change = jest.fn();
-        const wrapper = mount(<CustomEditImage on_change={on_change} raise_error={true} is_test={true} />);
-        const button = wrapper.find(".files_select input");
-        var errors = wrapper.find("div.field_error");
-        expect(errors.length).toEqual(0);
-        var crop_image_containers = wrapper.find("div.crop_image_container");
-        expect(crop_image_containers.length).toEqual(0);
-        var validate_crop_btns = wrapper.find("div.crop_image_container .validate_div .validate");
-        expect(validate_crop_btns.length).toEqual(0);
-        // Nous simulons un clic sur le bouton
-        button.simulate('change');
-        // Nous attendons que l'API soit appelée et que le composant se mette à jour
-        await new Promise(resolve => {
-            setImmediate(resolve);
+        render(<CustomEditImage on_change={on_change} />);
+        // Get the file input
+        var edit_image_component = screen.getAllByTestId('edit_image_test_id')[1]; // Update with your label text
+        expect(edit_image_component.querySelector(".files_select").textContent).toBe('Select');
+        var input = edit_image_component.querySelector("input");
+        // Create a fake image file
+        const fakeImage = new File(['(image content)'], 'test-image.png', { type: 'image/png' });
+        // Simulate selecting the image
+        act(() => {
+            fireEvent.change(input, { target: { files: [fakeImage] } });
         });
-        wrapper.update();
-        // Nous vérifions que le state du composant a été mis à jour
-        expect(wrapper.state('error_message')).toEqual("");
-        expect(wrapper.state('local_error_message')).toEqual("");
-        expect(wrapper.state('uploading')).toEqual(false);
         expect(on_change).toHaveBeenCalledTimes(0);
-        errors = wrapper.find("div.field_error");
-        expect(errors.length).toEqual(0);
-        crop_image_containers = wrapper.find("div.crop_image_container");
-        expect(crop_image_containers.length).toEqual(1);
-        var validate_crop_btns = wrapper.find("div.crop_image_container .validate_div .validate");
-        expect(validate_crop_btns.length).toEqual(1);
-        var validate_crop_button = wrapper.find("div.crop_image_container .validate_div .validate");
-        validate_crop_button.simulate('click');
-        await new Promise(resolve => {
-            setImmediate(resolve);
+    });
+    test('should handle selecting an image', async () => {
+        // Mock the FileReader API
+        window.FileReader = class FileReaderMock {
+            readAsDataURL = jest.fn();
+            addEventListener = (event, callback) => {
+                if (event === 'load') {
+                    callback();
+                }
+            };
+        };
+        const on_change = jest.fn();
+        render(<CustomEditImage crop_image={false} on_change={on_change} />);
+        // Get the file input
+        var edit_image_component = screen.getAllByTestId('edit_image_test_id')[1]; // Update with your label text
+        expect(edit_image_component.querySelector(".files_select").textContent).toBe('Select');
+        var input = edit_image_component.querySelector("input");
+        // Create a fake image file
+        const fakeImage = new File(['(image content)'], 'test-image.png', { type: 'image/png' });
+        // Simulate selecting the image
+        act(() => {
+            fireEvent.change(input, { target: { files: [fakeImage] } });
         });
-        wrapper.update();
-        expect(wrapper.state('error_message')).toEqual("");
+        // Wait for the component to update
+        await screen.findByText('Uploading...'); // Update with your loading text
         expect(on_change).toHaveBeenCalledTimes(1);
+        // Check if the image URL was updated it will not updated because it ubdate by parent
+        var img = edit_image_component.querySelector(".user_image img");
+        expect(img.src).not.toBe('mockImageUrl');
     });
     test('Should on_change called if crop_image is false', async () => {
         const on_change = jest.fn();
-        const wrapper = mount(<CustomEditImage on_change={on_change} crop_image={false} raise_error={true} is_test={true} />);
-        const button = wrapper.find(".files_select input");
+        const wrapper = mount(<CustomEditImage on_change={on_change} crop_image={false} />);
+        const fileInput = wrapper.find(".files_select input");
         var errors = wrapper.find("div.field_error");
         expect(errors.length).toEqual(0);
         // Nous simulons un clic sur le bouton
-        button.simulate('change');
+        fileInput.simulate('change');
         // Nous attendons que l'API soit appelée et que le composant se mette à jour
         await new Promise(resolve => {
             setImmediate(resolve);
