@@ -51,4 +51,5 @@ describe('Home component', () => {
     expect(contact_email).toBeInTheDocument();
     expect(site_name).toBeInTheDocument();
   });
+  //to be continued
 });
