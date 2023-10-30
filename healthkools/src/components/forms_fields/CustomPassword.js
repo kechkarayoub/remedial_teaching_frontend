@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
 import PasswordStrengthBar from 'react-password-strength-bar';
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
+
 class CustomPassword extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,7 @@ class CustomPassword extends Component {
         valid_message: props.valid_message,
         value: props.value,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, show_password, show_trength_bar, valid_message, value} = this.state;
@@ -111,6 +112,7 @@ const CustomPasswordStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomPassword.propTypes = {
   added_class: PropTypes.string,
   disabled: PropTypes.bool,
@@ -128,6 +130,5 @@ CustomPassword.propTypes = {
   valid_message: PropTypes.string,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomPassword);
-
-

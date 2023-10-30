@@ -1,8 +1,4 @@
-import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import { get_geo_info, check_if_email_or_username_exists_api_get } from 'services/api';
-import { get_contries_select_options } from 'utils/countries_list';
-import { format_as_date } from 'utils/datetime_format';
-import { get_random_color} from "utils/index";
+import * as EmailValidator from 'email-validator';
 import CustomButton from "components/CustomButton";
 import CustomDate from "components/forms_fields/CustomDate";
 import CustomEditImage from "components/forms_fields/CustomEditImage";
@@ -13,11 +9,7 @@ import CustomPhoneNumber from "components/forms_fields/CustomPhoneNumber";
 import CustomSelect from "components/forms_fields/CustomSelect";
 import CustomTextarea from "components/forms_fields/CustomTextarea";
 import CustomTSNotice from "components/forms_fields/CustomTSNotice";
-import DatePicker from "react-datepicker";
 import FieldError from "components/forms_fields/FieldError";
-// import FilesSelect from "components/FilesSelect";
-// import InitialsColor from "components/InitialsColor";
-// import UserImage from "components/UserImage";
 import jwt_decode from "jwt-decode";
 import moment from 'moment';
 import OAuthButtonContainer from 'pages/home/components/OAuthButtonContainer';
@@ -26,13 +18,15 @@ import QuestionButton from "components/QuestionButton";
 import React, { Component } from "react";
 import SignInUpConfirmationModal from 'pages/home/components/SignInUpConfirmationModal';
 import styled from "styled-components";
-import * as EmailValidator from 'email-validator';
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
-import { connect } from "react-redux";
+import { Button, Modal, Row } from 'react-bootstrap';
+import { check_if_email_or_username_exists_api_get, get_geo_info } from 'services/api';
+import { format_as_date } from 'utils/datetime_format';
 import { get } from "services/storage";
+import { get_contries_select_options } from 'utils/countries_list';
+import { get_random_color} from "utils/index";
+import { login_action } from "app_store/actions";
 import { register } from "services/api";
-import {login_action} from "app_store/actions";
-import $ from 'jquery';
+import { withTranslation } from 'react-i18next';
 
 
 const usernameRegex = /^[a-zA-Z0-9_]+$/;
@@ -87,6 +81,7 @@ class SignInUpModal extends Component {
   componentWillUnmount(){
     this._isMounted = false;
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language || props.default_sign_in_up_view !== state.default_view){
@@ -98,6 +93,7 @@ class SignInUpModal extends Component {
     }
     return null;
   }
+
   componentDidUpdate(prevProps, prevState){
     var new_state = {};
     if(prevState.current_language !== this.state.current_language){
@@ -571,6 +567,7 @@ class SignInUpModal extends Component {
     );
   }
 }
+
 const SignInUpModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px;
@@ -589,11 +586,7 @@ const SignInUpModalStyle = styled.div`
     padding: 10px 0;
   }
 `;
-function mapDispatchToProps(dispatch) {
-  return {
-    login_action: data => dispatch(login_action(data))
-  };
-}
+
 SignInUpModal.propTypes = {
   changeDefaultSignInUpView: PropTypes.oneOfType([
     PropTypes.func,
@@ -611,5 +604,11 @@ SignInUpModal.propTypes = {
   show: PropTypes.bool,
   t: PropTypes.func,
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login_action: data => dispatch(login_action(data))
+  };
+}
 // export default connect(null, mapDispatchToProps)(withTranslation('translations')(SignInUpModal));
 export default withTranslation('translations')(SignInUpModal);

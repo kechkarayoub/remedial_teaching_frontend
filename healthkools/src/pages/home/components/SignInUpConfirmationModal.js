@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import TextDiv from "components/TextDiv";
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
-import {colors} from "assets/variables/colors";
+import { colors } from "assets/variables/colors";
 import { get } from "services/storage";
 import { resend_activation_email } from "services/api";
 import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
@@ -22,6 +22,7 @@ class SignInUpConfirmationModal extends Component {
       registration_messages: props.registration_messages,
     };
   }
+
   static defaultProps = {
     onHide: () => {},
     registration_messages: {},
@@ -119,6 +120,7 @@ class SignInUpConfirmationModal extends Component {
     );
   }
 }
+
 const SignInUpConfirmationModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px;
@@ -154,6 +156,7 @@ const SignInUpConfirmationModalStyle = styled.div`
     padding: 10px 0;
   }
 `;
+
 SignInUpConfirmationModal.propTypes = {
   show: PropTypes.bool,
   onHide: PropTypes.oneOfType([
@@ -163,4 +166,5 @@ SignInUpConfirmationModal.propTypes = {
   registration_messages: PropTypes.object,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(SignInUpConfirmationModal);

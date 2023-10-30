@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import styled from "styled-components";
-import {colors} from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
 class QuestionButton extends Component {
     constructor(props){
       super(props);
     }
+
     static defaultProps = {
       added_class: "",
       on_click: null,
@@ -15,6 +15,7 @@ class QuestionButton extends Component {
       test_id: "",
       t: val => val,
     };
+
     render(){
         var test_id = this.props.test_id || "question_button";
         return(
@@ -31,6 +32,7 @@ class QuestionButton extends Component {
         )
     }
 }
+
 const QuestionButtonStyle = styled.span`
     color: #a9a9a9;
     cursor: pointer;
@@ -40,6 +42,7 @@ const QuestionButtonStyle = styled.span`
     text-decoration: underline;
     width: 100%;
 `;
+
 QuestionButton.propTypes = {
   added_class: PropTypes.string,
   on_click: PropTypes.oneOfType([
@@ -50,4 +53,5 @@ QuestionButton.propTypes = {
   test_id: PropTypes.string,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(QuestionButton);

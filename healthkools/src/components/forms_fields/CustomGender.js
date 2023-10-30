@@ -119,6 +119,7 @@ const CustomGenderStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomGender.propTypes = {
   added_class: PropTypes.string,
   disabled: PropTypes.bool,
@@ -133,6 +134,5 @@ CustomGender.propTypes = {
   valid_message: PropTypes.string,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomGender);
-
-

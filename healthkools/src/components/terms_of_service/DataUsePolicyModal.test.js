@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import { render, screen, act, fireEvent } from '@testing-library/react';
-import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
-import { withRouter, Redirect } from "react-router-dom";
-import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { mount, configure, shallow } from 'enzyme'
-import { unmountComponentAtNode } from "react-dom";
-import { async } from "q";
-import {get_data} from "components/terms_of_service/data";
-import {get_intro_items} from "components/terms_of_service/data_use_policy";
+import React from "react";
+import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { configure, mount } from 'enzyme';
 import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+import { get_intro_items } from "components/terms_of_service/data_use_policy";
 import { split_html_string } from "utils/tests_utils";
+
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -19,7 +16,9 @@ jest.mock('react-i18next', () => ({
     return Component;
   },
 }));
+
 jest.mock('axios');
+
 describe('DataUsePolicyModal component', () => {
   test('Should render without crash', async () => {
     render(<DataUsePolicyModal show={true} />);
@@ -34,6 +33,7 @@ describe('DataUsePolicyModal component', () => {
       expect(closeFn).toHaveBeenCalledTimes(1);
     });
   });
+  
   test('Should contains data use policy data', async () => {
     let wrapper = mount(<DataUsePolicyModal show={true}/>);
     var current_language = get("current_language");

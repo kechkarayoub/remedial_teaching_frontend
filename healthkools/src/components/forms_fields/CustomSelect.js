@@ -1,12 +1,12 @@
-import React, { Component, useRef } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
-import Select from 'react-select';
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import Select from 'react-select';
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
 
- class CustomSelect extends Component {
+class CustomSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,6 +59,7 @@ import PropTypes from 'prop-types';
   componentDidUpdate(prevProps, prevState){
     
   }
+
   handleChange = (option) => {
     if(this.props.on_change){
         this.props.on_change(option ? option.value : "", option ? option.name : "");
@@ -140,6 +141,7 @@ const CustomSelectStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomSelect.propTypes = {
   added_class: PropTypes.string,
   countries_options: PropTypes.array,
@@ -158,6 +160,5 @@ CustomSelect.propTypes = {
   valid_message: PropTypes.string,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomSelect);
-
-

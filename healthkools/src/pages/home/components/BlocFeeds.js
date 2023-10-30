@@ -1,18 +1,17 @@
-import React, { Component } from "react";
-import MediaQuery from "react-responsive";
-import Slider from "react-slick";
-// import Feed from "rss-to-json";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
-import {feeds_api_get, feeds_languages_api_get} from "services/api";
-import { colors } from "assets/variables/colors";
 import FeedItem from "pages/home/components/FeedItem";
 import PropTypes from 'prop-types';
+import MediaQuery from "react-responsive";
+import React, { Component } from "react";
+import Slider from "react-slick";
+import styled from "styled-components";
+import { colors } from "assets/variables/colors";
+import { feeds_api_get, feeds_languages_api_get } from "services/api";
 import { get } from "services/storage";
-import {get_feeds_url} from "utils/feeds";
-import {shuffle} from "utils/index";
+import { get_feeds_url } from "utils/feeds";
+import { shuffle } from "utils/index";
+import { withTranslation } from 'react-i18next';
 
- class BlocFeeds extends Component {
+class BlocFeeds extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +22,7 @@ import {shuffle} from "utils/index";
     this.feeds_api_done = true;
     this.saved_feeds_api_done = true;
   }
+
   static defaultProps = {
     t: val => val,
   };
@@ -50,6 +50,7 @@ import {shuffle} from "utils/index";
       });
     }
   }
+  
   getSavedFeeds = (current_language) => {
     if(this.saved_feeds_api_done){
       this.saved_feeds_api_done = false;
@@ -69,6 +70,7 @@ import {shuffle} from "utils/index";
       });
     }
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language){
@@ -77,6 +79,7 @@ import {shuffle} from "utils/index";
     }
     return null;
   }
+
   componentDidUpdate(prevProps, prevState){
     if(prevState.current_language !== this.state.current_language){
       const {feeds_languages} = this.state;
@@ -208,9 +211,9 @@ const BlocFeedsStyle = styled.div`
     }
   }
 `;
+
 BlocFeeds.propTypes = {
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(BlocFeeds);
-
-

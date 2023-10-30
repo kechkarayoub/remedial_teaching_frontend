@@ -1,8 +1,8 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
 import App from './App'; // Update the path to your component
 import moment from "moment";
+import React from 'react';
 import { get } from "services/storage";
+import { render, screen, waitFor } from '@testing-library/react';
 
 describe('App', () => {
   test('Should renders without crashing', () => {

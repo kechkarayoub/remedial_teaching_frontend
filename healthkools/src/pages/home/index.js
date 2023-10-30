@@ -27,6 +27,7 @@ export class Home extends Component {
     // if(window.scrollTo)
     //   window.scrollTo(0, 0);
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language){
@@ -35,6 +36,7 @@ export class Home extends Component {
     }
     return null;
   }
+
   componentWillUnmount() {
   }
 
@@ -66,6 +68,7 @@ export class Home extends Component {
     );
   }
 }
+
 const HomeStyle = styled.div`
   section {
     margin-bottom: 120px;
@@ -81,6 +84,7 @@ const HomeStyle = styled.div`
     }
   }
 `;
+
 Home.propTypes = {
   changeDefaultSignInUpView: PropTypes.oneOfType([
     PropTypes.func,
@@ -98,5 +102,6 @@ Home.propTypes = {
   show: PropTypes.bool,
   t: PropTypes.func,
 };
+
 const mapState2Props = state => ({ session: state.session });
 export default connect(mapState2Props)(withRouter(Home));

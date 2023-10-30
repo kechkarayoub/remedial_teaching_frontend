@@ -1,13 +1,10 @@
 import DatePicker from "react-datepicker";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
-import fr from "date-fns/locale/fr";
-import moment from "moment";
 import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import styled from "styled-components";
 import { get } from "services/storage";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { setInitLocale } from "utils/date_picker";
 import { withTranslation } from 'react-i18next';
 
@@ -59,7 +56,7 @@ class CustomDate extends Component {
         valid_message: props.valid_message,
         value: props.value || null,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, max_date, min_date, placeholder, valid_message, value} = this.state;
@@ -105,6 +102,7 @@ const CustomDateStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomDate.propTypes = {
   added_class: PropTypes.string,
   disabled: PropTypes.bool,
@@ -124,6 +122,5 @@ CustomDate.propTypes = {
     PropTypes.object,
   ]),
 };
+
 export default withTranslation('translations')(CustomDate);
-
-

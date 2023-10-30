@@ -1,13 +1,14 @@
 import CustomDate from "components/forms_fields/CustomDate";
-import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import moment from "moment";
+import { fireEvent, render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('CustomDate component', () => {
     test('Should render without crash', async () => {
         render(<CustomDate />);

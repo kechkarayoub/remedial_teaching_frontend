@@ -1,4 +1,4 @@
-import {COLORS, get_random_color, shuffle} from "utils/index";
+import { COLORS, get_random_color, shuffle } from "utils/index";
 
 describe('Shuffle function', () => {
     test('Test shuffle', () => {

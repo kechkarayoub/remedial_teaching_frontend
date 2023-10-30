@@ -1,6 +1,6 @@
 import Footer from "components/Footer";
+import { images } from "components/_resources";
 import { render, screen } from '@testing-library/react';
-import {images} from "components/_resources";
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
@@ -9,6 +9,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
+
 describe('Footer component', () => {
     test('Should render without crash', async () => {
         render(<Footer/>);

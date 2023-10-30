@@ -1,11 +1,13 @@
 import CustomPhoneNumber from "components/forms_fields/CustomPhoneNumber";
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('CustomPhoneNumber component', () => {
     test('Should render without crash', async () => {
         render(<CustomPhoneNumber />);

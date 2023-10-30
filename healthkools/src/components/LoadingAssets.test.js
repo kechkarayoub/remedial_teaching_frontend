@@ -7,6 +7,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
+
 describe('LoadingAssets component', () => {
     test('Should render without crash', async () => {
         render(<LoadingAssets/>);

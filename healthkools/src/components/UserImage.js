@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import styles from "styled-components";
 import default_user_image from "assets/img/default_user_image.png";
 import { withTranslation } from 'react-i18next';
+
 class UserImage extends Component {
   constructor(props){
     super(props);
@@ -10,6 +11,7 @@ class UserImage extends Component {
       image_url: props.image_url,
     };
   }
+
   static defaultProps = {
     containerStyle: null,
     image_url: "",
@@ -49,6 +51,7 @@ class UserImage extends Component {
     );
   }
 };
+
 const UserImageStyle = styles.div`
   height: 130px;
   margin: auto;
@@ -86,4 +89,5 @@ UserImage.propTypes = {
   test_id: PropTypes.string,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(UserImage);

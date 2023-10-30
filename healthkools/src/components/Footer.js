@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import styles from "styled-components";
+
 import LogoImage from "components/LogoImage";
-import { withTranslation } from 'react-i18next';
-import { images } from "components/_resources";
-import { colors } from "assets/variables/colors";
-import { get } from "services/storage";
 import moment from "moment";
 import PropTypes from 'prop-types';
-// import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import styles from "styled-components";
+import { get } from "services/storage";
+import { colors } from "assets/variables/colors";
+import { withTranslation } from 'react-i18next';
+
 class Footer extends Component {
   constructor(props){
     super(props);
@@ -17,6 +17,7 @@ class Footer extends Component {
     }
     this._isMounted = false;
   }
+
   static defaultProps = {
     history: null,
     i18n: null,
@@ -32,6 +33,7 @@ class Footer extends Component {
     }
     return null;
   }
+
   componentDidMount() {
     this._isMounted = true;
     window.addEventListener('general_information_stored',(e) => {
@@ -48,6 +50,7 @@ class Footer extends Component {
     this._isMounted = false;
     window.removeEventListener('general_information_stored', () => {}, false);
   }
+
   render(){
     var {current_language, general_information} = this.state;
     general_information = general_information || {};
@@ -84,6 +87,7 @@ class Footer extends Component {
     );
   }
 };
+
 const Copyright = styles.div`
   background: ${colors.default_color};
   float: left;
@@ -103,6 +107,7 @@ const Copyright = styles.div`
     text-align: center;
   }
 `;
+
 const FooterStyle = styles.footer`
   background: #f7f7f7;
   border-top: 10px solid ${colors.white};
@@ -152,4 +157,5 @@ Footer.propTypes = {
   ]),
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(Footer);

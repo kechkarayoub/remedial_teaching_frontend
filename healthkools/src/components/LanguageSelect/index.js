@@ -1,12 +1,12 @@
+import Language from "components/LanguageSelect/component/Language";
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import styled from "styled-components";
-import {flags} from "components/_resources";
-import Language from "components/LanguageSelect/component/Language";
-import {colors} from "assets/variables/colors";
-import { withTranslation } from 'react-i18next';
-import { get, set } from "services/storage";
 import { changeLocale } from "utils/date_picker";
-import PropTypes from 'prop-types';
+import { colors } from "assets/variables/colors";
+import { flags } from "components/_resources";
+import { get, set } from "services/storage";
+import { withTranslation } from 'react-i18next';
 
 // List of languages
 export const languages = [
@@ -14,6 +14,7 @@ export const languages = [
    { name: "English", short_name: "En", value: "en", flag: flags.flagEn16, alt:"United States flag" },
    { name: "French", short_name: "Fr", value: "fr", flag: flags.flagFr16, alt:"France flag" }
 ];
+
 class LanguageSelect extends Component {
     constructor(props) {
         super(props);
@@ -63,6 +64,7 @@ class LanguageSelect extends Component {
         )
     }
 }
+
 const LanguageSelectStyle = styled.div`
     color: white;
     cursor: pointer;
@@ -113,9 +115,11 @@ const LanguageSelectStyle = styled.div`
         }
     }
 `;
+
 LanguageSelect.propTypes = {
     added_class: PropTypes.string,
     style: PropTypes.object,
     t: PropTypes.func,
 };
+
 export default withTranslation('translations')(LanguageSelect);

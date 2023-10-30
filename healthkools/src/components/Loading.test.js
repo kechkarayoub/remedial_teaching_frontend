@@ -1,5 +1,5 @@
 import Loading from "components/Loading";
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import i18next from 'i18n_init';
  
 describe('Loading component', () => {

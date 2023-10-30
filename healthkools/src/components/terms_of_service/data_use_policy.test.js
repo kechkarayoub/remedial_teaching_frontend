@@ -1,5 +1,6 @@
-import {get_data} from "components/terms_of_service/data";
-import {get_intro_items} from "components/terms_of_service/data_use_policy";
+import { get_data } from "components/terms_of_service/data";
+import { get_intro_items } from "components/terms_of_service/data_use_policy";
+
 describe('Get_intro_items function', () => {
     test('Test get_intro_items', () => {
         var data = get_data();

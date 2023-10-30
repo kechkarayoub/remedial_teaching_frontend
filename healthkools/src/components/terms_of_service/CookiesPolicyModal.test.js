@@ -1,16 +1,14 @@
-import React, { Component } from "react";
-import { render, screen, act, fireEvent } from '@testing-library/react';
-import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
-import { withRouter, Redirect } from "react-router-dom";
-import moment from 'moment';
+
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { mount, configure, shallow } from 'enzyme'
-import { unmountComponentAtNode } from "react-dom";
-import { async } from "q";
-import {get_data} from "components/terms_of_service/data";
-import {get_intro_items} from "components/terms_of_service/cookies_policy";
+import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
+import React from "react";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { configure, mount } from 'enzyme';
 import { get } from "services/storage";
-import { remove_html_tags_from_string, split_html_string } from "utils/tests_utils";
+import { get_data } from "components/terms_of_service/data";
+import { get_intro_items } from "components/terms_of_service/cookies_policy";
+import { split_html_string } from "utils/tests_utils";
+
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -19,7 +17,9 @@ jest.mock('react-i18next', () => ({
     return Component;
   },
 }));
+
 jest.mock('axios');
+
 describe('CookiesPolicyModal component', () => {
   test('Should render without crash', async () => {
     render(<CookiesPolicyModal show={true} />);
@@ -34,6 +34,7 @@ describe('CookiesPolicyModal component', () => {
       expect(closeFn).toHaveBeenCalledTimes(1);
     });
   });
+  
   test('Should contains cookies policy data', async () => {
     let wrapper = mount(<CookiesPolicyModal show={true}/>);
     var current_language = get("current_language");

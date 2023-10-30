@@ -7,9 +7,11 @@ import PropTypes from 'prop-types';
 import React, {Component} from "react";
 import styles from "styled-components";
 import UserImage from "components/UserImage";
-import {store_files} from "utils/files_storage";
+import { store_files } from "utils/files_storage";
 import { withTranslation } from 'react-i18next';
+
 import 'react-image-crop/dist/ReactCrop.css';
+
 class CustomEditImage extends Component {
   constructor(props){
     super(props);
@@ -27,6 +29,7 @@ class CustomEditImage extends Component {
       uploading: false,  // Flag indicating if the upload is started or not
     };
   }
+
   static defaultProps = {
     containerStyle: null,
     crop_image: true,
@@ -60,7 +63,6 @@ class CustomEditImage extends Component {
     return new_state;
   }
   
-
   handleImageChange = (evt) => {
     let files = evt.target.files;
     if (files && files.length > 0) {
@@ -162,11 +164,13 @@ class CustomEditImage extends Component {
     );
   }
 };
+
 const CustomEditImageStyle = styles.div`
   margin: auto;
   padding: 10px;
   position: relative;
 `;
+
 CustomEditImage.propTypes = {
   containerStyle: PropTypes.string,
   crop_image: PropTypes.bool,
@@ -189,4 +193,5 @@ CustomEditImage.propTypes = {
   t: PropTypes.func,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomEditImage);

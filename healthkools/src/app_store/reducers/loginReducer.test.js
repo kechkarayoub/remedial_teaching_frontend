@@ -1,6 +1,5 @@
-import { login_action } from "app_store/actions";
 import loginReducer from "app_store/reducers/loginReducer";
-
+import { login_action } from "app_store/actions";
 
 describe('RootReducer', () => {
     test('Should render without crash', async () => {

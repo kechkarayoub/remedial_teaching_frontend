@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 import React, {Component} from "react";
 import styles from "styled-components";
 import { withTranslation } from 'react-i18next';
+
 class InitialsColor extends Component {
   constructor(props){
     super(props);
   }
+
   static defaultProps = {
     added_className: "",
     bg_color: "gray",
@@ -13,10 +15,11 @@ class InitialsColor extends Component {
     initials: "",
     on_click: null,
     style: null,
+    t: val => val,
     title: "",
     test_id: "initials_color_test_id",
-    t: val => val,
   };
+
   render(){
     var style = this.props.style || {};
     style.backgroundColor = this.props.bg_color;
@@ -42,6 +45,7 @@ class InitialsColor extends Component {
     );
   }
 };
+
 const InitialsColorStyle = styles.div`
   height: 130px;
   margin: auto;
@@ -76,4 +80,5 @@ InitialsColor.propTypes = {
   test_id: PropTypes.string,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(InitialsColor);

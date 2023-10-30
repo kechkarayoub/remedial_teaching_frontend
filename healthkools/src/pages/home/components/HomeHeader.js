@@ -1,17 +1,15 @@
-import React, {Component} from "react";
-import styles from "styled-components";
-import LogoImage from "components/LogoImage";
-import { withTranslation } from 'react-i18next';
+import CustomButtonIcon from 'components/CustomButtonIcon';
 import LanguageSelect from "components/LanguageSelect/index";
+import LogoImage from "components/LogoImage";
+import PropTypes from 'prop-types';
+import React, {Component} from "react";
+import SignInUpModal from 'pages/home/components/SignInUpModal';
+import styles from "styled-components";
 import { colors } from "assets/variables/colors";
 import { get } from "services/storage";
-import {images} from "pages/home/_resources";
-import CustomButtonIcon from 'components/CustomButtonIcon';
-import SignInUpModal from 'pages/home/components/SignInUpModal';
-import moment from "moment"
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import { images } from "pages/home/_resources";
+import { withTranslation } from 'react-i18next';
+
 class HomeHeader extends Component {
   constructor(props){
     super(props);
@@ -22,6 +20,7 @@ class HomeHeader extends Component {
       user: props.user,
     };
   }
+
   static defaultProps = {
     history: null,
     t: val => val,
@@ -92,6 +91,7 @@ class HomeHeader extends Component {
     );
   }
 };
+
 const HomeHeaderStyle = styles.header`
   border-bottom: 1px solid #EAEAEA;
   width: 100%;
@@ -156,13 +156,15 @@ const HomeHeaderStyle = styles.header`
     }
   }
 `;
-const mapStateToProps = state => {
-  return { user: state.user };
-};
+
 HomeHeader.propTypes = {
   history: PropTypes.object,
   t: PropTypes.func,
   user: PropTypes.object,
 };
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+
 // export default connect(mapStateToProps)(withTranslation('translations')(HomeHeader));
 export default withTranslation('translations')(HomeHeader);

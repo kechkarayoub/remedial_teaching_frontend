@@ -1,5 +1,7 @@
 import {get} from "services/storage";
+
 const code_mode = process.env.REACT_APP_CODE_MODE;
+
 export const get_data = () => {
     return {
         cndp_declaration_number: "",

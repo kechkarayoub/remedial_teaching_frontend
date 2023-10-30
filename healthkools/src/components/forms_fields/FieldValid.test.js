@@ -1,11 +1,13 @@
 import FieldValid from "components/forms_fields/FieldValid";
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('FieldValid component', () => {
     test('Should render without crash', async () => {
         render(<FieldValid />);

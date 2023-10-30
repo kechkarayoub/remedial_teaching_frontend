@@ -7,6 +7,7 @@ class CustomButtonIcon extends Component {
     constructor(props) {
         super(props);
     }
+
     static defaultProps = {
         added_class: "",
         alt: "",
@@ -14,6 +15,7 @@ class CustomButtonIcon extends Component {
         on_click: null,
         style: {},
     };
+
     render(){
         return(
             <CustomButtonIconStyle 
@@ -29,6 +31,7 @@ class CustomButtonIcon extends Component {
         )
     }
 }
+
 const CustomButtonIconStyle = styled.button`
     border: 0;
     border-radius: 50%;
@@ -48,6 +51,7 @@ const CustomButtonIconStyle = styled.button`
         height: 28px;
     }
 `;
+
 CustomButtonIcon.propTypes = {
     added_class: PropTypes.string,
     alt: PropTypes.string,
@@ -61,4 +65,5 @@ CustomButtonIcon.propTypes = {
     ]),
     style: PropTypes.object,
 };
+
 export default withTranslation('translations')(CustomButtonIcon);

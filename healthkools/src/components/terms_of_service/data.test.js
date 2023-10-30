@@ -1,6 +1,8 @@
-import {get} from "services/storage";
-import {get_data} from "components/terms_of_service/data";
+import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+
 const code_mode = process.env.REACT_APP_CODE_MODE;
+
 describe('Get_data function', () => {
     test('Test get_data', () => {
         var data = get_data();

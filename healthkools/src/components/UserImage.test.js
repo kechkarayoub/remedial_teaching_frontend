@@ -1,7 +1,7 @@
+import i18next from 'i18n_init';
 import UserImage from "components/UserImage";
 import { fireEvent, render, screen } from '@testing-library/react';
-import i18next from 'i18n_init';
- 
+
 describe('UserImage component', () => {
     test('Should render without crash', async () => {
         render(<UserImage i18n={i18next}/>);

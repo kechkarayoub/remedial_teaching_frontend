@@ -1,7 +1,7 @@
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import ar from "date-fns/locale/ar-MA";
 import en from "date-fns/locale/en-US";
 import fr from "date-fns/locale/fr";
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { get } from "services/storage";
 
 export const setInitLocale = current_language => {

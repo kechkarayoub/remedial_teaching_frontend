@@ -1,11 +1,13 @@
 import FieldError from "components/forms_fields/FieldError";
 import { render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('FieldError component', () => {
     test('Should render without crash', async () => {
         render(<FieldError />);

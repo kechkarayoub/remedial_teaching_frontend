@@ -1,11 +1,13 @@
 import CustomTextarea from "components/forms_fields/CustomTextarea";
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('CustomTextarea component', () => {
     test('Should render without crash', async () => {
         render(<CustomTextarea />);

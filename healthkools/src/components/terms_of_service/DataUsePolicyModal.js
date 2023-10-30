@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
-import styled from "styled-components";
 
-import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import moment from 'moment';
-import { get } from "services/storage";
-import { colors } from "assets/variables/colors";
-import { get_intro_items } from "components/terms_of_service/data_use_policy";
-import { get_data } from "components/terms_of_service/data";
 import CustomButton from "components/CustomButton";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Button, Modal, Row } from 'react-bootstrap';
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+import { get_intro_items } from "components/terms_of_service/data_use_policy";
+import { withTranslation } from 'react-i18next';
 
 class DataUsePolicyModal extends Component {
   constructor(props) {
@@ -22,6 +21,7 @@ class DataUsePolicyModal extends Component {
       intro: intro_items.intro,
     };
   }
+
   static defaultProps = {
     onHide: () => {},
     show: true,
@@ -30,6 +30,7 @@ class DataUsePolicyModal extends Component {
 
   componentDidMount(){
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language){
@@ -38,6 +39,7 @@ class DataUsePolicyModal extends Component {
     }
     return null;
   }
+
   componentDidUpdate(prevProps, prevState){
     var new_state = {};
     // if(prevState.current_language !== this.state.current_language){
@@ -54,7 +56,6 @@ class DataUsePolicyModal extends Component {
 //   componentDidUpdate() {
 //     $('.selectpicker').selectpicker("refresh");
 //   }
-
 
   render() {
     const {current_language, items, intro} = this.state;
@@ -132,6 +133,7 @@ class DataUsePolicyModal extends Component {
     );
   }
 }
+
 const DataUsePolicyModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
@@ -153,6 +155,7 @@ const DataUsePolicyModalStyle = styled.div`
     }
   }
 `;
+
 DataUsePolicyModal.propTypes = {
   show: PropTypes.bool,
   onHide: PropTypes.oneOfType([
@@ -161,4 +164,5 @@ DataUsePolicyModal.propTypes = {
     ]),
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(DataUsePolicyModal);

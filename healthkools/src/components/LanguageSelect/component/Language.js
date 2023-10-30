@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import {colors} from "assets/variables/colors";
+import { colors } from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+
 class Language extends Component {
     constructor(props) {
         super(props);
@@ -40,6 +41,7 @@ class Language extends Component {
         )
     }
 }
+
 const LanguageStyle = styled.li`
     border-bottom: 1px solid gray;
     color: black;
@@ -61,6 +63,7 @@ const LanguageStyle = styled.li`
         width: 16px;
     }
 `;
+
 Language.propTypes = {
     language: PropTypes.object,
     handleSelectLanguage: PropTypes.oneOfType([
@@ -69,5 +72,6 @@ Language.propTypes = {
       ]),
     selected_language: PropTypes.string,
     t: PropTypes.func,
-  };
+};
+
 export default withTranslation('translations')(Language);

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import React, {Component} from "react";
 import styles from "styled-components";
 import { withTranslation } from 'react-i18next';
+
 class FilesSelect extends Component {
   constructor(props){
     super(props);
   }
+
   static defaultProps = {
     accept: "*/*", // It must be one of: - "*/*"(default): All files. - "image/*": Images. - "application/pdf": Pdfs. - ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel": Excels. - ...
     added_className: "",
@@ -19,6 +21,7 @@ class FilesSelect extends Component {
     text: "",
     t: val => val,
   };
+
   render(){
     var style = this.props.style || {};
     style.color = "white";
@@ -39,11 +42,12 @@ class FilesSelect extends Component {
     );
   }
 };
+
 const FilesSelectStyle = styles.div`
   margin: auto;
   text-align: center;
   width: 100%;
-  }
+  
 `;
 
 FilesSelect.propTypes = {
@@ -61,4 +65,5 @@ FilesSelect.propTypes = {
   text: PropTypes.string,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(FilesSelect);

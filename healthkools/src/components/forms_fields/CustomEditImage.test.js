@@ -1,9 +1,7 @@
 import CustomEditImage from "components/forms_fields/CustomEditImage";
-import i18next from 'i18n_init';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { jpeg_data_url } from "utils/tests_utils";
 import { mount } from 'enzyme';
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -11,6 +9,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 }));
+
 describe('CustomEditImage component', () => {
     test('Should render without crash', async () => {
         render(<CustomEditImage test_id="test_id"/>);

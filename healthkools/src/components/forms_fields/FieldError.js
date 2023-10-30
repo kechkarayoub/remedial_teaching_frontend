@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import { get } from "services/storage";
-import styled from "styled-components";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
 
  class FieldError extends Component {
   constructor(props) {
@@ -39,10 +38,10 @@ import PropTypes from 'prop-types';
 const FieldErrorStyle = styled.div`
   color: red;
 `;
+
 FieldError.propTypes = {
   error_message: PropTypes.string,
   test_id: PropTypes.string,
 };
+
 export default withTranslation('translations')(FieldError);
-
-

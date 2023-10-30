@@ -1,6 +1,6 @@
 import CustomButton from "components/CustomButton";
-import { render, screen, fireEvent } from '@testing-library/react';
 import i18next from 'i18n_init';
+import { fireEvent, render, screen } from '@testing-library/react';
  
 describe('CustomButton component', () => {
     test('Should render without crash', async () => {

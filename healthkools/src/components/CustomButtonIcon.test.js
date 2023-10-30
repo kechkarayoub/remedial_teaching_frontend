@@ -1,6 +1,7 @@
 import CustomButtonIcon from "components/CustomButtonIcon";
-import { render, screen, fireEvent } from '@testing-library/react';
 import sign_in from "assets/img/sign_in.svg";
+import { fireEvent, render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -8,6 +9,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
+
 describe('CustomButtonIcon component', () => {
     test('Should render without crash', async () => {
         render(<CustomButtonIcon />);

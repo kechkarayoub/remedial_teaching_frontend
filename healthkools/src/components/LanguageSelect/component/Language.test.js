@@ -1,6 +1,7 @@
 import Language from "components/LanguageSelect/component/Language";
-import { render, screen, fireEvent } from '@testing-library/react';
-import {languages} from "components/LanguageSelect/index"
+import { fireEvent, render, screen } from '@testing-library/react';
+import { languages } from "components/LanguageSelect/index";
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -8,6 +9,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 })); 
+
 describe('Language component', () => {
     const language = languages[0];
     test('Should render without crash', async () => {

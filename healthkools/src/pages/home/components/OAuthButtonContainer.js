@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
 import PropTypes from 'prop-types';
-import { colors } from "assets/variables/colors";
-import { GoogleLogin } from '@react-oauth/google';
+import React, { Component } from "react";
+import styled from "styled-components";
 import { get } from "services/storage";
+import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { withTranslation } from 'react-i18next';
 
 
  class OAuthButtonContainer extends Component {
@@ -15,6 +14,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
       current_language: get("current_language"),
     };
   }
+
   static defaultProps = {
     added_class: "",
     buttonText: "",
@@ -29,7 +29,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
   componentDidMount() {
   }
-
 
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
@@ -112,6 +111,7 @@ const OAuthButtonContainerStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 OAuthButtonContainer.propTypes = {
   added_class: PropTypes.string,
   buttonText: PropTypes.string,
@@ -129,6 +129,5 @@ OAuthButtonContainer.propTypes = {
   t: PropTypes.func,
   test_id: PropTypes.string,
 };
+
 export default withTranslation('translations')(OAuthButtonContainer);
-
-

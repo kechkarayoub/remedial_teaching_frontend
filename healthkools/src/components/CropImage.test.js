@@ -1,10 +1,11 @@
 import CropImage from "components/CropImage";
 import fetchMock from 'jest-fetch-mock';
-import i18next from 'i18n_init';
 import testImage from "assets/img/tests/test_image.png";
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { jpeg_data_url } from "utils/tests_utils";
+
 jest.mock('axios');
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -12,6 +13,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 }));
+
 describe('CropImage component', () => {
     beforeAll(() => {
       fetchMock.enableMocks();

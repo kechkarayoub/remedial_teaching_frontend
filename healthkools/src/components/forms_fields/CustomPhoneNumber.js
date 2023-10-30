@@ -1,18 +1,19 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
-import FieldError from "components/forms_fields/FieldError";
-import FieldValid from "components/forms_fields/FieldValid";
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-import { get } from "services/storage";
+
 import ar from 'react-phone-input-2/lang/ar.json';
 import fr from 'react-phone-input-2/lang/fr.json';
+import FieldError from "components/forms_fields/FieldError";
+import FieldValid from "components/forms_fields/FieldValid";
+import PhoneInput from 'react-phone-input-2';
+import React, { Component } from "react";
+import styled from "styled-components";
 import PropTypes from 'prop-types';
-// import 'react-phone-number-input/style.css';
+import { get } from "services/storage";
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import { withTranslation } from 'react-i18next';
 
- class CustomPhoneNumber extends Component {
+import 'react-phone-input-2/lib/style.css';
+
+class CustomPhoneNumber extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,7 +56,7 @@ import PropTypes from 'prop-types';
         valid_message: props.valid_message,
         value: props.value,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, default_country, error_message, invalid_message, label, placeholder, valid_message, value} = this.state;
@@ -145,6 +146,7 @@ const CustomPhoneNumberStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomPhoneNumber.propTypes = {
   added_class: PropTypes.string,
   default_country: PropTypes.string,
@@ -161,6 +163,5 @@ CustomPhoneNumber.propTypes = {
   valid_message: PropTypes.string,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomPhoneNumber);
-
-

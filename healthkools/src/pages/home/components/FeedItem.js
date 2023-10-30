@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
-import { colors } from "assets/variables/colors";
 import defaultRssImg from "assets/img/default_rss_img.png";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
+import { colors } from "assets/variables/colors";
 
- class FeedItem extends Component {
+class FeedItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       feed: props.feed,
     };
   }
+
   static defaultProps = {
     feed: {},
     t: val => val,
@@ -23,7 +24,7 @@ import PropTypes from 'prop-types';
       return new_state;
     }
     return null;
-}
+  }
 
   render() {
     const {feed} = this.state;
@@ -102,10 +103,10 @@ const FeedItemStyle = styled.div`
     }
   }
 `;
+
 FeedItem.propTypes = {
   feed: PropTypes.object,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(FeedItem);
-
-

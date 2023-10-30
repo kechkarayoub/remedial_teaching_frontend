@@ -1,6 +1,6 @@
 import FilesSelect from "components/FilesSelect";
 import { fireEvent, render, screen } from '@testing-library/react';
-import i18next from 'i18n_init';
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -8,6 +8,7 @@ jest.mock('react-i18next', () => ({
       return Component;
     },
 }));
+
 describe('FilesSelect component', () => {
     test('Should render without crash', async () => {
         render(<FilesSelect/>);

@@ -1,4 +1,5 @@
 import {countries, get_contries_select_options} from "utils/countries_list";
+
 describe('Get_contries_select_options function', () => {
     test('Test get_contries_select_options', () => {
         var contries_select_options = get_contries_select_options();

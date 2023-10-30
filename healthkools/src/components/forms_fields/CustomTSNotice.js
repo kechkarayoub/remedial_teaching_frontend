@@ -1,16 +1,15 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
-import FieldError from "components/forms_fields/FieldError";
-import {get_terms_service_notice} from "components/terms_of_service/terms_of_service";
-import { get } from "services/storage";
-import { colors } from "assets/variables/colors";
-import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
 import CookiesPolicyModal from "components/terms_of_service/CookiesPolicyModal";
 import DataUsePolicyModal from "components/terms_of_service/DataUsePolicyModal";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
+import { get_terms_service_notice } from "components/terms_of_service/terms_of_service";
+import { withTranslation } from 'react-i18next';
 
- class CustomTSNotice extends Component {
+class CustomTSNotice extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,10 +100,10 @@ const CustomTSNoticeStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomTSNotice.propTypes = {
   added_class: PropTypes.string,
   registration_label: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomTSNotice);
-
-

@@ -1,14 +1,10 @@
-import React, { Component } from "react";
-import { render, screen, act, fireEvent, waitFor } from '@testing-library/react';
-import SignInUpConfirmationModal from "pages/home/components/SignInUpConfirmationModal";
-import { withRouter, Redirect } from "react-router-dom";
-import axios from 'axios';
-import i18next from 'init_fcm';
-import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { mount, configure, shallow } from 'enzyme'
-import { unmountComponentAtNode } from "react-dom";
-import { async } from "q";
+import i18next from 'init_fcm';
+import React from "react";
+import SignInUpConfirmationModal from "pages/home/components/SignInUpConfirmationModal";
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { configure } from 'enzyme';
+
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -17,7 +13,9 @@ jest.mock('react-i18next', () => ({
     return Component;
   },
 }));
+
 jest.mock('axios');
+
 describe('SignInUpConfirmationModal component', () => {
   var registration_messages = {
     title: "Your account is created.",

@@ -1,6 +1,6 @@
+import i18next from 'i18n_init';
 import QuestionButton from "components/QuestionButton";
 import { fireEvent, render, screen } from '@testing-library/react';
-import i18next from 'i18n_init';
  
 describe('QuestionButton component', () => {
     test('Should render without crash', async () => {

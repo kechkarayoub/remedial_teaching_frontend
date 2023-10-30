@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { colors } from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
- class CustomCheckbox extends Component {
+class CustomCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -107,6 +107,7 @@ const CustomCheckboxStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomCheckbox.propTypes = {
   added_class: PropTypes.string,
   checked: PropTypes.bool,
@@ -120,6 +121,5 @@ CustomCheckbox.propTypes = {
   ]),
   valid_message: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomCheckbox);
-
-

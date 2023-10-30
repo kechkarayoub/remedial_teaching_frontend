@@ -1,14 +1,15 @@
 import * as storage from "services/storage";
-import {LOGIN} from "app_store/actions"
-import {createSlice} from "@reduxjs/toolkit";
+import { LOGIN } from "app_store/actions";
 
 var initialState = {
   user: storage.get("user"),
   authenticated: false
 };
+
 if (initialState.user) {
   initialState.authenticated = true;
 }
+
 export const loginReducer= (state, action) =>  {
   state = state || initialState;
   switch(action.type){
@@ -20,4 +21,5 @@ export const loginReducer= (state, action) =>  {
       return state;
   }
 };
+
 export default loginReducer;

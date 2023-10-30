@@ -1,13 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import styled from "styled-components";
-import {colors} from "assets/variables/colors";
+import { colors } from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 
 class CustomButton extends Component {
     constructor(props) {
         super(props);
     }
+
     static defaultProps = {
         added_class: "",
         disabled: false,
@@ -17,6 +18,7 @@ class CustomButton extends Component {
         test_id: "",
         text: "",
     };
+
     render(){
         var test_id = this.props.test_id || ("custom_button_" + parseInt(Math.random() * 100));
         return(
@@ -33,6 +35,7 @@ class CustomButton extends Component {
         )
     }
 }
+
 const CustomButtonStyle = styled.button`
     &.btn{
         border: 0;
@@ -64,6 +67,7 @@ const CustomButtonStyle = styled.button`
         color: ${colors.default_color};
     }
 `;
+
 CustomButton.propTypes = {
     added_class: PropTypes.string,
     disabled: PropTypes.bool,
@@ -76,4 +80,5 @@ CustomButton.propTypes = {
     test_id: PropTypes.string,
     text: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomButton);

@@ -1,11 +1,12 @@
+import App from 'App';
+import i18next from 'i18n_init';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'index.css';
-import App from 'App';
 import reportWebVitals from 'reportWebVitals';
-import {set_vh_vw_properties} from 'utils';
-import {I18nextProvider} from 'react-i18next';
-import i18next from 'i18n_init';
+import { I18nextProvider } from 'react-i18next';
+import { set_vh_vw_properties } from 'utils';
+
+import 'index.css';
 
 set_vh_vw_properties();
 // window.addEventListener("orientationchange", function() {

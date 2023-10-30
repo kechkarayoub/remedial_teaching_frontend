@@ -1,14 +1,10 @@
-import React, { Component } from "react";
-import { render, screen, act, fireEvent } from '@testing-library/react';
-import SignInUpModal from "pages/home/components/SignInUpModal";
-import { withRouter, Redirect } from "react-router-dom";
-import axios from 'axios';
-import i18next from 'init_fcm';
-import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { mount, configure, shallow } from 'enzyme'
-import { unmountComponentAtNode } from "react-dom";
-import { async } from "q";
+import i18next from 'init_fcm';
+import React from "react";
+import SignInUpModal from "pages/home/components/SignInUpModal";
+import { configure, mount } from 'enzyme';
+import { render, screen, act, fireEvent } from '@testing-library/react';
+
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -17,7 +13,9 @@ jest.mock('react-i18next', () => ({
     return Component;
   },
 }));
+
 jest.mock('axios');
+
 export const geo_info_data =  {
   IPv4: "xx.x.xx.x",
   city: "Casablanca",
@@ -28,6 +26,7 @@ export const geo_info_data =  {
   postal: null,
   state: "Casablanca-Settat",
 };
+
 describe('SignInUpModal component', () => {
   beforeAll(() => {
     global.fetch = jest.fn();

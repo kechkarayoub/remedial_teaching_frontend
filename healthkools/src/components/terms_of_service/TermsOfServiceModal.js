@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
-import styled from "styled-components";
-
-import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import moment from 'moment';
-import { get } from "services/storage";
-import { colors } from "assets/variables/colors";
-import { get_articles } from "components/terms_of_service/terms_of_service";
-import { get_data } from "components/terms_of_service/data";
 import CustomButton from "components/CustomButton";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Button, Modal, Row } from 'react-bootstrap';
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+import { get_articles } from "components/terms_of_service/terms_of_service";
+import { withTranslation } from 'react-i18next';
 
 class TermsOfServiceModal extends Component {
   constructor(props) {
@@ -28,6 +26,7 @@ class TermsOfServiceModal extends Component {
 
   componentDidMount(){
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language){
@@ -36,6 +35,7 @@ class TermsOfServiceModal extends Component {
     }
     return null;
   }
+
   componentDidUpdate(prevProps, prevState){
     var new_state = {};
     // if(prevState.current_language !== this.state.current_language){
@@ -115,6 +115,7 @@ class TermsOfServiceModal extends Component {
     );
   }
 }
+
 const TermsOfServiceModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
@@ -133,6 +134,7 @@ const TermsOfServiceModalStyle = styled.div`
     }
   }
 `;
+
 TermsOfServiceModal.propTypes = {
   show: PropTypes.bool,
   onHide: PropTypes.oneOfType([
@@ -141,4 +143,5 @@ TermsOfServiceModal.propTypes = {
     ]),
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(TermsOfServiceModal);

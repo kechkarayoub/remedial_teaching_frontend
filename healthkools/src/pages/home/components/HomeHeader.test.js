@@ -1,15 +1,17 @@
 import HomeHeader from "pages/home/components/HomeHeader";
-import { render, screen } from '@testing-library/react';
+import logo from "assets/img/logo_temp.jpg";
 import sign_in from "assets/img/sign_in.svg";
 import sign_up from "assets/img/sign_up.svg";
-import logo from "assets/img/logo_temp.jpg";
-import {languages} from "components/LanguageSelect/index";
+import { languages } from "components/LanguageSelect/index";
+import { render, screen } from '@testing-library/react';
+
 jest.mock('react-i18next', () => ({
     withTranslation: () => Component => {
       Component.defaultProps = { ...Component.defaultProps, t: (w) => w };
       return Component;
     },
 })); 
+
 describe('HomeHeader component', () => {
     test('Should render without crash', async () => {
         render(<HomeHeader />);

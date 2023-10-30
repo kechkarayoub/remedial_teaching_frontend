@@ -1,6 +1,5 @@
-import { global_action } from "app_store/actions";
 import rootReducer from "app_store/reducers";
-
+import { global_action } from "app_store/actions";
 
 describe('RootReducer', () => {
     test('Should render without crash', async () => {

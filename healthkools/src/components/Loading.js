@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import styled from "styled-components";
-import {colors} from "assets/variables/colors";
+import { colors } from "assets/variables/colors";
 import { withTranslation } from 'react-i18next';
 
 class Loading extends Component {
     constructor(props){
         super(props);
-      }
-      static defaultProps = {
+    }
+
+    static defaultProps = {
         added_class: "",
         style: null,
-      };
+    };
+
     render(){
         return(
             <LoadingStyle 
@@ -38,6 +40,7 @@ class Loading extends Component {
         )
     }
 }
+
 const LoadingStyle = styled.div`
     background: #80808099;
     height: 100%;
@@ -134,8 +137,10 @@ const LoadingStyle = styled.div`
         }
     }
 `;
+
 Loading.propTypes = {
     added_class: PropTypes.string,
     style: PropTypes.object,
-  };
+};
+
 export default withTranslation('translations')(Loading);

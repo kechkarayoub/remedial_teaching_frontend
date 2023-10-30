@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 import React, {Component} from "react";
 import ReactCrop from 'react-image-crop';
 import styles from "styled-components";
-import {colors} from "assets/variables/colors";
-import {store_files} from "utils/files_storage";
+import { colors } from "assets/variables/colors";
+import { store_files } from "utils/files_storage";
 import { withTranslation } from 'react-i18next';
+
 import 'react-image-crop/dist/ReactCrop.css';
+
 class CropImage extends Component {
   constructor(props){
     super(props);
@@ -28,6 +30,7 @@ class CropImage extends Component {
       uploading: false,  // Uploading flag for animation
     };
   }
+
   static defaultProps = {
     circularCrop: false,
     containerStyle: null,
@@ -115,7 +118,6 @@ class CropImage extends Component {
     }, 'image/jpeg', 1)
   }
   
-
   dataURLtoFile(dataurl, filename) {
     // Create image object
     let arr = dataurl.split(','),
@@ -171,6 +173,7 @@ class CropImage extends Component {
       });
     }
   }
+
   render(){
     const {crop, error_message, image_url, uploading} = this.state;
     return (
@@ -214,6 +217,7 @@ class CropImage extends Component {
     );
   }
 };
+
 const CropImageStyle = styles.div`
   .crop_container{
     height: 130px;
@@ -276,4 +280,5 @@ CropImage.propTypes = {
   test_id: PropTypes.string,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(CropImage);

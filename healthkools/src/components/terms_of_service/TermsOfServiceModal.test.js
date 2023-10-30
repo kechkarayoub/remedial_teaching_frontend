@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import { render, screen, act, fireEvent } from '@testing-library/react';
-import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
-import { withRouter, Redirect } from "react-router-dom";
-import moment from 'moment';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { mount, configure, shallow } from 'enzyme'
-import { unmountComponentAtNode } from "react-dom";
-import { async } from "q";
-import {get_data} from "components/terms_of_service/data";
-import {get_articles} from "components/terms_of_service/terms_of_service";
+import React from "react";
+import TermsOfServiceModal from "components/terms_of_service/TermsOfServiceModal";
+import { configure, mount } from 'enzyme';
 import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+import { get_articles } from "components/terms_of_service/terms_of_service";
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import { split_html_string } from "utils/tests_utils";
+
 configure({adapter: new Adapter()});
 
 jest.mock('react-i18next', () => ({
@@ -19,7 +16,9 @@ jest.mock('react-i18next', () => ({
     return Component;
   },
 }));
+
 jest.mock('axios');
+
 describe('TermsOfServiceModal component', () => {
   test('Should render without crash', async () => {
     render(<TermsOfServiceModal show={true} />);

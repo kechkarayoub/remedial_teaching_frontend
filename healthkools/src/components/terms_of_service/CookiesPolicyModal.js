@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
-import styled from "styled-components";
 
-import { withTranslation, Trans, composeInitialProps } from 'react-i18next';
-import moment from 'moment';
-import { get } from "services/storage";
-import { colors } from "assets/variables/colors";
-import { get_intro_items } from "components/terms_of_service/cookies_policy";
-import { get_data } from "components/terms_of_service/data";
 import CustomButton from "components/CustomButton";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { colors } from "assets/variables/colors";
+import { get } from "services/storage";
+import { get_data } from "components/terms_of_service/data";
+import { get_intro_items } from "components/terms_of_service/cookies_policy";
+import { Modal, Button, Row } from 'react-bootstrap';
+import { withTranslation } from 'react-i18next';
 
 class CookiesPolicyModal extends Component {
   constructor(props) {
@@ -22,6 +21,7 @@ class CookiesPolicyModal extends Component {
       intro: intro_items.intro,
     };
   }
+
   static defaultProps = {
     onHide: () => {},
     show: true,
@@ -30,6 +30,7 @@ class CookiesPolicyModal extends Component {
 
   componentDidMount(){
   }
+
   static getDerivedStateFromProps(props, state) {
     var current_language = get("current_language");
     if(current_language !== state.current_language){
@@ -38,6 +39,7 @@ class CookiesPolicyModal extends Component {
     }
     return null;
   }
+
   componentDidUpdate(prevProps, prevState){
     var new_state = {};
     // if(prevState.current_language !== this.state.current_language){
@@ -46,15 +48,6 @@ class CookiesPolicyModal extends Component {
       this.setState(new_state);
     }
   }
-
-//   componentDidMount(){
-//     $('.selectpicker').selectpicker();
-//   }
-
-//   componentDidUpdate() {
-//     $('.selectpicker').selectpicker("refresh");
-//   }
-
 
   render() {
     const {current_language, items, intro} = this.state;
@@ -132,6 +125,7 @@ class CookiesPolicyModal extends Component {
     );
   }
 }
+
 const CookiesPolicyModalStyle = styled.div`
   height: 100%;
   padding: 10px 25px 10px 15px;
@@ -153,6 +147,7 @@ const CookiesPolicyModalStyle = styled.div`
     }
   }
 `;
+
 CookiesPolicyModal.propTypes = {
   onHide: PropTypes.oneOfType([
       PropTypes.func,
@@ -161,4 +156,5 @@ CookiesPolicyModal.propTypes = {
   show: PropTypes.bool,
   t: PropTypes.func,
 };
+
 export default withTranslation('translations')(CookiesPolicyModal);

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { withTranslation } from 'react-i18next';
-import styled from "styled-components";
 import FieldError from "components/forms_fields/FieldError";
 import FieldValid from "components/forms_fields/FieldValid";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withTranslation } from 'react-i18next';
 
- class CustomTextarea extends Component {
+class CustomTextarea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ import PropTypes from 'prop-types';
       value: props.value,
     };
   }
+
   static defaultProps = {
     added_class: "",
     disabled: false,
@@ -45,7 +46,7 @@ import PropTypes from 'prop-types';
         valid_message: props.valid_message,
         value: props.value,
     };
-}
+  }
 
   render() {
     const {added_class, disabled, error_message, invalid_message, label, placeholder, rows, valid_message, value} = this.state;
@@ -92,6 +93,7 @@ const CustomTextareaStyle = styled.div`
   @media screen and (max-width: 767px){
   }
 `;
+
 CustomTextarea.propTypes = {
   added_class: PropTypes.string,
   disabled: PropTypes.bool,
@@ -107,6 +109,5 @@ CustomTextarea.propTypes = {
   valid_message: PropTypes.string,
   value: PropTypes.string,
 };
+
 export default withTranslation('translations')(CustomTextarea);
-
-
