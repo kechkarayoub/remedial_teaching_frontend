@@ -1,3 +1,4 @@
-Change favicon.ico in healthkools/public.
+Change favicon.ico in remedial_teaching/public.
+Change text: "Remedial teaching" in whole code with company name
 In src/components/ErrorComponent:
     The user have to return to the previous page when clicking on "Try again" button.

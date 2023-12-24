@@ -12,7 +12,7 @@ log/
 /yarn.lock
 /yarn-error.log
 /package-lock.json
-/healthkools/yarn.lock
+/remedial_teaching/yarn.lock
 
 # misc
 .DS_Store
